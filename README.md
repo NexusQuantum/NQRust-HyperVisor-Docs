@@ -167,9 +167,51 @@ yarn gen-api-docs
 ## Troubleshooting
 
 If you encounter out-of-memory errors with the local development server or while
-generating the static website you can allow NodeJS to consume more memory:
+generating the static website you can allow NodeJS to consume more memory. There
+are a few cross-platform options below; the recommended approach is to use
+`cross-env` in the project `scripts` so the commands work the same on Windows,
+macOS, and Linux.
 
-```console
+Temporary (per-shell) options:
+
+- Git Bash / macOS / Linux (POSIX):
+
+```bash
 export NODE_OPTIONS='--max-old-space-size=7168'
 yarn start
 ```
+
+Or as a one-liner:
+
+```bash
+NODE_OPTIONS='--max-old-space-size=7168' yarn start
+```
+
+- PowerShell (temporary for the session):
+
+```powershell
+$env:NODE_OPTIONS='--max-old-space-size=7168'
+yarn start
+```
+
+- Windows cmd.exe (temporary for the command):
+
+```cmd
+set "NODE_OPTIONS=--max-old-space-size=7168" && yarn start
+```
+
+Recommended (persistent, cross-platform):
+
+1. Install `cross-env` as a dev dependency:
+
+```bash
+yarn add --dev cross-env
+```
+
+2. Use `cross-env` in the `scripts` inside `package.json`. Example (already updated):
+
+```json
+"start": "cross-env NODE_OPTIONS=--max-old-space-size=7168 docusaurus start"
+```
+
+This makes the project scripts resilient across different shells and OSes.
