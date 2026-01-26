@@ -30,15 +30,15 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. Mount the Harvester ISO file and boot the server by selecting the `Harvester Installer` option.
 
-   ![iso-install.png](/img/v1.2/install/iso-install.png)
+   ![iso-installation.png](/img/v1.0/install-hv/iso-installation.png)
 
    The installer automatically checks the hardware and displays warning messages if the minimum requirements are not met. The **Hardware Checks** screen is not displayed if all checks are passed.
 
-   ![hardware-checks.png](/img/v1.3/install/hardware-checks.png)
+   ![hardware-checks.png](/img/v1.0/install-hv/hardware-checks.png)
 
 1. Use the arrow keys to choose an installation mode. By default, the first node will be the management node of the cluster.
 
-	![choose-installation-mode.png](/img/v1.2/install/choose-installation-mode.png)
+![choose-installation-mode.png](/img/v1.0/install-hv/choose-installation-mode.png)
 
 	- `Create a new Harvester cluster`: creates an entirely new Harvester cluster.
 
@@ -61,7 +61,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. Choose the installation disk you want to install the Harvester cluster on and the data disk you want to store VM data on. By default, Harvester uses [GUID Partition Table (GPT)](https://en.wikipedia.org/wiki/GUID_Partition_Table) partitioning schema for both UEFI and BIOS. If you use the BIOS boot, then you will have the option to select [Master boot record (MBR)](https://en.wikipedia.org/wiki/Master_boot_record).
 
-	![choose-installation-target-data-disk.png](/img/v1.2/install/choose-installation-target-data-disk.png)
+![choose-installation-target-data-disk.png](/img/v1.0/install-hv/choose-installation-target-data-disk.png)
 	
 	- `Installation disk`: The disk to install the Harvester cluster on. 
 	- `Data disk`: The disk to store VM data on. Choosing a separate disk to store VM data is recommended.
@@ -97,7 +97,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 	If using DHCP to configure the IP address, you need to configure a static MAC-to-IP address mapping on your DHCP server to have a persistent virtual IP (VIP), and the VIP must be unique.
 	:::
 
-	![config-virtual-ip.png](/img/v1.2/install/config-virtual-ip.png)
+![config-virtual-ip.png](/img/v1.0/install-hv/config-virtual-ip.png)
 
 1. Configure the `Cluster token`. This token is used for adding other nodes to the cluster.
 
@@ -133,7 +133,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 	Choosing `Install Harvester binaries only` on the first page requires additional setup after the first bootup.
 	:::
 
-   ![iso-installed.png](/img/v1.2/install/iso-installed.png)
+   ![iso-installed.png](/img/v1.0/install-hv/iso-installed.png)
 
 1. You will be prompted to set the password for the default `admin` user when logging in for the first time.
 

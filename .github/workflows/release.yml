@@ -27,7 +27,7 @@ jobs:
 
       - name: Build
         env:
-          NODE_OPTIONS: "--max_old_space_size=7168"
+          NODE_OPTIONS: "--max-old-space-size=8192"
         run: |
           yarn gen-api-docs
           yarn build
@@ -46,7 +46,7 @@ jobs:
     needs: build
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

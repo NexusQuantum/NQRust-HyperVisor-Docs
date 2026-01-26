@@ -4,26 +4,28 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
+/** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Harvester",
+  title: "NQRust HyperVisor",
   tagline: "The open-source hyperconverged infrastructure solution for a cloud-native world",
-  url: "https://docs.harvesterhci.io",
+  url: "https://docs.nqrhypervisor.io",
   baseUrl: "/",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
-  favicon: "img/favicon.ico",
-  organizationName: "harvester",
+  // favicon: "img/favicon.ico",
+  favicon: "img/logo_hypervisor.png",
+  organizationName: "Nexus Quantum", 
   projectName: "docs",
   i18n: {
     defaultLocale: "en",
-    locales: ["en"],
+    locales: ["en", "zh"],
+    path: "i18n",
     localeConfigs: {
       en: {
         label: "English",
       },
       zh: {
-        label: "简体中文",
+        label: "Chinese (Simplified)",
       },
     },
   },
@@ -58,7 +60,7 @@ const config = {
           routeBasePath: '/',
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateTime: true,
-          editUrl: "https://github.com/harvester/docs/edit/main/",
+          editUrl: "https://github.com/nqr-hypervisor/docs/edit/main/",
           docItemComponent: "@theme/ApiItem",
           lastVersion: 'v1.6',
           versions: {
@@ -121,7 +123,7 @@ const config = {
     algolia: {
       appId: 'U7QCSJFCWR',
       apiKey: '954c1b1327687e818ef6930a5e8f8770',
-      indexName: 'harvester',
+      indexName: 'Harvester',
       contextualSearch: true,
       searchParameters: {},
       // Optional: path for search page that enabled by default (`false` to disable it)
@@ -133,16 +135,17 @@ const config = {
       },
     },
     navbar: {
+      title: "NQRust HyperVisor",
       logo: {
         alt: "Harvester Logo",
-        src: "img/logo_horizontal.svg",
+        src: "img/logo_nqr.png",
       },
       items: [
-        {
-          type: 'docsVersionDropdown',
-          position: 'left',
-          dropdownActiveClassDisabled: true,
-        },
+        // {
+        //   type: 'docsVersionDropdown',
+        //   position: 'left',
+        //   dropdownActiveClassDisabled: true,
+        // },
         {
           type: 'docSidebar',
           label: 'API',
@@ -163,23 +166,23 @@ const config = {
           position: 'right',
           items: [
             {
-              href: "https://harvesterhci.io/",
+              href: "https://nqrhypervisor.io/",
               label: "Harvester Home",
             },
             {
-              href: 'https://github.com/harvester/harvester',
-              label: 'GitHub',
+              href: "https://github.com/nqr-hypervisor/nqr-hypervisor",
+              label: "GitHub",
             },
             {
-              href: 'https://github.com/harvester/docs',
-              label: 'Docs GitHub',
+              href: "https://github.com/nqr-hypervisor/docs",
+              label: "Docs GitHub",
             },
             {
-              href: "https://harvesterhci.io/kb",
+              href: "https://nqrhypervisor.io/kb",
               label: "Knowledge Base",
             },
             {
-              href: "https://www.suse.com/c/?s=harvester",
+              href: "https://www.suse.com/c/?s=nqrhypervisor",
               label: "Blog",
             },
           ],
@@ -279,8 +282,20 @@ const config = {
     [
       '@docusaurus/plugin-client-redirects',
       {
+        /**
+         * @typedef {string[]} RedirectArray
+         */
+        /**
+         * @typedef {RedirectArray|undefined} RedirectsReturn
+         */
+
+        /**
+         * Create redirect function for plugin-client-redirects
+         * @param {string|undefined} existingPath
+         * @returns {RedirectsReturn}
+         */
         createRedirects(existingPath) {
-          if (existingPath.includes('/v1.6')) {
+          if (typeof existingPath === 'string' && existingPath.includes('/v1.6')) {
             return [existingPath.replace('/v1.6', '/latest')];
           }
           return undefined;
