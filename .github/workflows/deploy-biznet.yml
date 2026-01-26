@@ -1,0 +1,54 @@
+name: Deploy to Biznet Cloud
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          npm install -g yarn
+          PUPPETEER_DOWNLOAD_BASE_URL=https://storage.googleapis.com/chrome-for-testing-public yarn install --frozen-lockfile
+
+      - name: Build
+        env:
+          NODE_OPTIONS: "--max_old_space_size=7168"
+        run: |
+          yarn gen-api-docs
+          yarn build
+
+      - name: Clean and Deploy to Biznet Cloud VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.BIZNET_HOST }}
+          username: ${{ secrets.BIZNET_USERNAME }}
+          key: ${{ secrets.BIZNET_SSH_KEY }}
+          port: ${{ secrets.BIZNET_SSH_PORT }}
+          source: "build/*"
+          target: ${{ secrets.BIZNET_DEPLOY_PATH }}
+          strip_components: 1
+          rm: true
+          timeout: 300s
+
+      - name: Reload Caddy
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.BIZNET_HOST }}
+          username: ${{ secrets.BIZNET_USERNAME }}
+          key: ${{ secrets.BIZNET_SSH_KEY }}
+          port: ${{ secrets.BIZNET_SSH_PORT }}
+          script: |
+            sudo systemctl reload caddy
