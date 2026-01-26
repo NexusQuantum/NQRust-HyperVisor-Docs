@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 45
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,7 +31,28 @@ jobs:
           yarn gen-api-docs
           yarn build
 
-      - name: Clean and Deploy to Biznet Cloud VPS
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build/
+          retention-days: 1
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: build/
+
+      - name: List build files
+        run: ls -la build/
+
+      - name: Deploy to Biznet Cloud VPS
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.BIZNET_HOST }}
@@ -43,7 +64,7 @@ jobs:
           strip_components: 1
           rm: true
           timeout: 600s
-          command_timeout: 30m
+          debug: true
 
       - name: Reload Caddy
         uses: appleboy/ssh-action@v1.2.0
