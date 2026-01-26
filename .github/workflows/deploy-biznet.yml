@@ -9,6 +9,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -41,7 +42,8 @@ jobs:
           target: ${{ secrets.BIZNET_DEPLOY_PATH }}
           strip_components: 1
           rm: true
-          timeout: 300s
+          timeout: 600s
+          command_timeout: 30m
 
       - name: Reload Caddy
         uses: appleboy/ssh-action@v1.2.0
