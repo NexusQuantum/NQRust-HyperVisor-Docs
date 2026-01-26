@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: "NQRust HyperVisor",
   tagline: "The open-source hyperconverged infrastructure solution for a cloud-native world",
-  url: "https://docs.nqrhypervisor.io",
+  url: "https://docs.nqrhypervisorhci.io",
   baseUrl: "/",
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
@@ -16,19 +16,19 @@ const config = {
   favicon: "img/logo_hypervisor.png",
   organizationName: "Nexus Quantum", 
   projectName: "docs",
-  i18n: {
-    defaultLocale: "en",
-    locales: ["en", "zh"],
-    path: "i18n",
-    localeConfigs: {
-      en: {
-        label: "English",
-      },
-      zh: {
-        label: "Chinese (Simplified)",
-      },
-    },
-  },
+  // i18n: {
+  //   defaultLocale: "en",
+  //   locales: ["en", "zh"],
+  //   path: "i18n",
+  //   localeConfigs: {
+  //     en: {
+  //       label: "English",
+  //     },
+  //     zh: {
+  //       label: "Chinese (Simplified)",
+  //     },
+  //   },
+  // },
   webpack: {
     jsLoader: (isServer) => ({
       loader: require.resolve("swc-loader"),
@@ -60,7 +60,7 @@ const config = {
           routeBasePath: '/',
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateTime: true,
-          editUrl: "https://github.com/nqr-hypervisor/docs/edit/main/",
+          editUrl: "https://github.com/nqrhypervisor/docs/edit/main/",
           docItemComponent: "@theme/ApiItem",
           lastVersion: 'v1.6',
           versions: {
@@ -120,15 +120,15 @@ const config = {
   ],
   themeConfig: {
     zoom: {},
-    algolia: {
-      appId: 'U7QCSJFCWR',
-      apiKey: '954c1b1327687e818ef6930a5e8f8770',
-      indexName: 'Harvester',
-      contextualSearch: true,
-      searchParameters: {},
-      // Optional: path for search page that enabled by default (`false` to disable it)
-      searchPagePath: 'search',
-    },
+    // algolia: {
+    //   appId: 'U7QCSJFCWR',
+    //   apiKey: '954c1b1327687e818ef6930a5e8f8770',
+    //   indexName: 'NQR HyperVisor',
+    //   contextualSearch: true,
+    //   searchParameters: {},
+    //   // Optional: path for search page that enabled by default (`false` to disable it)
+    //   searchPagePath: 'search',
+    // },
     docs: {
       sidebar: {
         hideable: true,
@@ -137,7 +137,7 @@ const config = {
     navbar: {
       title: "NQRust HyperVisor",
       logo: {
-        alt: "Harvester Logo",
+        alt: "NQR HyperVisor Logo",
         src: "img/logo_nqr.png",
       },
       items: [
@@ -156,29 +156,29 @@ const config = {
           type: "localeDropdown",
           position: "left",
         },
-        {
-          type: 'search',
-          position: 'left',
-        },
+        // {
+        //   type: 'search',
+        //   position: 'left',
+        // },
         {
           type: 'dropdown',
           label: 'Quick Links',
           position: 'right',
           items: [
             {
-              href: "https://nqrhypervisor.io/",
-              label: "Harvester Home",
+              href: "https://nqrhypervisorhci.io/",
+              label: "NQR HyperVisor Home",
             },
             {
-              href: "https://github.com/nqr-hypervisor/nqr-hypervisor",
-              label: "GitHub",
+              href: "https://github.com/nqrhypervisor/nqrhypervisor",
+              label: 'GitHub',
             },
             {
-              href: "https://github.com/nqr-hypervisor/docs",
-              label: "Docs GitHub",
+              href: "https://github.com/nqrhypervisor/docs",
+              label: 'Docs GitHub',
             },
             {
-              href: "https://nqrhypervisor.io/kb",
+              href: "https://nqrhypervisorhci.io/kb",
               label: "Knowledge Base",
             },
             {
@@ -273,7 +273,7 @@ const config = {
     ]
   },
   customFields: {
-    title: "Harvester - Open-source hyperconverged infrastructure",
+    title: "NQR HyperVisor - Open-source hyperconverged infrastructure",
     description:
       "The open-source hyperconverged infrastructure solution for a cloud-native world",
   },
@@ -299,7 +299,7 @@ const config = {
             return [existingPath.replace('/v1.6', '/latest')];
           }
           return undefined;
-        },
+        }
       },
     ],
     [
