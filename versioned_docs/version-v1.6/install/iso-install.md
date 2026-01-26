@@ -13,7 +13,7 @@ description: To get the Harvester ISO, download it from the Github releases. Dur
 ---
 
 <head>
-  <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/install/index"/>
+  <link rel="canonical" href="https://docs.harvesterhci.io/v1.7/install/index"/>
 </head>
 
 Harvester ships as a bootable appliance image, you can install it directly on a bare metal server with the ISO image. To get the ISO image, download **💿 harvester-v1.x.x-amd64.iso** from the [Harvester releases](https://github.com/harvester/harvester/releases) page.
@@ -30,15 +30,15 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. Mount the Harvester ISO file and boot the server by selecting the `Harvester Installer` option.
 
-   ![iso-install.png](/img/v1.2/install/iso-install.png)
+   ![iso-installation.png](/img/v1.0/install-hv/iso-installation.png)
 
    The installer automatically checks the hardware and displays warning messages if the minimum requirements are not met. The **Hardware Checks** screen is not displayed if all checks are passed.
 
-   ![hardware-checks.png](/img/v1.3/install/hardware-checks.png)
+   ![hardware-checks.png](/img/v1.0/install-hv/hardware-checks.png)
 
 1. Use the arrow keys to choose an installation mode. By default, the first node will be the management node of the cluster.
 
-	![choose-installation-mode.png](/img/v1.2/install/choose-installation-mode.png)
+   ![choose-installation-mode.png](/img/v1.0/install-hv/choose-installation-mode.png)
 
 	- `Create a new Harvester cluster`: creates an entirely new Harvester cluster.
 
@@ -52,16 +52,24 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. Choose a role for the node. You are required to perform this step if you selected the installation mode `Join an existing Harvester cluster`.
 
-	![choose-node-role.png](/img/v1.3/install/select-role.png)
+   ![choose-node-role.png](/img/v1.0/install-hv/select-role.png)
 
 	- `Default Role`: Allows a node to function as a management node or a worker node. This role does not have any specific privileges or restrictions.
 	- `Management Role`: Allows a node to be prioritized when Harvester promotes nodes to management nodes.
 	- `Witness Role`: Restricts a node to being a witness node (only functions as an etcd node) in a specific cluster.
 	- `Worker Role`: Restricts a node to being a worker node (never promoted to management node) in a specific cluster.
 
+1. Configure and confirm a `Password` to access the node. The default SSH user is `rancher`.
+
+	![config-password.png](/img/v1.2/install/config-password.png)
+
 1. Choose the installation disk you want to install the Harvester cluster on and the data disk you want to store VM data on. By default, Harvester uses [GUID Partition Table (GPT)](https://en.wikipedia.org/wiki/GUID_Partition_Table) partitioning schema for both UEFI and BIOS. If you use the BIOS boot, then you will have the option to select [Master boot record (MBR)](https://en.wikipedia.org/wiki/Master_boot_record).
 
-	![choose-installation-target-data-disk.png](/img/v1.2/install/choose-installation-target-data-disk.png)
+	:::info important
+	Support for legacy BIOS booting is deprecated in v1.7.0 and will be removed in a later release. Existing Harvester clusters that use this boot mode will continue to function, but upgrading to later versions may require re-installation in UEFI mode. To avoid issues and disruptions, use UEFI in new installations.
+	:::
+
+   ![choose-installation-target-data-disk.png](/img/v1.0/install-hv/choose-installation-target-data-disk.png)
 
 	- `Installation disk`: The disk to install the Harvester cluster on.
 	- `Data disk`: The disk to store VM data on. Choosing a separate disk to store VM data is recommended. Not applicable for witness nodes.
@@ -73,9 +81,12 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. Configure network interface(s) for the management network. By default, Harvester creates a [bonded NIC](./requirements.md#hardware-requirements) named `mgmt-bo` for the [built-in management cluster network](../networking/clusternetwork.md#built-in-cluster-network), and the IP address can be configured via DHCP or statically assigned.
 
-   ![config-network.png](/img/v1.2/install/config-network.png)
+   ![config-network.png](/img/v1.0/install-hv/config-network.png)
 
 	:::note
+
+	Physical switches connected to `bonded NIC` must be configured strictly as trunk ports. These ports must accept tagged traffic and send traffic tagged with the VLAN ID used by the VM network.
+
 	It is not possible to change the node IP throughout the lifecycle of a Harvester cluster. If using DHCP, you must ensure the DHCP server always offers the same IP for the same node. If the node IP is changed, the related node cannot join the cluster and might even break the cluster.
 
 	In addition, you are required to add the *routers* option (`option routers`) when configuring the DHCP server. This option is used to add the default route on the Harvester host. Without the default route, the node will fail to start.
@@ -93,7 +104,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
     If you want to use the default values, leave the fields blank.
 
-    ![config-cluster-cidrs.png](/img/v1.5/install/config-cluster-cidrs.png)
+   ![config-cluster-cidrs.png](/img/v1.0/install-hv/config-cluster-cidrs.png)
 
     :::info important
 
@@ -119,15 +130,11 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 	For DHCP setup with static MAC-to-IP address mappings configured, enter the MAC address in the provided field to fetch the unique persistent virtual IP (VIP). Otherwise, leave it blank.
 	:::
 
-	![config-virtual-ip.png](/img/v1.5/install/config-virtual-ip.png)
+   ![config-virtual-ip.png](/img/v1.0/install-hv/config-virtual-ip.png)
 
 1. Configure the `Cluster token`. This token is used for adding other nodes to the cluster.
 
 	![config-cluster-token.png](/img/v1.2/install/config-cluster-token.png)
-
-1. Configure and confirm a `Password` to access the node. The default SSH user is `rancher`.
-
-	![config-password.png](/img/v1.2/install/config-password.png)
 
 1. Configure `NTP servers` to make sure all nodes' times are synchronized. This defaults to `0.suse.pool.ntp.org`. Use commas as a delimiter to add more NTP servers.
 
@@ -151,7 +158,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. Review and confirm your installation options. After confirming the installation options, Harvester will be installed to your host. The installation may take a few minutes to be complete.
 
-	![confirm-install.png](/img/v1.2/install/confirm-install.png)
+   ![confirm-install.png](/img/v1.0/install-hv/confirm-install.png)
 
 1. Once the installation is complete, your node restarts. After the restart, the Harvester console displays the management URL and status. The default URL of the web interface is `https://your-virtual-ip`. You can use `F12` to switch from the Harvester console to the Shell and type `exit` to go back to the Harvester console.
 
@@ -159,11 +166,11 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 	Choosing `Install Harvester binaries only` on the first page requires additional setup after the first bootup.
 	:::
 
-   ![iso-installed.png](/img/v1.2/install/iso-installed.png)
+   ![iso-installed.png](/img/v1.0/install-hv/iso-installed.png)
 
 1. You will be prompted to set the password for the default `admin` user when logging in for the first time.
 
-   ![first-login.png](/img/v1.2/install/first-time-login.png)
+   ![first-login.png](/img/v1.0/install-hv/first-time-login.png)
 
 <!-- :::note
 In some cases, if you are using an older VGA connector, you may encounter an `panic: invalid dimensions` error with ISO installation. See issue [#2937](https://github.com/harvester/harvester/issues/2937#issuecomment-1278545927) for a workaround.

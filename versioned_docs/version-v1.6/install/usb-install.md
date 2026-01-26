@@ -29,7 +29,7 @@ No matter which tool you use, creating a bootable device erases your USB device 
 2. Rufus automatically detects your USB. Select the USB device you want to use from the **Device** drop-down menu.
 3. For **Boot Selection**, choose **Select** and find the Harvester installation ISO image you want to burn onto the USB.
 
-	![rufus.png](/img/v1.2/install/rufus.png)
+	<img src="/img/v1.2/install-usb-hv/rufus.png" alt="Rufus setup" width="600" height="400" />
 
 	:::info
 
@@ -37,7 +37,7 @@ No matter which tool you use, creating a bootable device erases your USB device 
 
 	:::
 
-### balenaEtcher
+<!-- ### balenaEtcher
 
 [balenaEtcher](https://www.balena.io/etcher/) supports writing an image to a USB flash drive on most Linux distros, macOS, and Windows. It has a GUI and is easy to use.
 
@@ -103,4 +103,4 @@ The modified parameter should look like the following:
 After making this adjustment, press `Ctrl + x` to initiate booting. You should now enter the installer as usual.
 
 - Related issue:
-  - [[BUG] v1.2.0 Interactive ISO Fails to Install On Some Bare-Metal Devices](https://github.com/harvester/harvester/issues/4510) 
+  - [[BUG] v1.2.0 Interactive ISO Fails to Install On Some Bare-Metal Devices](https://github.com/harvester/harvester/issues/4510)  -->

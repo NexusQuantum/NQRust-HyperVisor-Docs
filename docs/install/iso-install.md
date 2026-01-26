@@ -30,15 +30,15 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. Mount the Harvester ISO file and boot the server by selecting the `Harvester Installer` option.
 
-   ![iso-install.png](/img/v1.2/install/iso-install.png)
+   ![iso-installation.png](/img/v1.0/install-hv/iso-installation.png)
 
    The installer automatically checks the hardware and displays warning messages if the minimum requirements are not met. The **Hardware Checks** screen is not displayed if all checks are passed.
 
-   ![hardware-checks.png](/img/v1.3/install/hardware-checks.png)
+   <img src="/img/v1.0/install-hv/hardware-checks.png" alt="Hardware checks" width="1000" />
 
 1. Use the arrow keys to choose an installation mode. By default, the first node will be the management node of the cluster.
 
-	![choose-installation-mode.png](/img/v1.2/install/choose-installation-mode.png)
+	<img src="/img/v1.0/install-hv/choose-installation-mode.png" alt="Choose installation mode" width="1000" />
 
 	- `Create a new Harvester cluster`: creates an entirely new Harvester cluster.
 
@@ -65,7 +65,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 	Support for legacy BIOS booting is deprecated in v1.7.0 and will be removed in a later release. Existing Harvester clusters that use this boot mode will continue to function, but upgrading to later versions may require re-installation in UEFI mode. To avoid issues and disruptions, use UEFI in new installations.
 	:::
 
-	![choose-installation-target-data-disk.png](/img/v1.2/install/choose-installation-target-data-disk.png)
+	![choose-installation-target-data-disk.png](/img/v1.0/install-hv/choose-installation-target-data-disk.png)
 
 	- `Installation disk`: The disk to install the Harvester cluster on.
 	- `Data disk`: The disk to store VM data on. Choosing a separate disk to store VM data is recommended. Not applicable for witness nodes.
@@ -77,7 +77,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. Configure network interface(s) for the management network. By default, Harvester creates a [bonded NIC](./requirements.md#hardware-requirements) named `mgmt-bo` for the [built-in management cluster network](../networking/clusternetwork.md#built-in-cluster-network), and the IP address can be configured via DHCP or statically assigned.
 
-   ![config-network.png](/img/v1.2/install/config-network.png)
+   ![iso-nic-config.png](/img/v1.0/install-hv/iso-nic-config.png)
 
 	:::note
 	It is not possible to change the node IP throughout the lifecycle of a Harvester cluster. If using DHCP, you must ensure the DHCP server always offers the same IP for the same node. If the node IP is changed, the related node cannot join the cluster and might even break the cluster.
@@ -97,7 +97,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
     If you want to use the default values, leave the fields blank.
 
-    ![config-cluster-cidrs.png](/img/v1.5/install/config-cluster-cidrs.png)
+    ![config-cluster-cidrs.png](/img/v1.0/install-hv/config-cluster-cidrs.png)
 
     :::info important
 
@@ -123,7 +123,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 	For DHCP setup with static MAC-to-IP address mappings configured, enter the MAC address in the provided field to fetch the unique persistent virtual IP (VIP). Otherwise, leave it blank.
 	:::
 
-	![config-virtual-ip.png](/img/v1.5/install/config-virtual-ip.png)
+	![config-virtual-ip.png](/img/v1.0/install-hv/config-virtual-ip.png)
 
 1. Configure the `Cluster token`. This token is used for adding other nodes to the cluster.
 
@@ -163,7 +163,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 	Choosing `Install Harvester binaries only` on the first page requires additional setup after the first bootup.
 	:::
 
-   ![iso-installed.png](/img/v1.2/install/iso-installed.png)
+   ![iso-installed.png](/img/v1.0/install-hv/iso-installed.png)
 
 1. You will be prompted to set the password for the default `admin` user when logging in for the first time.
 

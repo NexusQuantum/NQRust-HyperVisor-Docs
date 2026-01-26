@@ -10,6 +10,8 @@ permissions:
 jobs:
   auto-assign:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.DOCS_NQR_HV }} # PAT with repo access
     steps:
     - uses: rancher/gh-issue-mgr/auto-assign-action@main
       with:
