@@ -14,6 +14,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+
+      - name: Setup swap
+        run: |
+          sudo fallocate -l 4G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          free -h
+
       - name: Set up Node.js 20
         uses: actions/setup-node@v4
         with:
@@ -26,15 +40,13 @@ jobs:
 
       - name: Generate API docs
         env:
-          NODE_OPTIONS: "--max_old_space_size=6144"
+          NODE_OPTIONS: "--max_old_space_size=4096"
         run: yarn gen-api-docs || true
 
       - name: Build site
         env:
-          NODE_OPTIONS: "--max_old_space_size=6144"
-        run: |
-          yarn build
-          echo "Build completed"
+          NODE_OPTIONS: "--max_old_space_size=4096"
+        run: yarn build
 
       - name: Verify build output
         run: |
@@ -59,9 +71,6 @@ jobs:
         with:
           name: build
           path: build/
-
-      - name: List build files
-        run: ls -la build/
 
       - name: Deploy to Biznet Cloud VPS
         uses: appleboy/scp-action@v0.1.7
