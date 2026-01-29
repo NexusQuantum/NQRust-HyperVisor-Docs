@@ -3,7 +3,7 @@ sidebar_position: 4
 sidebar_label: Document Conventions
 title: "Document Conventions"
 keywords:
-- Harvester
+- Hypervisor
 - documentation
 - conventions
 - release types
@@ -27,7 +27,7 @@ The terms "Community" and "Prime" are used to differentiate the releases intende
 
 ## Release Labels
 
-The Harvester documentation uses the following labels to describe releases of the software.
+The Hypervisor documentation uses the following labels to describe releases of the software.
 
 - **Dev**: The software is under active development and has not been thoroughly tested. Upgrading from earlier releases or to later releases is not supported.
 
@@ -58,7 +58,7 @@ These features have the following limitations:
 
 ## Admonitions
 
-Admonitions are text blocks that provide additional or important information. Each text block is marked with a special label and icon. The Harvester documentation uses the following conventions to help you interpret information.
+Admonitions are text blocks that provide additional or important information. Each text block is marked with a special label and icon. The Hypervisor documentation uses the following conventions to help you interpret information.
 
 - **Note**: Additional information that is useful but not critical.
 
