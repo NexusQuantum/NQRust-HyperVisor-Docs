@@ -1,4 +1,4 @@
----
+﻿---
 id: airgap
 sidebar_position: 3
 sidebar_label: Air Gapped Environment
@@ -26,17 +26,17 @@ In some environments, the connection to external services, from the servers or V
 
 You can configure the HTTP(S) proxy during the [ISO installation](./install/iso-install.md) as shown in picture below:
 
-![iso-proxy](/img/v1.2/iso-proxy.png)
+![iso-proxy](/img/iso-proxy.png)
 
 ### Configure an HTTP Proxy in Harvester Settings
 
 You can configure the HTTP(S) proxy in the settings page of the Harvester dashboard:
 
 1. Go to the settings page of the Harvester UI.
-1. Find the `http-proxy` setting, click **⋮ > Edit setting**
+1. Find the `http-proxy` setting, click **â‹® > Edit setting**
 1. Enter the value(s) for `http-proxy`, `https-proxy` and `no-proxy`.
 
-![proxy-setting](/img/v1.2/proxy-setting.png)
+![proxy-setting](/img/proxy-setting.png)
 
 :::note
 
@@ -55,7 +55,7 @@ However, it's essential to understand a guest K8s cluster (e.g., RKE2 cluster) c
 
 If the **Cloud Provider** option is configured to **Harvester** in a guest K8s cluster, it deploys the Harvester cloud provider and Container Storage Interface (CSI) driver.
 
-![cluster-registry](/img/v1.2/cluster-registry.png)
+![cluster-registry](/img/cluster-registry.png)
 
 As a result, we recommend monitoring each [RKE2 release](https://github.com/rancher/rke2/releases) in your air gapped environment and pulling the required images into your private registry. Please refer to the **Harvester CCM & CSI Driver** with RKE2 Releases section on the [Harvester support matrix page](https://www.suse.com/suse-harvester/support-matrix/all-supported-versions/harvester-v1-1-2/) for the best Harvester cloud provider and CSI driver capability support.
 
@@ -85,13 +85,13 @@ The Harvester UI Extension is required to access the Harvester UI in Rancher v2.
 
 1. Pull the image [rancher/ui-plugin-catalog](https://hub.docker.com/r/rancher/ui-plugin-catalog/tags) with the newest tag.
 
-1. On the Rancher UI, go to **Extensions**, and then select **⋮ > Manage Extension Catalogs**.
+1. On the Rancher UI, go to **Extensions**, and then select **â‹® > Manage Extension Catalogs**.
 
-  ![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-01.png)
+  ![](/img/air-gapped/air-gappted-harvester-ui-extension-01.png)
 
 1. Specify the required information.
 
-  ![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-02.png)
+  ![](/img/air-gapped/air-gappted-harvester-ui-extension-02.png)
 
     - **Catalog Image Reference**: Specify the private registry URL and image repository.
     - **Image Pull Secrets**: Specify the secret used to access the registry when a username and password are required. You must create that secret in the `cattle-ui-plugin-system` namespace. Use either `kubernetes.io/dockercfg` or `kubernetes.io/dockerconfigjson` as the value of `type`.
@@ -110,25 +110,25 @@ The Harvester UI Extension is required to access the Harvester UI in Rancher v2.
 
 1. Click **Load**, and then allow some time for the extension to be loaded.
 
-  ![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-03.png)
+  ![](/img/air-gapped/air-gappted-harvester-ui-extension-03.png)
 
 1. On the **Available** tab, locate the extension named **Harvester**, and then click **Install**.
 
-  ![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-04.png)
+  ![](/img/air-gapped/air-gappted-harvester-ui-extension-04.png)
 
 1. Select the version that matches the Harvester cluster, and then click **Install**.
 
   For more information, see the [Harvester UI Extension Support Matrix](/v1.4/rancher/harvester-ui-extension/#support-matrix).
 
-  ![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-05.png)
+  ![](/img/air-gapped/air-gappted-harvester-ui-extension-05.png)
 
-  ![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-06.png) 
+  ![](/img/air-gapped/air-gappted-harvester-ui-extension-06.png) 
 
 1. Go to **Virtualization Management > Harvester Clusters**.
 
   You can now import Harvester clusters and access the Harvester UI.
 
-  ![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-07.png)
+  ![](/img/air-gapped/air-gappted-harvester-ui-extension-07.png)
 
 ## Time Requirements
 
@@ -142,21 +142,21 @@ Ensuring accurate and consistent time across the cluster is essential for reliab
 
 ### UI Extensions Do Not Appear
 
-If the **Extensions** screen is empty, go to **Repositories** (**⋮ > Manage Repositories**) and then click **Refresh**.
+If the **Extensions** screen is empty, go to **Repositories** (**â‹® > Manage Repositories**) and then click **Refresh**.
 
-![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-04-01.png)
+![](/img/air-gapped/air-gappted-harvester-ui-extension-04-01.png)
 
-![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-04-02.png)
+![](/img/air-gapped/air-gappted-harvester-ui-extension-04-02.png)
 
-![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-04-03.png)
+![](/img/air-gapped/air-gappted-harvester-ui-extension-04-03.png)
 
-![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-04-04.png)
+![](/img/air-gapped/air-gappted-harvester-ui-extension-04-04.png)
 
 ### Installation Failed
 
 If you encounter an error during installation, check the `uiplugins` resource.
 
-![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-05-01.png)
+![](/img/air-gapped/air-gappted-harvester-ui-extension-05-01.png)
 
 Example:
 

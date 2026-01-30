@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 2
 sidebar_label: StorageClass
 title: "StorageClass"
@@ -19,7 +19,7 @@ For support with other storage, please refer to [Third-Party Storage Support](..
 ## Creating a StorageClass
 You can create one or more StorageClasses from the **Advanced > StorageClasses** page.
 
-![](/img/v1.2/storageclass/create_storageclasses_entry.png)
+![](/img/storageclass/create_storageclasses_entry.png)
 
 :::note
 
@@ -31,7 +31,7 @@ After a StorageClass is created, nothing can be changed except `Description`.
 1. **Name**: name of the StorageClass
 1. **Description** (optional): description of the StorageClass
 
-![](/img/v1.2/storageclass/create_storageclasses_header_sections.png)
+![](/img/storageclass/create_storageclasses_header_sections.png)
 
 ### Parameters Tab
 
@@ -39,31 +39,31 @@ After a StorageClass is created, nothing can be changed except `Description`.
 
 The number of replicas created for each volume in Longhorn. Defaults to `3`.
 
-![](/img/v1.2/storageclass/create_storageclasses_replicas.png)
+![](/img/storageclass/create_storageclasses_replicas.png)
 
 #### Stale Replica Timeout
 
 Determines when Longhorn would clean up an error replica after the replica's status is ERROR. The unit is minute. Defaults to `30` minutes in Harvester.
 
-![](/img/v1.2/storageclass/create_storageclasses_stale_timeout.png)
+![](/img/storageclass/create_storageclasses_stale_timeout.png)
 
 #### Node Selector (Optional)
 
 Select the node tags to be matched in the volume scheduling stage. You can add node tags by going to **Host > Edit Config**.
 
-![](/img/v1.2/storageclass/create_storageclasses_node_selector.png)
+![](/img/storageclass/create_storageclasses_node_selector.png)
 
 #### Disk Selector (Optional)
 
 Select the disk tags to be matched in the volume scheduling stage. You can add disk tags by going to **Host > Edit Config**.
 
-![](/img/v1.2/storageclass/create_storageclasses_disk_selector.png)
+![](/img/storageclass/create_storageclasses_disk_selector.png)
 
 #### Migratable
 
 Whether [Live Migration](../vm/live-migration.md) is supported. Defaults to `Yes`.
 
-![](/img/v1.2/storageclass/create_storageclasses_migratable.png)
+![](/img/storageclass/create_storageclasses_migratable.png)
 
 ### Customize Tab
 
@@ -74,13 +74,13 @@ Volumes dynamically created by a StorageClass will have the reclaim policy speci
 1. `Delete`: Deletes volumes and the underlying devices when the volume claim is deleted.
 2. `Retain`: Retains the volume for manual cleanup.
 
-![](/img/v1.2/storageclass/customize_tab_reclaim_policy.png)
+![](/img/storageclass/customize_tab_reclaim_policy.png)
 
 #### Allow Volume Expansion
 
 Volumes can be configured to be expandable. This feature is `Enabled` by default, which allows users to resize the volume by editing the corresponding PVC object.
 
-![](/img/v1.2/storageclass/customize_tab_allow_vol_expansion.png)
+![](/img/storageclass/customize_tab_allow_vol_expansion.png)
 
 :::note
 
@@ -95,7 +95,7 @@ The `volumeBindingMode` field controls when volume binding and dynamic provision
 1. `Immediate`: Binds and provisions a persistent volume once the PersistentVolumeClaim is created.
 2. `WaitForFirstConsumer`: Binds and provisions a persistent volume once a VM using the PersistentVolumeClaim is created.
 
-![](/img/v1.2/storageclass/customize_tab_vol_binding_mode.png)
+![](/img/storageclass/customize_tab_vol_binding_mode.png)
 
 ## Appendix - Use Case
 
@@ -113,14 +113,14 @@ HDD is not recommended for guest RKE2 clusters or VMs with good performance disk
 
 First, add your HDD on the `Host` page and specify the disk tags as needed, such as`HDD` or `ColdStorage`. For more information on how to add extra disks and disk tags, see [Multi-disk Management](../host/host.md#multi-disk-management) for details.
 
-![](/img/v1.2/storageclass/add_hdd_on_host_page.png)
+![](/img/storageclass/add_hdd_on_host_page.png)
 
-![](/img/v1.2/storageclass/add_tags.png)
+![](/img/storageclass/add_tags.png)
 
 Then, create a new `StorageClass` for the HDD (use the above disk tags). For hard drives with large capacity but slow performance, the number of replicas can be reduced to improve performance.
 
-![](/img/v1.2/storageclass/create_hdd_storageclass.png)
+![](/img/storageclass/create_hdd_storageclass.png)
 
 You can now create a volume using the above `StorageClass` with HDDs mostly for cold storage or archiving purpose.
 
-![](/img/v1.2/storageclass/create_volume_hdd.png)
+![](/img/storageclass/create_volume_hdd.png)

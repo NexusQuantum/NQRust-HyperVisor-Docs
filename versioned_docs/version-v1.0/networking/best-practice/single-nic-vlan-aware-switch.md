@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 4
 sidebar_label: Single NIC with VLAN-aware Switch
 title: "Single NIC with VLAN-aware Switch"
@@ -34,7 +34,7 @@ Cabling:
 
 The following diagram illustrates the cabling used for this guide:
 
-   ![vlan-aware-case.png](/img/v1.0/networking/best-practice/vlan-aware-case.png)
+   ![vlan-aware-case.png](/img/networking/best-practice/vlan-aware-case.png)
 
 ## External Switch Configuration
 
@@ -58,7 +58,7 @@ You can create a new VLAN network in the **Advanced > Networks** page, and click
 
 Specify the name and VLAN ID that you want to create for the VLAN network <small>(You can specify the same VLAN ID in different namespaces if you have [Rancher multi-tenancy](../../rancher/virtualization-management.md#multi-tenancy) configured)</small>.
 
-   ![create-vlan-network.png](/img/v1.0/networking/best-practice/create-network.png)
+   ![create-vlan-network.png](/img/networking/best-practice/create-network.png)
 
 ### Connect a VM to the subnet of the Harvester hosts
 
@@ -68,7 +68,7 @@ Therefore, if you need VMs to connect to the VLAN ID 100, you need to create a V
 
 The external switch will remove the VLAN 100 tag from the packet for egress and `harvester-br0` will add the VLAN 1 tag to the packet and treat it as VLAN 1 as shown in the following diagram:
 
-   ![vlan-aware-native-vlan.png](/img/v1.0/networking/best-practice/vlan-aware-native-vlan.png)
+   ![vlan-aware-native-vlan.png](/img/networking/best-practice/vlan-aware-native-vlan.png)
 
 :::caution
 

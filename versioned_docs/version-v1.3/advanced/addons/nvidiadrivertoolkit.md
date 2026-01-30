@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 6
 sidebar_label: Nvidia Driver Toolkit
 title: "Nvidia Driver Toolkit"
@@ -18,7 +18,7 @@ The toolkit only includes the correct Harvester OS image, build utilities, and k
 
 The Harvester ISO does not include the nvidia-driver-toolkit container image. Because of its size, the image is pulled from Docker Hub by default. If you have an air-gapped environment, you can download and push the image to your private registry. The **Image Repository** and **Image Tag** fields on the **nvidia-driver-toolkit** screen provide information about the image that you must download.
 
-![](/img/v1.3/advanced/nvidia-driver-toolkit.png)
+![](/img/advanced/nvidia-driver-toolkit.png)
 
 :::note
 Each new Harvester version will be released with the correct nvidia-driver-toolkit image to ensure that all dependencies required to install the NVIDIA vGPU KVM drivers are available in the image.

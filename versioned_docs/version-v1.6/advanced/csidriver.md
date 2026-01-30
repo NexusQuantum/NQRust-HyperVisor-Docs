@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 3
 sidebar_label: Third-Party Storage Support
 title: "Third-Party Storage Support"
@@ -85,11 +85,11 @@ For more information, see [Containerized Data Importer (CDI) Settings](./storage
 :::
 
 1. Login to the Harvester UI, then navigate to **Advanced** > **Settings**.
-1. Find and select **csi-driver-config**, and then select **⋮** > **Edit Setting** to access the configuration options.
+1. Find and select **csi-driver-config**, and then select **â‹®** > **Edit Setting** to access the configuration options.
 1. Set the **Provisioner** to the third-party CSI driver in the settings.
 1. Next, Configure the **Volume Snapshot Class Name**. This setting points to the name of the `VolumeSnapshotClass` used for creating volume snapshots or VM snapshots.
 
-![csi-driver-config-external](/img/v1.5/advanced/csi-driver-config-external.png)
+![csi-driver-config-external](/img/advanced/csi-driver-config-external.png)
 
 ## Use the CSI Driver
 
@@ -101,11 +101,11 @@ You can use an external storage solution to store and manage virtual machine ima
 
 When [uploading a virtual machine image](../image/upload-image.md) using the Harvester UI (**Image > Create**), you must select the StorageClass for the external storage solution on the **Storage** tab. In the following example, the StorageClass is **nfs-csi**.
 
-![create-image-with-nfs-csi](/img/v1.5/advanced/create-image-with-nfs-csi.png)
+![create-image-with-nfs-csi](/img/advanced/create-image-with-nfs-csi.png)
 
 Harvester stores the created image in the external storage solution.
 
-![created-image-with-nfs-csi](/img/v1.5/advanced/created-image-with-nfs-csi.png) 
+![created-image-with-nfs-csi](/img/advanced/created-image-with-nfs-csi.png) 
 
 ### Virtual Machine Creation
 
@@ -116,11 +116,11 @@ When [creating a virtual machine](../vm/create-vm.md) using the Harvester UI (**
 - Select a virtual machine image stored in the external storage solution, and then configure the required settings.
 - Add a data volume.
 
-![various-volumes-for-vm-creating](/img/v1.5/advanced/various-volumes-for-vm-creating.png)
+![various-volumes-for-vm-creating](/img/advanced/various-volumes-for-vm-creating.png)
 
 In the following example, the root volume is created using NFS, and the data volume is created using the Longhorn V2 Data Engine.
 
-![various-volumes-for-vm-created](/img/v1.5/advanced/various-volumes-for-vm-created.png)
+![various-volumes-for-vm-created](/img/advanced/various-volumes-for-vm-created.png)
 
 ### Volume Creation
 
@@ -131,7 +131,7 @@ When [creating a volume](../volume/create-volume.md) using the Harvester UI (**V
 - **Storage Class**: Select the target StorageClass, e.g. **nfs-csi**.
 - **Volume Mode**: Select the corresponding volume mode, e.g. **Filesystem** for **nfs-csi**.
 
-![create-fs-volume](/img/v1.5/advanced/create-fs-volume.png)
+![create-fs-volume](/img/advanced/create-fs-volume.png)
 
 ## Advanced Topics
 
@@ -179,7 +179,7 @@ Avoid changing the storage profile or CDI directly. Instead, allow the Harvester
 
 - There is a limitation in the CDI which prevents Harvester from converting attached PVCs to virtual machine images. Before exporting a volume in external storage, ensure that the PVC is not attached to workloads. This prevents the resulting image from getting stuck in the *Exporting* state.
 
-![convert-pvc-to-image-stuck](/img/v1.5/advanced/convert-pvc-to-image-stuck.png)
+![convert-pvc-to-image-stuck](/img/advanced/convert-pvc-to-image-stuck.png)
 
 ### How to deploy the NFS CSI driver
 
@@ -270,7 +270,7 @@ Increasing the overhead value does not affect the image PVC size. The scratch vo
 
 :::
 
-Related issue: [#7993](https://github.com/harvester/harvester/issues/7993) (See this [comment](https://github.com/harvester/harvester/issues/7993#issuecomment-2790260841).)
+Related issue: [#7993](https://github.com/harvester/harvester/issues/7993) (See thisÂ [comment](https://github.com/harvester/harvester/issues/7993#issuecomment-2790260841).)
 
 ### 2. Multipath support
 _Available as of v1.4.3_

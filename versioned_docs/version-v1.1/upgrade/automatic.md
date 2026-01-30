@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 1
 sidebar_label: Upgrading Harvester
@@ -76,14 +76,14 @@ Note we are still working towards zero-downtime upgrade, due to some known issue
     - If the cluster is in an air-gapped environment, please see [Prepare an air-gapped upgrade](#prepare-an-air-gapped-upgrade) section first. You can also speed up the ISO download by using the approach in that section.
 - Navigate to Harvester GUI and click the upgrade button on the Dashboard page.
 
-    ![](/img/v1.1/upgrade/upgrade_button.png)
+    ![](/img/upgrade/upgrade_button.png)
 
 - Select a version to start upgrading.
 
-    ![](/img/v1.1/upgrade/upgrade_select_version.png)
+    ![](/img/upgrade/upgrade_select_version.png)
 
 - Click the circle on the top to display the upgrade progress.
-    ![](/img/v1.1/upgrade/upgrade_progress.png)
+    ![](/img/upgrade/upgrade_progress.png)
 
 
 ## Prepare an air-gapped upgrade

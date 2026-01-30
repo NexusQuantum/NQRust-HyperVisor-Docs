@@ -1,4 +1,4 @@
----
+﻿---
 id: harvester-monitoring
 sidebar_position: 1
 sidebar_label: Monitoring
@@ -25,7 +25,7 @@ Harvester has provided a built-in monitoring integration using [Prometheus](http
 From the `Dashboard` page, users can view the cluster metrics and top 10 most used VM metrics respectively.
 Also, users can click the [Grafana](http://grafana.com/) dashboard link to view more dashboards on the Grafana UI.
 
-![](/img/v1.2/monitoring/monitoring-dashboard.png)
+![](/img/monitoring/monitoring-dashboard.png)
 
 :::note
 
@@ -41,7 +41,7 @@ Reference: [values.yaml](https://github.com/rancher/charts/tree/dev-v2.7/charts/
 
 For VMs, you can view VM metrics by clicking on the `VM details page > VM Metrics`.
 
-![](/img/v1.2/monitoring/vm-metrics.png)
+![](/img/monitoring/vm-metrics.png)
 
 :::note
 
@@ -80,7 +80,7 @@ On the **Advanced** page, you can view and change the resource settings as follo
  2. From the **Prometheus** tab, change the resource requests and limits.
  3. Select **Save** when finished configuring the settings for the **rancher-monitoring** addon. The **Monitoring** deployments restart within a few seconds. Please be aware that the reboot can take time to reload previous data.
 
-![](/img/v1.2/monitoring/modify-prometheus-settings-from-addon.png)
+![](/img/monitoring/modify-prometheus-settings-from-addon.png)
 
 :::note
 
@@ -149,7 +149,7 @@ You can still make configuration adjustments when the addon is disabled. However
 
 `Alertmanager` is enabled by default. You may disable it from the following config path.
 
-![](/img/v1.2/monitoring/modify-alertmanager-from-addon.png)
+![](/img/monitoring/modify-alertmanager-from-addon.png)
 
 #### Change Resource Setting
 
@@ -163,23 +163,23 @@ On the WebUI, navigate to `Monitoring & Logging` -> `Monitoring` -> `Alertmanage
 
 On the `Alertmanager Config: Create` page, click `Namespace` to select the target namespace from the drop-down list and set the `Name`. After this, click `Create` in the lower right corner.
 
-![](/img/v1.2/monitoring/alertmanager-config-create-1.png)
+![](/img/monitoring/alertmanager-config-create-1.png)
 
 Click the `Alertmanager Configs` you just created to continue the configuration.
 
-![](/img/v1.2/monitoring/view-alertmanager-config.png)
+![](/img/monitoring/view-alertmanager-config.png)
 
 Click `Add Receiver`.
 
-![](/img/v1.2/monitoring/prepare-to-add-receiver.png)
+![](/img/monitoring/prepare-to-add-receiver.png)
 
 Set the `Name` for the receiver. After this, select the receiver type, for example, `Webhook`, and click `Add Webhook`.
 
-![](/img/v1.2/monitoring/webhook-receiver-1.png)
+![](/img/monitoring/webhook-receiver-1.png)
 
 Fill in the required parameters and click `Create`.
 
-![](/img/v1.2/monitoring/webhook-receiver-2.png)
+![](/img/monitoring/webhook-receiver-2.png)
 
 To set up Microsoft Teams or SMS webhooks, first install the rancher-alerting-drivers app using the following commands:
 
@@ -309,11 +309,11 @@ You can visit the original dashboard of `Alertmanager` from the link below. Note
 
 The overall view of the `Alertmanager` dashboard is as follows.
 
-![](/img/v1.2/monitoring/alertmanager-dashboard.png)
+![](/img/monitoring/alertmanager-dashboard.png)
 
 You can view the details of an alert:
 
-![](/img/v1.2/monitoring/alert-view-detail.png)
+![](/img/monitoring/alert-view-detail.png)
 
 #### From Prometheus Dashboard
 
@@ -323,7 +323,7 @@ You can visit the original dashboard of `Prometheus` from the link below. Note t
 
 The `Alerts` menu in the top navigation bar shows all defined rules in Prometheus. You can use the filters `Inactive`, `Pending`, and `Firing` to quickly find the information that you need.
 
-![](/img/v1.2/monitoring/prometheus-original-alerts.png)
+![](/img/monitoring/prometheus-original-alerts.png)
 
 
 ## Troubleshooting

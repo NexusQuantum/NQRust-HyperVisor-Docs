@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 2
 sidebar_label: StorageClass
 title: "StorageClass"
@@ -18,7 +18,7 @@ To avoid this issue, you can perform either of the following actions:
 
 - Change the [replica count](../install/harvester-configuration/#installharvesterstorage_classreplica_count) of `harvester-longhorn` to `1` using a [Harvester configuration](../install/harvester-configuration.md) file. 
 
-- [Create a new StorageClass](../advanced/storageclass.md#creating-a-storageclass) with the **Number of Replicas** parameter set to `1`. Once created, locate the new StorageClass in the list and then select **⋮ > Set as Default**.
+- [Create a new StorageClass](../advanced/storageclass.md#creating-a-storageclass) with the **Number of Replicas** parameter set to `1`. Once created, locate the new StorageClass in the list and then select **â‹® > Set as Default**.
 
 :::
 
@@ -37,7 +37,7 @@ Once the StorageClass is created, you can only edit the description. All other s
 
 1. On the Harvester UI, go to **Advanced > StorageClasses**.
 
-    ![](/img/v1.2/storageclass/create_storageclasses_entry.png)
+    ![](/img/storageclass/create_storageclasses_entry.png)
 
 1. In the general information section, configure the following:
 
@@ -126,7 +126,7 @@ Harvester officially supports data locality as of **v1.3.0**. This applies even 
 - **Key**: `dataLocality`
 - **Value**: `disabled` or `best-effort`
 
-![](/img/v1.3/storageclass/data-locality.png)
+![](/img/storageclass/data-locality.png)
 
 ### Data Locality Options
 
@@ -160,14 +160,14 @@ HDD is not recommended for guest RKE2 clusters or VMs with good performance disk
 
 First, add your HDD on the `Host` page and specify the disk tags as needed, such as`HDD` or `ColdStorage`. For more information on how to add extra disks and disk tags, see [Multi-disk Management](../host/host.md#multi-disk-management) for details.
 
-![](/img/v1.2/storageclass/add_hdd_on_host_page.png)
+![](/img/storageclass/add_hdd_on_host_page.png)
 
-![](/img/v1.2/storageclass/add_tags.png)
+![](/img/storageclass/add_tags.png)
 
 Then, create a new `StorageClass` for the HDD (use the above disk tags). For hard drives with large capacity but slow performance, the number of replicas can be reduced to improve performance.
 
-![](/img/v1.2/storageclass/create_hdd_storageclass.png)
+![](/img/storageclass/create_hdd_storageclass.png)
 
 You can now create a volume using the above `StorageClass` with HDDs mostly for cold storage or archiving purpose.
 
-![](/img/v1.2/storageclass/create_volume_hdd.png)
+![](/img/storageclass/create_volume_hdd.png)

@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: Access to the Virtual Machine
 title: "Access to the Virtual Machine"
@@ -25,7 +25,7 @@ VMs can be accessed from the UI directly using either VNC or the serial console.
 
 If the VGA display is not enabled on the VM, e.g., the `Ubuntu-Minimal-Cloud` image, the VM can only be accessed with the serial console.
 
-![](/img/v1.2/vm/access-to-vm.png)
+![](/img/vm/access-to-vm.png)
 
 ## SSH Access
 
@@ -35,7 +35,7 @@ Harvester provides two ways to inject SSH public keys into virtual machines. Gen
 
 You can provide ssh keys to your virtual machines during the creation time on the `Basics` tab. Additionally, you can place the public ssh keys into your cloud-init script to allow it to take place.
 
-![](/img/v1.2/vm/vm-ssh-keys.png)
+![](/img/vm/vm-ssh-keys.png)
 
 #### Example of SSH key cloud-init configuration:
 ```yaml
@@ -61,7 +61,7 @@ When using `qemuGuestAgent` propagation, the `/home/$USER/.ssh/authorized_keys` 
 
 You can inject your access credentials via the Harvester dashboard as below:
 
-1. Select the VM and click `⋮` button.
+1. Select the VM and click `â‹®` button.
 2. Click the `Edit Config` button and go to the `Access Credentials` tab.
 3. Click to add either basic auth credentials or ssh keys, (e.g., add `opensuse` as the user and select your ssh keys if your guest OS is OpenSUSE).
 4. Make sure your qemu guest agent is already installed and the VM should be restarted after the credentials are added.
@@ -72,7 +72,7 @@ You need to enter the VM to edit password or remove SSH-Key after deleting the c
 
 :::
 
-![](/img/v1.2/vm/vm-add-access-credentails.png)
+![](/img/vm/vm-add-access-credentails.png)
 
 
 

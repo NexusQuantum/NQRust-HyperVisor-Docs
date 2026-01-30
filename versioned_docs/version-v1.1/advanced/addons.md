@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 4
 sidebar_label: Addons
 title: "Addons"
@@ -20,4 +20,4 @@ v1.1.0 currently ships with two Addons:
 * [pcidevices-controller](./pcidevices.md)
 * [vm-import-controller](./vmimport.md)
 
-![](/img/v1.1/addons/DefaultAddons.png)
+![](/img/addons/DefaultAddons.png)

@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 1
 sidebar_label: Settings
@@ -95,7 +95,7 @@ For more information, see the [Longhorn documentation](https://longhorn.io/docs/
   "accessKeyId": "test-access-key-id",
   "secretAccessKey": "test-access-key",
   "bucketName": "test-bup",
-  "bucketRegion": "us‑east‑2",
+  "bucketRegion": "usâ€‘eastâ€‘2",
   "cert": "",
   "virtualHostedStyle": false
 }
@@ -132,7 +132,7 @@ For security purposes, Harvester automatically removes the username and password
 
 **Example**:
 
-![containerd-registry](/img/v1.2/advanced/containerd-registry.png)
+![containerd-registry](/img/advanced/containerd-registry.png)
 
 ```json
 {
@@ -268,7 +268,7 @@ debug
 
 **Definition**: Setting that enables and disables the Longhorn V2 Data Engine.
 
-When set to `true`, Harvester automatically loads the kernel modules required by the Longhorn V2 Data Engine, and attempts to allocate 1024 × 2 MiB-sized huge pages (for example, 2 GiB of RAM) on all nodes.
+When set to `true`, Harvester automatically loads the kernel modules required by the Longhorn V2 Data Engine, and attempts to allocate 1024 Ã— 2 MiB-sized huge pages (for example, 2 GiB of RAM) on all nodes.
 
 Changing this setting automatically restarts RKE2 on all nodes but does not affect running virtual machine workloads.
 
@@ -619,7 +619,7 @@ status: {}
 
 After some time, a newer image tag (`v0.0.36`) is specified in the `value` field using the Harvester UI.
 
-![](/img/v1.3/advanced/support-bundle-image-set-customized-value.png)
+![](/img/advanced/support-bundle-image-set-customized-value.png)
 
 ```
 apiVersion: harvesterhci.io/v1beta1
@@ -667,7 +667,7 @@ status: {}
 
 The **Use the default value** button on the Harvester UI can be used to copy the contents of the `default` field to the `value` field.
 
-![](/img/v1.3/advanced/support-bundle-image-set-use-default-value.png)
+![](/img/advanced/support-bundle-image-set-use-default-value.png)
 
 The object appears as follows after the changes are saved.
 
@@ -962,7 +962,7 @@ Because this setting is part of the `settings.management.cattle.io` custom resou
 
 :::
 
-![containerd-registry](/img/v1.2/advanced/branding.png)
+![containerd-registry](/img/advanced/branding.png)
 
 **Supported options and values**:
 

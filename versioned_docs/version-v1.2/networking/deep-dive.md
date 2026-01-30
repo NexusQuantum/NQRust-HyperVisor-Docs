@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 3
 sidebar_label: Harvester Network Deep Dive
 title: "Harvester Network Deep Dive"
@@ -14,7 +14,7 @@ keywords:
 
 The network topology below reveals how we implement the Harvester network.
 
-![](/img/v1.2/networking/topology.png)
+![](/img/networking/topology.png)
 
 The diagram contains [the built-in cluster network mgmt](./clusternetwork.md#built-in-cluster-network) and a [custom cluster network](./clusternetwork.md#custom-cluster-network) called `oob`.
 

@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 7
 sidebar_label: Live Migration
 title: "Live Migration"
@@ -45,21 +45,21 @@ However, `host-model` only allows migration of the VM to a node with same CPU mo
 ## Starting a Migration
 
 1. Go to the **Virtual Machines** page.
-1. Find the virtual machine that you want to migrate and select **⋮ > Migrate**.
+1. Find the virtual machine that you want to migrate and select **â‹® > Migrate**.
 1. Choose the node to which you want to migrate the virtual machine. Click **Apply**.
 
-![](/img/v1.2/vm/migrate-action.png)
+![](/img/vm/migrate-action.png)
 
 When you have [node scheduling rules](./create-windows-vm.md#node-scheduling-tab) configured for a VM, you must ensure that the target nodes you are migrating to meet the VM's runtime requirements. The list of nodes you get to search and select from will be generated based on:
 - VM scheduling rules.
 - Possibly node rules from the network configuration.
 
-![](/img/v1.2/vm/migrate.png)
+![](/img/vm/migrate.png)
 
 ## Aborting a Migration
 
 1. Go to the **Virtual Machines** page.
-1. Find the virtual machine in migrating status that you want to abort. Select **⋮ > Abort Migration**.
+1. Find the virtual machine in migrating status that you want to abort. Select **â‹® > Abort Migration**.
 
 ## Migration Timeouts
 

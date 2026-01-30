@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 9
 sidebar_label: Resource Overcommit
 title: "Resource Overcommit"
@@ -34,18 +34,18 @@ Users can modify the global `overcommit-config` by following the steps below, an
 
 1. Go to the **Advanced > Settings** page.
 
-  ![overcommit page](/img/v1.2/vm/overcommit-page.png)
+  ![overcommit page](/img/vm/overcommit-page.png)
 
 1. Find the `overcommit-config` setting.
 1. Configure the desired CPU, Memory, and Storage ratio.
 
-  ![overcommit panel](/img/v1.2/vm/overcommit-panel.png)
+  ![overcommit panel](/img/vm/overcommit-panel.png)
 
 ## Configure overcommit for a single virtual machine
 
 In situations where you require specific configurations for individual virtual machines without affecting the global settings, you can easily achieve this by modifying the `spec.template.spec.domain.resources.limits.<memory|cpu>` value on the corresponding virtual machine spec directly.
 
-![vm overcommit config](/img/v1.2/vm/vm-overcommit-config.png)
+![vm overcommit config](/img/vm/vm-overcommit-config.png)
 
 ## Reserve more memory for the system overhead
 

@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 1
 sidebar_label: Create a Volume
@@ -24,7 +24,7 @@ description: Create a volume from the Volume page.
 1. Select an existing `StorageClass`.
 1. Configure the `Size` of the volume.
 
-![create-empty-volume](/img/v1.2/volume/create-empty-volume.png)
+![create-empty-volume](/img/volume/create-empty-volume.png)
 
 ## Create an Image Volume
 
@@ -46,4 +46,4 @@ To determine the virtual size of a qcow2 image, you can run the command `qemu-im
 
 :::
 
-![create-image-volume](/img/v1.2/volume/create-image-volume.png)
+![create-image-volume](/img/volume/create-image-volume.png)

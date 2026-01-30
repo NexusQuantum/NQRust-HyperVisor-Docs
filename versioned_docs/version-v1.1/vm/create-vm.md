@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 1
 sidebar_label: Create a Virtual Machine
@@ -40,7 +40,7 @@ Please refer to [this page](./create-windows-vm.md) for creating Windows virtual
     1. You can also add additional networks to the VMs using VLAN networks. You may configure the VLAN networks on **Advanced > Networks** first.
 1. Advanced options such as run strategy, os type and cloud-init data are optional. You may configure these in the **Advanced Options** section when applicable.
 
-![create-vm](/img/v1.1/vm/create-vm.png)
+![create-vm](/img/vm/create-vm.png)
 
 ## Volumes
 
@@ -55,7 +55,7 @@ A disk can be made accessible via the following types:
 
 A volume's [StorageClass](../advanced/storageclass.md) can be specified when adding a new empty volume; for other volumes (such as VM images), the `StorageClass` is defined during image creation.
 
-![create-vm](/img/v1.1/vm/create-vm-volumes.png)
+![create-vm](/img/vm/create-vm-volumes.png)
 
 ### Adding a container disk
 
@@ -67,7 +67,7 @@ A container disk is added when creating a VM by providing a Docker image. When c
 
 1. Go to the **Volumes** tab.
 1. Select **Add Container**.
-  ![add-container-volume](/img/v1.1/vm/add-container-volume-1.png)
+  ![add-container-volume](/img/vm/add-container-volume-1.png)
 1. Enter a **Name** for the container disk.
 1. Choose a disk **Type**.
 1. Add a **Docker Image**.
@@ -75,7 +75,7 @@ A container disk is added when creating a VM by providing a Docker image. When c
     - Raw and qcow2 formats are supported, but qcow2 is recommended in order to reduce the container image's size. If you use an unsupported image format, the VM will get stuck in a `Running` state.
     - A container disk also allows you to store disk images in any folder in the `/disk` directory by adding a [custom disk image path](https://kubevirt.io/user-guide/virtual_machines/disks_and_volumes/#custom-disk-image-path).
 1. Choose a **Bus** type.  
-  ![add-container-volume](/img/v1.1/vm/add-container-volume-2.png)
+  ![add-container-volume](/img/vm/add-container-volume-2.png)
 
 ## Networks
 
@@ -166,7 +166,7 @@ The QEMU guest agent is a daemon that runs on the virtual machine instance and p
 
 `Install guest agent` checkbox is enabled by default when a new VM is created.
 
-![](/img/v1.1/vm/qga.png)
+![](/img/vm/qga.png)
 
 :::note
 
@@ -187,7 +187,7 @@ The following example describes how to install an ISO image using [openSUSE Leap
 4. Click **Add Volume** and select an existing **StorageClass**.
 5. Drag **Volume** to the top of **Image Volume** as follows. In this way, the **bootOrder** of **Volume** will become `1`.
 
-![one-time-boot-create-vm-bootorder](/img/v1.1/vm/one-time-boot-create-vm-bootorder.png)
+![one-time-boot-create-vm-bootorder](/img/vm/one-time-boot-create-vm-bootorder.png)
 
 6. Click **Create**.
 7. Open the VM web-vnc you just created and follow the instructions given by the installer.

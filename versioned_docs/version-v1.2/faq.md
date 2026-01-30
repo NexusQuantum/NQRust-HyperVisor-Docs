@@ -1,4 +1,4 @@
----
+﻿---
 id: faq
 sidebar_position: 17
 sidebar_label: FAQ
@@ -21,7 +21,7 @@ password: # you will be promoted to set the default password when logging in for
 ### How can I access the kubeconfig file of the Harvester cluster?
 
 Option 1. You can download the kubeconfig file from the support page of the Harvester dashboard.
-![harvester-kubeconfig.png](/img/v1.2/harvester-kubeconfig.png)
+![harvester-kubeconfig.png](/img/harvester-kubeconfig.png)
 
 Option 2. You can get the kubeconfig file from one of the Harvester management nodes. E.g.,
 ```shell

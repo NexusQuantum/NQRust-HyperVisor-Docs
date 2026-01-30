@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 10
 sidebar_label: Descheduler
 title: "Descheduler (Experimental)"
@@ -14,17 +14,17 @@ When enabled, the add-on deploys the Descheduler in the `kube-system` namespace 
 
 1. On the Harvester UI, go to **Advanced** > **Add-ons**.
 
-1. Select **descheduler (Experimental)**, and then select **⋮** > **Enable**.
+1. Select **descheduler (Experimental)**, and then select **â‹®** > **Enable**.
 
-  ![](/img/v1.7/descheduler/descheduler-enable.png)
+  ![](/img/descheduler/descheduler-enable.png)
 
 ## Customizing Descheduler Policies
 
-Select **⋮** > **Edit YAML** to customize the Descheduler policies according to your requirements. The configuration is defined in YAML format.
+Select **â‹®** > **Edit YAML** to customize the Descheduler policies according to your requirements. The configuration is defined in YAML format.
 
-  ![](/img/v1.7/descheduler/descheduler-edit-yaml.png)
+  ![](/img/descheduler/descheduler-edit-yaml.png)
 
-  ![](/img/v1.7/descheduler/descheduler-policy.png)
+  ![](/img/descheduler/descheduler-policy.png)
 
 - `deschedulingInterval`: How often the Descheduler runs. The default value is `5m` (5 minutes).
 - `maxNoOfPodsToEvictPerNode`: Maximum number of pods that can be evicted during a single descheduling cycle. The default is value is `5`.
@@ -36,4 +36,4 @@ Select **⋮** > **Edit YAML** to customize the Descheduler policies according t
 
 1. On the Harvester UI, go to **Advanced** > **Add-ons**.
 
-1. Select **descheduler (Experimental)**, and then select **⋮** > **Disable**.
+1. Select **descheduler (Experimental)**, and then select **â‹®** > **Disable**.

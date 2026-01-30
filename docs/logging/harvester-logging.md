@@ -1,4 +1,4 @@
----
+﻿---
 id: harvester-logging
 sidebar_position: 1
 sidebar_label: Logging
@@ -38,7 +38,7 @@ For Harvester clusters upgraded from version v1.1.x, the logging feature is conv
 
 Both Harvester and Rancher use the [Logging Operator](https://kube-logging.dev/docs/#overview) to manage specific components and operations of the internal logging infrastructure.
 
-![](/img/v1.2/logging/logging-operator.png)
+![](/img/logging/logging-operator.png)
 
 In Harvester's practice, the `Logging`, `Audit` and `Event` shares one architecture, the `Logging` is the infrastructure, while the `Audit` and `Event` are on top of it.
 
@@ -74,7 +74,7 @@ If desired, you can modify how many resources are dedicated to those components.
  3. From the **Fluentd** tab, change the resource requests and limits.
  4. Select **Save** when finished configuring the settings for the **rancher-logging** addon. 
 
-![](/img/v1.2/logging/modify-logging-resources-from-addon.png)
+![](/img/logging/modify-logging-resources-from-addon.png)
 
 :::note
 
@@ -126,7 +126,7 @@ _Available as of v1.5.0_
 
 When enabling the **rancher-logging** add-on, you may encounter the following error:
 
-![](/img/v1.5/logging/logging-dangling-resources-check.png)
+![](/img/logging/logging-dangling-resources-check.png)
 
 You may also observe that deployments related to the add-on are not fully rolled out.
 
@@ -166,15 +166,15 @@ UI images are for `Output` and `Flow` whose configuration process is almost iden
  4. Select the logging type.
  5. Select the logging output type.
 
-![](/img/v1.2/logging/create-output.png)
+![](/img/logging/create-output.png)
 
  6. Configure the output buffer if necessary.
 
-![](/img/v1.2/logging/create-output-buffer.png)
+![](/img/logging/create-output-buffer.png)
 
  7. Add any labels or annotations.
 
-![](/img/v1.2/logging/create-output-labels-and-annotations.png)
+![](/img/logging/create-output-labels-and-annotations.png)
 
  8. Once done, click `Create` on the lower right.
 
@@ -201,15 +201,15 @@ You can append labels and annotations to the created resource.
  3. Add a name for the resource.
  4. Select any nodes whose logs to include or exclude.
 
-![](/img/v1.2/logging/create-flow-matches.png)
+![](/img/logging/create-flow-matches.png)
 
  5. Select target `Outputs` and `ClusterOutputs`.
 
-![](/img/v1.2/logging/create-flow-outputs.png)
+![](/img/logging/create-flow-outputs.png)
 
  6. Add any filters if desired.
 
-![](/img/v1.2/logging/create-flow-filters.png)
+![](/img/logging/create-flow-filters.png)
 
  7. Once done, click `Create` on the lower left.
 
@@ -317,7 +317,7 @@ sudo docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e xpack.security
 
 To use Elasticsearch with Harvester v1.5.0, ensure that the Elasticsearch server is running version 8.11.0 or later.
 
-You must upgrade Elasticsearch when the `rancher-logging-root-fluentd-0` pod reports an error such as `#0 unexpected error error_class=Elastic::Transport::Transport::Error error="no address for http (Resolv::ResolvError)" Client can’t recognise the server.`.
+You must upgrade Elasticsearch when the `rancher-logging-root-fluentd-0` pod reports an error such as `#0 unexpected error error_class=Elastic::Transport::Transport::Error error="no address for http (Resolv::ResolvError)" Client canâ€™t recognise the server.`.
 
 :::
 
@@ -574,7 +574,7 @@ When you configure from the Harvester dashboard, the field is added automaticall
 
 Select type `Audit Only` from the `Type` drpo-down list.
 
-![](/img/v1.2/logging/cluster-output-type.png)
+![](/img/logging/cluster-output-type.png)
 
 When you configure from the CLI, please add the field manually.
 
@@ -607,7 +607,7 @@ When you configure from the Harvester dashboard, the field is added automaticall
 
 Select type `Audit`.
 
-![](/img/v1.2/logging/cluster-flow-type.png)
+![](/img/logging/cluster-flow-type.png)
 
 When you config from the CLI, please add the field manually.
 
@@ -708,7 +708,7 @@ Events share the `Output`/`ClusterOutput` with `Logging`.
 
 Select `Logging/Event` from the `Type` drop-down list.
 
-![](/img/v1.2/logging/cluster-output-type.png)
+![](/img/logging/cluster-output-type.png)
 
 ### Event Log Flow/ClusterFlow
 
@@ -718,7 +718,7 @@ When you configure from the Harvester dashboard, the field is added automaticall
 
 Select `Event` from the `Type` drop-down list.
 
-![](/img/v1.2/logging/cluster-flow-type.png)
+![](/img/logging/cluster-flow-type.png)
 
 When you configure from the CLI, please add the field manually.
 

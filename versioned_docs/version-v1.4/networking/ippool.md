@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: IP Pool
 title: "IP Pool"
@@ -30,9 +30,9 @@ To create a new IP pool:
 1. Go to the **Networks** > **IP Pools** page and select **Create**.
 1. Specify the **Name** of the IP pool.
 1. Go to the **Range** tab to specify the **IP ranges** for the IP pool. You can add multiple IP ranges.
-   ![](/img/v1.2/networking/multiple-ranges.png)
+   ![](/img/networking/multiple-ranges.png)
 1. Go to the **Selector** tab to specify the **Scope** and **Priority** of the IP pool.
-   ![](/img/v1.2/networking/ippool-scope.png)
+   ![](/img/networking/ippool-scope.png)
 
 ## Selection policy
 Each IP pool will have a specific range, and you can specify the corresponding requirements in the LB `annotations`. IP pools that meet the specified requirements will automatically assign IP addresses to LBs.

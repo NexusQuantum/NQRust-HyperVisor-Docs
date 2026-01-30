@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 2
 sidebar_label: VM Network
 title: "VM Network"
@@ -36,13 +36,13 @@ However, you can leverage the Kubernetes [service object](https://kubevirt.io/us
 
 Since the management network is built-in and doesn't require extra operations, you can add it directly when configuring the VM network.
 
-![](/img/v1.2/networking/management-network.png)
+![](/img/networking/management-network.png)
 
 :::info important
 
 `mgmt` uses the default MTU value `1500` if you do not specify a value other than `0` or `1500` in the [`install.management_interface`](../install/harvester-configuration.md#installmanagement_interface) setting during installation. However, the network interfaces of virtual machines connected to `mgmt` have an MTU value of [`1450`](https://docs.tigera.io/calico/latest/networking/configuring/mtu#determine-mtu-size). This is because Harvester uses the **Calico and Flannel CNI**, which has an overhead of 50 bytes per packet, to carry the in-cluster overlay network.
 
-![](/img/v1.3/networking/management-network-mtu.png)
+![](/img/networking/management-network-mtu.png)
 
 If any of your workloads involve transmission of network traffic, you must specify the appropriate MTU value for the affected VM network interfaces and bridges.
 
@@ -70,7 +70,7 @@ The [Harvester network-controller](https://github.com/harvester/harvester-networ
     - Vlan ID
     - Cluster Network
 
-    ![](/img/v1.2/networking/create-vlan-network.png)
+    ![](/img/networking/create-vlan-network.png)
 
   :::note
 
@@ -86,11 +86,11 @@ The [Harvester network-controller](https://github.com/harvester/harvester-networ
 
     - Auto(DHCP): The Harvester network controller retrieves the CIDR and gateway addresses from the DHCP server. You can specify the DHCP server address. 
 
-    ![](/img/v1.2/networking/create-network-auto.png)
+    ![](/img/networking/create-network-auto.png)
 
     - Manual: Specify the CIDR and gateway addresses.
 
-    ![](/img/v1.2/networking/create-network-manual.png)
+    ![](/img/networking/create-network-manual.png)
 
     :::info important
     Harvester uses the information to verify that all nodes can access the VM network you are creating. If that is the case, the *Network connectivity* column on the **VM Networks** screen indicates that the network is active. Otherwise, the screen indicates that an error has occurred.
@@ -112,7 +112,7 @@ The usage of untagged network is similar to [the VLAN network](#vlan-network).
 
 To create a new untagged network, go to the **Networks > VM Networks** page and click the **Create** button. You have to specify the name, select the type `Untagged Network` and choose the cluster network.
 
-![](/img/v1.2/networking/create-untagged-network.png)
+![](/img/networking/create-untagged-network.png)
 
 :::note
 
@@ -150,7 +150,7 @@ The overlay network implementation in Harvester v1.6 has the following limitatio
 
 - By default, the `enableDHCP` and `dhcpV4Options` settings are not configured, so no default route exists on virtual machines that are attached to a Kube-OVN overlay subnet. Attempts to access external destinations fail until the default route is correctly configured on the guest operating system. You can perform either of the following workarounds:
 
-    - Manually add the subnet’s gateway IP as the virtual machine's default route.
+    - Manually add the subnetâ€™s gateway IP as the virtual machine's default route.
 
     - Use the `managedTap` binding: Edit the YAML configuration of the attached subnet, and verify that the field `.spec.enableDHCP` is set to `true`. Next, edit the YAML configuration of the virtual machine, and modify the interface definition to use binding.
 

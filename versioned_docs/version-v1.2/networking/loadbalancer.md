@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 4
 sidebar_label: Load Balancer
 title: "Load Balancer"
@@ -40,18 +40,18 @@ To create a new Harvester VM load balancer:
 1. Go to the **Networks > Load Balancer** page and select **Create**.
 1. Select the **Namespace** and specify the **Name**.
 1. Go to the **Basic** tab to choose the IPAM mode, which can be **DHCP** or **IP Pool**. If you select **IP Pool**, prepare an IP pool first, specify the IP pool name, or choose **auto**. If you choose **auto**, the LB automatically selects an IP pool according to [the IP pool selection policy](/networking/ippool.md/#selection-policy).
-   ![](/img/v1.2/networking/create-lb-01.png)
+   ![](/img/networking/create-lb-01.png)
 1. Go to the **Listeners** tab to add listeners. You must specify the **Port**, **Protocol**, and **Backend Port** for each listener.
-   ![](/img/v1.2/networking/create-lb-02.png)
+   ![](/img/networking/create-lb-02.png)
 1. Go to the **Backend Server Selector** tab to add label selectors. To add the VM to the LB, go to the **Virtual Machine > Instance Labels** tab to add the corresponding labels to the VM.
-   ![](/img/v1.2/networking/create-lb-03.png)
+   ![](/img/networking/create-lb-03.png)
 1. Go to the **Health Check** tab to enable health check and specify the parameters, including the **Port**, **Success Threshold**, **Failure Threshold**, **Interval**, and **Timeout** if the backend service supports health check. Refer to [Health Checks](#health-checks) for more details.
-   ![](/img/v1.2/networking/create-lb-04.png)
+   ![](/img/networking/create-lb-04.png)
 
 ### Health Checks
 The Harvester load balancer supports TCP health checks. You can specify the parameters in the Harvester UI if you've enabled the `Health Check` option.
 
-![](/img/v1.2/networking/health-check.png)
+![](/img/networking/health-check.png)
 
 | Name                           | Value Type | Required | Default | Description |
 |:-------------------------------|:-----------|:---|:--------|:---|
@@ -63,7 +63,7 @@ The Harvester load balancer supports TCP health checks. You can specify the para
 
 ## Guest Kubernetes cluster load balancer
 In conjunction with Harvester Cloud Provider, the Harvester load balancer provides load balancing for LB services in the guest cluster.
-   ![](/img/v1.2/networking/guest-kubernetes-cluster-lb.png)
+   ![](/img/networking/guest-kubernetes-cluster-lb.png)
 When you create, update, or delete an LB service on a guest cluster with Harvester Cloud Provider, the Harvester Cloud Provider will create a Harvester LB automatically.
 
 For more details, refer to [Harvester Cloud Provider](/rancher/cloud-provider.md).

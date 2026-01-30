@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 6
 sidebar_label: Upload Images
 title: "Upload Images"
@@ -26,7 +26,7 @@ The image name will be auto-filled using the URL address's filename. You can cus
 
 :::
 
-![](/img/v1.0/upload-image.png)
+![](/img/upload-image.png)
 
 ### Upload Images via Local File
 
@@ -38,14 +38,14 @@ Currently, qcow2, raw, and ISO images are supported.
 
 :::
 
-![](/img/v1.0/upload-image-local.png)
+![](/img/upload-image-local.png)
 
 
 ### Create Images via Volumes
 
 On the **Volumes** page, click **Export Image**. Enter image name to create image.
 
-![](/img/v1.0/export-image.png)
+![](/img/export-image.png)
 
 ### Image labels
 
@@ -54,4 +54,4 @@ You can add labels to the image, which will help identify the OS type more accur
 
 If you create an image from a URL, the UI will automatically recognize the OS type and image category based on the image name. However, if you created the image by uploading a local file, you will need to manually select the corresponding labels.
 
-![](/img/v1.0/image-labels.png)
+![](/img/image-labels.png)

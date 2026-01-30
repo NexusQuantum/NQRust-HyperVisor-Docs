@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: VM Import
 title: "VM Import"
@@ -14,7 +14,7 @@ With the vm-import-controller addon users can import their virtual machines from
 
 To use the VM import feature, users need to enable the vm-import-controller addon.
 
-![](/img/v1.1/vm-import-controller/EnableAddon.png)
+![](/img/vm-import-controller/EnableAddon.png)
 
 By default, vm-import-controller leverages ephemeral storage, which is mounted from /var/lib/kubelet.  
 
@@ -22,7 +22,7 @@ During the migration, a large VM's node could run out of space on this mount, re
 
 To avoid this, users are advised to enable PVC-backed storage and customize the amount of storage needed. According to the best practice, the PVC size should be twice the size of the largest VM being migrated. This is essential as the PVC is used as scratch space to download the VM, and convert the disks into raw image files.
 
-![](/img/v1.1/vm-import-controller/ConfigureAddon.png)
+![](/img/vm-import-controller/ConfigureAddon.png)
 
 ## vm-import-controller
 

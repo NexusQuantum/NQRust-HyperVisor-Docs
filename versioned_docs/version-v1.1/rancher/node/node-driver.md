@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 1
 sidebar_label: Harvester Node Driver
 title: "Harvester Node Driver"
@@ -30,7 +30,7 @@ The Harvester node driver is enabled by default from Rancher `v2.6.3`. You can g
 
 When the Harvester node driver is enabled, you can create Kubernetes clusters on top of the Harvester cluster and manage them from Rancher.
 
-![rke1-cluster](/img/v1.1/rancher/rke1-node-driver.png)
+![rke1-cluster](/img/rancher/rke1-node-driver.png)
 
 ### Support Matrix
 Refer to [Rancher Downstream Cluster Support Matrix](https://www.suse.com/suse-rancher/support-matrix/all-supported-versions/rancher-v2-6-9)
@@ -48,7 +48,7 @@ Refer to [Rancher Downstream Cluster Support Matrix](https://www.suse.com/suse-r
 | Resolved(Rancher >=v2.7.2) | 2023-05-08   |
 
 **Workaround**: You can temporarily change the Harvester node driver version to [v0.6.3](https://github.com/harvester/docker-machine-driver-harvester/releases/tag/v0.6.3) from the Rancher UI.
-1. Go to the Rancher UI and click `Cluster Management` > `Drivers` > `Node Drivers`. In the `Node Drivers` list, find ` Harvester` and then click `⋮`  > `View in API`.
+1. Go to the Rancher UI and click `Cluster Management` > `Drivers` > `Node Drivers`. In the `Node Drivers` list, find ` Harvester` and then click `â‹®`  > `View in API`.
 2. Click `Edit`.
 3. Uncheck the `builtin` checkbox.
 4. Change the `*url` to `https://releases.rancher.com/harvester-node-driver/v0.6.3/docker-machine-driver-harvester-amd64.tar.gz`.
@@ -132,7 +132,7 @@ Label synchronization will only take effect during guest node initialization. To
    topology.kubernetes.io/region: us-east-1
    topology.kubernetes.io/zone: us-east-1a
    ```
-   ![](/img/v1.1/rancher/node-add-affinity-labels.png)
+   ![](/img/rancher/node-add-affinity-labels.png)
 
 1. Creating a guest Kubernetes cluster using the Harvester node driver and it is recommended to add the [node affinity rules](./rke2-cluster.md#add-node-affinity), this will help to avoid node drifting to other zones after VM rebuilding.
 

@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 2
 sidebar_label: ISO Installation
@@ -16,7 +16,7 @@ description: To get the Harvester ISO, download it from the Github releases. Dur
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.7/install/index"/>
 </head>
 
-Harvester ships as a bootable appliance image, you can install it directly on a bare metal server with the ISO image. To get the ISO image, download **💿 harvester-v1.x.x-amd64.iso** from the [Harvester releases](https://github.com/harvester/harvester/releases) page.
+Harvester ships as a bootable appliance image, you can install it directly on a bare metal server with the ISO image. To get the ISO image, download **ðŸ’¿ harvester-v1.x.x-amd64.iso** from the [Harvester releases](https://github.com/harvester/harvester/releases) page.
 
 During the installation, you can either choose to **create a new Harvester cluster** or **join the node to an existing Harvester cluster**.
 
@@ -30,15 +30,15 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. Mount the Harvester ISO file and boot the server by selecting the `Harvester Installer` option.
 
-   ![iso-installation.png](/img/v1.0/install-hv/iso-installation.png)
+   ![iso-installation.png](/img/install-hv/iso-installation.png)
 
    The installer automatically checks the hardware and displays warning messages if the minimum requirements are not met. The **Hardware Checks** screen is not displayed if all checks are passed.
 
-   ![hardware-checks.png](/img/v1.0/install-hv/hardware-checks.png)
+   ![hardware-checks.png](/img/install-hv/hardware-checks.png)
 
 1. Use the arrow keys to choose an installation mode. By default, the first node will be the management node of the cluster.
 
-   ![choose-installation-mode.png](/img/v1.0/install-hv/choose-installation-mode.png)
+   ![choose-installation-mode.png](/img/install-hv/choose-installation-mode.png)
 
 	- `Create a new Harvester cluster`: creates an entirely new Harvester cluster.
 
@@ -52,7 +52,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. Choose a role for the node. You are required to perform this step if you selected the installation mode `Join an existing Harvester cluster`.
 
-   ![choose-node-role.png](/img/v1.0/install-hv/select-role.png)
+   ![choose-node-role.png](/img/install-hv/select-role.png)
 
 	- `Default Role`: Allows a node to function as a management node or a worker node. This role does not have any specific privileges or restrictions.
 	- `Management Role`: Allows a node to be prioritized when Harvester promotes nodes to management nodes.
@@ -61,7 +61,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. Configure and confirm a `Password` to access the node. The default SSH user is `rancher`.
 
-	![config-password.png](/img/v1.2/install/config-password.png)
+	![config-password.png](/img/install/config-password.png)
 
 1. Choose the installation disk you want to install the Harvester cluster on and the data disk you want to store VM data on. By default, Harvester uses [GUID Partition Table (GPT)](https://en.wikipedia.org/wiki/GUID_Partition_Table) partitioning schema for both UEFI and BIOS. If you use the BIOS boot, then you will have the option to select [Master boot record (MBR)](https://en.wikipedia.org/wiki/Master_boot_record).
 
@@ -69,7 +69,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 	Support for legacy BIOS booting is deprecated in v1.7.0 and will be removed in a later release. Existing Harvester clusters that use this boot mode will continue to function, but upgrading to later versions may require re-installation in UEFI mode. To avoid issues and disruptions, use UEFI in new installations.
 	:::
 
-   ![choose-installation-target-data-disk.png](/img/v1.0/install-hv/choose-installation-target-data-disk.png)
+   ![choose-installation-target-data-disk.png](/img/install-hv/choose-installation-target-data-disk.png)
 
 	- `Installation disk`: The disk to install the Harvester cluster on.
 	- `Data disk`: The disk to store VM data on. Choosing a separate disk to store VM data is recommended. Not applicable for witness nodes.
@@ -77,11 +77,11 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. Configure the `HostName` of the node.
 
-   ![config-hostname.png](/img/v1.2/install/config-hostname.png)
+   ![config-hostname.png](/img/install/config-hostname.png)
 
 1. Configure network interface(s) for the management network. By default, Harvester creates a [bonded NIC](./requirements.md#hardware-requirements) named `mgmt-bo` for the [built-in management cluster network](../networking/clusternetwork.md#built-in-cluster-network), and the IP address can be configured via DHCP or statically assigned.
 
-   ![config-network.png](/img/v1.0/install-hv/config-network.png)
+   ![config-network.png](/img/install-hv/config-network.png)
 
 	:::note
 
@@ -104,7 +104,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
     If you want to use the default values, leave the fields blank.
 
-   ![config-cluster-cidrs.png](/img/v1.0/install-hv/config-cluster-cidrs.png)
+   ![config-cluster-cidrs.png](/img/install-hv/config-cluster-cidrs.png)
 
     :::info important
 
@@ -122,7 +122,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. (Optional) Configure the `DNS Servers`. Use commas as a delimiter to add more DNS servers. Leave it blank to use the default DNS server.
 
-	![config-dns-server.png](/img/v1.2/install/config-dns-server.png)
+	![config-dns-server.png](/img/install/config-dns-server.png)
 
 1. Configure the virtual IP (VIP) by selecting a `VIP Mode`. This VIP is used to access the cluster or for other nodes to join the cluster.
 
@@ -130,15 +130,15 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 	For DHCP setup with static MAC-to-IP address mappings configured, enter the MAC address in the provided field to fetch the unique persistent virtual IP (VIP). Otherwise, leave it blank.
 	:::
 
-   ![config-virtual-ip.png](/img/v1.0/install-hv/config-virtual-ip.png)
+   ![config-virtual-ip.png](/img/install-hv/config-virtual-ip.png)
 
 1. Configure the `Cluster token`. This token is used for adding other nodes to the cluster.
 
-	![config-cluster-token.png](/img/v1.2/install/config-cluster-token.png)
+	![config-cluster-token.png](/img/install/config-cluster-token.png)
 
 1. Configure `NTP servers` to make sure all nodes' times are synchronized. This defaults to `0.suse.pool.ntp.org`. Use commas as a delimiter to add more NTP servers.
 
-	![config-ntp-server.png](/img/v1.2/install/config-ntp-server.png)
+	![config-ntp-server.png](/img/install/config-ntp-server.png)
 
 	:::note
 	Using multiple NTP servers provides redundancy, better accuracy, fault tolerance, and improved performance. It ensures that time synchronization continues even if one server fails or gives incorrect data, and it helps distribute the load across different servers.
@@ -146,19 +146,19 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 1. (Optional) If you need to use an HTTP proxy to access the outside world, enter the `Proxy address`. Otherwise, leave this blank.
 
-	![config-proxy.png](/img/v1.2/install/config-proxy.png)
+	![config-proxy.png](/img/install/config-proxy.png)
 
 1. (Optional) You can choose to import SSH keys by providing `HTTP URL`. For example, your GitHub public keys `https://github.com/<username>.keys` can be used.
 
-	![import-ssh-keys.png](/img/v1.2/install/import-ssh-keys.png)
+	![import-ssh-keys.png](/img/install/import-ssh-keys.png)
 
 1. (Optional) If you need to customize the host with a [Harvester configuration](./harvester-configuration.md) file, enter the `HTTP URL` here.
 
-	![remote-config.png](/img/v1.2/install/remote-config.png)
+	![remote-config.png](/img/install/remote-config.png)
 
 1. Review and confirm your installation options. After confirming the installation options, Harvester will be installed to your host. The installation may take a few minutes to be complete.
 
-   ![confirm-install.png](/img/v1.0/install-hv/confirm-install.png)
+   ![confirm-install.png](/img/install-hv/confirm-install.png)
 
 1. Once the installation is complete, your node restarts. After the restart, the Harvester console displays the management URL and status. The default URL of the web interface is `https://your-virtual-ip`. You can use `F12` to switch from the Harvester console to the Shell and type `exit` to go back to the Harvester console.
 
@@ -166,11 +166,11 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 	Choosing `Install Harvester binaries only` on the first page requires additional setup after the first bootup.
 	:::
 
-   ![iso-installed.png](/img/v1.0/install-hv/iso-installed.png)
+   ![iso-installed.png](/img/install-hv/iso-installed.png)
 
 1. You will be prompted to set the password for the default `admin` user when logging in for the first time.
 
-   ![first-login.png](/img/v1.0/install-hv/first-time-login.png)
+   ![first-login.png](/img/install-hv/first-time-login.png)
 
 <!-- :::note
 In some cases, if you are using an older VGA connector, you may encounter an `panic: invalid dimensions` error with ISO installation. See issue [#2937](https://github.com/harvester/harvester/issues/2937#issuecomment-1278545927) for a workaround.
@@ -182,20 +182,20 @@ In some cases, if you are using an older VGA connector, you may encounter an `pa
 
 In some cases, if you are using an older graphics card/monitor, you may encounter a `panic: invalid dimensions` error during ISO installation.
 
-![invalid-dimensions.png](/img/v1.2/install/invalid-dimensions.png)
+![invalid-dimensions.png](/img/install/invalid-dimensions.png)
 
 We are working on this known issue and planning a fix for a future release. You can try to use another GRUB entry to force it to use the resolution of `1024x768` when booting up.
 
-![force-resolution.png](/img/v1.2/install/force-resolution.png)
+![force-resolution.png](/img/install/force-resolution.png)
 
 If you are using a version earlier than v1.1.1, please try the following workaround:
 
 1. Boot up with the ISO, and press `E` to edit the first menu entry:
 
-   ![grub-menu.png](/img/v1.2/install/grub-menu.png)
+   ![grub-menu.png](/img/install/grub-menu.png)
 
 1. Append `vga=792` to the line started with `$linux`:
 
-   ![edit-menu-entry.png](/img/v1.2/install/edit-menu-entry.png)
+   ![edit-menu-entry.png](/img/install/edit-menu-entry.png)
 
 1. Press `Ctrl+X` or `F10` to boot up.

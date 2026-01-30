@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: Addons
 title: "Addons"
@@ -23,7 +23,7 @@ Harvester v1.2.0 ships with five Addons:
 * [rancher-logging](../logging/harvester-logging.md)
 * [harvester-seeder](./addons/seeder.md)
 
-![](/img/v1.2/addons/AddonsV120.png)
+![](/img/addons/AddonsV120.png)
 
 :::note
 
@@ -31,17 +31,17 @@ Harvester v1.2.0 ships with five Addons:
 
 :::
 
-You can enable a **Disabled** by choosing an addon and selecting **⋮** > **Enable** from the **Basic** tab.
+You can enable a **Disabled** by choosing an addon and selecting **â‹®** > **Enable** from the **Basic** tab.
 
-![](/img/v1.2/addons/enable-rancher-logging-addon.png)
+![](/img/addons/enable-rancher-logging-addon.png)
 
 When the addon is enabled successfully, the **State** will be **DeploySuccessful**.
 
-![](/img/v1.2/addons/deploy-successful-addon.png)
+![](/img/addons/deploy-successful-addon.png)
 
-You can disable an **Enabled** by choosing an addon and selecting **⋮** > **Disable** or from the **Basic** tab.
+You can disable an **Enabled** by choosing an addon and selecting **â‹®** > **Disable** or from the **Basic** tab.
 
-![](/img/v1.2/addons/disable-rancher-monitoring-addon.png)
+![](/img/addons/disable-rancher-monitoring-addon.png)
 
 When the addon is disabled successfully, the **State** will be **Disabled**.
 

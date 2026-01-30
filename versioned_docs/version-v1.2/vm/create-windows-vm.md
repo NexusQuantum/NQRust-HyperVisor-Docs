@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 2
 sidebar_label: Create a Windows Virtual Machine
 title: "Create a Windows Virtual Machine"
@@ -41,7 +41,7 @@ For creating Linux virtual machines, please refer to [this page](./create-vm.md)
 1. Configure the number of `CPU` cores assigned to the VM.
 1. Configure the amount of `Memory` assigned to the VM.
 
-![create-windows-vm](/img/v1.2/vm/create-windows-vm.png)
+![create-windows-vm](/img/vm/create-windows-vm.png)
 
 :::note
 
@@ -76,7 +76,7 @@ The `bootOrder` values need to be set with the installation image first. If you 
     4. `Bus`: The value `SATA` is set by default. We recommend not changing this value. 
 4. You can add additional disks using the buttons `Add Volume`, `Add Existing Volume`, `Add VM Image`, or `Add Container`.
 
-![create-windows-vm-volumes](/img/v1.2/vm/create-windows-vm-volumes.png)
+![create-windows-vm-volumes](/img/vm/create-windows-vm-volumes.png)
 
 ### Networks Tab
 
@@ -87,7 +87,7 @@ The `bootOrder` values need to be set with the installation image first. If you 
     4. `Type`: The value `masquerade` is set by default. You can keep it or change it to the other available option, `bridge`.
 2. You can add additional networks by clicking  `Add Network`.
 
-![create-windows-vm-networks](/img/v1.2/vm/create-windows-vm-networks.png)
+![create-windows-vm-networks](/img/vm/create-windows-vm-networks.png)
 
 :::caution
 
@@ -99,7 +99,7 @@ Changing the `Node Scheduling` settings can impact Harvester features, such as d
 
 1. `Node Scheduling` is set to `Run VM on any available node` by default. You can keep it or change it to the other available options from the dropdown.
 
-![create-windows-vm-scheduling](/img/v1.2/vm/create-windows-vm-scheduling.png)
+![create-windows-vm-scheduling](/img/vm/create-windows-vm-scheduling.png)
 
 ### Advanced Options Tab
 
@@ -115,7 +115,7 @@ Currently, only non-persistent vTPMs are supported, and their state is erased af
 
 :::
 
-![create-windows-vm-advanced](/img/v1.2/vm/create-windows-vm-advanced.png)
+![create-windows-vm-advanced](/img/vm/create-windows-vm-advanced.png)
 
 ### Footer Section
 
@@ -136,11 +136,11 @@ And if you want to cancel all changes made, click `Cancel`.
 
 3. (Optional) If you are using `virtio` based volumes, you will need to load the specific driver to allow the installer to detect them. If you're using VM template `windows-iso-image-base-template`, the instruction is as follows:
     1. Click on `Load driver`, and then click `Browse` on the dialog box, and find a CD-ROM drive with a `VMDP-WIN` prefix. Next, find the driver directory according to the Windows version you're installing; for example, Windows Server 2012r2 should expand `win8.1-2012r2` and choose the `pvvx` directory inside.
-    ![find-virtio-driver-directory](/img/v1.2/vm/find-virtio-driver-directory.png)
+    ![find-virtio-driver-directory](/img/vm/find-virtio-driver-directory.png)
     2. Click `OK` to allow the installer to scan this directory for drivers, choose `SUSE Block Driver for Windows`, and click `Next` to load the driver.
-    ![select-virtio-block-driver](/img/v1.2/vm/select-virtio-block-driver.png)
+    ![select-virtio-block-driver](/img/vm/select-virtio-block-driver.png)
     1. Wait for the installer to load up the driver. If you choose the correct driver version the `virtio` volumes will be detected once the driver is loaded.
-    ![installer-found-virtio-drive](/img/v1.2/vm/installer-found-virtio-drive.png)
+    ![installer-found-virtio-drive](/img/vm/installer-found-virtio-drive.png)
 
 4. (Optional) If you are using other `virtio` based hardware like network adapter, you will need to install those drivers manually after completing the installation. To install drivers, open the VMDP driver disk, and use the installer based on your platform.
 
@@ -179,11 +179,11 @@ For full instructions on how to install the VMDP guest driver and tools see the 
 
 When using EFI mode with Windows, you may find the system booted with other devices like HDD or UEFI shell like the one below:
 
-![efi-shell](/img/v1.2/vm/efi-shell.png)
+![efi-shell](/img/vm/efi-shell.png)
 
 That's because Windows will prompt a `Press any key to boot from CD or DVD...` to let the user decide whether to boot from the installer ISO or not, and it needs human intervention to allow the system to boot from CD or DVD.
 
-![boot-from-cd](/img/v1.2/vm/boot-from-cd.png)
+![boot-from-cd](/img/vm/boot-from-cd.png)
 
 Alternately if the system has already booted into the UEFI shell, you can type in `reset` to force the system to reboot again. Once the prompt appears you can press any key to let system boot from Windows ISO.
 
@@ -193,7 +193,7 @@ There is a known issue with Windows VM when it is allocated more than 8GiB witho
 
 This can be fixed by allocating at least 256MiB of reserved memory to the template on the Advanced Options tab. If `256MiB` doesn't work, try `512MiB`.
 
-![reserved-memory-config](/img/v1.2/vm/reserved-memory-config.png)
+![reserved-memory-config](/img/vm/reserved-memory-config.png)
 
 ### BSoD (Blue Screen of Death) at first boot time of Windows
 

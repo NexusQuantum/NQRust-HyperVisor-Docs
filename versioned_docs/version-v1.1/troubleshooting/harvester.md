@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 2
 sidebar_label: Harvester
 title: "Harvester"
@@ -59,13 +59,13 @@ When [PXE Boot Installation](../install/pxe-boot-install.md) is adopted, please 
 Users can generate a support bundle in the Harvester GUI with the following steps:
 
 - Click the `Support` link at the bottom-left of Harvester Web UI.
-    ![](/img/v1.1/troubleshooting/harvester-sb-support-link.png)
+    ![](/img/troubleshooting/harvester-sb-support-link.png)
 
 - Click `Generate Support Bundle` button.
-    ![](/img/v1.1/troubleshooting/harvester-sb-support-button.png)
+    ![](/img/troubleshooting/harvester-sb-support-button.png)
 
 - Enter a useful description for the support bundle and click `Create` to generate and download a support bundle.
-    ![](/img/v1.1/troubleshooting/harvester-sb-support-modal.png)
+    ![](/img/troubleshooting/harvester-sb-support-modal.png)
 
 ## Access Embedded Rancher and Longhorn Dashboards
 
@@ -73,7 +73,7 @@ _Available as of v1.1.0_
 
 You can now access the embedded Rancher and Longhorn dashboards directly on the `Support` page, but you must first go to the `Preferences` page and check the `Enable Extension developer features` box under `Advanced Features` (in Harvester v1.1.0 and v1.1.1, the option name is `Developer Tools & Features`). 
 
-![](/img/v1.1/troubleshooting/support-access-embedded-ui.png)
+![](/img/troubleshooting/support-access-embedded-ui.png)
 
 For previous versions, you can access them manually through:
 - `https://{{HARVESTER_IP}}/dashboard/c/local/explorer` (Embedded Rancher)

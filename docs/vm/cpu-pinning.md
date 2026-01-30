@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 11
 sidebar_label: CPU Pinning
 title: "CPU Pinning"
@@ -56,12 +56,12 @@ You must enable or disable the CPU Manager on each node separately.
 
 1. On the Harvester UI, go to **Hosts**.
 
-1. Locate the node in the list, and then select **⋮** > **Enable CPU Manager** or **Disable CPU Manager**.
+1. Locate the node in the list, and then select **â‹®** > **Enable CPU Manager** or **Disable CPU Manager**.
 
 Allow some time for Harvester to apply the corresponding CPU Manager policy.
 
-![enable-cpu-manager](/img/v1.4/cpu-pinning/enable-cpu-manager.png)
-![disable-cpu-manager](/img/v1.4/cpu-pinning/disable-cpu-manager.png)
+![enable-cpu-manager](/img/cpu-pinning/enable-cpu-manager.png)
+![disable-cpu-manager](/img/cpu-pinning/disable-cpu-manager.png)
 
 ### Limitations
 
@@ -85,11 +85,11 @@ Allow some time for Harvester to apply the corresponding CPU Manager policy.
 
 1. Click **Create**.
 
-  ![create-vm](/img/v1.4/cpu-pinning/create-vm.png)
+  ![create-vm](/img/cpu-pinning/create-vm.png)
 
 1. On the **Advanced Options** tab, select **Enable CPU Pinning**.
 
-  ![vm-advanced-options](/img/v1.4/cpu-pinning/vm-advanced-options.png)
+  ![vm-advanced-options](/img/cpu-pinning/vm-advanced-options.png)
 
 1. Click **Save**.
 

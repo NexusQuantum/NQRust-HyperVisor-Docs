@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 4
 sidebar_label: Storage Network
 title: "Storage Network"
@@ -87,7 +87,7 @@ Take `eth2` and `eth3` as an example for VM VLAN traffic and Longhorn Storage Ne
 
 Please refer Networking page to configure `ClusterNetwork` and `VLAN Config` with `eth2` and `eth3` and remember the `ClusterNetwork` name for the further step.
 
-![storagenetwork-same.png](/img/v1.2/storagenetwork/storagenetwork-same.png)
+![storagenetwork-same.png](/img/storagenetwork/storagenetwork-same.png)
 
 
 #### Different Physical Interfaces
@@ -96,7 +96,7 @@ Please refer Networking page to configure `ClusterNetwork` and `VLAN Config` wit
 
 Please refer Networking page to configure `ClusterNetwork` and `VLAN Config` with `eth4` and `eth5` for Storage Network and remember the `ClusterNetwork` name for the further step.
 
-![storagenetwork-diff.png](/img/v1.2/storagenetwork/storagenetwork-diff.png)
+![storagenetwork-diff.png](/img/storagenetwork/storagenetwork-diff.png)
 
 ### Harvester Storage Network Setting
 
@@ -122,7 +122,7 @@ Using the Harvester UI to configure the `storage-network` setting is strongly re
 
 1. Click **Save**.
 
-![storage-network-enabled.png](/img/v1.4/storagenetwork/storage-network-enabled.png)
+![storage-network-enabled.png](/img/storagenetwork/storage-network-enabled.png)
 
 ##### Disable the Storage Network
 
@@ -134,7 +134,7 @@ Using the Harvester UI to configure the `storage-network` setting is strongly re
 
 Once the storage network is disabled, Longhorn starts using the pod network for storage-related operations.
 
-![storage-network-disabled.png](/img/v1.4/storagenetwork/storage-network-disabled.png)
+![storage-network-disabled.png](/img/storagenetwork/storage-network-disabled.png)
 
 #### CLI
 

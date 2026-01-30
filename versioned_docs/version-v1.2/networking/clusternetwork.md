@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 1
 sidebar_label: Cluster Network
@@ -24,7 +24,7 @@ In Harvester v1.1.0, we introduced a new concept called cluster network for traf
 
 The following diagram describes a typical network architecture that separates data-center (DC) traffic from out-of-band (OOB) traffic.
 
-![](/img/v1.2/networking/traffic-isolation.png)
+![](/img/networking/traffic-isolation.png)
 
 We abstract the sum of devices, links, and configurations on a traffic-isolated forwarding path on Harvester as a cluster network.
 
@@ -47,7 +47,7 @@ Please refer to [network part](./harvester-network.md) for more details about ne
 ### Relationship Between Cluster Network, Network Config, VM Network
 The following diagram shows the relationship between a cluster network, a network config, and a VM network.
 
-![](/img/v1.2/networking/relation.png)
+![](/img/networking/relation.png)
 
 All `Network Configs` and `VM Networks` are grouped under a cluster network. 
 
@@ -95,15 +95,15 @@ Before creating a new cluster network, ensure that the [hardware requirements](.
 
 1. To create a cluster network, go to the **Networks > ClusterNetworks/Configs** page and click the **Create** button. You only need to specify the name.
 
-   ![](/img/v1.2/networking/create-clusternetwork.png)
+   ![](/img/networking/create-clusternetwork.png)
 
 2. Click the **Create Network Config** button on the right of the cluster network to create a new network configuration.
 
-   ![](/img/v1.2/networking/create-network-config-button.png)
+   ![](/img/networking/create-network-config-button.png)
 
 3. In the **Node Selector** tab, specify the name and choose one of the three methods to select nodes where the network configuration will apply. If you want to cover the unselected nodes, you can create another network configuration.
 
-   ![](/img/v1.2/networking/select-nodes.png)
+   ![](/img/networking/select-nodes.png)
 
 :::note
 
@@ -113,7 +113,7 @@ The method **Select all nodes** works only when all nodes use the exact same ded
 
 4. Click the **Uplink** tab to add the NICs, and configure the bond options and link attributes. The bond mode defaults to `active-backup`.
     
-   ![](/img/v1.2/networking/config-uplink.png)
+   ![](/img/networking/config-uplink.png)
 
 :::note
 

@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 6
 sidebar_label: Live Migration
 title: "Live Migration"
@@ -29,17 +29,17 @@ Live migration means moving a virtual machine to a different host without downti
 ## Starting a Migration
 
 1. Go to the **Virtual Machines** page.
-1. Find the virtual machine that you want to migrate and select **⋮ > Migrate**.
+1. Find the virtual machine that you want to migrate and select **â‹® > Migrate**.
 1. Choose the node to which you want to migrate the virtual machine. Click **Apply**.
 
-![](/img/v1.1/vm/migrate-action.png)
+![](/img/vm/migrate-action.png)
 
-![](/img/v1.1/vm/migrate.png)
+![](/img/vm/migrate.png)
 
 ## Aborting a Migration
 
 1. Go to the **Virtual Machines** page.
-1. Find the virtual machine in migrating status that you want to abort. Select **⋮ > Abort Migration**.
+1. Find the virtual machine in migrating status that you want to abort. Select **â‹® > Abort Migration**.
 
 ## Migration Timeouts
 

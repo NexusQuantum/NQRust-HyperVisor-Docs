@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 3
 sidebar_label: USB Installation
 title: "USB Installation"
@@ -29,7 +29,7 @@ No matter which tool you use, creating a bootable device erases your USB device 
 2. Rufus automatically detects your USB. Select the USB device you want to use from the **Device** drop-down menu.
 3. For **Boot Selection**, choose **Select** and find the Harvester installation ISO image you want to burn onto the USB.
 
-	<img src="/img/v1.2/install-usb-hv/rufus.png" alt="Rufus setup" width="600" height="400" />
+	<img src="/img/install-usb-hv/rufus.png" alt="Rufus setup" width="600" height="400" />
 
 	:::info
 
@@ -44,7 +44,7 @@ No matter which tool you use, creating a bootable device erases your USB device 
 1. Select the Harvester installation ISO.
 2. Select the target USB device to create a USB installation flash drive.
 
-	![balena-etcher.png](/img/v1.2/install/balena-etcher.png)
+	![balena-etcher.png](/img/install/balena-etcher.png)
 
 ### `dd` command
 
@@ -60,7 +60,7 @@ You can use the 'dd' command on Linux or other platforms to create a USB install
 
 If you use the UEFI mode, try to boot from the UEFI boot partition on the USB device rather than the USB device itself. For example, select the `UEFI: USB disk 3.0 PMAP, Partition 1` to boot. The representation varies from system to system.
 
-![](/img/v1.2/install/usb-install-select-correct-partition.jpg)
+![](/img/install/usb-install-select-correct-partition.jpg)
 
 ### Graphics issue
 
@@ -68,7 +68,7 @@ Firmwares of some graphic cards are not shipped in `v0.3.0`.
 
 You can press `e` to edit the GRUB menu entry and append `nomodeset` to the boot parameters. Press `Ctrl + x` to boot.
 
-![](/img/v1.2/install/usb-install-nomodeset.png)
+![](/img/install/usb-install-nomodeset.png)
 
 ### Harvester installer is not displayed
 
@@ -83,7 +83,7 @@ During installation from a USB flash drive with v1.2.0 ISO image (created by too
 
 If you encounter this issue, you'll observe the following similar output, and the process will hang for at least 50 minutes (the default timeout value from `dracut`).
 
-![](/img/v1.2/install/usb-install-hang.png)
+![](/img/install/usb-install-hang.png)
 
 #### Workaround
 
@@ -98,7 +98,7 @@ $linux ($root)/boot/kernel cdroot root=live:/dev/sda1 rd.live.dir=/ rd.live.squa
 
 The modified parameter should look like the following:
 
-![](/img/v1.2/install/grub-parameter-modified.png)
+![](/img/install/grub-parameter-modified.png)
 
 After making this adjustment, press `Ctrl + x` to initiate booting. You should now enter the installer as usual.
 

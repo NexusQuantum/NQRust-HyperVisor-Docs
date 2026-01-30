@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 1
 sidebar_label: Create a Virtual Machine
 title: "Create a Virtual Machine"
@@ -39,7 +39,7 @@ Please refer to [this page](./create-windows-vm.md) for creating Windows virtual
     1. You can also add additional networks to the VMs using VLAN networks. You may configure the VLAN networks on **Advanced > Networks** first.
 1. Advanced options such as run strategy, os type and cloud-init data are optional. You may configure these in the **Advanced Options** section when applicable.
 
-![create-vm](/img/v1.0/vm/create-vm.png)
+![create-vm](/img/vm/create-vm.png)
 
 ## Volumes
 
@@ -52,7 +52,7 @@ A disk can be made accessible via the following types:
 | disk   | A disk disk will expose the volume as an ordinary disk to the VM.                              |
 | cd-rom | A cd-rom disk will expose the volume as a cd-rom drive to the VM. It is read-only by default.  |
 
-![create-vm](/img/v1.0/vm/create-vm-volumes.png)
+![create-vm](/img/vm/create-vm-volumes.png)
 
 :::info Container Disk
 
@@ -151,7 +151,7 @@ The QEMU guest agent is a daemon that runs on the virtual machine instance and p
 
 `Install guest agent` checkbox is enabled by default when a new VM is created.
 
-![](/img/v1.0/vm/qga.png)
+![](/img/vm/qga.png)
 
 :::note
 

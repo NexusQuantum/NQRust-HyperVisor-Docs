@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 4
 sidebar_label: Harvester Cloud Provider
 title: "Harvester Cloud Provider"
@@ -35,11 +35,11 @@ When spinning up an RKE cluster using the Harvester node driver, you can perform
 
 - Select `Harvester(Out-of-tree)` option.
 
-    ![](/img/v1.0/rancher/rke-cloud-provider.png)
+    ![](/img/rancher/rke-cloud-provider.png)
   
 - Install `Harvester Cloud Provider` from the Rancher marketplace.
 
-    ![](/img/v1.0/rancher/install-harvester-cloud-provider.png)
+    ![](/img/rancher/install-harvester-cloud-provider.png)
   
 :::note
 
@@ -49,24 +49,24 @@ You should specify the `Cluster name`. The default value `kubernetes` will be se
 
 - Install Harvester csi driver from the Rancher marketplace if needed.
 
-    ![](/img/v1.0/rancher/install-harvester-csi-driver.png)
+    ![](/img/rancher/install-harvester-csi-driver.png)
   
 ### Deploying to the RKE2 Cluster with Harvester Node Driver [Experimental]
 When spinning up an RKE2 cluster using the Harvester node driver, select the `Harvester` cloud provider. The node driver will then help deploy both the CSI driver and CCM automatically.
 
-  ![](/img/v1.0/rancher/rke2-cloud-provider.png)
+  ![](/img/rancher/rke2-cloud-provider.png)
 
 ### Deploying to the K3s Cluster with Harvester Node Driver [Experimental]
 
 - Choose the Kubernetes version to be k3s and click the `Edit as YAML` button to config the K3s cluster YAML (For existing cluster, you can also click the `Edit YAML` button to update it):
 
-  ![](/img/v1.0/rancher/edit-k3s-cluster-yaml.png)
+  ![](/img/rancher/edit-k3s-cluster-yaml.png)
 
 - Edit K3s cluster YAML.
     - Set `disable-cloud-provider: true` to disable default k3s cloud provider.
     - Add `cloud-provider=external` to use harvester cloud provider.
 
-  ![](/img/v1.0/rancher/k3s-cluster-yaml-content-for-harvester-cloud-provider.png)
+  ![](/img/rancher/k3s-cluster-yaml-content-for-harvester-cloud-provider.png)
 
 - [Generate addon configuration](https://github.com/harvester/cloud-provider-harvester/blob/master/deploy/generate_addon.sh) and put it in K3s VMs `/etc/kubernetes/cloud-config`.
 
@@ -76,7 +76,7 @@ Deploying external cloud provider is similar for both RKE2 and K3s based cluster
 
 Once the in-tree cloud provider has been disabled by following the above steps, you can deploy the external cloud provider via:
 
-  ![](/img/v1.0/rancher/external-cloud-provider-addon.png)
+  ![](/img/rancher/external-cloud-provider-addon.png)
 
 A sample additional manifest is as follows:
 ```
@@ -106,7 +106,7 @@ The cloud provider needs a kubeconfig file to work, a limited scoped one can be 
 The output will look as follows:
 
 ```
-(⎈ |local:default)➜  cloud-provider-harvester git:(master) ✗ ./deploy/generate_addon.sh harvester-cloud-provider default
+(âŽˆ |local:default)âžœ  cloud-provider-harvester git:(master) âœ— ./deploy/generate_addon.sh harvester-cloud-provider default
 Creating target directory to hold files in ./tmp/kube...done
 Creating a service account in default namespace: harvester-cloud-provider
 W0506 16:44:15.429068 3008674 helpers.go:598] --dry-run is deprecated and can be replaced with --dry-run=client.
@@ -156,7 +156,7 @@ users:
 ```
 
 This cloud-config file can now be injected via the `user-data` available in the `advanced options` for the nodepool.
-  ![](/img/v1.0/rancher/cloud-config-userdata.png)
+  ![](/img/rancher/cloud-config-userdata.png)
 
 With these settings in place a K3s / RKE2 cluster should provision successfully while using the external cloud provider.
 
@@ -164,22 +164,22 @@ With these settings in place a K3s / RKE2 cluster should provision successfully 
 
 ### Upgrade RKE2
 The cloud provider can be upgraded by upgrading the RKE2 version. You can upgrade the RKE2 cluster via the Rancher UI as follows:
-1. Click **☰ > Cluster Management**.
-2. Find the guest cluster that you want to upgrade and select ⋮ **> Edit Config**.
+1. Click **â˜° > Cluster Management**.
+2. Find the guest cluster that you want to upgrade and select â‹® **> Edit Config**.
 3. Select **Kubernetes Version**.
 4. Click **Save**.
 
 ### Upgrade RKE/K3s
 RKE/K3s upgrade cloud provider via the Rancher UI, as follows:
-1. Click **☰ > RKE/K3s Cluster > Apps > Installed Apps**.
-2. Find the cloud provider chart and select ⋮ **> Edit/Upgrade**.
+1. Click **â˜° > RKE/K3s Cluster > Apps > Installed Apps**.
+2. Find the cloud provider chart and select â‹® **> Edit/Upgrade**.
 3. Select **Version**.
 4. Click **Next > Update**.
 
 ## Load Balancer Support
 After deploying the `Harvester Cloud provider`, you can use the Kubernetes `LoadBalancer` service to expose a microservice inside the guest cluster to the external world. When you create a Kubernetes `LoadBalancer` service, a Harvester load balancer is assigned to the service and you can edit it through the `Add-on Config` in the Rancher UI.
 
-  ![](/img/v1.0/rancher/lb-svc.png)
+  ![](/img/rancher/lb-svc.png)
   
 
 ### IPAM
@@ -187,7 +187,7 @@ Harvester's built-in load balancer supports both `pool` and `dhcp` modes. You ca
 
 - pool: You should configure an IP address pool in Harvester in advance. The Harvester LoadBalancer controller will allocate an IP address from the IP address pool for the load balancer.
   
-  ![](/img/v1.0/rancher/vip-pool.png) 
+  ![](/img/rancher/vip-pool.png) 
   
 - dhcp:  A DHCP server is required. The Harvester LoadBalancer controller will request an IP address from the DHCP server.
 
@@ -200,7 +200,7 @@ It is not allowed to modify the IPAM mode. You need to create a new service if y
 ### Health Checks
 The Harvester load balancer supports TCP health checks. You can specify the parameters in the Rancher UI if you enable the `Health Check` option.
 
-  ![](/img/v1.0/rancher/health-check.png)
+  ![](/img/rancher/health-check.png)
 
 Alternatively, you can specify the parameters by adding annotations to the service manually. The following annotations are supported:
 

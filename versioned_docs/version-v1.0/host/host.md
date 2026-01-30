@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 1
 sidebar_label: Host Management
 title: "Host Management"
@@ -16,19 +16,19 @@ Because Harvester is built on top of Kubernetes and uses etcd as its database, t
 
 :::
 
-![host.png](/img/v1.0/host/host.png)
+![host.png](/img/host/host.png)
 
 ## Node Maintenance
 
-Admin users can enable Maintenance Mode (select **⋮ > Enable Maintenance Mode**) to automatically evict all virtual machines from a node. This mode leverages the **live migration** feature to migrate the virtual machines to other nodes, which is useful when you need to reboot, upgrade firmware, or replace hardware components. At least two active nodes are required to use this feature.
+Admin users can enable Maintenance Mode (select **â‹® > Enable Maintenance Mode**) to automatically evict all virtual machines from a node. This mode leverages the **live migration** feature to migrate the virtual machines to other nodes, which is useful when you need to reboot, upgrade firmware, or replace hardware components. At least two active nodes are required to use this feature.
 
-![node-maintenance.png](/img/v1.0/host/node-maintenance.png)
+![node-maintenance.png](/img/host/node-maintenance.png)
 
 ## Cordoning a Node
 
 Cordoned nodes are marked as unschedulable. Cordoning is useful when you want to prevent new workloads from being scheduled on a node. You can uncordon a node to make it schedulable again.
 
-![cordon-node.png](/img/v1.0/host/cordon-nodes.png)
+![cordon-node.png](/img/host/cordon-nodes.png)
 
 ## Deleting a Node
 
@@ -36,7 +36,7 @@ Deleting a node is done in two phases:
 
 1. Delete the node from Harvester
     - Go to the **Hosts** page
-    - On the node you want to modify, click **⋮ > Delete**
+    - On the node you want to modify, click **â‹® > Delete**
 
 2. Uninstall RKE2 from the node
     - Login to the node as root
@@ -55,14 +55,14 @@ Once resolved, the last step can be skipped.
 
 :::
 
-![delete.png](/img/v1.0/host/delete.png)
+![delete.png](/img/host/delete.png)
 
 ## Multi-disk Management - `Tech Preview`
 
 Users can view and add multiple disks as additional data volumes from the host detail page.
 
 1. Go to the **Hosts** page.
-2. On the node you want to modify, click **⋮ > Edit Config**.
+2. On the node you want to modify, click **â‹® > Edit Config**.
 2. Select the **Disks** tab and click **Add Disks**.
 3. Select an additional raw block device to add as an additional data volume.
     - The `Force Formatted` option is required if the block device has never been force-formatted.
@@ -80,5 +80,5 @@ If you are testing Harvester in a QEMU environment, you'll need to use QEMU v6.0
 
 :::
 
-![Edit Config](/img/v1.0/host/edit-config.png)
-![Add Disks](/img/v1.0/host/add-disks.png)
+![Edit Config](/img/host/edit-config.png)
+![Add Disks](/img/host/add-disks.png)

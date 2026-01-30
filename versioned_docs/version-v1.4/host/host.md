@@ -1,4 +1,4 @@
----
+﻿---
 id: host-management
 sidebar_position: 1
 sidebar_label: Host Management
@@ -17,7 +17,7 @@ Because Harvester is built on top of Kubernetes and uses etcd as its database, t
 
 :::
 
-![host.png](/img/v1.2/host/host.png)
+![host.png](/img/host/host.png)
 
 :::info
 
@@ -26,7 +26,7 @@ Harvester reserves CPU resources for system-level operations on each node. For m
 :::
 ## Node Maintenance
 
-Admin users can enable Maintenance Mode (select **⋮ > Enable Maintenance Mode**) to automatically evict all virtual machines from a node. This mode leverages the **live migration** feature to migrate the virtual machines to other nodes, which is useful when you need to reboot, upgrade firmware, or replace hardware components. At least two active nodes are required to use this feature.
+Admin users can enable Maintenance Mode (select **â‹® > Enable Maintenance Mode**) to automatically evict all virtual machines from a node. This mode leverages the **live migration** feature to migrate the virtual machines to other nodes, which is useful when you need to reboot, upgrade firmware, or replace hardware components. At least two active nodes are required to use this feature.
 
 :::warning
 
@@ -40,7 +40,7 @@ A [bug](https://github.com/harvester/harvester/issues/7128) may cause an I/O err
 
 1. Wait for all virtual machines to be live-migrated out of the node.
 
-1. On the **Hosts** screen, select the target node, and then select **⋮ -> Enable Maintenance Mode**.
+1. On the **Hosts** screen, select the target node, and then select **â‹® -> Enable Maintenance Mode**.
 
 Once the maintenance tasks are completed, perform the following steps to allow scheduling of workloads on the node.
 
@@ -50,7 +50,7 @@ Once the maintenance tasks are completed, perform the following steps to allow s
     kubectl taint node <NODE> kubevirt.io/drain-
     ```
 
-1. On the **Hosts** screen, select the node, and then select **⋮ -> Disable Maintenance Mode**.
+1. On the **Hosts** screen, select the node, and then select **â‹® -> Disable Maintenance Mode**.
 
 For more information, see [Issue #7128](https://github.com/harvester/harvester/issues/7128).
 
@@ -67,13 +67,13 @@ You can force a collective shutdown of all VMs on a node on the **Enable Mainten
 
 If you want to execute a special command before shutting down a VM, consider using the [container lifecycle hook](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks) `PreStop`.
 
-![node-maintenance.png](/img/v1.2/host/node-maintenance.png)
+![node-maintenance.png](/img/host/node-maintenance.png)
 
 ## Cordoning a Node
 
 Cordoned nodes are marked as unschedulable. Cordoning is useful when you want to prevent new workloads from being scheduled on a node. You can uncordon a node to make it schedulable again.
 
-![cordon-node.png](/img/v1.2/host/cordon-nodes.png)
+![cordon-node.png](/img/host/cordon-nodes.png)
 
 ## Deleting a Node
 
@@ -164,7 +164,7 @@ If your cluster is running Harvester v1.1.2 or later, you can enable [Maintenanc
 
 All workloads have been successfully evicted if the node state is **Maintenance**.
 
-![node-maintain-completed.png](/img/v1.3/host/node-maintain-completed.png)
+![node-maintain-completed.png](/img/host/node-maintain-completed.png)
 
 :::info important
 If a cluster has only two control plane nodes, Harvester does not allow you to enable Maintenance Mode on any node. You can manually drain the node to be removed using the following command:
@@ -195,9 +195,9 @@ Once resolved, you can skip this step.
 
 1. On the Harvester UI, go to the **Hosts** screen.
 
-1. Locate the node that you want to remove, and then click **⋮ > Delete**.
+1. Locate the node that you want to remove, and then click **â‹® > Delete**.
 
-![delete.png](/img/v1.2/host/delete-node.png)
+![delete.png](/img/host/delete-node.png)
 
 ## Role Management
 
@@ -220,13 +220,13 @@ For more information about assigning roles to nodes, see [ISO Installation](/v1.
 Users can view and add multiple disks as additional data volumes from the edit host page.
 
 1. Go to the **Hosts** page.
-2. On the node you want to modify, click **⋮ > Edit Config**.
+2. On the node you want to modify, click **â‹® > Edit Config**.
 
-![Edit Config](/img/v1.4/host/multidisk-mgmt-01.png)
+![Edit Config](/img/host/multidisk-mgmt-01.png)
 
 3. Select the **Storage** tab and click **Add Disk**.
 
-![Add Disks](/img/v1.4/host/multidisk-mgmt-02.png)
+![Add Disks](/img/host/multidisk-mgmt-02.png)
 
 :::caution
 
@@ -238,19 +238,19 @@ As of Harvester v1.0.2, we no longer support adding partitions as additional dis
 
   - **LonghornV1 (CSI)**: This is the default provisioner.
 
-    ![Provisioner LonghornV1](/img/v1.4/host/multidisk-mgmt-03.png)
+    ![Provisioner LonghornV1](/img/host/multidisk-mgmt-03.png)
 
     You must set **Force Formatted** to **Yes** if the block device has never been force-formatted.
 
-    ![Force Format](/img/v1.4/host/multidisk-mgmt-08.png)
+    ![Force Format](/img/host/multidisk-mgmt-08.png)
 
   - **LonghornV2 (CSI)**: Select this provisioner if you want to use the [Longhorn V2 Data Engine](../advanced/longhorn-v2.md).
 
-    ![Provisioner LonghornV2](/img/v1.4/host/multidisk-mgmt-04.png)
+    ![Provisioner LonghornV2](/img/host/multidisk-mgmt-04.png)
 
   - **LVM**: Select this provisioner if you want to use [local storage](../advanced/addons/lvm-local-storage.md) to create persistent volumes for your workloads.
 
-    ![Provisioner LVM](/img/v1.4/host/multidisk-mgmt-05.png)
+    ![Provisioner LVM](/img/host/multidisk-mgmt-05.png)
 
 5. Click **Save**.
 
@@ -258,9 +258,9 @@ As of Harvester v1.0.2, we no longer support adding partitions as additional dis
 
 You can also add [storage tags](#storage-tags) if you want Longhorn volume data to be stored on specific nodes or disks. Storage tags can only be used with the **LonghornV1 (CSI)** and **LonghornV2 (CSI)** provisioners.
 
-![disk tag 01](/img/v1.4/host/multidisk-mgmt-06.png)
+![disk tag 01](/img/host/multidisk-mgmt-06.png)
 
-![disk tag 02](/img/v1.4/host/multidisk-mgmt-07.png)
+![disk tag 02](/img/host/multidisk-mgmt-07.png)
 
 :::note
 
@@ -290,7 +290,7 @@ The tags can be set up through the Harvester UI on the host page:
 1. Click `Save` to update tags.
 1. On the [StorageClasses](../advanced/storageclass.md) page, create a new storage class and select those defined tags on the `Node Selector` and `Disk Selector` fields.
 
-All the existing scheduled volumes on the node or disk won’t be affected by the new tags.
+All the existing scheduled volumes on the node or disk wonâ€™t be affected by the new tags.
 
 :::note
 
@@ -313,36 +313,36 @@ The replica data would be rebuilt to another disk automatically to keep the high
 2. On the node containing the disk, select the node name and go to the **Storage** tab.
 3. Find the disk you want to remove. Let's assume we want to remove `/dev/sdb`, and the disk's mount point is `/var/lib/harvester/extra-disks/1b805b97eb5aa724e6be30cbdb373d04`.
 
-![Find disk to remove](/img/v1.2/host/remove-disks-harvester-find-disk.png)
+![Find disk to remove](/img/host/remove-disks-harvester-find-disk.png)
 
 #### Evict replicas (Longhorn dashboard)
 1. Please follow [this session](../troubleshooting/harvester.md#access-embedded-rancher-and-longhorn-dashboards) to enable the embedded Longhorn dashboard.
 2. Visit the Longhorn dashboard and go to the **Node** page.
 3. Expand the node containing the disk. Confirm the mount point `/var/lib/harvester/extra-disks/1b805b97eb5aa724e6be30cbdb373d04` is in the disks list.
 
-![Check the removing disk](/img/v1.2/host/remove-disks-longhorn-nodes.png)
+![Check the removing disk](/img/host/remove-disks-longhorn-nodes.png)
 
 4. Select **Edit node and disks**.
 
-![Edit node and disks](/img/v1.2/host/remove-disks-longhorn-nodes-edit.png)
+![Edit node and disks](/img/host/remove-disks-longhorn-nodes-edit.png)
 
 5. Scroll to the disk you want to remove.
 - Set `Scheduling` to `Disable`.
 - Set `Eviction Requested` to `True`.
 - Select **Save**. Do not select the delete icon.
 
-![Evict disk](/img/v1.2/host/remove-disks-longhorn-nodes-evict-disk.png)
+![Evict disk](/img/host/remove-disks-longhorn-nodes-evict-disk.png)
 
 6. The disk will be disabled. Please wait until the disk replica count becomes `0` to proceed with removing the disk.
 
-![Wait replicas](/img/v1.2/host/remove-disks-longhorn-wait-replicas.png)
+![Wait replicas](/img/host/remove-disks-longhorn-wait-replicas.png)
 
 #### Remove the disk (Harvester dashboard)
 1. Go to the **Hosts** page.
-2. On the node containing the disk, select **⋮ > Edit Config**.
+2. On the node containing the disk, select **â‹® > Edit Config**.
 3. Go to the **Storage** tab and select **x**  to remove the disk.
 
-![Remove disk](/img/v1.2/host/remove-disks-harvester-remove.png)
+![Remove disk](/img/host/remove-disks-harvester-remove.png)
 
 4. Select **Save** to remove the disk.
 
@@ -354,7 +354,7 @@ _Available as of v1.1.0_
 [Node labels](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#node-labels) are used to identify the topology domains that each node is in. You can configure labels such as [`topology.kubernetes.io/zone`](https://kubernetes.io/docs/reference/labels-annotations-taints/#topologykubernetesiozone) on the Harvester UI.
 
 1. Go to the **Hosts** screen.
-1. Locate the target node in the list, and then select **⋮ > Edit Config**.
+1. Locate the target node in the list, and then select **â‹® > Edit Config**.
 1. On the **Labels** tab, click **Add Label** and then specify the label `topology.kubernetes.io/zone` and a value.
 1. Click **Save**.
 
@@ -370,16 +370,16 @@ Ksmtuned is a KSM automation tool deployed as a DaemonSet to run Ksmtuned on eac
 ### Quick Run
 
 1. Go to the **Hosts** page.
-2. On the node you want to modify, click **⋮ > Edit Config**.
+2. On the node you want to modify, click **â‹® > Edit Config**.
 3. Select the **Ksmtuned** tab and select **Run** in **Run Strategy**.
 4. (Optional) You can modify **Threshold Coefficient** as needed.
 
-![Edit Ksmtuned](/img/v1.2/host/edit-ksmtuned.png)
+![Edit Ksmtuned](/img/host/edit-ksmtuned.png)
 
 5. Click **Save** to update.
 6. Wait for about 1-2 minutes and you can check its **Statistics** by clicking **Your Node > Ksmtuned tab**.
 
-![View Ksmtuned Statistics](/img/v1.2/host/view-ksmtuned-statistics.png)
+![View Ksmtuned Statistics](/img/host/view-ksmtuned-statistics.png)
 
 ### Parameters
 
@@ -452,11 +452,11 @@ In previous Harvester versions, NTP settings were mainly configurable [during th
 
 Beginning with version v1.2.0, Harvester is supporting NTP configuration on the Harvester UI Settings screen (**Advanced** > **Settings**). You can configure NTP settings for the entire Harvester cluster at any time, and the settings are applied to all nodes in the cluster.
 
-![](/img/v1.3/host/harvester-ntp-settings.png)
+![](/img/host/harvester-ntp-settings.png)
 
 You can set up multiple NTP servers at once.
 
-![](/img/v1.3/host/harvester-ntp-settings-multiple.png)
+![](/img/host/harvester-ntp-settings-multiple.png)
 
 You can check the settings in the `node.harvesterhci.io/ntp-service` annotation in Kubernetes nodes:
 - `ntpSyncStatus`: Status of the connection to NTP servers (possible values: `disabled`, `synced` and `unsynced`)
@@ -472,7 +472,7 @@ $ kubectl get nodes harvester-node-0 -o yaml |yq -e '.metadata.annotations.["nod
 > 1. Do not modify the NTP configuration file on each node. Harvester will automatically sync the settings that you configured on the Harvester UI to the nodes.
 > 1. If you upgraded Harvester from an earlier version, the **ntp-servers** list on the Settings screen will be empty (see screenshot). You must manually configure the NTP settings because Harvester is unaware of the previous settings and is unable to detect conflicts.
 
-![](/img/v1.3/host/harvester-ntp-settings-empty.png)
+![](/img/host/harvester-ntp-settings-empty.png)
 
 ## Cloud-Native Node Configuration
 
@@ -612,7 +612,7 @@ You can configure the URL of the console for remote server management. This cons
 
 1. On the Harvester UI, go to **Hosts**.
 
-1. Locate the target host, and then select **⋮ > Edit Config**.
+1. Locate the target host, and then select **â‹® > Edit Config**.
 
   ![](/img/remote_console_config.png)
 

@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 2
 sidebar_label: Create a Virtual Machine
@@ -46,7 +46,7 @@ Please refer to [this page](./create-windows-vm.md) for creating Windows virtual
 1. (Optional) Set workload affinity rules on the **VM Scheduling** tab.
 1. Advanced options such as run strategy, os type and cloud-init data are optional. You may configure these in the **Advanced Options** section when applicable.
 
-![create-vm](/img/v1.2/vm/create-vm.png)
+![create-vm](/img/vm/create-vm.png)
 </TabItem>
 <TabItem value="api" label="API">
 
@@ -163,7 +163,7 @@ By default, Harvester sets the volume size to either 10 GiB or the virtual size 
 
 :::
 
-![create-vm](/img/v1.2/vm/create-vm-volumes.png)
+![create-vm](/img/vm/create-vm-volumes.png)
 
 ### Adding a container disk
 
@@ -175,7 +175,7 @@ A container disk is added when creating a VM by providing a Docker image. When c
 
 1. Go to the **Volumes** tab.
 1. Select **Add Container**.
-  ![add-container-volume](/img/v1.2/vm/add-container-volume-1.png)
+  ![add-container-volume](/img/vm/add-container-volume-1.png)
 1. Enter a **Name** for the container disk.
 1. Choose a disk **Type**.
 1. Add a **Docker Image**.
@@ -183,7 +183,7 @@ A container disk is added when creating a VM by providing a Docker image. When c
     - Raw and qcow2 formats are supported, but qcow2 is recommended in order to reduce the container image's size. If you use an unsupported image format, the VM will get stuck in a `Running` state.
     - A container disk also allows you to store disk images in the `/disk` directory. An example of creating such a container image can be found [here](https://kubevirt.io/user-guide/virtual_machines/disks_and_volumes/#containerdisk-workflow-example).
 1. Choose a **Bus** type.
-  ![add-container-volume](/img/v1.2/vm/add-container-volume-2.png)
+  ![add-container-volume](/img/vm/add-container-volume-2.png)
 
 ## Networks
 
@@ -212,7 +212,7 @@ In bridge VLAN, virtual machines are connected to the host network through a lin
 
 `Node Scheduling` allows you to constrain which nodes your VMs can be scheduled on based on node labels.
 
-![vm-node-scheduling](/img/v1.6/vm/vm-node-scheduling.png)
+![vm-node-scheduling](/img/vm/vm-node-scheduling.png)
 
 You can choose to run virtual machines on the following:
 
@@ -484,7 +484,7 @@ The QEMU guest agent is a daemon that runs on the virtual machine instance and p
 
 `Install guest agent` checkbox is enabled by default when a new VM is created.
 
-![](/img/v1.2/vm/qga.png)
+![](/img/vm/qga.png)
 
 :::note
 
@@ -520,7 +520,7 @@ The following example describes how to install an ISO image using [openSUSE Leap
 4. Click **Add Volume** and select an existing **StorageClass**.
 5. Drag **Volume** to the top of **Image Volume** as follows. In this way, the **bootOrder** of **Volume** will become `1`.
 
-![one-time-boot-create-vm-bootorder](/img/v1.2/vm/one-time-boot-create-vm-bootorder.png)
+![one-time-boot-create-vm-bootorder](/img/vm/one-time-boot-create-vm-bootorder.png)
 
 6. Click **Create**.
 7. Open the VM web-vnc you just created and follow the instructions given by the installer.

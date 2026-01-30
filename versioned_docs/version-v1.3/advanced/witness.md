@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 8
 sidebar_label: Witness Node
 title: "Witness Node"
@@ -30,7 +30,7 @@ You can assign the *witness* role to a node when it joins a newly created cluste
 In the following example, a cluster with three nodes was created and the node `harvester-node-1` was assigned the *witness* role. `harvester-node-1` consumes less resources and only has etcd capabilities.
 
 ```
-NAME↑               STATUS   ROLE                         VERSION               PODS     CPU      MEM    %CPU    %MEM    CPU/A    MEM/A AGE        
+NAMEâ†‘               STATUS   ROLE                         VERSION               PODS     CPU      MEM    %CPU    %MEM    CPU/A    MEM/A AGE        
 harvester-node-0    Ready    control-plane,etcd,master    v1.27.10+rke2r1         70    1095    10143      10      63    10000    15976 4d13h      
 harvester-node-1    Ready    etcd                         v1.27.10+rke2r1          7     258     2258       2      14    10000    15976 4d13h      
 harvester-node-2    Ready    control-plane,etcd,master    v1.27.10+rke2r1         36     840     6905       8      43    10000    15976 4d13h      
@@ -67,25 +67,25 @@ In summary, you must use a StorageClass that matches the cluster configuration.
 - 2 management nodes + 1 witness node: Create a new default StorageClass with the **Number of Replicas** parameter set to **2**. This ensures that only two replicas are created for each Longhorn volume.
 - 2 management nodes + 1 witness node + 1 or more worker nodes: You can use the existing default StorageClass.
   
-![new storageclass replica 2](/img/v1.3/advanced/new-storageclass-rep-2.png)
-![set to default](/img/v1.3/advanced/set-to-default-sc.png)
+![new storageclass replica 2](/img/advanced/new-storageclass-rep-2.png)
+![set to default](/img/advanced/set-to-default-sc.png)
 
 If you already created volumes using the original default StorageClass, you can modify the replica count on the **Volume** screen of the [embedded Longhorn UI](../troubleshooting/harvester/#access-embedded-rancher-and-longhorn-dashboards).
 
-![redirect-to-longhorn-volume-page](/img/v1.3/advanced/redirect-to-longhorn-vol-page.png)
-![update-replica-count-to-2](/img/v1.3/advanced/update-replica-2.png)
+![redirect-to-longhorn-volume-page](/img/advanced/redirect-to-longhorn-vol-page.png)
+![update-replica-count-to-2](/img/advanced/update-replica-2.png)
 
 ## Known Issues
 
 ### 1. When creating a cluster with a witness node, the **Network Config: Create** screen on the Harvester UI is unable to identify any NICs that can be used with all nodes.
 
-  ![create network config with all nodes](/img/v1.3/advanced/create-policy-with-all-nodes.png)
-  ![no uplink](/img/v1.3/advanced/no-uplink.png)
+  ![create network config with all nodes](/img/advanced/create-policy-with-all-nodes.png)
+  ![no uplink](/img/advanced/no-uplink.png)
 
   The workaround is to select a non-witness node and then select a NIC that can be used with that specific node.
 
-  ![create network config with specific node](/img/v1.3/advanced/create-policy-with-specific-node.png)
-  ![get uplink](/img/v1.3/advanced/get-uplink.png)
+  ![create network config with specific node](/img/advanced/create-policy-with-specific-node.png)
+  ![get uplink](/img/advanced/get-uplink.png)
 
 You must repeat this procedure for every non-witness node in the cluster. The same uplink settings can be used across nodes.
 
@@ -93,7 +93,7 @@ You must repeat this procedure for every non-witness node in the cluster. The sa
 
 ### 2. When selecting a target node for VM migration, the target list includes the witness node.
 
-![vm migration target witness node](/img/v1.3/advanced/vm-migration-witness-node.png)
+![vm migration target witness node](/img/advanced/vm-migration-witness-node.png)
 
 Do not select the witness node as the migration target. If you do, VM migration will fail.
 

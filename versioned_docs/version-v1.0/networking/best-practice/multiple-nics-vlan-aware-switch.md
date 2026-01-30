@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 2
 sidebar_label: Multiple NICs with VLAN-aware Switch
 title: "Multiple NICs with VLAN-aware Switch"
@@ -34,7 +34,7 @@ Cabling:
 
 The following diagram illustrates the cabling used for this guide:
 
-   ![mulitple-nics-vlan-aware.png](/img/v1.0/networking/best-practice/mulitple-nics-vlan-aware.png)
+   ![mulitple-nics-vlan-aware.png](/img/networking/best-practice/mulitple-nics-vlan-aware.png)
 
 ## External Switch Configuration
 
@@ -84,7 +84,7 @@ You can create a new VLAN network in the **Advanced > Networks** page, and click
 
 Specify the name and a VLAN ID that you want to create for the VLAN network <small>(You can specify the same VLAN ID in different namespaces if you have [Rancher multi-tenancy](../../rancher/virtualization-management.md#multi-tenancy) configured)</small>.
 
-   ![create-vlan-network.png](/img/v1.0/networking/best-practice/create-network.png)
+   ![create-vlan-network.png](/img/networking/best-practice/create-network.png)
 
 ### Connect a VM to the subnet of the Harvester hosts
 

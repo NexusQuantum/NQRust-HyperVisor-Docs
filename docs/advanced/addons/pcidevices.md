@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 2
 sidebar_label: PCI Devices
 title: "PCI Devices"
@@ -20,42 +20,42 @@ This is accomplished by using the `pcidevices-controller` addon.
 
 To use the PCI devices feature, users need to enable the `pcidevices-controller` addon first.
 
-![](/img/v1.2/vm-import-controller/EnableAddon.png)
+![](/img/vm-import-controller/EnableAddon.png)
 
 Once the `pcidevices-controller` addon is deployed successfully, it can take a few minutes for it to scan and the PCIDevice CRDs to become available.
-![](/img/v1.2/pcidevices/PcideviceEnabled.png)
+![](/img/pcidevices/PcideviceEnabled.png)
 ## Enabling Passthrough on a PCI Device
 
 1. Now go to the `Advanced -> PCI Devices` page:
 
-   ![](/img/v1.2/pcidevices/advanced-pcidevices-index.png)
+   ![](/img/pcidevices/advanced-pcidevices-index.png)
 
 1. Search for your device by vendor name (e.g. NVIDIA, Intel, etc.) or device name.
 
-   ![](/img/v1.2/pcidevices/search-pcidevices.png)
+   ![](/img/pcidevices/search-pcidevices.png)
 
 1. Select the devices you want to enable for passthrough:
 
-   ![](/img/v1.2/pcidevices/select-pcidevices.png)
+   ![](/img/pcidevices/select-pcidevices.png)
 
 1. Then click **Enable Passthrough** and read the warning message. If you still want to enable these devices, click **Enable** and wait for all devices to be `Enabled`.
    :::caution
    Please do not use `host-owned` PCI devices (e.g., management and VLAN NICs). Incorrect device allocation may cause damage to your cluster, including node failure.
    :::
 
-   ![](/img/v1.2/pcidevices/enable-pcidevices-inprogress.png)
+   ![](/img/pcidevices/enable-pcidevices-inprogress.png)
 
-   ![](/img/v1.2/pcidevices/enable-pcidevices-done.png)
+   ![](/img/pcidevices/enable-pcidevices-done.png)
 
 ## Attaching PCI Devices to a VM
 
 After enabling these PCI devices, you can navigate to the **Virtual Machines** page and select **Edit Config** to pass these devices.
 
-![](/img/v1.2/pcidevices/vm-pcidevices-edit-config.png)
+![](/img/pcidevices/vm-pcidevices-edit-config.png)
 
 Select **PCI Devices** and use the **Available PCI Devices** drop-down. Select the devices you want to attach from the list displayed and then click **Save**.
 
-![](/img/v1.2/pcidevices/vm-pcidevices-attach.png)
+![](/img/pcidevices/vm-pcidevices-attach.png)
 
 
 ## Using a passed-through PCI Device inside the VM
@@ -73,25 +73,25 @@ This is just like installing drivers in the host. The PCI passthrough feature wi
 
 The pcidevices-controller add-on currently uses unique resource descriptors to publish devices to the kubelet. If multiple `PCIDeviceClaims` of the same device type exist within the cluster, the same unique resource descriptor is used for these `PCIDeviceClaims`, and so the virtual machine may be scheduled on an incorrect node. To ensure that the correct device and node are used, select **Run VM on specific node** when configuring **Node Scheduling** settings.
 
-![](/img/v1.4/vm/vm-scheduling.png)
+![](/img/vm/vm-scheduling.png)
 
 ## SRIOV Network Devices
 _Available as of v1.2.0_
 
-![](/img/v1.2/pcidevices/SriovNetworkDevicesLink.png)
+![](/img/pcidevices/SriovNetworkDevicesLink.png)
 
 The `pcidevices-controller` addon can now scan network interfaces on the underlying hosts and check if they support SRIOV Virtual Functions (VFs). If a valid device is found, `pcidevices-controller` will generate a new `SRIOVNetworkDevice` object.
 
-![](/img/v1.2/pcidevices/SriovNetworkDevicesList.png)
+![](/img/pcidevices/SriovNetworkDevicesList.png)
 
-To create VFs on a SriovNetworkDevice, you can click **⋮ > Enable** and then define the **Number of Virtual Functions**.
-![](/img/v1.2/pcidevices/SriovNetworkDeviceEnable.png)
+To create VFs on a SriovNetworkDevice, you can click **â‹® > Enable** and then define the **Number of Virtual Functions**.
+![](/img/pcidevices/SriovNetworkDeviceEnable.png)
 
-![](/img/v1.2/pcidevices/SriovNetworkVFDefinition.png)
+![](/img/pcidevices/SriovNetworkVFDefinition.png)
 
 The `pcidevices-controller` will define the VFs on the network interface and report the new PCI device status for the newly created VFs.
 
-![](/img/v1.2/pcidevices/SriovNetworkDevicesVFStatus.png)
+![](/img/pcidevices/SriovNetworkDevicesVFStatus.png)
 
 On the next re-scan, the `pcidevices-controller` will create the PCIDevices for VFs. This can take up to 1 minute.
 
@@ -99,10 +99,10 @@ You can now navigate to the **PCI Devices** page to view the new devices.
 
 We have also introduced a new filter to help you filter PCI devices by the underlying network interface.
 
-![](/img/v1.2/pcidevices/SriovNetworkDevicesFilter.png)
+![](/img/pcidevices/SriovNetworkDevicesFilter.png)
 
 The newly created PCI device can be passed through to virtual machines like any other PCI device.
-![](/img/v1.2/pcidevices/SriovNetworkDevicesFilterResult.png)
+![](/img/pcidevices/SriovNetworkDevicesFilterResult.png)
 
 ## USB Devices
 
@@ -120,19 +120,19 @@ Before you remove the USB device, detach it from the virtual machine and then di
 
 1. On the Harvester UI, go to **Advanced** > **USB Devices**.
 
-    ![](/img/v1.4/usbdevices/index.png)
+    ![](/img/usbdevices/index.png)
 
 1. Locate the device in the list.
 
-    ![](/img/v1.4/usbdevices/search.png)
+    ![](/img/usbdevices/search.png)
 
-1. Select the target device, and then select **⋮** > **Enable Passthrough**.
+1. Select the target device, and then select **â‹®** > **Enable Passthrough**.
 
-   ![](/img/v1.4/usbdevices/select.png)
+   ![](/img/usbdevices/select.png)
 
 1. Read the confirmation message, and then click **Enable**. Allow some time for the device state to change to **Enabled**.
 
-    ![](/img/v1.4/usbdevices/enable-done.png)
+    ![](/img/usbdevices/enable-done.png)
 
 ### Attach a USB Device to a Virtual Machine
 
@@ -142,7 +142,7 @@ Before you remove the USB device, detach it from the virtual machine and then di
 
 1. On the virtual machine configuration screen, go to the **USB Devices** tab and then select a device from the **Available USB Devices** list. 
 
-    ![](/img/v1.4/usbdevices/attach-vm.png)
+    ![](/img/usbdevices/attach-vm.png)
 
 1. Click **Create** or **Save**.
 
@@ -152,7 +152,7 @@ Before you remove the USB device, detach it from the virtual machine and then di
 
 1. Run `lsusb`. This utility displays information about USB buses and attached devices.
 
-    ![](/img/v1.4/usbdevices/usb-in-vm.png)
+    ![](/img/usbdevices/usb-in-vm.png)
 
 ### Limitations
 

@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: VM
 title: "VM"
@@ -16,21 +16,21 @@ The following sections contain information useful in troubleshooting issues rela
 
 On rare occasions, the **Start** button is unavailable on the Harvester UI for VMs that are *Off*. Without that button, users are unable to start the VMs.
 
-![](/img/v1.2/troubleshooting/vm-start-button-is-not-visible.png)
+![](/img/troubleshooting/vm-start-button-is-not-visible.png)
 
 ### VM General Operations
 
 On the Harvester UI, the **Stop** button is visible after a VM is created and started.
 
-![](/img/v1.2/troubleshooting/stop-vm-from-webui.png)
+![](/img/troubleshooting/stop-vm-from-webui.png)
 
 The **Start** button is visible after the VM is stopped.
 
-![](/img/v1.2/troubleshooting/start-vm-after-vm-is-stopped-from-webui.png)
+![](/img/troubleshooting/start-vm-after-vm-is-stopped-from-webui.png)
 
 When the VM is powered off from inside the VM, both the **Start** and **Restart** buttons are visible.
 
-![](/img/v1.2/troubleshooting/actively-powered-off-vm.png)
+![](/img/troubleshooting/actively-powered-off-vm.png)
 
 ### General VM Related Objects
 

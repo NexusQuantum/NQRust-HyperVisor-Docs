@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 8
 sidebar_label: Import Existing Cluster built on Harvester VM
 title: "Import Existing Cluster built on Harvester VM"
@@ -106,7 +106,7 @@ Rancher allows you to import existing Harvester VMs in which you installed Kuber
 
 1. Create VM with two cloud-config files.
 
-    ![VM with cloud-config](/img/v1.4/rancher/vm-with-cloud-config.png)
+    ![VM with cloud-config](/img/rancher/vm-with-cloud-config.png)
 
 1. Install RKE2 in the VM.
 
@@ -130,7 +130,7 @@ Rancher allows you to import existing Harvester VMs in which you installed Kuber
 
     On the Rancher UI, go to **Cluster Management** > **Clusters** > **Import Existing** > **Generic** > **Create**.
 
-    ![Import Exisging Cluster](/img/v1.4/rancher/import-existing-cluster.png)
+    ![Import Exisging Cluster](/img/rancher/import-existing-cluster.png)
 
     ```shell
     # Run the command in the VM

@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 1
 sidebar_label: Create a Volume
@@ -24,7 +24,7 @@ description: Create a volume from the Volume page.
 1. Select an existing `StorageClass`.
 1. Configure the `Size` of the volume.
 
-![create-empty-volume](/img/v1.1/volume/create-empty-volume.png)
+![create-empty-volume](/img/volume/create-empty-volume.png)
 
 ## Create an Image Volume
 
@@ -38,7 +38,7 @@ description: Create a volume from the Volume page.
 1. Select an existing `Image`.
 1. Configure the `Size` of the volume.
 
-![create-image-volume](/img/v1.1/volume/create-image-volume.png)
+![create-image-volume](/img/volume/create-image-volume.png)
 
 ## Known Issues
 
@@ -56,8 +56,8 @@ After creating a volume when using Harvester from Rancher, users with the projec
 
 You can temporarily change the Harvester plugin version to [v1.2.1-patch1](https://github.com/harvester/dashboard/releases/tag/v1.1.2-patch1) from the Harvester UI.
 
-1. Go to the **Advanced** > **Settings** page. Find  the **ui-plugin-index** and select **⋮**  > **Edit Setting**.
+1. Go to the **Advanced** > **Settings** page. Find  the **ui-plugin-index** and select **â‹®**  > **Edit Setting**.
 1. Change the **Value** to **https://releases.rancher.com/harvester-ui/plugin/harvester-release-harvester-v1.1.2-patch1/harvester-release-harvester-v1.1.2-patch1.umd.min.js**.
-1. On the **Settings** page, find **ui-source** and select **⋮**  > **Edit Setting**.
+1. On the **Settings** page, find **ui-source** and select **â‹®**  > **Edit Setting**.
 1. Change the **Value** to **External** to use an external UI source.
 1. Log in again as a **Project Member** user in Rancher to view the newly created volume for your Harvester cluster.

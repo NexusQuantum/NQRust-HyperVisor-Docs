@@ -1,4 +1,4 @@
----
+﻿---
 id: upload-image
 sidebar_position: 6
 sidebar_label: Upload Images
@@ -27,7 +27,7 @@ The image name will be auto-filled using the URL address's filename. You can cus
 
 :::
 
-![](/img/v1.1/upload-image.png)
+![](/img/upload-image.png)
 
 ### Upload Images via Local File
 
@@ -39,14 +39,14 @@ Currently, qcow2, raw, and ISO images are supported.
 
 :::
 
-![](/img/v1.1/upload-image-local.png)
+![](/img/upload-image-local.png)
 
 
 ### Create Images via Volumes
 
 On the **Volumes** page, click **Export Image**. Enter the image name and select a StorageClass to create an image.
 
-![](/img/v1.1/volume/export-volume-to-image-1.png)
+![](/img/volume/export-volume-to-image-1.png)
 
 ### Image StorageClass
 
@@ -60,7 +60,7 @@ Instead, it will create a special StorageClass under the hood with a prefix name
 
 :::
 
-![](/img/v1.1/image-storageclass.png)
+![](/img/image-storageclass.png)
 
 ### Image Labels
 
@@ -68,7 +68,7 @@ You can add labels to the image, which will help identify the OS type more accur
 
 If your image name or URL contains any valid information, the UI will automatically recognize the OS type and image category for you. If not, you can also manually specify those corresponding labels on the UI.
 
-![](/img/v1.1/image-labels.png)
+![](/img/image-labels.png)
 
 ### Known Issues
 
@@ -76,7 +76,7 @@ If you remove an image before the upload process is completed, the related Longh
 
 To determine if the issue has occurred, locate the backing image on the Dashboard screen of the [Longhorn UI](./troubleshooting/harvester.md#access-embedded-rancher-and-longhorn-dashboards). If the deletion state has lasted for more than 5 minutes, perform the following steps:
 
-![](/img/v1.1/delete-image-stuck.png)
+![](/img/delete-image-stuck.png)
 
 1. Verify that the deletion state has lasted for more than 5 minutes.
 
@@ -85,7 +85,7 @@ To determine if the issue has occurred, locate the backing image on the Dashboar
     ```
 
     Example:
-    ![](/img/v1.1/check-image-stuck.png)
+    ![](/img/check-image-stuck.png)
 
 2. Edit the affected backing image data source.
 
@@ -102,7 +102,7 @@ To determine if the issue has occurred, locate the backing image on the Dashboar
 3. Delete the `finalizers` metadata of the affected backing image data source.
 
    Example:
-   ![](/img/v1.1/delete-stuck-image-finalizer.png)
+   ![](/img/delete-stuck-image-finalizer.png)
    You must delete `finalizers:` and `- longhorn.io`.
 
 4. The backing image should no longer be stuck in the deletion state.

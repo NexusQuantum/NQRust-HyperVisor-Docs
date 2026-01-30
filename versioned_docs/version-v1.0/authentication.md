@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: Authentication
 title: "Authentication"
@@ -17,7 +17,7 @@ description: With ISO installation mode, user will be prompted to set the passwo
 
 After installation, user will be prompted to set the password for the default `admin` user on the first-time login.
 
-![auth](/img/v1.0/install/first-time-login.png)
+![auth](/img/install/first-time-login.png)
 
 :::note
 

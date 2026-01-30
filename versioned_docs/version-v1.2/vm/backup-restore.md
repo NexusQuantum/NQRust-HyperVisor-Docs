@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: VM Backup, Snapshot & Restore
 title: "VM Backup, Snapshot & Restore"
@@ -20,11 +20,11 @@ description: VM backups are created from the Virtual Machines page. The VM backu
 _Available as of v0.3.0_
 
 VM backups are created from the **Virtual Machines** page. The VM backup volumes will be stored in the **Backup Target** (an NFS or S3 server), and they can be used to either restore a new VM or replace an existing VM.
-![vm-backup.png](/img/v1.2/vm/vm-backup.png)
+![vm-backup.png](/img/vm/vm-backup.png)
 
 :::note
 
-A backup target must be set up. For more information, see [Configure Backup Target](#configure-backup-target). If the backup target has not been set, you’ll be prompted with a message to do so.
+A backup target must be set up. For more information, see [Configure Backup Target](#configure-backup-target). If the backup target has not been set, youâ€™ll be prompted with a message to do so.
 
 :::
 
@@ -48,13 +48,13 @@ A backup target is an endpoint used to access a backup store in Harvester. A bac
 1. Once the backup target is set, go to the `Virtual Machines` page.
 1. Click `Take Backup` of the VM actions to create a new VM backup.
 1. Set a custom backup name and click `Create` to create a new VM backup.
-![create-backup.png](/img/v1.2/vm/create-backup.png)
+![create-backup.png](/img/vm/create-backup.png)
 
 **Result:** The backup is created. You will receive a notification message, and you can also go to the `Backup & Snapshot > VM Backups` page to view all VM backups.
 
 The `State` will be set to `Ready` once the backup is complete.
 
-![vm-backup-results.png](/img/v1.2/vm/vm-backup-results.png)
+![vm-backup-results.png](/img/vm/vm-backup-results.png)
 
 Users can either restore a new VM or replace an existing VM using this backup.
 
@@ -65,7 +65,7 @@ To restore a new VM from a backup, follow these steps:
 1. Go to the `VM Backups` page.
 1. Specify the new VM name and click `Create`.
 1. A new VM will be restored using the backup volumes and metadata, and you can access it from the `Virtual Machines` page.
-![restore-vm.png](/img/v1.2/vm/restore-vm.png)
+![restore-vm.png](/img/vm/restore-vm.png)
 
 ### Replace an existing VM using a backup
 
@@ -78,7 +78,7 @@ You can choose to either delete or retain the previous volumes. By default, all 
 1. Go to the `VM Backups` page.
 1. Click `Replace Existing`.
 1. You can view the restore process from the `Virtual Machines` page.
-![vm-restore-existing.png](/img/v1.2/vm/vm-restore-existing.png)
+![vm-restore-existing.png](/img/vm/vm-restore-existing.png)
 
 ### Restore a new VM on another Harvester cluster
 
@@ -131,20 +131,20 @@ EOF
 _Available as of v1.1.0_
 
 VM snapshots are created from the **Virtual Machines** page. The VM snapshot volumes will be stored in the cluster, and they can be used to either restore a new VM or replace an existing VM.
-![vm-snapshot.png](/img/v1.2/vm/vm-snapshot.png)
+![vm-snapshot.png](/img/vm/vm-snapshot.png)
 
 ### Create a VM snapshot
 
 1. Go to the `Virtual Machines` page.
 1. Click `Take VM Snapshot` of the VM actions to create a new VM snapshot.
 1. Set a custom snapshot name and click `Create` to create a new VM snapshot.
-![create-snapshot.png](/img/v1.2/vm/create-snapshot.png)
+![create-snapshot.png](/img/vm/create-snapshot.png)
 
 **Result:** The snapshot is created. You can also go to the `Backup & Snapshot > VM Snapshots` page to view all VM snapshots.
 
 The `State` will be set to `Ready` once the snapshot is complete.
 
-![vm-snapshot-results.png](/img/v1.2/vm/vm-snapshot-results.png)
+![vm-snapshot-results.png](/img/vm/vm-snapshot-results.png)
 
 Users can either restore a new VM or replace an existing VM using this snapshot.
 
@@ -155,7 +155,7 @@ To restore a new VM from a snapshot, follow these steps:
 1. Go to the `VM Snapshots` page.
 1. Specify the new VM name and click `Create`.
 1. A new VM will be restored using the snapshot volumes and metadata, and you can access it from the `Virtual Machines` page.
-![restore-vm-snapshot.png](/img/v1.2/vm/restore-vm-snapshot.png)
+![restore-vm-snapshot.png](/img/vm/restore-vm-snapshot.png)
 
 ### Replace an existing VM using a snapshot
 
@@ -170,7 +170,7 @@ You can only choose to retain the previous volumes.
 1. Go to the `VM Snapshots` page.
 1. Click `Replace Existing`.
 1. You can view the restore process from the `Virtual Machines` page.
-![restore-vm-snapshot-existing.png](/img/v1.2/vm/restore-vm-snapshot-existing.png)
+![restore-vm-snapshot-existing.png](/img/vm/restore-vm-snapshot-existing.png)
 
 ## Known issues
 
@@ -192,7 +192,7 @@ Harvester v1.3.0 fixes this issue by changing the metadata file path to `<storag
 
 When creating a backup for a stopped VM, the Harvester UI may display an error message that indicates a known issue.
 
-![](/img/v1.2/vm/vm_backup_fail.png)
+![](/img/vm/vm_backup_fail.png)
 
 To determine if the [issue](https://github.com/harvester/harvester/issues/5841) has occurred, locate the VM backup on the **Dashboard** screen and perform the following steps:
 

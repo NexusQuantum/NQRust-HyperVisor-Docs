@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 4
 sidebar_label: Monitoring
 title: "Monitoring"
@@ -85,15 +85,15 @@ Based on the `Longhorn` `Volume` expansion guide, `Harvester` illustrates how to
 
 Access the embedded Longhorn WebUI according to [this document](../troubleshooting/harvester.md#access-embedded-longhorn).
 
-![](/img/v1.0/troubleshooting/1-access-embedded-longhorn.png)
+![](/img/troubleshooting/1-access-embedded-longhorn.png)
 
 The default view.
 
-![](/img/v1.0/troubleshooting/2-longhorn-dashboard.png)
+![](/img/troubleshooting/2-longhorn-dashboard.png)
 
 Click `Volume` to list all existing volumes.
 
-![](/img/v1.0/troubleshooting/3-view-all-volume.png)
+![](/img/troubleshooting/3-view-all-volume.png)
 
 #### From CLI
 
@@ -157,11 +157,11 @@ longhorn-system   pvc-b2b2c07c-f7cd-4965-90e6-ac3319597bf7   detached   unknown 
 
 In the Longhorn WebUI, the related volume becomes `Detached`. Click the icon in the `Operation` column, and select `Expand Volume`.
 
-![](/img/v1.0/troubleshooting/4-select-volume-to-expand.png)
+![](/img/troubleshooting/4-select-volume-to-expand.png)
 
 Input a new size, and `Longhorn` will expand the volume to this size.
 
-![](/img/v1.0/troubleshooting/5-expand-volue-to-new-size.png)
+![](/img/troubleshooting/5-expand-volue-to-new-size.png)
 
 ### Scale Up a Deployment
 
@@ -185,7 +185,7 @@ rancher-monitoring-prometheus-adapter   1/1     1            1           43h
 
 The `Volume` is attached to the new POD.
 
-![](/img/v1.0/troubleshooting/6-after-scale-up.png)
+![](/img/troubleshooting/6-after-scale-up.png)
 
 To now, the `Volume` is expanded to the new size and the POD is using it smoothly.
 

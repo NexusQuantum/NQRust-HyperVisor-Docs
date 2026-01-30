@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 2
 sidebar_label: VM Network
 title: "VM Network"
@@ -33,13 +33,13 @@ However, you can leverage the Kubernetes [service object](https://kubevirt.io/us
 ### How to use management network
 Since the management network is built-in and doesn't require extra operations, you can add it directly when configuring the VM network.
 
-![](/img/v1.2/networking/management-network.png)
+![](/img/networking/management-network.png)
 
 :::info important
 
 Network interfaces of VMs connected to the management network have an [MTU value of `1450`](https://docs.tigera.io/calico/latest/networking/configuring/mtu#determine-mtu-size). This is because a VXLAN overlay network typically has a slightly higher per-packet overhead.
 
-![](/img/v1.3/networking/management-network-mtu.png)
+![](/img/networking/management-network-mtu.png)
 
 If any of your workloads involve transmission of network traffic, you must specify the appropriate MTU value for the affected VM network interfaces and bridges.
 
@@ -67,17 +67,17 @@ The [Harvester network-controller](https://github.com/harvester/harvester-networ
     - Vlan ID 
     - Cluster Network 
 
-    ![](/img/v1.2/networking/create-vlan-network.png)
+    ![](/img/networking/create-vlan-network.png)
 
 1. On the Route tab, select an option and then specify the related IPv4 addresses.
 
     - Auto(DHCP): The Harvester network controller retrieves the CIDR and gateway addresses from the DHCP server. You can specify the DHCP server address. 
 
-    ![](/img/v1.2/networking/create-network-auto.png)
+    ![](/img/networking/create-network-auto.png)
 
     - Manual: Specify the CIDR and gateway addresses. 
 
-    ![](/img/v1.2/networking/create-network-manual.png)
+    ![](/img/networking/create-network-manual.png)
 
     :::info important
     Harvester uses the information to verify that all nodes can access the VM network you are creating. If that is the case, the *Network connectivity* column on the **VM Networks** screen indicates that the network is active. Otherwise, the screen indicates that an error has occurred.
@@ -99,7 +99,7 @@ The usage of untagged network is similar to [the VLAN network](./harvester-netwo
 
 To create a new untagged network, go to the **Networks > VM Networks** page and click the **Create** button. You have to specify the name, select the type `Untagged Network` and choose the cluster network.
 
-![](/img/v1.2/networking/create-untagged-network.png)
+![](/img/networking/create-untagged-network.png)
 
 :::note
 

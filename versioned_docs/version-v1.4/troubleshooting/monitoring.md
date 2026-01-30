@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 4
 sidebar_label: Monitoring
 title: "Monitoring"
@@ -87,11 +87,11 @@ Access the embedded Longhorn WebUI according to [this document](../troubleshooti
 
 The Longhorn dashboard default view.
 
-![](/img/v1.2/troubleshooting/2-longhorn-dashboard.png)
+![](/img/troubleshooting/2-longhorn-dashboard.png)
 
 Click `Volume` to list all existing volumes.
 
-![](/img/v1.2/troubleshooting/3-view-all-volume.png)
+![](/img/troubleshooting/3-view-all-volume.png)
 
 #### From CLI
 
@@ -155,11 +155,11 @@ longhorn-system   pvc-b2b2c07c-f7cd-4965-90e6-ac3319597bf7   detached   unknown 
 
 In the Longhorn WebUI, the related volume becomes `Detached`. Click the icon in the `Operation` column, and select `Expand Volume`.
 
-![](/img/v1.2/troubleshooting/4-select-volume-to-expand.png)
+![](/img/troubleshooting/4-select-volume-to-expand.png)
 
 Input a new size, and `Longhorn` will expand the volume to this size.
 
-![](/img/v1.2/troubleshooting/5-expand-volue-to-new-size.png)
+![](/img/troubleshooting/5-expand-volue-to-new-size.png)
 
 ### Scale Up a Deployment
 
@@ -183,7 +183,7 @@ rancher-monitoring-prometheus-adapter   1/1     1            1           43h
 
 The `Volume` is attached to the new POD.
 
-![](/img/v1.2/troubleshooting/6-after-scale-up.png)
+![](/img/troubleshooting/6-after-scale-up.png)
 
 To now, the `Volume` is expanded to the new size and the POD is using it smoothly.
 
@@ -275,13 +275,13 @@ You may encounter this when you install the Harvester v1.3.0 or higher version c
     alertmanager-rancher-monitoring-alertmanager-db-alertmanager-rancher-monitoring-alertmanager-0   Bound    pvc-cea6316e-f74f-4771-870b-49edb5442819   5Gi        RWO            harvester-longhorn   16m
     ```
 
-1. On the **Addons** screen of the Harvester UI, select **⋮** (menu icon) and then select **Edit YAML**.
+1. On the **Addons** screen of the Harvester UI, select **â‹®** (menu icon) and then select **Edit YAML**.
 
-    ![](/img/v1.3/troubleshooting/edit-rancher-monitoring.png)
+    ![](/img/troubleshooting/edit-rancher-monitoring.png)
 
 1. As indicated below, change the two occurrences of the number `50` to `30` under prometheusSpec, and then save. The `prometheus` feature will use a 30GiB disk to store data.
 
-    ![](/img/v1.3/troubleshooting/edit-rancher-monitoring-yaml.png)
+    ![](/img/troubleshooting/edit-rancher-monitoring-yaml.png)
 
     Alternatively, you can use `kubectl` to edit the object.
 
@@ -617,7 +617,7 @@ log from prometheus pod:
 
 ...
 ts=2025-05-20T05:41:02.847Z caller=kubernetes.go:327 level=info component="discovery manager notify" discovery=kubernetes config=config-0 msg="Using pod service account via in-cluster config"
-ts=2025-05-20T05:41:02.880Z caller=main.go:1261 level=info msg="Completed loading of configuration file" filename=/etc/prometheus/config_out/prometheus.env.yaml totalDuration=35.457401ms db_storage=998ns remote_storage=1.45Âµs web_handler=392ns query_engine=1.095Âµs scrape=34.384Âµs scrape_sd=515.81Âµs notify=10.226Âµs notify_sd=82.314Âµs rules=32.514863ms tracing=2.344Âµs
+ts=2025-05-20T05:41:02.880Z caller=main.go:1261 level=info msg="Completed loading of configuration file" filename=/etc/prometheus/config_out/prometheus.env.yaml totalDuration=35.457401ms db_storage=998ns remote_storage=1.45Ã‚Âµs web_handler=392ns query_engine=1.095Ã‚Âµs scrape=34.384Ã‚Âµs scrape_sd=515.81Ã‚Âµs notify=10.226Ã‚Âµs notify_sd=82.314Ã‚Âµs rules=32.514863ms tracing=2.344Ã‚Âµs
 ts=2025-05-20T05:41:50.044Z caller=main.go:854 level=warn msg="Received SIGTERM, exiting gracefully..."
 ts=2025-05-20T05:41:50.044Z caller=main.go:878 level=info msg="Stopping scrape discovery manager..."
 ts=2025-05-20T05:41:50.044Z caller=main.go:892 level=info msg="Stopping notify discovery manager..."

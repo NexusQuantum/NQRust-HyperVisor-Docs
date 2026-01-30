@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 7
 sidebar_label: Rancher Terraform
 title: "Rancher Terraform"
@@ -32,23 +32,23 @@ The [Rancher Terraform Provider](https://registry.terraform.io/providers/rancher
 
     On the Rancher UI, go to **Account & API Keys** > **Create API key** > **Create**.
 
-    ![Create API Key](/img/v1.4/rancher/create-api-key.png)
-    ![Access & Secret Keys](/img/v1.4/rancher/access-and-secret-keys.png)
+    ![Create API Key](/img/rancher/create-api-key.png)
+    ![Access & Secret Keys](/img/rancher/access-and-secret-keys.png)
 
 1. Obtain the Harvester cluster ID.
 
     On the Rancher UI, go to **Virtualization Management** > **Manage** > **Related Resources** > **Mgmt Cluster Name**.
 
-    ![Harvester Cluster ID](/img/v1.4/rancher/harvester-cluster-id.png)
+    ![Harvester Cluster ID](/img/rancher/harvester-cluster-id.png)
 
 1. Obtain the kubeconfig for the Harvester Cloud Provider and the Harvester CSI Driver.
 
     <Tabs>
     <TabItem value="ui" label="UI" default>
 
-    On the Rancher UI, go to **Virtualization Management**. Locate the target Harvester cluster in the list and then select **⋮** > **Download KubeConfig**.
+    On the Rancher UI, go to **Virtualization Management**. Locate the target Harvester cluster in the list and then select **â‹®** > **Download KubeConfig**.
 
-    ![Download Kubeconfig](/img/v1.4/rancher/download-kubeconfig-harvester.png)
+    ![Download Kubeconfig](/img/rancher/download-kubeconfig-harvester.png)
 
     </TabItem>
     <TabItem value="shell" label="Shell">

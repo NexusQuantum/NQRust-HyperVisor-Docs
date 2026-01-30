@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 2
 sidebar_label: Calculation of Resource Metrics
 title: "Calculation of Resource Metrics"
@@ -19,11 +19,11 @@ You can view resource-related metrics on the Harvester UI.
 
 - **Hosts** screen: Displays host-level metrics
 
-  ![Host-level resource metrics](/img/v1.5/monitoring/host-resource-usage.png)
+  ![Host-level resource metrics](/img/monitoring/host-resource-usage.png)
 
 - **Dashboard** screen: Displays cluster-level metrics
 
-  ![Cluster-level resource metrics](/img/v1.5/monitoring/cluster-resource-usage.png)
+  ![Cluster-level resource metrics](/img/monitoring/cluster-resource-usage.png)
 
 ## CPU and Memory
 

@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 6
 sidebar_label: Managed DHCP
 title: "Managed DHCP"
@@ -39,13 +39,13 @@ kubectl apply -f https://raw.githubusercontent.com/harvester/experimental-addons
 
 After installation, enable the add-on on the **Dashboard** screen of the Harvester UI or using the command-line tool kubectl.
 
-![](/img/v1.3/vm-dhcp-controller/enable-addon.png)
+![](/img/vm-dhcp-controller/enable-addon.png)
 
 ## Usage
 
 1. On the **Dashboard** screen of the Harvester UI, [create a VM Network](../../networking/harvester-network.md#create-a-vm-network).
 
-    ![](/img/v1.3/vm-dhcp-controller/vm-network.png)
+    ![](/img/vm-dhcp-controller/vm-network.png)
 
 1. Create an IPPool object using the command-line tool kubectl.
 
@@ -76,7 +76,7 @@ After installation, enable the add-on on the **Dashboard** screen of the Harvest
 
 1. [Create a VM](../../vm/create-vm.md#how-to-create-a-vm) that is connected to the VM Network you previously created.
 
-    ![](/img/v1.3/vm-dhcp-controller/create-vm.png)
+    ![](/img/vm-dhcp-controller/create-vm.png)
 
 1. Wait for the corresponding VirtualMachineNetworkConfig object to be created and for the MAC address of the VM's network interface to be applied to the object.
 1. Check the `.status` field of the IPPool and VirtualMachineNetworkConfig objects, and verify that the IP address is allocated and assigned to the MAC address.
@@ -178,7 +178,7 @@ After installation, enable the add-on on the **Dashboard** screen of the Harvest
 
 1. Check the [VM's serial console](../../vm/access-to-the-vm.md#access-with-the-harvester-ui) and verify that the IP address is correctly configured on the network interface (via DHCP).
 
-    ![](/img/v1.3/vm-dhcp-controller/vm-console.png)
+    ![](/img/vm-dhcp-controller/vm-console.png)
 
 ## vm-dhcp-controller Pods and CRDs
 

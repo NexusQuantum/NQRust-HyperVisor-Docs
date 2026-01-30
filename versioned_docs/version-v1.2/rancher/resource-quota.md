@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 6
 sidebar_label: Resource Quotas
 title: "Resource Quotas"
@@ -23,7 +23,7 @@ In the Rancher UI, administrators can configure resource quotas for namespaces t
 1. Click the hamburger menu and choose the **Virtualization Management** tab.
 1. Choose one of the clusters and go to **Projects/Namespaces** > **Create Project**.
 1. Specify the desired project **Name**. Next, go to the **Resource Quotas** tab and select the **Add Resource** option. Within the **Resource Type** field, select either **CPU Limit** or **Memory Limit** and define the **Project Limit** and **Namespace Default Limit** values.
-  ![](/img/v1.2/rancher/create-project.png)
+  ![](/img/rancher/create-project.png)
 
 :::note
 The "VM Default Resource Limit" is used to set default request/limit on compute resources for pods running within the namespace, using the Kubernetes [`LimitRange` API](https://kubernetes.io/docs/concepts/policy/limit-range/). The resource "reservation" and "limit" values correspond to the `defaultRequest` and `default` limits of the namespace's `LimitRange` configuration. These settings are applied to pod workloads only.
@@ -36,7 +36,7 @@ You can configure the **Namespace** limits as follows:
 1. Find the newly created project, and select **Create Namespace**.
 1. Specify the desired namespace **Name**, and adjust the limits.
 1. Complete the process by selecting **Create**.
-  ![](/img/v1.2/rancher/create-namespace.png)
+  ![](/img/rancher/create-namespace.png)
 
 ## Overhead memory of virtual machine
 Upon creating a virtual machine (VM), the VM controller seamlessly incorporates overhead resources into the VM's configuration. These additional resources intend to guarantee the consistent and uninterrupted functioning of the VM. It's important to note that configuring memory limits requires a higher memory reservation due to the inclusion of these overhead resources.
@@ -78,4 +78,4 @@ Please be aware of the following constrains of the automatic resizing of `Resour
 - When raising the `ResourceQuota` value, if you create, start, or restore other VMs, Harvester will verify if the resources are sufficient based on the original `ResourceQuota`. If the conditions are not met, the system will alert that the migration process is not feasible.
 - After expanding `ResourceQuota`, potential resource contention may occur between non-VM pods and VM pods, leading to migration failures. Therefore, deploying custom container workloads and VMs to the same namespace is not recommended.
 - Due to the concurrent limitation of the webhook validator, the VM controller will execute a secondary validation to confirm resource sufficiency. If the resource is insufficient, it will auto config the VM's `RunStrategy` to `Halted`, and a new annotation `harvesterhci.io/insufficient-resource-quota` will be added to the VM object, informing you that the VM was shut down due to insufficient resources.
-  ![](/img/v1.2/rancher/vm-annotation-insufficient-resource-quota.png)
+  ![](/img/rancher/vm-annotation-insufficient-resource-quota.png)

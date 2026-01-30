@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 3
 sidebar_label: Air Gapped Environment
 title: "Air Gapped Environment"
@@ -25,17 +25,17 @@ In some environments, the connection to external services, from the servers or V
 
 You can configure the HTTP(S) proxy during the [ISO installation](./install/iso-install.md) as shown in picture below:
 
-![iso-proxy](/img/v1.0/iso-proxy.png)
+![iso-proxy](/img/iso-proxy.png)
 
 ### Configure an HTTP Proxy in Harvester Settings
 
 You can configure the HTTP(S) proxy in the settings page of the Harvester dashboard:
 
 1. Go to the settings page of the Harvester UI.
-1. Find the `http-proxy` setting, click **⋮ > Edit setting**
+1. Find the `http-proxy` setting, click **â‹® > Edit setting**
 1. Enter the value(s) for `http-proxy`, `https-proxy` and `no-proxy`.
 
-![proxy-setting](/img/v1.0/proxy-setting.png)
+![proxy-setting](/img/proxy-setting.png)
 
 :::note
 

@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: IP Pool
 title: "IP Pool"
@@ -30,9 +30,9 @@ To create a new IP pool:
 1. Go to the **Networks** > **IP Pools** page and select **Create**.
 1. Specify the **Name** of the IP pool.
 1. Go to the **Range** tab to specify the **IP ranges** for the IP pool. You can add multiple IP ranges.
-   ![](/img/v1.2/networking/multiple-ranges.png)
+   ![](/img/networking/multiple-ranges.png)
 1. Go to the **Selector** tab to specify the **Scope** and **Priority** of the IP pool.
-   ![](/img/v1.2/networking/ippool-scope.png)
+   ![](/img/networking/ippool-scope.png)
 
 When you operate from the Harvester UI, the `Scope` only includes `Namespace`. Click `Add Scope` to add new items.
 
@@ -40,7 +40,7 @@ When you operate from the Harvester UI, the `Scope` only includes `Namespace`. C
 
 If the Harvester cluster is imported to `Rancher Manager` from `Rancher Manager UI > Virtualization Management`, the `Network` tab in the IP Pools section looks different.
 
-![](/img/v1.6/networking/create-ippool-from-rancher-manager.png)
+![](/img/networking/create-ippool-from-rancher-manager.png)
 
 The `Scope` includes `Project`, `Namespace` and `Guest Kubernetes Cluster`. For more information, see [Multi-Tenancy Example](../rancher/virtualization-management.md#multi-tenancy-example) and [Projects and Kubernetes Namespaces with Rancher](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/manage-clusters/projects-and-namespaces#about-projects).
 

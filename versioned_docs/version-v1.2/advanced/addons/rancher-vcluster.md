@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: Rancher Manager
 title: "Rancher Manager (Experimental)"
@@ -12,7 +12,7 @@ _Available as of v1.2.0_
 
 The `rancher-vcluster` addon allows you to run Rancher Manager as a workload on the underlying Harvester cluster and is implemented using [vcluster](https://www.vcluster.com/).
 
-![](/img/v1.2/vm-import-controller/EnableAddon.png)
+![](/img/vm-import-controller/EnableAddon.png)
 
 The addon runs a nested K3s cluster in the `rancher-vcluster` namespace and deploys Rancher to this cluster.
 
@@ -33,9 +33,9 @@ kubectl apply -f https://raw.githubusercontent.com/harvester/experimental-addons
 After installing the addon, you need to configure it from the Harvester UI as follows:
 
 1. Select **Advanced** > **Addons**.
-1. Find the `rancher-vcluster` addon and select **⋮** > **Edit Config**.
+1. Find the `rancher-vcluster` addon and select **â‹®** > **Edit Config**.
 
-![](/img/v1.2/rancher-vcluster/VclusterConfig.png)
+![](/img/rancher-vcluster/VclusterConfig.png)
 
 1. In the **Hostname** field, enter a valid DNS record pointing to the Harvester VIP. This is essential as the vcluster ingress is synced to the parent Harvester cluster. A valid hostname is used to filter ingress traffic to the vcluster workload.
 1. In the **Bootstrap Password** field, enter the bootstrap password for the new Rancher deployed on the vcluster.

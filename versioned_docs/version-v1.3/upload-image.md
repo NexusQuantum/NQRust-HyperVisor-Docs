@@ -1,4 +1,4 @@
----
+﻿---
 id: upload-image
 sidebar_position: 6
 sidebar_label: Upload Images
@@ -28,7 +28,7 @@ To import virtual machine images in the **Images** page, enter a URL that can be
 
 :::
 
-![](/img/v1.2/upload-image.png)
+![](/img/upload-image.png)
 
 
 ### Upload Images via Local File
@@ -41,14 +41,14 @@ Currently, qcow2, raw, and ISO images are supported.
 
 :::
 
-![](/img/v1.2/upload-image-local.png)
+![](/img/upload-image-local.png)
 
 
 #### HTTP 413 Error in Rancher Multi-Cluster Management
 
 You can upload images from the [**Multi-Cluster Management**](./rancher/virtualization-management.md#importing-harvester-cluster) screen on the **Rancher UI**. When the status of an image is *Uploading* but the progress indicator displays *0%* for an extended period, check the HTTP response status code. *413* indicates that the size of the request body exceeds the limit.
 
-![](/img/v1.3/img-413-code.png)
+![](/img/img-413-code.png)
 
 The maximum request body size should be specific to the cluster that is hosting Rancher (for example, RKE2 clusters have a default limit of 1 MB but no such limit exists in K3s clusters).
 
@@ -65,7 +65,7 @@ If Rancher is deployed on an RKE2 cluster, perform the following steps:
 2. Specify a value for `nginx.ingress.kubernetes.io/proxy-body-size`.
 
   Example:
-  ![](/img/v1.3/img-ingress-client-body.png)
+  ![](/img/img-ingress-client-body.png)
 
 3. Delete the stuck image, and then restart the upload process.
 
@@ -102,7 +102,7 @@ Before uploading, decompress backing images using the command `$ gzip -d <file n
 
 On the **Volumes** page, click **Export Image**. Enter the image name and select a StorageClass to create an image.
 
-![](/img/v1.2/volume/export-volume-to-image-1.png)
+![](/img/volume/export-volume-to-image-1.png)
 
 ### Image StorageClass
 
@@ -116,7 +116,7 @@ Instead, it will create a special StorageClass under the hood with a prefix name
 
 :::
 
-![](/img/v1.2/image-storageclass.png)
+![](/img/image-storageclass.png)
 
 ### Image Labels
 
@@ -124,4 +124,4 @@ You can add labels to the image, which will help identify the OS type more accur
 
 If your image name or URL contains any valid information, the UI will automatically recognize the OS type and image category for you. If not, you can also manually specify those corresponding labels on the UI.
 
-![](/img/v1.2/image-labels.png)
+![](/img/image-labels.png)

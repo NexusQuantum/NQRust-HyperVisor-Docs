@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 4
 sidebar_label: Harvester Cloud Provider
 title: "Harvester Cloud Provider"
@@ -76,22 +76,22 @@ When spinning up an RKE cluster using the Harvester node driver, you can perform
 
 1. Select `Harvester(Out-of-tree)` option.
 
-    ![](/img/v1.2/rancher/rke-cloud-provider.png)
+    ![](/img/rancher/rke-cloud-provider.png)
 
 2. Install `Harvester Cloud Provider` from the Rancher marketplace.
 
-    ![](/img/v1.2/rancher/install-harvester-cloud-provider.png)
+    ![](/img/rancher/install-harvester-cloud-provider.png)
 
 
 ### Deploying to the RKE2 Cluster with Harvester Node Driver
 
 When spinning up an RKE2 cluster using the Harvester node driver, select the `Harvester` cloud provider. The node driver will then help deploy both the CSI driver and CCM automatically.
 
-  ![](/img/v1.2/rancher/rke2-cloud-provider.png)
+  ![](/img/rancher/rke2-cloud-provider.png)
 
 ### Deploying to the RKE2 custom cluster (experimental)
 
-![](/img/v1.2/rancher/custom.png)
+![](/img/rancher/custom.png)
 1. Generate cloud config data using the script `generate_addon.sh`, and then place the data on every custom node (directory: `/etc/kubernetes/cloud-config`).
 
     ```bash
@@ -157,23 +157,23 @@ When spinning up an RKE2 cluster using the Harvester node driver, select the `Ha
 
     - **Basics** tab: The minimum requirements are 2 CPUs and 4 GiB of RAM. The required disk space depends on the VM image.
 
-      ![](/img/v1.3/rancher/custom-cluster-vm-cpu-and-ram.png)
+      ![](/img/rancher/custom-cluster-vm-cpu-and-ram.png)
 
     - **Networks** tab: Specify a network name with the format `nic-<number>`.
 
-      ![](/img/v1.3/rancher/custom-cluster-vm-network.png)
+      ![](/img/rancher/custom-cluster-vm-network.png)
 
     - **Advanced Options** tab: Copy and paste the content of the **Cloud Config User Data** screen.
 
-      ![](/img/v1.3/rancher/custom-cluster-vm-user-data.png)
+      ![](/img/rancher/custom-cluster-vm-user-data.png)
 
 1. On the **Basics** tab of the **Cluster Configuration** screen, select **Harvester** as the **Cloud Provider** and then select **Create** to spin up the cluster.
 
-  ![](/img/v1.2/rancher/create-custom-rke2.png)
+  ![](/img/rancher/create-custom-rke2.png)
 
 1. On the **Registration** tab, perform the steps required to run the RKE2 registration command on the VM.
 
-    ![](/img/v1.3/rancher/custom-cluster-registration.png)
+    ![](/img/rancher/custom-cluster-registration.png)
 
 ### Deploying to the K3s cluster with Harvester node driver (experimental)
 
@@ -220,7 +220,7 @@ When spinning up a K3s cluster using the Harvester node driver, you can perform 
     ```
 
 2. Copy and paste the `cloud-init user data` content to **Machine Pools >Show Advanced > User Data**.
-   ![](/img/v1.2/rancher/cloud-config-userdata.png)
+   ![](/img/rancher/cloud-config-userdata.png)
 
 3. Add the following `HelmChart` yaml of `harvester-cloud-provider` to **Cluster Configuration > Add-On Config > Additional Manifest**.
 
@@ -239,13 +239,13 @@ When spinning up a K3s cluster using the Harvester node driver, you can perform 
       helmVersion: v3
     ```
 
-    ![](/img/v1.2/rancher/external-cloud-provider-addon.png)
+    ![](/img/rancher/external-cloud-provider-addon.png)
 
 4. Disable the `in-tree` cloud provider in the following ways:
 
     - Click the `Edit as YAML` button.
 
-    ![](/img/v1.2/rancher/edit-k3s-cluster-yaml.png)
+    ![](/img/rancher/edit-k3s-cluster-yaml.png)
     - Disable `servicelb` and set `disable-cloud-controller: true` to disable the default K3s cloud controller.
     ```yaml
         machineGlobalConfig:
@@ -263,7 +263,7 @@ When spinning up a K3s cluster using the Harvester node driver, you can perform 
               protect-kernel-defaults: false
     ```
 
-    ![](/img/v1.2/rancher/k3s-cluster-yaml-content-for-harvester-cloud-provider.png)
+    ![](/img/rancher/k3s-cluster-yaml-content-for-harvester-cloud-provider.png)
 
 With these settings in place a K3s cluster should provision successfully while using the external cloud provider.
 
@@ -272,15 +272,15 @@ With these settings in place a K3s cluster should provision successfully while u
 
 ### Upgrade RKE2
 The cloud provider can be upgraded by upgrading the RKE2 version. You can upgrade the RKE2 cluster via the Rancher UI as follows:
-1. Click **☰ > Cluster Management**.
-2. Find the guest cluster that you want to upgrade and select ⋮ **> Edit Config**.
+1. Click **â˜° > Cluster Management**.
+2. Find the guest cluster that you want to upgrade and select â‹® **> Edit Config**.
 3. Select **Kubernetes Version**.
 4. Click **Save**.
 
 ### Upgrade RKE/K3s
 RKE/K3s upgrade cloud provider via the Rancher UI, as follows:
-1. Click **☰ > RKE/K3s Cluster > Apps > Installed Apps**.
-2. Find the cloud provider chart and select ⋮ **> Edit/Upgrade**.
+1. Click **â˜° > RKE/K3s Cluster > Apps > Installed Apps**.
+2. Find the cloud provider chart and select â‹® **> Edit/Upgrade**.
 3. Select **Version**.
 4. Click **Next > Update**.
 
@@ -295,7 +295,7 @@ For more information, see [this GitHub issue comment](https://github.com/harvest
 ## Load Balancer Support
 Once you've deployed the Harvester cloud provider, you can leverage the Kubernetes `LoadBalancer` service to expose a microservice within the guest cluster to the external world. Creating a Kubernetes `LoadBalancer` service assigns a dedicated Harvester load balancer to the service, and you can make adjustments through the `Add-on Config` within the Rancher UI.
 
-![](/img/v1.2/rancher/lb-svc.png)
+![](/img/rancher/lb-svc.png)
 
 
 ### IPAM

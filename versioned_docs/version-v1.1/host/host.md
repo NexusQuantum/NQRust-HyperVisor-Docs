@@ -1,4 +1,4 @@
----
+﻿---
 id: host-management
 sidebar_position: 1
 sidebar_label: Host Management
@@ -17,19 +17,19 @@ Because Harvester is built on top of Kubernetes and uses etcd as its database, t
 
 :::
 
-![host.png](/img/v1.1/host/host.png)
+![host.png](/img/host/host.png)
 
 ## Node Maintenance
 
-Admin users can enable Maintenance Mode (select **⋮ > Enable Maintenance Mode**) to automatically evict all virtual machines from a node. This mode leverages the **live migration** feature to migrate the virtual machines to other nodes, which is useful when you need to reboot, upgrade firmware, or replace hardware components. At least two active nodes are required to use this feature.
+Admin users can enable Maintenance Mode (select **â‹® > Enable Maintenance Mode**) to automatically evict all virtual machines from a node. This mode leverages the **live migration** feature to migrate the virtual machines to other nodes, which is useful when you need to reboot, upgrade firmware, or replace hardware components. At least two active nodes are required to use this feature.
 
-![node-maintenance.png](/img/v1.1/host/node-maintenance.png)
+![node-maintenance.png](/img/host/node-maintenance.png)
 
 ## Cordoning a Node
 
 Cordoned nodes are marked as unschedulable. Cordoning is useful when you want to prevent new workloads from being scheduled on a node. You can uncordon a node to make it schedulable again.
 
-![cordon-node.png](/img/v1.1/host/cordon-nodes.png)
+![cordon-node.png](/img/host/cordon-nodes.png)
 
 ## Deleting a Node
 
@@ -37,7 +37,7 @@ Deleting a node is done in two phases:
 
 1. Delete the node from Harvester
     - Go to the **Hosts** page
-    - On the node you want to modify, click **⋮ > Delete**
+    - On the node you want to modify, click **â‹® > Delete**
 
 2. Uninstall RKE2 from the node
     - Login to the node as root
@@ -56,7 +56,7 @@ Once resolved, the last step can be skipped.
 
 :::
 
-![delete.png](/img/v1.1/host/delete-node.png)
+![delete.png](/img/host/delete-node.png)
 
 ## Multi-disk Management
 
@@ -65,13 +65,13 @@ Once resolved, the last step can be skipped.
 Users can view and add multiple disks as additional data volumes from the edit host page.
 
 1. Go to the **Hosts** page.
-2. On the node you want to modify, click **⋮ > Edit Config**.
+2. On the node you want to modify, click **â‹® > Edit Config**.
 
-![Edit Config](/img/v1.1/host/edit-config.png)
+![Edit Config](/img/host/edit-config.png)
 
 3. Select the **Storage** tab and click **Add Disk**.
 
-![Add Disks](/img/v1.1/host/add-disks.png)
+![Add Disks](/img/host/add-disks.png)
 
 :::caution
 
@@ -82,11 +82,11 @@ As of Harvester v1.0.2, we no longer support adding partitions as additional dis
 4. Select an additional raw block device to add as an additional data volume.
     - The `Force Formatted` option is required if the block device has never been force-formatted.
 
-![Force Format](/img/v1.1/host/force-format-disks.png)
+![Force Format](/img/host/force-format-disks.png)
 
-5. Last, you can click **⋮ > Edit Config** again to check the newly added disk. Meanwhile, you can also add the "Host/Disk" tag (details are described in the [next section](#storage-tags)).
+5. Last, you can click **â‹® > Edit Config** again to check the newly added disk. Meanwhile, you can also add the "Host/Disk" tag (details are described in the [next section](#storage-tags)).
 
-![Check Result](/img/v1.1/host/check-added-disks.png)
+![Check Result](/img/host/check-added-disks.png)
 
 :::note
 
@@ -116,7 +116,7 @@ The tags can be set up through the Harvester UI on the host page:
 1. Click `Save` to update tags.
 1. On the [StorageClasses](../advanced/storageclass.md) page, create a new storage class and select those defined tags on the `Node Selector` and `Disk Selector` fields.
 
-All the existing scheduled volumes on the node or disk won’t be affected by the new tags.
+All the existing scheduled volumes on the node or disk wonâ€™t be affected by the new tags.
 
 :::note
 
@@ -139,36 +139,36 @@ The replica data would be rebuilt to another disk automatically to keep the high
 2. On the node containing the disk, select the node name and go to the **Storage** tab.
 3. Find the disk you want to remove. Let's assume we want to remove `/dev/sdb`, and the disk's mount point is `/var/lib/harvester/extra-disks/1b805b97eb5aa724e6be30cbdb373d04`.
 
-![Find disk to remove](/img/v1.1/host/remove-disks-harvester-find-disk.png)
+![Find disk to remove](/img/host/remove-disks-harvester-find-disk.png)
 
 #### Evict replicas (Longhorn dashboard)
 1. Please follow [this session](../troubleshooting/harvester.md#access-embedded-rancher-and-longhorn-dashboards) to enable the embedded Longhorn dashboard.
 2. Visit the Longhorn dashboard and go to the **Node** page.
 3. Expand the node containing the disk. Confirm the mount point `/var/lib/harvester/extra-disks/1b805b97eb5aa724e6be30cbdb373d04` is in the disks list. 
 
-![Check the removing disk](/img/v1.1/host/remove-disks-longhorn-nodes.png)
+![Check the removing disk](/img/host/remove-disks-longhorn-nodes.png)
 
 4. Select **Edit node and disks**.
 
-![Edit node and disks](/img/v1.1/host/remove-disks-longhorn-nodes-edit.png)
+![Edit node and disks](/img/host/remove-disks-longhorn-nodes-edit.png)
 
 5. Scroll to the disk you want to remove.
 - Set `Scheduling` to `Disable`.
 - Set `Eviction Requested` to `True`.
 - Select **Save**. Do not select the delete icon.
 
-![Evict disk](/img/v1.1/host/remove-disks-longhorn-nodes-evict-disk.png)
+![Evict disk](/img/host/remove-disks-longhorn-nodes-evict-disk.png)
 
 6. The disk will be disabled. Please wait until the disk replica count becomes `0` to proceed with removing the disk.
 
-![Wait replicas](/img/v1.1/host/remove-disks-longhorn-wait-replicas.png)
+![Wait replicas](/img/host/remove-disks-longhorn-wait-replicas.png)
 
 #### Remove the disk (Harvester dashboard)
 1. Go to the **Hosts** page.
-2. On the node containing the disk, select **⋮ > Edit Config**.
+2. On the node containing the disk, select **â‹® > Edit Config**.
 3. Go to the **Storage** tab and select **x**  to remove the disk.
 
-![Remove disk](/img/v1.1/host/remove-disks-harvester-remove.png)
+![Remove disk](/img/host/remove-disks-harvester-remove.png)
 
 4. Select **Save** to remove the disk.
 
@@ -180,7 +180,7 @@ _Available as of v1.1.0_
 [Node labels](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#node-labels) are used to identify the topology domains that each node is in. You can configure labels such as [`topology.kubernetes.io/zone`](https://kubernetes.io/docs/reference/labels-annotations-taints/#topologykubernetesiozone) on the Harvester UI.
 
 1. Go to the **Hosts** screen.
-1. Locate the target node in the list, and then select **⋮ > Edit Config**.
+1. Locate the target node in the list, and then select **â‹® > Edit Config**.
 1. On the **Labels** tab, click **Add Label** and then specify the label `topology.kubernetes.io/zone` and a value.
 1. Click **Save**.
 
@@ -196,16 +196,16 @@ Ksmtuned is a KSM automation tool deployed as a DaemonSet to run Ksmtuned on eac
 ### Quick Run
 
 1. Go to the **Hosts** page.
-2. On the node you want to modify, click **⋮ > Edit Config**.
+2. On the node you want to modify, click **â‹® > Edit Config**.
 3. Select the **Ksmtuned** tab and select **Run** in **Run Strategy**.
 4. (Optional) You can modify **Threshold Coefficient** as needed.
 
-![Edit Ksmtuned](/img/v1.1/host/edit-ksmtuned.png)
+![Edit Ksmtuned](/img/host/edit-ksmtuned.png)
 
 5. Click **Save** to update.
 6. Wait for about 1-2 minutes and you can check its **Statistics** by clicking **Your Node > Ksmtuned tab**.
 
-![View Ksmtuned Statistics](/img/v1.1/host/view-ksmtuned-statistics.png)
+![View Ksmtuned Statistics](/img/host/view-ksmtuned-statistics.png)
 
 ### Parameters
 

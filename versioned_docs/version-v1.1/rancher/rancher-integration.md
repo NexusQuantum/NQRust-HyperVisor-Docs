@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 1
 sidebar_label: Rancher Integration
 title: "Rancher Integration"
@@ -30,7 +30,7 @@ Users can now import and manage multiple Harvester clusters using the Rancher [V
 <iframe width="950" height="475" src="https://www.youtube.com/embed/fyxDm3HVwWI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-![virtualization-management](/img/v1.1/rancher/virtualization-management.png)
+![virtualization-management](/img/rancher/virtualization-management.png)
 
 ## Deploying Rancher Server
 
@@ -74,7 +74,7 @@ By clicking on one of the clusters, you are able to view and manage the imported
 
 For more details, please check the [virtualization management](./virtualization-management.md) page.
 
-![import-cluster](/img/v1.1/rancher/import-harvester-cluster.png)
+![import-cluster](/img/rancher/import-harvester-cluster.png)
 
 ## Creating Kubernetes Clusters using the Harvester Node Driver
 

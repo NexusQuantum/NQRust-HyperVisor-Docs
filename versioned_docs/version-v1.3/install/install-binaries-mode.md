@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 8
 sidebar_label: Install Harvester Binaries Only
 title: "Install Harvester Binaries Only"
@@ -19,7 +19,7 @@ _Available as of v1.2.0_
 
 The `Install Harvester binaries only` mode allows you to install and configure binaries only, making it ideal for cloud and edge use cases.
 
-![choose-installation-mode.png](/img/v1.2/install/choose-installation-mode.png)
+![choose-installation-mode.png](/img/install/choose-installation-mode.png)
 
 ### Background
 Currently when a new Harvester node is launched it needs to be the first node in the cluster or join an existing cluster.

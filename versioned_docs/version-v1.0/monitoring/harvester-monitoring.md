@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 1
 sidebar_label: Monitoring
 title: "Monitoring"
@@ -16,7 +16,7 @@ Harvester has provided a built-in monitoring integration using [Prometheus](http
 From the `Dashboard` page, users can view the cluster metrics and top 10 most used VM metrics respectively.
 Also, users can click the [Grafana](http://grafana.com/) dashboard link to view more dashboards on the Grafana UI.
 
-![](/img/v1.0/monitoring/monitoring-dashboard.png)
+![](/img/monitoring/monitoring-dashboard.png)
 
 :::note
 
@@ -32,7 +32,7 @@ Reference: [values.yaml](https://github.com/rancher/charts/tree/dev-v2.7/charts/
 
 For VMs, you can view VM metrics by clicking on the `VM details page > VM Metrics`.
 
-![](/img/v1.0/monitoring/vm-metrics.png)
+![](/img/monitoring/vm-metrics.png)
 
 :::note
 
@@ -68,12 +68,12 @@ Currently, `Resources Settings` can be configured for the following components:
 In the `Advanced Settings` page, you can view and change the resources settings as follows:
 
 1. Navigate to settings page, find `harvester-monitoring`.
-![](/img/v1.0/monitoring/monitoring-setting.png)
+![](/img/monitoring/monitoring-setting.png)
 
 1. Click `Show harvester-monitoring` to view the current values.
 
-1. Click `⋮ > Edit Setting` to set a new value.
-![](/img/v1.0/monitoring/monitoring-setting-edit-config.png)
+1. Click `â‹® > Edit Setting` to set a new value.
+![](/img/monitoring/monitoring-setting-edit-config.png)
 
 1. Click `Save` and the `Monitoring` resource will be restarted within a few seconds. Please be aware that the reboot can take some time to reload previous data.
 

@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 6
 sidebar_label: PCI Devices
 title: "PCI Devices (Experimental)"
@@ -20,40 +20,40 @@ This is accomplished by using the `pcidevices-controller` addon.
 
 To use the PCI devices feature, users need to enable the `pcidevices-controller` addon first.
 
-![](/img/v1.1/vm-import-controller/EnableAddon.png)
+![](/img/vm-import-controller/EnableAddon.png)
 
 ## Enabling Passthrough on a PCI Device
 
 1. Now go to the `Advanced -> PCI Devices` page:
 
-   ![](/img/v1.1/pcidevices/advanced-pcidevices-index.png)
+   ![](/img/pcidevices/advanced-pcidevices-index.png)
 
 1. Search for your device by vendor name (e.g. NVIDIA, Intel, etc.) or device name.
 
-   ![](/img/v1.1/pcidevices/search-pcidevices.png)
+   ![](/img/pcidevices/search-pcidevices.png)
 
 1. Select the devices you want to enable for passthrough:
 
-   ![](/img/v1.1/pcidevices/select-pcidevices.png)
+   ![](/img/pcidevices/select-pcidevices.png)
 
 1. Then click **Enable Passthrough** and read the warning message. If you still want to enable these devices, click **Enable** and wait for all devices to be `Enabled`.
    :::caution
    Please do not use `host-owned` PCI devices (e.g., management and VLAN NICs). Incorrect device allocation may cause damage to your cluster, including node failure.
    :::
 
-   ![](/img/v1.1/pcidevices/enable-pcidevices-inprogress.png)
+   ![](/img/pcidevices/enable-pcidevices-inprogress.png)
 
-   ![](/img/v1.1/pcidevices/enable-pcidevices-done.png)
+   ![](/img/pcidevices/enable-pcidevices-done.png)
 
 ## Attaching PCI Devices to a VM
 
 After enabling these PCI devices, you can navigate to the **Virtual Machines** page and select **Edit Config** to pass these devices.
 
-![](/img/v1.1/pcidevices/vm-pcidevices-edit-config.png)
+![](/img/pcidevices/vm-pcidevices-edit-config.png)
 
 Select **PCI Devices** and use the **Available PCI Devices** drop-down. Select the devices you want to attach from the list displayed and then click **Save**.
 
-![](/img/v1.1/pcidevices/vm-pcidevices-attach.png)
+![](/img/pcidevices/vm-pcidevices-attach.png)
 
 
 ## Using a passed-through PCI Device inside the VM

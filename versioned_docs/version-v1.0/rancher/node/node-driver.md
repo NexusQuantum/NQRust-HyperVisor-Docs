@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 1
 sidebar_label: Harvester Node Driver
 title: "Harvester Node Driver"
@@ -36,7 +36,7 @@ The Harvester node driver is enabled by default from Rancher `v2.6.3`. You can g
 
 When the Harvester node driver is enabled, you can create Kubernetes clusters on top of the Harvester cluster and manage them from Rancher.
 
-![rke1-cluster](/img/v1.0/rancher/rke1-node-driver.png)
+![rke1-cluster](/img/rancher/rke1-node-driver.png)
 
 ## RKE1 Kubernetes Cluster
 Click to learn [how to create RKE1 Kubernetes Clusters](./rke1-cluster.md).
@@ -79,7 +79,7 @@ Label synchronization will only take effect during guest node initialization. To
    topology.kubernetes.io/region: us-east-1
    topology.kubernetes.io/zone: us-east-1a
    ```
-   ![](/img/v1.0/rancher/node-add-affinity-labels.png)
+   ![](/img/rancher/node-add-affinity-labels.png)
 
 1. Creating a guest Kubernetes cluster using the Harvester node driver and it is recommended to add the [node affinity rules](./rke2-cluster.md#add-node-affinity), this will help to avoid node drifting to other zones after VM rebuilding.
 

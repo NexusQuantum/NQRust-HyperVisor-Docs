@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 4
 sidebar_label: Export a Volume to Image
 title: "Export a Volume to Image"
@@ -19,13 +19,13 @@ If the volume is in external storage, ensure that it is not attached to workload
 
 :::
 
-1. Click the `⋮` button and select the `Export Image` option.
+1. Click the `â‹®` button and select the `Export Image` option.
 
-    ![export-volume-to-image-1](/img/v1.2/volume/export-volume-to-image-1.png)
+    ![export-volume-to-image-1](/img/volume/export-volume-to-image-1.png)
 
 1. Select the `Namespace` of the new image.
 1. Configure the `Name` of the new image.
 1. Select an existing `StorageClass`.
-1. (Optional) You can download the exported image from the `Images` page by clicking the `⋮` button and selecting the `Download` option.
+1. (Optional) You can download the exported image from the `Images` page by clicking the `â‹®` button and selecting the `Download` option.
 
-    ![export-volume-to-image-2](/img/v1.2/volume/export-volume-to-image-2.png)
+    ![export-volume-to-image-2](/img/volume/export-volume-to-image-2.png)

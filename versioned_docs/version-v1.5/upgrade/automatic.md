@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 1
 sidebar_label: Upgrading Harvester
@@ -130,17 +130,17 @@ Check out the available [`upgrade-config` setting](../advanced/settings.md#upgra
 
     If your environment does not have direct internet access, follow the instructions in [Prepare an air-gapped upgrade](#prepare-an-air-gapped-upgrade), which provides an efficient approach to downloading the Harvester ISO.
 
-    ![](/img/v1.2/upgrade/upgrade_button.png)
+    ![](/img/upgrade/upgrade_button.png)
 
 1. Select a version that you want to upgrade to.
 
     If you require customizations, see [Customize the Version](#customize-the-version).
 
-    ![](/img/v1.2/upgrade/upgrade_select_version.png)
+    ![](/img/upgrade/upgrade_select_version.png)
 
 1. Click the progress indicator (the **circle** button) to view the status of each related process.
 
-    ![](/img/v1.2/upgrade/upgrade_progress.png)
+    ![](/img/upgrade/upgrade_progress.png)
 
 ### Customize the Version
 
@@ -262,7 +262,7 @@ Harvester loads images on each node during upgrades. When disk usage exceeds the
 
 Harvester v1.5.0 includes checks that ensure nodes do not trigger garbage collection after loading new images.
 
-![](/img/v1.5/upgrade/upgrade_free_space_check.png)
+![](/img/upgrade/upgrade_free_space_check.png)
 
 If you want to try upgrading even if the free system partition space is insufficient on some nodes, you can update the `harvesterhci.io/skipGarbageCollectionThresholdCheck: true` annotation of the `Version` object.
 
@@ -389,7 +389,7 @@ If you [disabled the RKE2 ingress-nginx admission webhooks](https://harvesterhci
 
 The upgrade process may become stuck in the "Pre-drained" state. Kubernetes is supposed to drain the workload on the node, but some factors may cause the process to stall.
 
-![](/img/v1.2/upgrade/known_issues/3730-stuck.png)
+![](/img/upgrade/known_issues/3730-stuck.png)
 
 A possible cause is processes related to orphan engines of the Longhorn Instance Manager. To determine if this applies to your situation, perform the following steps:
 

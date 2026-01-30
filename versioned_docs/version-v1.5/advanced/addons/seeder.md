@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 4
 sidebar_label: Harvester Seeder
 title: "Harvester Seeder (Experimental)"
@@ -49,41 +49,41 @@ Ensure that the following requirements are met before enabling the add-on.
 
 1. On the Harvester UI, go to **Advanced** > **Addons**.
 
-1. Select **harvester-seeder**, and then select **⋮** > **Enable**.
+1. Select **harvester-seeder**, and then select **â‹®** > **Enable**.
 
     After a few seconds, the value of **State** changes to **DeploySuccessful**.
 
-    ![](/img/v1.2/vm-import-controller/EnableAddon.png)
+    ![](/img/vm-import-controller/EnableAddon.png)
 
 1. Go to the **Hosts** screen.
 
     You must edit the configuration of each host listed on this screen.
 
-1. Select a host, and then select **⋮** > **Edit Config**.
+1. Select a host, and then select **â‹®** > **Edit Config**.
 
-    ![](/img/v1.2/seeder/EditConfig.png)
+    ![](/img/seeder/EditConfig.png)
 
 1. On the **Out-of-Band Access** tab, select **Enabled**, configure the settings, and then select **Save**.
 
     The add-on uses the information to connect to your IPMI interface.
 
-    ![](/img/v1.2/seeder/OutOfBandAccess.png)
+    ![](/img/seeder/OutOfBandAccess.png)
 
 ## Power-Related Operations
 
 You can use the Harvester UI to shut down and reboot hosts once the Out-of-Band Access settings are configured. However, you must first enable [Maintenance Mode](../../host/host.md#node-maintenance), which automatically migrates all VMs to other nodes. **harvester-seeder** communicates with the hosts via IPMI when performing the selected operation.
 
-![](/img/v1.2/seeder/ShutdownReboot.png)
+![](/img/seeder/ShutdownReboot.png)
 
 You can also power on VMs while Maintenance Mode is enabled.
 
-![](/img/v1.2/seeder/PowerOn.png)
+![](/img/seeder/PowerOn.png)
 
 ## Hardware Event Aggregation
 
 If you selected **Enabled** in the **Event** section of the **Out-of-Band Access** settings screen, **harvester-seeder** leverages Redfish to query the hardware for information about component failures and fan temperatures. The information is converted to Kubernetes events during hardware reconciliation and is subsequently handled by the Kubernetes garbage collection policy. Harvester stores these events for 1 hour by default.
 
-![](/img/v1.2/seeder/HardwareEvents.png)
+![](/img/seeder/HardwareEvents.png)
 
 ## Troubleshooting
 

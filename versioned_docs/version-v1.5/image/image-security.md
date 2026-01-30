@@ -1,4 +1,4 @@
----
+﻿---
 id: image-security
 sidebar_position: 2
 sidebar_label: Image Security
@@ -39,7 +39,7 @@ Prepare the following resources:
 
 - Secret: A Kubernetes secret is used as the passphrase of dm_crypt. You must specify the value of the `CRYPTO_KEY_VALUE` field. All other fields are fixed.
 
-  ![](/img/v1.4/image/create-encryption-used-secret.png)
+  ![](/img/image/create-encryption-used-secret.png)
 
   Example of a secret:
 
@@ -74,7 +74,7 @@ Prepare the following resources:
 
 - StorageClass: Images are encrypted using Longhorn, so required fields must be passed to the Longhorn CSI Driver. You can specify the encryption secret when creating a StorageClass. For more information, see [Image StorageClass](./upload-image#image-storageclass). 
 
-  ![](/img/v1.4/image/create-storage-class.png)
+  ![](/img/image/create-storage-class.png)
 
   Example of a StorageClass:
 
@@ -116,13 +116,13 @@ Prepare the following resources:
 
 1. On the **Basics** tab, select **Encrypt** and then select a source image.
 
-  ![](/img/v1.4/image/create-encrypted-image.png)
+  ![](/img/image/create-encrypted-image.png)
 
 1. On the **Storage** tab, select a StorageClass that includes encryption-related fields. 
 
   Harvester passes the required fields to Longhorn.
 
-  ![](/img/v1.4/image/select-encryption-storage-class.png)
+  ![](/img/image/select-encryption-storage-class.png)
 
 1. Click **Create**.
 
@@ -136,13 +136,13 @@ Prepare the following resources:
 
 1. On the **Basics** tab, select **Decrypt** and then select a source image.
 
-  ![](/img/v1.4/image/create-decrypted-image.png)
+  ![](/img/image/create-decrypted-image.png)
 
 1. On the **Storage** tab, select **harvester-longhorn (Default)** or another commonly used StorageClass.
 
   Harvester uses the StorageClass of the source image that you want to decrypt.
 
-  ![](/img/v1.4/image/select-normal-storage-class.png)
+  ![](/img/image/select-normal-storage-class.png)
 
 1. Click **Create**.
 
@@ -150,17 +150,17 @@ Prepare the following resources:
 
 You must select the image that you want to use when creating a virtual machine.
 
-![](/img/v1.4/image/create.png)
+![](/img/image/create.png)
 
 The **Virtual Machines** screen displays the following icons and messages when volumes used by virtual machines are encrypted.
 
-![](/img/v1.4/image/case1.png)
+![](/img/image/case1.png)
 
-![](/img/v1.4/image/case2.png)
+![](/img/image/case2.png)
 
 To determine which volumes are encrypted, check the **Volumes** tab on the **Virtual Machine** details screen.
 
-![](/img/v1.4/image/volume-detail.png)
+![](/img/image/volume-detail.png)
 
 ## Advanced Usage with Rancher Integration
 

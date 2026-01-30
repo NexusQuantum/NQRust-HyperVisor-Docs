@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 2
 sidebar_label: Rancher
 title: "Rancher"
@@ -71,9 +71,9 @@ Follow the steps below to configure the different TLS setting options.
 
 1. Go to **Global Settings > Settings**.
 
-1. Select **agent-tls-mode**, and then select **⋮ > Edit Setting** to access the configuration options.
+1. Select **agent-tls-mode**, and then select **â‹® > Edit Setting** to access the configuration options.
 
-    ![](/img/v1.4/troubleshooting/rancher-global-setting-agent-tls-mode.png)
+    ![](/img/troubleshooting/rancher-global-setting-agent-tls-mode.png)
 
 1. Set **Value** to **System Store** or **Strict**.
 

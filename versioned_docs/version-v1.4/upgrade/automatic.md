@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 1
 sidebar_label: Upgrading Harvester
@@ -94,14 +94,14 @@ Check out the available [`upgrade-config` setting](../advanced/settings.md#upgra
     - If the cluster is in an air-gapped environment, please see [Prepare an air-gapped upgrade](#prepare-an-air-gapped-upgrade) section first. You can also speed up the ISO download by using the approach in that section.
 - Navigate to Harvester GUI and click the upgrade button on the Dashboard page.
 
-    ![](/img/v1.2/upgrade/upgrade_button.png)
+    ![](/img/upgrade/upgrade_button.png)
 
 - Select a version to start upgrading.
 
-    ![](/img/v1.2/upgrade/upgrade_select_version.png)
+    ![](/img/upgrade/upgrade_select_version.png)
 
 - Click the circle on the top to display the upgrade progress.
-    ![](/img/v1.2/upgrade/upgrade_progress.png)
+    ![](/img/upgrade/upgrade_progress.png)
 
 
 ## Prepare an air-gapped upgrade
@@ -150,7 +150,7 @@ The minimum free system partition space requirement in Harvester v1.2.0 is 30 Gi
 
 Harvester will check the amount of free system partition space on each node when you select **Upgrade**. If any node does not meet the requirement, the upgrade will be denied as follows
 
-![](/img/v1.2/upgrade/upgrade_free_space_check.png)
+![](/img/upgrade/upgrade_free_space_check.png)
 
 If some nodes do not have enough free system partition space, but you still want to try upgrading, you can customize the upgrade by updating the `harvesterhci.io/minFreeDiskSpaceGB` annotation of `Version` object.
 
@@ -273,7 +273,7 @@ If you have previously [disabled the RKE2 ingress-nginx admission webhook](https
 
 The upgrade process may become stuck in the "Pre-drained" state. Kubernetes is supposed to drain the workload on the node, but some factors may cause the process to stall.
 
-![](/img/v1.2/upgrade/known_issues/3730-stuck.png)
+![](/img/upgrade/known_issues/3730-stuck.png)
 
 A possible cause is processes related to orphan engines of the Longhorn Instance Manager. To determine if this applies to your situation, perform the following steps:
 

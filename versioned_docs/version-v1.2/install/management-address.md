@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 7
 sidebar_label: Management Address
 title: "Management Address"
@@ -19,7 +19,7 @@ If you selected the IP address to be configured via DHCP, you will need to confi
 
 :::
 
-![](/img/v1.2/install/iso-installed.png)
+![](/img/install/iso-installed.png)
 
 ## Requirements
 
@@ -84,4 +84,4 @@ The management address:
 
 - Allows the access to the Harvester API/UI via `HTTPS` protocol.
 - Allows other nodes to join the cluster.
-  ![](/img/v1.2/install/configure-management-address.png)
+  ![](/img/install/configure-management-address.png)

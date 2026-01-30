@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 6
 sidebar_label: Volume Security
 title: "Volume Security"
@@ -21,7 +21,7 @@ Prepare the following resources:
 
 - Secret: A Kubernetes secret is used as the passphrase of dm_crypt. You must specify the value of the `CRYPTO_KEY_VALUE` field. All other fields are fixed.
 
-  ![](/img/v1.4/image/create-encryption-used-secret.png)
+  ![](/img/image/create-encryption-used-secret.png)
 
   Example Secret:
 
@@ -48,7 +48,7 @@ Prepare the following resources:
 
 - StorageClass: Images are encrypted using Longhorn, so required fields must be passed to the Longhorn CSI Driver. You can specify the encryption secret when creating a StorageClass. For more information, see [Image StorageClass](../image/upload-image.md#image-storageclass). 
 
-  ![](/img/v1.4/image/create-storage-class.png)
+  ![](/img/image/create-storage-class.png)
 
   Example of a StorageClass:
 
@@ -94,11 +94,11 @@ You can create an encrypted volume using an encrypted StorageClass on the follow
 
 - **Volumes: Create** screen
 
-  ![create-empty-volume](/img/v1.4/volume/create-empty-volume.png)
+  ![create-empty-volume](/img/volume/create-empty-volume.png)
 
 - **Volumes** tab on the **Virtual Machine: Create** screen
 
-  ![create-empty-volume](/img/v1.4/volume/create-empty-volume-in-vm.png)
+  ![create-empty-volume](/img/volume/create-empty-volume-in-vm.png)
 
 ## Advanced Usage with Rancher Integration
 

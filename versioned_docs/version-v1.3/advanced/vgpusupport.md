@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 9
 sidebar_label: vGPU Support
 title: "vGPU Support"
@@ -24,21 +24,21 @@ The [nvidia-driver-toolkit](./addons/nvidiadrivertoolkit.md) addon needs to be e
   - GPU devices have been scanned. 
   - An associated `sriovgpudevices.devices.harvesterhci.io` object has been created. 
 
-  ![](/img/v1.3/advanced/sriovgpudevices-disabled.png)
+  ![](/img/advanced/sriovgpudevices-disabled.png)
 
 1. Locate the device that you want to enable, and then select **:** > **Enable**. 
 
-  ![](/img/v1.3/advanced/sriovgpudevices-enabled.png)
+  ![](/img/advanced/sriovgpudevices-enabled.png)
 
 1. Go to the **vGPU Devices** screen and check the associated `vgpudevices.devices.harvesterhci.io` objects.
 
   Allow some time for the pcidevices-controller to scan the vGPU devices and for the Harvester UI to display the device information.
 
-  ![](/img/v1.3/advanced/vgpudevicelist.png)
+  ![](/img/advanced/vgpudevicelist.png)
 
 1. Select a vGPU and configure a profile.
 
-  ![](/img/v1.3/advanced/vgpuprofiles.png)
+  ![](/img/advanced/vgpuprofiles.png)
 
   :::note
   The list of profiles depends on the GPU and the underlying /sys tree of the host. For more information about the available profiles and their capabilities, see the [NVIDIA documentation](https://docs.nvidia.com/grid/15.0/grid-vgpu-user-guide/index.html#supported-gpus-grid-vgpu).
@@ -48,7 +48,7 @@ The [nvidia-driver-toolkit](./addons/nvidiadrivertoolkit.md) addon needs to be e
 
 1. Attach the vGPU to a new or existing VM.
 
-  ![](/img/v1.3/advanced/vgpuattachment.png)
+  ![](/img/advanced/vgpuattachment.png)
 
   :::info important
   Once a vGPU has been assigned to a VM, it may not be possible to disable the VM until the vGPU is removed.
@@ -79,7 +79,7 @@ Attaching multiple vGPUs to a VM may fail for the following reasons:
 
 - Not all vGPU profiles support attachment of multiple vGPUs. The [NVIDIA documentation](https://docs.nvidia.com/grid/16.0/grid-vgpu-release-notes-generic-linux-kvm/index.html#multiple-vgpu-support) lists the vGPU profiles that support this feature. For example, if you use NVIDIA A2 or A16 GPUs, note that only Q-series vGPUs allow you to attach multiple vGPUs.
 
-  ![](/img/v1.3/advanced/multiplevgpu.png)
+  ![](/img/advanced/multiplevgpu.png)
 
 - Only 1 GPU device in the VM definition can have `ramFB` enabled. To attach multiple vGPUs, you must edit the VM configuration (in YAML) and add `virtualGPUOptions` to all non-primary vGPU devices.
 ```
@@ -101,7 +101,7 @@ Example ([NVIDIA A2 GPU](https://docs.nvidia.com/grid/15.0/grid-vgpu-user-guide/
 
 If you select the `NVIDIA A2-4Q` profile, you can only configure 4 vGPU devices. Once those devices are configured, you cannot select any profiles for the remaining vGPUs.
 
-![](/img/v1.3/advanced/nvidia-a2-example.png)
+![](/img/advanced/nvidia-a2-example.png)
 
 ### Technical Deep dive
 
@@ -219,7 +219,7 @@ status:
 The pcidevices controller also runs a vGPU device plugin, which advertises the details of the various vGPU profiles to the kubelet. This is then used by the k8s scheduler to place the VM's requesting vGPU's to the correct nodes.
 
 ```
-(⎈|local:harvester-system)➜  ~ k get nodes harvester-kgd9c -o yaml | yq .status.allocatable
+(âŽˆ|local:harvester-system)âžœ  ~ k get nodes harvester-kgd9c -o yaml | yq .status.allocatable
 cpu: "24"
 devices.kubevirt.io/kvm: 1k
 devices.kubevirt.io/tun: 1k

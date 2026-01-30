@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 1
 sidebar_label: Harvester Node Driver
 title: "Harvester Node Driver"
@@ -32,11 +32,11 @@ The Harvester node driver only supports cloud images. This is because ISO images
 
 Starting from Rancher `v2.6.3`, the Harvester node driver is enabled by default. You can go to the **Cluster Management** > **Drivers** > **Node Drivers** page to check the Harvester node driver status.
 
-![edit-node-driver](/img/v1.2/rancher/edit-node-driver.png)
+![edit-node-driver](/img/rancher/edit-node-driver.png)
 
 When the Harvester node driver is enabled, you can create Kubernetes clusters on top of the Harvester cluster and manage them from Rancher.
 
-![harvester-node-driver](/img/v1.2/rancher/harvester-node-driver.png)
+![harvester-node-driver](/img/rancher/harvester-node-driver.png)
 
 :::note
 
@@ -114,11 +114,11 @@ During the cluster installation, the Harvester node driver will automatically he
    topology.kubernetes.io/region: us-east-1
    topology.kubernetes.io/zone: us-east-1a
    ```
-   ![](/img/v1.2/rancher/node-add-affinity-labels.png)
+   ![](/img/rancher/node-add-affinity-labels.png)
 
 1. Create a downstream RKE2 cluster using the Harvester node driver with Harvester cloud provider enabled. We recommend adding the [node affinity rules](./rke2-cluster.md#add-node-affinity), which prevents nodes from drifting to other zones after VM rebuilding.
 
-   ![](/img/v1.2/rancher/create-rke2-harvester-cluster-3.png)
+   ![](/img/rancher/create-rke2-harvester-cluster-3.png)
 
 1. After the cluster is ready, confirm that those topology labels are successfully synchronized to the nodes on the guest Kubernetes cluster.
 

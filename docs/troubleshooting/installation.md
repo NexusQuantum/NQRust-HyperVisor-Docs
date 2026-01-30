@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 1
 sidebar_label: Installation
@@ -168,7 +168,7 @@ Please include the following information in a bug report when reporting a failed
 
     The command output messages contain the generated tarball path. For example the path is `/var/loq/scc_aaa_220520_1021 804d65d-c9ba-4c54-b12d-859631f892c5.txz` in the following example:
 
-    ![](/img/v1.2/troubleshooting/installation-support-config-example.png)
+    ![](/img/troubleshooting/installation-support-config-example.png)
 
     :::note
 
@@ -535,7 +535,7 @@ icy":"File"}]}}}}
 
 After a successful installation, the Harvester console persistently shows `Setting up Harvester`. While most UI and CLI operations remain unaffected, attempts to [start an upgrade](../upgrade/automatic.md#start-an-upgrade) are blocked.
 
-![](/img/v1.6/troubleshooting/setting-up-harvester-after-day-0.png)
+![](/img/troubleshooting/setting-up-harvester-after-day-0.png)
 
 The following information is displayed after you run the command `kubectl get managedchart -n fleet-local harvester -oyaml`:
 

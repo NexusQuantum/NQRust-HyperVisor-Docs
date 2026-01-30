@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 9
 sidebar_label: Harvester UI Extension
 title: Harvester UI Extension
@@ -46,7 +46,7 @@ Installing the extension over the network is not possible in air-gapped environm
 You can install the Harvester UI Extension with a single click.
 
 1. On the Rancher UI, go to **Virtualization Management**.
-    ![](/img/v1.5/rancher/auto-install-ui-extension.png)
+    ![](/img/rancher/auto-install-ui-extension.png)
 
 1. On the **Harvester Clusters** tab, click **Install**.
   
@@ -56,17 +56,17 @@ You can install the Harvester UI Extension with a single click.
     Do not navigate away from the screen during the installation process.
     :::
 
-    ![](/img/v1.5/rancher/auto-install-ui-extension.png)
+    ![](/img/rancher/auto-install-ui-extension.png)
 
 
 ### Manual Installation
 If the automatic installation fails, you can specify the Harvester UI Extension repository URL and then install the extension.
 
-![](/img/v1.5/rancher/ui-extension-install-failed.png)
+![](/img/rancher/ui-extension-install-failed.png)
 
 1. On the Rancher UI, go to **local > Apps > Repositories**, and then click **Create**.
 
-  ![](/img/v1.5/rancher/ui-extension-app-repository-setup.png)
+  ![](/img/rancher/ui-extension-app-repository-setup.png)
 
 1. Configure the following settings:
     - Name: Specify a name for the repository.
@@ -77,7 +77,7 @@ If the automatic installation fails, you can specify the Harvester UI Extension 
 2. Click **Create**.
 
 3. Go to **Extensions > Available**.
-  ![](/img/v1.5/rancher/ui-extension-available-tab.png)
+  ![](/img/rancher/ui-extension-available-tab.png)
 
 4. Locate the extension named **Harvester**, and then click **Install**.
 
@@ -90,7 +90,7 @@ The **Update** button appears whenever a new version of the extension is availab
 
 1. On the Rancher UI, go to **Virtualization Management**.
 
-    ![](/img/v1.5/rancher/ui-extension-update.png)
+    ![](/img/rancher/ui-extension-update.png)
 
 1. Click **Update**.
     Allow some time for the extension to be upgraded. The screen is automatically refreshed once the upgrade is completed.
@@ -99,12 +99,12 @@ The **Update** button appears whenever a new version of the extension is availab
 
 1. On the Rancher UI, go to **local > Apps > Repositories**.
 
-1. Locate the repository with the following settings, and then select **⋮ > Refresh**.
+1. Locate the repository with the following settings, and then select **â‹® > Refresh**.
 
     - URL: **https://github.com/harvester/harvester-ui-extension**
     - Branch: **gh-pages**
 
-    ![](/img/v1.4/upgrade/rancher-2.10.1-repository-page.png)
+    ![](/img/upgrade/rancher-2.10.1-repository-page.png)
 
 1. Go to **Extensions > Installed**.
 
@@ -112,7 +112,7 @@ The **Update** button appears whenever a new version of the extension is availab
 
 1. Select the new version, and then click **Update**.
 
-    ![](/img/v1.4/upgrade/update-harvester-ui-extension-modal.png)
+    ![](/img/upgrade/update-harvester-ui-extension-modal.png)
 
 1. Allow some time for the extension to be upgraded, and then refresh the screen.
 
@@ -123,7 +123,7 @@ When you import a cluster that is running Harvester v1.2.x or earlier, an error 
 
 The **Manage** button is still available in Rancher 2.11.0, but it will be disabled in a future Rancher release. For more information, see issue [#8054](https://github.com/harvester/harvester/issues/8054).
 
-  ![](/img/v1.5/rancher/ui-extension-import-121harvester.png)
+  ![](/img/rancher/ui-extension-import-121harvester.png)
 
 :::caution
 Please avoid clicking Manage button to operate Harvester cluster v1.2.x or earlier, as it is not supported.

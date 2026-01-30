@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 1
 sidebar_label: Settings
@@ -78,7 +78,7 @@ Default: none
   "accessKeyId": "test-access-key-id",
   "secretAccessKey": "test-access-key",
   "bucketName": "test-bup",
-  "bucketRegion": "us‑east‑2",
+  "bucketRegion": "usâ€‘eastâ€‘2",
   "cert": "",
   "virtualHostedStyle": false
 }
@@ -122,7 +122,7 @@ If you set a username and password for a private registry, the system will autom
 
 #### Example
 
-![containerd-registry](/img/v1.2/advanced/containerd-registry.png)
+![containerd-registry](/img/advanced/containerd-registry.png)
 
 ```json
 {
@@ -529,7 +529,7 @@ Because this setting is part of the `settings.management.cattle.io` custom resou
 
 :::
 
-![containerd-registry](/img/v1.2/advanced/branding.png)
+![containerd-registry](/img/advanced/branding.png)
 
 You can set the following options and values:
 

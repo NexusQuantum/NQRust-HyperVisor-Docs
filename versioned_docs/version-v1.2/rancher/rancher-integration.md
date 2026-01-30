@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 1
 sidebar_label: Rancher Integration
@@ -28,7 +28,7 @@ For the network requirements, please refer to the doc [here](../install/requirem
 <iframe width="950" height="475" src="https://www.youtube.com/embed/fyxDm3HVwWI" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-![virtualization-management](/img/v1.2/rancher/virtualization-management.png)
+![virtualization-management](/img/rancher/virtualization-management.png)
 
 ## Deploying Rancher server
 
@@ -63,7 +63,7 @@ Additionally, the virtualization management feature leverages Rancher's existing
 
 For in-depth insights, please refer to the [virtualization management](./virtualization-management.md) page.
 
-![import-cluster](/img/v1.2/rancher/import-harvester-cluster.png)
+![import-cluster](/img/rancher/import-harvester-cluster.png)
 
 ## Creating Kubernetes clusters using the Harvester node driver
 
@@ -73,7 +73,7 @@ One benefit of installing Kubernetes on node pools hosted by the node driver is 
 
 Starting from Rancher version `v2.6.1`, the Harvester node driver is included by default. You can refer to the [node-driver](./node/node-driver.md) page for more details.
 
-![harvester-node-driver](/img/v1.2/rancher/harvester-node-driver.png)
+![harvester-node-driver](/img/rancher/harvester-node-driver.png)
 
 ## Harvester baremetal container workload support (experimental)
 
@@ -82,7 +82,7 @@ _Available as of Harvester v1.2.0 + Rancher v2.7.6_
 
 Starting with Rancher v2.7.6, Harvester introduces a new feature that enables you to deploy and manage container workloads directly to the underlying Harvester cluster. With this feature, you can seamlessly combine the power of virtual machines with the flexibility of containerization, allowing for a more versatile and efficient infrastructure setup.
 
-![harvester-container-dashboard](/img/v1.2/rancher/harvester-container-dashboard.png)
+![harvester-container-dashboard](/img/rancher/harvester-container-dashboard.png)
 
 This guide will walk you through enabling and using this experimental feature, highlighting its capabilities and best practices.
 
@@ -93,7 +93,7 @@ To enable this new feature flag, follow these steps on Rancher UI:
 1. Click the drop-down menu and select **Activate** to enable this feature.
 1. If the feature state changes to **Active**, the feature is successfully enabled.
 
-![harvester-baremetal-container-workload-feature](/img/v1.2/rancher/harvester-baremetal-container-workload-feature.png)
+![harvester-baremetal-container-workload-feature](/img/rancher/harvester-baremetal-container-workload-feature.png)
 
 ### Key Features
 

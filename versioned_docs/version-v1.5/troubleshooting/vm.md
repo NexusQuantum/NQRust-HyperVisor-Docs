@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: VM
 title: "VM"
@@ -16,21 +16,21 @@ The following sections contain information useful in troubleshooting issues rela
 
 On rare occasions, the **Start** button is unavailable on the Harvester UI for VMs that are *Off*. Without that button, users are unable to start the VMs.
 
-![](/img/v1.2/troubleshooting/vm-start-button-is-not-visible.png)
+![](/img/troubleshooting/vm-start-button-is-not-visible.png)
 
 ### VM General Operations
 
 On the Harvester UI, the **Stop** button is visible after a VM is created and started.
 
-![](/img/v1.2/troubleshooting/stop-vm-from-webui.png)
+![](/img/troubleshooting/stop-vm-from-webui.png)
 
 The **Start** button is visible after the VM is stopped.
 
-![](/img/v1.2/troubleshooting/start-vm-after-vm-is-stopped-from-webui.png)
+![](/img/troubleshooting/start-vm-after-vm-is-stopped-from-webui.png)
 
 When the VM is powered off from inside the VM, both the **Start** and **Restart** buttons are visible.
 
-![](/img/v1.2/troubleshooting/actively-powered-off-vm.png)
+![](/img/troubleshooting/actively-powered-off-vm.png)
 
 ### General VM Related Objects
 
@@ -252,7 +252,7 @@ https://github.com/harvester/harvester/issues/4659
 
 Some VMs may fail to start and then become unresponsive after the cluster or some nodes are restarted. On the **Dashboard** screen of the Harvester UI, the status of the affected VMs is stuck at *Starting*.
 
-![](/img/v1.3/troubleshooting/vm-stuck-at-starting.png)
+![](/img/troubleshooting/vm-stuck-at-starting.png)
 
 ### Issue Analysis
 
@@ -374,7 +374,7 @@ Cluster level operation:
 
     The VM is off now.
 
-    ![](/img/v1.3/troubleshooting/vm-is-off.png)
+    ![](/img/troubleshooting/vm-is-off.png)
 
 Node level operation, node by node:
 
@@ -399,7 +399,7 @@ Node level operation, node by node:
 
     Wait some time, the VM will run successfully.
 
-    ![](/img/v1.3/troubleshooting/start-vm-and-run.png)
+    ![](/img/troubleshooting/start-vm-and-run.png)
 
     The newly generated csi file is an expected device file.
 
@@ -439,7 +439,7 @@ You can [install the QEMU guest agent](../vm/create-vm.md#installing-the-qemu-gu
 
 1. On the Harvester UI, go to **Virtual Machines**.
 
-1. Locate the affected virtual machine, and then select **⋮ > Edit Config**.
+1. Locate the affected virtual machine, and then select **â‹® > Edit Config**.
 
 1. On the **Advanced Options** tab, under **Cloud Config**, select **Install guest agent**.
 
@@ -545,7 +545,7 @@ While no direct workaround is available for this issue, an [upstream fix](https:
 
 The state of a virtual machine is `Unschedulable` because of an unsatisfied affinity rule.
 
-![](/img/v1.5/troubleshooting/unschedulable-vm.png)
+![](/img/troubleshooting/unschedulable-vm.png)
 
 The `VirtualMachine` object contains an affinity rule similar to the following:
 

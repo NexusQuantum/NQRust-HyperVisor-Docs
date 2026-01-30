@@ -1,4 +1,4 @@
----
+﻿---
 id: customsuseimages
 sidebar_position: 8
 sidebar_label: Custom SUSE VM Images
@@ -32,11 +32,11 @@ You can create custom images based on what SUSE provides using OBS [image templa
 
 1. Specify a name for the image, and then select **Create appliance**.
 
-   ![](/img/v1.3/advanced/custom-vm-01-select-template.png)
+   ![](/img/advanced/custom-vm-01-select-template.png)
 
    OBS automatically builds the image. By default, the interface shows the **Overview** tab, which contains information such as the number of included packages and the build status.
 
-   ![](/img/v1.3/advanced/custom-vm-02-image-overview.png)
+   ![](/img/advanced/custom-vm-02-image-overview.png)
 
 ### 2. Select image profiles and add packages.
 
@@ -48,23 +48,23 @@ You can create custom images based on what SUSE provides using OBS [image templa
   For most cases, you can use the *Minimal VM Cloud* qcow2 images because these include the cloud-init tool necessary for automatic VM configuration. Other image variants require you to log onto the VM console and then perform initial configuration.
   :::
 
-   ![](/img/v1.3/advanced/custom-vm-03-image-software.png)
+   ![](/img/advanced/custom-vm-03-image-software.png)
 
 1. (Optional) Add and remove packages.
 
-   ![](/img/v1.3/advanced/custom-vm-04-image-software-packages.png)
+   ![](/img/advanced/custom-vm-04-image-software-packages.png)
 
-   ![](/img/v1.3/advanced/custom-vm-05-image-software-add-package.png)
+   ![](/img/advanced/custom-vm-05-image-software-add-package.png)
 
 ### 3. (Optional) Switch to *View Package* mode.
 
 *View Package* mode provides more granular control over configuration. To switch, click the *View Package* icon in the navigation bar.
 
-![](/img/v1.3/advanced/custom-vm-06-view-package.png)
+![](/img/advanced/custom-vm-06-view-package.png)
 
 The **Source Files** section of the **Overview** tab shows all the files that comprise your Kiwi template. You can edit any of the files by selecting the corresponding file name.
 
-![](/img/v1.3/advanced/custom-vm-07-view-package-details.png)
+![](/img/advanced/custom-vm-07-view-package-details.png)
 
 ### 4. (Optional) Edit the configuration file `Minimal.kiwi`.
 
@@ -72,29 +72,29 @@ Select the file name to open the text editor. The `<packages type="image">` sect
 
 By default, the *Cloud* image profile (`<package type="image" profiles="Cloud">`) installs the *kernel-default-base* package. In the following example, that package is replaced with *kernel-default*, which includes modules necessary for iSCSI support.
 
-![](/img/v1.3/advanced/custom-vm-08-edit-kiwi-config.png)
+![](/img/advanced/custom-vm-08-edit-kiwi-config.png)
 
 ### 5. Wait for OBS to finish building the image.
 
 Once the process is completed, the **Build Results** section on the **Overview** tab shows the status *succeeded*.
 
-![](/img/v1.3/advanced/custom-vm-09-build-succeeded.png)
+![](/img/advanced/custom-vm-09-build-succeeded.png)
 
 The **Build Results** section also contains a download link for the new image.
 
-![](/img/v1.3/advanced/custom-vm-10-binaries-link.png)
+![](/img/advanced/custom-vm-10-binaries-link.png)
 
-![](/img/v1.3/advanced/custom-vm-11-binaries-download.png)
+![](/img/advanced/custom-vm-11-binaries-download.png)
 
 ### 6. Enable publishing to share the image.
 
 To allow the public to download your custom image, go to the **Repositories** tab of your OBS project and enable the *Publish* flag.
 
-![](/img/v1.3/advanced/custom-vm-12-project-publish-repositories.png)
+![](/img/advanced/custom-vm-12-project-publish-repositories.png)
 
 Your image is published to https://download.opensuse.org/ (under `repositories/home:/YOUR_USER_NAME:/branches:/SUSE:/Templates:/Images:/`).
 
-![](/img/v1.3/advanced/custom-vm-13-download.openuse.org.png)
+![](/img/advanced/custom-vm-13-download.openuse.org.png)
 
 ## Using the Kiwi Command-line Tool
 

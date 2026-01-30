@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 3
 sidebar_label: Third-Party Storage Support
 title: "Third-Party Storage Support"
@@ -52,11 +52,11 @@ With the kubeconfig of the Harvester cluster, you can install the third-party CS
 Before you can make use of Harvester's **Backup & Snapshot** features, you need to set up some essential configurations through the Harvester [csi-driver-config](../advanced/settings.md#csi-driver-config) setting. Follow these steps to make these configurations:
 
 1. Login to the Harvester UI, then navigate to **Advanced** > **Settings**.
-1. Find and select **csi-driver-config**, and then select **⋮** > **Edit Setting** to access the configuration options.
+1. Find and select **csi-driver-config**, and then select **â‹®** > **Edit Setting** to access the configuration options.
 1. Set the **Provisioner** to the third-party CSI driver in the settings.
 1. Next, Configure the **Volume Snapshot Class Name**. This setting points to the name of the `VolumeSnapshotClass` used for creating volume snapshots or VM snapshots.
 
-![csi-driver-config-external](/img/v1.2/advanced/csi-driver-config-external.png)
+![csi-driver-config-external](/img/advanced/csi-driver-config-external.png)
 
 ### VM Backup Compatibility
 
@@ -72,9 +72,9 @@ After successfully configuring these settings, you can utilize the third-party S
 
 With these configurations in place, your Harvester cluster is ready to make the most of the third-party storage integration.
 
-![rook-ceph-volume-external](/img/v1.2/advanced/rook-ceph-volume-external.png)
+![rook-ceph-volume-external](/img/advanced/rook-ceph-volume-external.png)
 
-![rook-ceph-vm-external](/img/v1.2/advanced/rook-ceph-vm-external.png)
+![rook-ceph-vm-external](/img/advanced/rook-ceph-vm-external.png)
 
 ## References
 

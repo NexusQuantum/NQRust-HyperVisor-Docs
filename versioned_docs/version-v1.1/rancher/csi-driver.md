@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: Harvester CSI Driver
 title: "Harvester CSI Driver"
@@ -33,24 +33,24 @@ Currently, the Harvester CSI driver only supports single-node read-write(RWO) vo
 
 - Select `Harvester(Out-of-tree)` option (optional. If you don't need to use the Cloud Provider feature at the same time, you can select the `None` option).
 
-    ![](/img/v1.1/rancher/rke-cloud-provider.png)
+    ![](/img/rancher/rke-cloud-provider.png)
 
 - Install `Harvester CSI Driver` from the Rancher marketplace.
 
-    ![](/img/v1.1/rancher/install-harvester-csi-driver.png)
+    ![](/img/rancher/install-harvester-csi-driver.png)
 
 
 ### Deploying with Harvester RKE2 Node Driver
 
 When spinning up a Kubernetes cluster using Rancher RKE2 node driver, the Harvester CSI driver will be deployed when Harvester cloud provider is selected.
 
-![select-harvester-cloud-provider](/img/v1.1/rancher/rke2-cloud-provider.png)
+![select-harvester-cloud-provider](/img/rancher/rke2-cloud-provider.png)
 
 #### Install CSI Driver Manually in the RKE2 Cluster
 
 If you prefer to deploy the Harvester CSI driver without enabling the Harvester cloud provider, you can choose either `Default - RKE2 Embedded` or `External` in the `Cloud Provider` field. If you are using Rancher v2.6, select `None` instead.
 
-![](/img/v1.1/rancher/non-harvester-cloud-provider.png)
+![](/img/rancher/non-harvester-cloud-provider.png)
 
 #### Prerequisites
 
@@ -61,7 +61,7 @@ Ensure that you have the following prerequisites in place:
     export KUBECONFIG=/path/to/your/harvester-kubeconfig
     ```
 
-![](/img/v1.1/rancher/creating_guest_cluster.png)
+![](/img/rancher/creating_guest_cluster.png)
 
 Perform the following steps to deploy the Harvester CSI Driver manually:
 #### Deploy Harvester CSI Driver
@@ -123,9 +123,9 @@ Perform the following steps to deploy the Harvester CSI Driver manually:
 3. Install Harvester CSI Driver.
 
     Install the `Harvester CSI Driver` chart from the Rancher marketplace. (Note: by default, you do not need to change the `cloud-config` path).
-    ![](/img/v1.1/rancher/install_csi_rancher_marketplace.png)
+    ![](/img/rancher/install_csi_rancher_marketplace.png)
 
-    ![](/img/v1.1/rancher/donot_change_cloud_config_path.png)
+    ![](/img/rancher/donot_change_cloud_config_path.png)
 
 :::note
 
@@ -164,7 +164,7 @@ Harvester CSI driver v0.1.15 is supported out of the box starting with the follo
 
 Please add the following additional perquisites to your Harvester cluster. The Harvester CSI driver requires proper **RBAC** to display error messages. This is important for displaying an error message when creating a PVC with a StorageClass that does not exist, as shown in the following figure.
 
-![](/img/v1.1/rancher/error_event_csi_driver.png)
+![](/img/rancher/error_event_csi_driver.png)
 
 
 Perform the following steps to setup **RBAC** to enable seeing error messages.
@@ -237,11 +237,11 @@ Make sure the `serviceaccount name` and `namespace` are the same as your cloud p
 
     As show in the following figure, create a new StorageClass named **replica-2**.
 
-    ![](/img/v1.1/rancher/sc-replica-2.png)
+    ![](/img/rancher/sc-replica-2.png)
 
     For example, create a new StorageClass on the downstream cluster as follows associated with the StorageClass created on the Harvester Cluster named **replica-2**.
 
-    ![](/img/v1.1/rancher/downstream-cluster-sc-creation.png)
+    ![](/img/rancher/downstream-cluster-sc-creation.png)
 
     :::note
 

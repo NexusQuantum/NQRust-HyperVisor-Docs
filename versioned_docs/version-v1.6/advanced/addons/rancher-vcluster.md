@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: Rancher Manager
 title: "Rancher Manager (Experimental)"
@@ -34,9 +34,9 @@ After installation, configure the add-on using the Harvester UI.
 
 1. Go to **Advanced** > **Add-ons**.
 
-1. Locate the **rancher-vcluster** add-on, and then select **⋮** > **Edit Config**.
+1. Locate the **rancher-vcluster** add-on, and then select **â‹®** > **Edit Config**.
 
-    ![](/img/v1.2/rancher-vcluster/VclusterConfig.png)
+    ![](/img/rancher-vcluster/VclusterConfig.png)
 
 1. In the **Hostname** field, enter a valid DNS record pointing to the Harvester VIP. This is essential as the vcluster ingress is synced to the parent Harvester cluster. A valid hostname is used to filter ingress traffic to the vcluster workload.
 

@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 1
 sidebar_label: Cluster Network
@@ -24,7 +24,7 @@ In Harvester v1.1.0, we introduced a new concept called cluster network for traf
 
 The following diagram describes a typical network architecture that separates data-center (DC) traffic from out-of-band (OOB) traffic.
 
-![](/img/v1.2/networking/traffic-isolation.png)
+![](/img/networking/traffic-isolation.png)
 
 We abstract the sum of devices, links, and configurations on a traffic-isolated forwarding path on Harvester as a cluster network.
 
@@ -47,7 +47,7 @@ Please refer to [network part](./harvester-network.md) for more details about ne
 ### Relationship Between Cluster Network, Network Config, VM Network
 The following diagram shows the relationship between a cluster network, a network config, and a VM network.
 
-![](/img/v1.2/networking/relation.png)
+![](/img/networking/relation.png)
 
 All `Network Configs` and `VM Networks` are grouped under a cluster network. 
 
@@ -248,17 +248,17 @@ To simplify cluster maintenance, create one network configuration for each node 
 
 1. Specify a name for the cluster network.
 
-    ![](/img/v1.2/networking/create-clusternetwork.png)
+    ![](/img/networking/create-clusternetwork.png)
 
 1. On the **ClusterNetworks/Configs** screen, click the **Create Network Config** button of the cluster network you created.
 
-    ![](/img/v1.2/networking/create-network-config-button.png)
+    ![](/img/networking/create-network-config-button.png)
 
 1. On the **Network Config:Create** screen, specify a name for the configuration.
 
 1. On the **Node Selector** tab, select the method for defining the scope of this specific network configuration.
 
-    ![](/img/v1.2/networking/select-nodes.png)
+    ![](/img/networking/select-nodes.png)
 
     :::note
 
@@ -273,7 +273,7 @@ To simplify cluster maintenance, create one network configuration for each node 
     - **Bond Options**: The default bonding mode is **active-backup**.
     - **Attributes**: You must use the same MTU across all network configurations of a custom cluster network. If you do not specify an MTU, the default value **1500** is used. The Harvester webhook rejects a new network configuration if its MTU does not match the MTU of existing network configurations.
 
-   ![](/img/v1.2/networking/config-uplink.png)
+   ![](/img/networking/config-uplink.png)
 
 1. Click **Save**.
 
@@ -293,17 +293,17 @@ You must stop all affected virtual machines before changing a network configurat
 
     In the following example, the cluster network is `cn-data` and the network configuration is `nc-1`.
 
-    ![](/img/v1.4/networking/network-configuration-1.png)
+    ![](/img/networking/network-configuration-1.png)
 
-1. Select **⋮ > Edit Config**, and then change the relevant fields.
+1. Select **â‹® > Edit Config**, and then change the relevant fields.
 
     - **Node Selector** tab:
 
-    ![](/img/v1.4/networking/network-configuration-2.png)
+    ![](/img/networking/network-configuration-2.png)
 
     - **Uplink** tab:
 
-    ![](/img/v1.4/networking/network-configuration-3.png)
+    ![](/img/networking/network-configuration-3.png)
 
     :::info important
 
@@ -315,7 +315,7 @@ You must stop all affected virtual machines before changing a network configurat
 
 The following sections outline the steps you must perform to change the MTU of a network configuration. The sample cluster network used in these sections has `cn-data` that was built with a MTU value `1500` and is intended to be changed with value `9000`.
 
-![](/img/v1.4/networking/set-a-new-mtu-value.png)
+![](/img/networking/set-a-new-mtu-value.png)
 
 #### Change the MTU of a Network Configuration with No Attached Storage Network
 

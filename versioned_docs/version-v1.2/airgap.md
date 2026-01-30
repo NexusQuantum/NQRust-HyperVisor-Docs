@@ -1,4 +1,4 @@
----
+﻿---
 id: airgap
 sidebar_position: 3
 sidebar_label: Air Gapped Environment
@@ -22,17 +22,17 @@ In some environments, the connection to external services, from the servers or V
 
 You can configure the HTTP(S) proxy during the [ISO installation](./install/iso-install.md) as shown in picture below:
 
-![iso-proxy](/img/v1.2/iso-proxy.png)
+![iso-proxy](/img/iso-proxy.png)
 
 ### Configure an HTTP Proxy in Harvester Settings
 
 You can configure the HTTP(S) proxy in the settings page of the Harvester dashboard:
 
 1. Go to the settings page of the Harvester UI.
-1. Find the `http-proxy` setting, click **⋮ > Edit setting**
+1. Find the `http-proxy` setting, click **â‹® > Edit setting**
 1. Enter the value(s) for `http-proxy`, `https-proxy` and `no-proxy`.
 
-![proxy-setting](/img/v1.2/proxy-setting.png)
+![proxy-setting](/img/proxy-setting.png)
 
 :::note
 
@@ -51,6 +51,6 @@ However, it's essential to understand a guest K8s cluster (e.g., RKE2 cluster) c
 
 If the **Cloud Provider** option is configured to **Harvester** in a guest K8s cluster, it deploys the Harvester cloud provider and Container Storage Interface (CSI) driver.
 
-![cluster-registry](/img/v1.2/cluster-registry.png)
+![cluster-registry](/img/cluster-registry.png)
 
 As a result, we recommend monitoring each [RKE2 release](https://github.com/rancher/rke2/releases) in your air gapped environment and pulling the required images into your private registry. Please refer to the **Harvester CCM & CSI Driver** with RKE2 Releases section on the [Harvester support matrix page](https://www.suse.com/suse-harvester/support-matrix/all-supported-versions/harvester-v1-1-2/) for the best Harvester cloud provider and CSI driver capability support.

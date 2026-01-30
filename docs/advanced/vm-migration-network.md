@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 12
 sidebar_label: VM Migration Network
 title: "VM Migration Network"
@@ -53,7 +53,7 @@ Using the Harvester UI to configure the `vm-migration-network` setting is strong
 
 1. Click **Save**.
 
-![vm-migration-network-enabled.png](/img/v1.6/vm-migration-network/vm-migration-network-enabled.png)
+![vm-migration-network-enabled.png](/img/vm-migration-network/vm-migration-network-enabled.png)
 
 #### Disable the VM Migration Network
 
@@ -65,7 +65,7 @@ Using the Harvester UI to configure the `vm-migration-network` setting is strong
 
 Once the VM migration network is disabled, KubeVirt starts using `mgmt` for VM migration-related operations.
 
-![vm-migration-network-disabled.png](/img/v1.6/vm-migration-network/vm-migration-network-disabled.png)
+![vm-migration-network-disabled.png](/img/vm-migration-network/vm-migration-network-disabled.png)
 
 </TabItem>
 

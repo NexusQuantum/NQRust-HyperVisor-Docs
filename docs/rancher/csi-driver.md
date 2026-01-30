@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: Harvester CSI Driver
 title: "Harvester CSI Driver"
@@ -55,7 +55,7 @@ Currently, the Harvester CSI driver only supports single-node read-write(RWO) vo
 
 When spinning up a Kubernetes cluster using Rancher RKE2 node driver, the Harvester CSI driver will be deployed automatically when Harvester cloud provider is selected.
 
-![select-harvester-cloud-provider](/img/v1.2/rancher/rke2-cloud-provider.png)
+![select-harvester-cloud-provider](/img/rancher/rke2-cloud-provider.png)
 
 ### Install CSI driver manually in the RKE2 cluster
 
@@ -80,7 +80,7 @@ Perform the following steps to deploy the Harvester CSI driver manually:
    ```shell
    ./generate_addon_csi.sh <serviceaccount name> <namespace> RKE2
    ```
-    ![](/img/v1.1/rancher/creating_guest_cluster.png)
+    ![](/img/rancher/creating_guest_cluster.png)
 
     The generated output will be similar to the following one:
     ```shell
@@ -114,20 +114,20 @@ Perform the following steps to deploy the Harvester CSI driver manually:
     ```
 
 1. Copy and paste the `cloud-init user data` content to **Machine Pools** > **Show Advanced** > **User Data**.
-   ![](/img/v1.2/rancher/cloud-config-userdata.png)
+   ![](/img/rancher/cloud-config-userdata.png)
 
    The `cloud-provider-config` file will be created after you apply the cloud-init user data above. You can find it on the guest Kubernetes nodes at the path `/var/lib/rancher/rke2/etc/config-files/cloud-provider-config`.
 
 1. Configure the **Cloud Provider** either to **Default - RKE2 Embedded** or **External**.
 
-    ![](/img/v1.2/rancher/non-harvester-cloud-provider.png)
+    ![](/img/rancher/non-harvester-cloud-provider.png)
 
 1. Select **Create** to create your RKE2 cluster.
 1. Once the RKE2 cluster is ready, install the **Harvester CSI Driver** chart from the Rancher marketplace. You do not need to change the **cloud-config** path  by default.
 
-    ![](/img/v1.2/rancher/install_csi_rancher_marketplace.png)
+    ![](/img/rancher/install_csi_rancher_marketplace.png)
 
-    ![](/img/v1.2/rancher/donot_change_cloud_config_path.png)
+    ![](/img/rancher/donot_change_cloud_config_path.png)
 
 :::note
 
@@ -160,29 +160,29 @@ You can use the parameter `host-storage-class` to customize the default StorageC
 1. Create a StorageClass for the host Harvester cluster.
 
     Example:
-    ![](/img/v1.3/rancher/create-new-sc.png)
+    ![](/img/rancher/create-new-sc.png)
 
 1. Deploy the CSI driver with the parameter `host-storage-class`.
 
     Example:
-    ![](/img/v1.3/rancher/deploy-csi-driver-with-host-storage-class.png)
+    ![](/img/rancher/deploy-csi-driver-with-host-storage-class.png)
 
 1. Verify that the Harvester CSI driver is ready.
 
     1. On the **PersistentVolumeClaims** screen, create a PVC. Select **Use a Storage Class to provision a new Persistent Volume** and specify the StorageClass you created.
 
         Example:
-        ![](/img/v1.3/rancher/create-volume-with-harvester-csi-driver.png)
+        ![](/img/rancher/create-volume-with-harvester-csi-driver.png)
 
     2. Once the PVC is created, note the name of the provisioned volume and verify that the status is **Bound**.
 
         Example:
-        ![](/img/v1.3/rancher/check-volume-and-pvc-name.png)
+        ![](/img/rancher/check-volume-and-pvc-name.png)
 
     3. On the **Volumes** screen, verify that the volume was provisioned using the StorageClass that you created.
 
         Example:
-        ![](/img/v1.3/rancher/check-pvc-name-on-host-harvester-volume-page.png)
+        ![](/img/rancher/check-pvc-name-on-host-harvester-volume-page.png)
 
 ## Passthrough Custom StorageClass
 
@@ -198,7 +198,7 @@ A compatible Harvester CSI driver is built-in out of the box in each supported R
 
 Add the following prerequisites to your Harvester cluster to ensure the Harvester CSI driver displays error messages correctly. Proper RBAC settings are essential for error message visibility, especially when creating a PVC with a non-existent StorageClass, as shown in the image below:
 
-![](/img/v1.2/rancher/error_event_csi_driver.png)
+![](/img/rancher/error_event_csi_driver.png)
 
 Follow these steps to set up **RBAC** for error message visibility:
 
@@ -269,11 +269,11 @@ Now you can create a new StorageClass that you intend to use in your guest Kuber
 
 1. For administrators, you can create a desired [StorageClass](../advanced/storageclass.md) (e.g., named **replica-2**) in your bare-metal Harvester cluster.
 
-    ![](/img/v1.2/rancher/sc-replica-2.png)
+    ![](/img/rancher/sc-replica-2.png)
 
 1. Then, on the guest Kubernetes cluster, create a new StorageClass associated with the StorageClass named **replica-2** from the Harvester Cluster:
 
-    ![](/img/v1.2/rancher/downstream-cluster-sc-creation.png)
+    ![](/img/rancher/downstream-cluster-sc-creation.png)
 
     :::note
 
@@ -301,13 +301,13 @@ RWX volumes currently only work with a dedicated storage network. [GitHub issue 
 
   Use **exclude** to reserve a range of IP addresses for the guest cluster virtual machines. 
 
-  ![](/img/v1.5/rancher/configure-storage-network-01.png)
+  ![](/img/rancher/configure-storage-network-01.png)
 
 - The **Storage Network for RWX Volume** setting on the embedded Longhorn UI is enabled. 
 
   Go to **General**, and then select **Storage Network for RWX Volume Enabled**.
   
-  ![](/img/v1.5/rancher/enable-rwx-storage-network-01.png)
+  ![](/img/rancher/enable-rwx-storage-network-01.png)
 
 - You have created an RWX StorageClass on the host Harvester cluster.
 
@@ -329,11 +329,11 @@ RWX volumes currently only work with a dedicated storage network. [GitHub issue 
     nfsOptions: "vers=4.2,noresvport,softerr,timeo=600,retrans=5"
   ```
 
-  ![](/img/v1.4/rancher/create-rwx-sc-host-cluster-01.png)
+  ![](/img/rancher/create-rwx-sc-host-cluster-01.png)
 
-  ![](/img/v1.4/rancher/create-rwx-sc-host-cluster-02.png)
+  ![](/img/rancher/create-rwx-sc-host-cluster-02.png)
 
-  ![](/img/v1.4/rancher/create-rwx-sc-host-cluster-03.png)
+  ![](/img/rancher/create-rwx-sc-host-cluster-03.png)
 
 - The role-based access control (RBAC) settings are up-to-date.
 
@@ -392,11 +392,11 @@ RWX volumes currently only work with a dedicated storage network. [GitHub issue 
 
   The NAD **default/vlan101** is used for the storage network.
 
-  ![](/img/v1.5/rancher/create-guest-cluster-with-two-nics.png)
+  ![](/img/rancher/create-guest-cluster-with-two-nics.png)
 
 - The Harvester CSI driver version is v0.1.20 or later.
 
-  ![](/img/v1.4/rancher/harvester-csi-driver-version.png)
+  ![](/img/rancher/harvester-csi-driver-version.png)
 
 - The NFS client is installed on each node in the guest cluster.
 
@@ -429,7 +429,7 @@ RWX volumes currently only work with a dedicated storage network. [GitHub issue 
 
   On the **StorageClass: Create** screen, add a **Host Storage Class** parameter and specify the RWX StorageClass that you created on the host Harvester cluster.  
   
-  ![](/img/v1.4/rancher/new-sc-associated-with-rwx.png)
+  ![](/img/rancher/new-sc-associated-with-rwx.png)
 
 1. Create an RWX PersistentVolumeClaim (PVC).
 
@@ -438,23 +438,23 @@ RWX volumes currently only work with a dedicated storage network. [GitHub issue 
   - **Volume Claim** tab: Specify the new StorageClass.
   - **Customize** tab: Select **Many Nodes Read-Write**.
 
-  ![](/img/v1.4/rancher/create-rwx-pvc-01.png)
+  ![](/img/rancher/create-rwx-pvc-01.png)
 
-  ![](/img/v1.4/rancher/create-rwx-pvc-02.png)
+  ![](/img/rancher/create-rwx-pvc-02.png)
 
 1. Verify that the RWX PVC was created successfully.
 
-  ![](/img/v1.4/rancher/check-rwx-pvc.png)
+  ![](/img/rancher/check-rwx-pvc.png)
 
 1. Create two pods.
 
   On the **Pod: Create** screen, specify the RWX PVC.
 
-  ![](/img/v1.4/rancher/create-pod-with-rwx-pvc-01.png)
+  ![](/img/rancher/create-pod-with-rwx-pvc-01.png)
 
-  ![](/img/v1.4/rancher/create-pod-with-rwx-pvc-02.png)
+  ![](/img/rancher/create-pod-with-rwx-pvc-02.png)
 
-  ![](/img/v1.4/rancher/create-pod-with-rwx-pvc-03.png)
+  ![](/img/rancher/create-pod-with-rwx-pvc-03.png)
 
 :::note
 
@@ -496,9 +496,9 @@ The Harvester CSI Driver supports volume snapshots starting with version **v0.1.
 
 To upgrade the CSI driver, use the Rancher UI to upgrade RKE2. Ensure the new RKE2 version supports/bundled with the updated CSI driver version.
 
-1. Go to **☰** > **Cluster Management**.
+1. Go to **â˜°** > **Cluster Management**.
 
-1. Find the guest cluster that you want to upgrade and select **⋮** > **Edit Config**.
+1. Find the guest cluster that you want to upgrade and select **â‹®** > **Edit Config**.
 
 1. Select **Kubernetes Version**.
 
@@ -508,9 +508,9 @@ To upgrade the CSI driver, use the Rancher UI to upgrade RKE2. Ensure the new RK
 
 You can upgrade K3s using the Rancher UI.
 
-1. Go to **☰** > **K3s Cluster** > **Apps** > **Installed Apps**.
+1. Go to **â˜°** > **K3s Cluster** > **Apps** > **Installed Apps**.
 
-1. Find the CSI driver chart and select **⋮** > **Edit/Upgrade**.
+1. Find the CSI driver chart and select **â‹®** > **Edit/Upgrade**.
 
 1. Select **Version**.
 

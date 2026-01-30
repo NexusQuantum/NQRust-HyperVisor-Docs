@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 sidebar_label: Harvester CSI Driver
 title: "Harvester CSI Driver"
@@ -43,13 +43,13 @@ Currently, the Harvester CSI driver only supports single-node read-write(RWO) vo
 
 When spinning up a Kubernetes cluster using Rancher RKE2 node driver, the Harvester CSI driver will be deployed when Harvester cloud provider is selected.
 
-![select-harvester-cloud-provider](/img/v1.0/rancher/select-harvester-cloud-provider.png)
+![select-harvester-cloud-provider](/img/rancher/select-harvester-cloud-provider.png)
 
 #### Install CSI Driver Manually in the RKE2 Cluster
 
 If you prefer to deploy the Harvester CSI driver without enabling the Harvester cloud provider, you can choose either `Default - RKE2 Embedded` or `External` in the `Cloud Provider` field. If you are using Rancher v2.6, select `None` instead.
 
-![](/img/v1.0/rancher/non-harvester-cloud-provider.png)
+![](/img/rancher/non-harvester-cloud-provider.png)
 
 #### Prerequisites
 
@@ -60,7 +60,7 @@ Ensure that you have the following prerequisites in place:
     export KUBECONFIG=/path/to/your/harvester-kubeconfig
     ```
 
-![](/img/v1.0/rancher/creating_guest_cluster.png)
+![](/img/rancher/creating_guest_cluster.png)
 
 Perform the following steps to deploy the Harvester CSI Driver manually:
 #### Deploy Harvester CSI Driver
@@ -122,9 +122,9 @@ If you want to change the cloud-provider-config path, you should update the clou
 3. Install Harvester CSI Driver.
 
     Install the `Harvester CSI Driver` chart from the Rancher marketplace. (Note: by default, you do not need to change the `cloud-config` path).
-  ![](/img/v1.0/rancher/install_csi_rancher_marketplace.png)
+  ![](/img/rancher/install_csi_rancher_marketplace.png)
 
-  ![](/img/v1.0/rancher/donot_change_cloud_config_path.png)
+  ![](/img/rancher/donot_change_cloud_config_path.png)
 
 :::note
 

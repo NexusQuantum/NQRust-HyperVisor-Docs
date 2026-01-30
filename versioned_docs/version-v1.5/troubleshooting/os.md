@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 3
 sidebar_label: Operating System
 title: "Operating System"
@@ -54,11 +54,11 @@ Enabling read-write mode might break your system if files are modified. Please u
 
 - Reboot the system to GRUB menu. Press ESC to stay on the menu.
 
-    ![](/img/v1.2/troubleshooting/grub-menu.png)
+    ![](/img/troubleshooting/grub-menu.png)
 
 - Press `e` on first menuentry. Append `rd.cos.debugrw` to the `linux (loop0)$kernel $kernelcmd` line. Press `Ctrl + x` to boot the system.
 
-    ![](/img/v1.2/troubleshooting/edit-boot-parameter.png)
+    ![](/img/troubleshooting/edit-boot-parameter.png)
 
 ## How to permanently edit kernel parameters
 
@@ -134,10 +134,10 @@ If kernel panic traces are not recorded in the system log when a system crashes,
 To enable outputting of kernel messages to a serial console, please use the following steps:
 
 - Boot the system to GRUB menu. Press ESC to stay on the menu.
-    ![](/img/v1.2/troubleshooting/grub-menu.png)
+    ![](/img/troubleshooting/grub-menu.png)
 - Press `e` on first menuentry. Append `console=ttyS0,115200n8` to the `linux (loop0)$kernel $kernelcmd` line. Press `Ctrl + x` to boot the system.
 
-    ![](/img/v1.2/troubleshooting/edit-boot-parameter-serial.png)
+    ![](/img/troubleshooting/edit-boot-parameter-serial.png)
 
 :::note
 
@@ -151,6 +151,6 @@ For kernel panic crashes, you can use kdump to collect crash dumps.
 
 By default, the OS is booted without the kdump feature enabled. Users can enable the feature by selecting the `debug` menuentry when booting, as in the following example:
 
-![](/img/v1.2/troubleshooting/grub-menu-debug.png)
+![](/img/troubleshooting/grub-menu-debug.png)
 
 When a system crashes, a crash dump will be stored in the `/var/crash/<time>` directory. Providing the crash dump to developers helps them to troubleshoot and resolve issues.

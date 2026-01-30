@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 4
 sidebar_label: Storage Network
 title: "Storage Network"
@@ -81,7 +81,7 @@ The routing of Longhorn replication traffic depends on whether virtual machine V
 
 - **Same physical interfaces**: In the following example, both `eth2` and `eth3` are used for virtual machine VLAN traffic and the Longhorn storage network. The red line indicates that Longhorn sends replication traffic through `eth3`.
 
-  ![storagenetwork-same.png](/img/v1.2/storagenetwork/storagenetwork-same.png)
+  ![storagenetwork-same.png](/img/storagenetwork/storagenetwork-same.png)
 
   :::note
 
@@ -91,7 +91,7 @@ The routing of Longhorn replication traffic depends on whether virtual machine V
 
 - **Different physical interfaces**: In the following example, `eth2` and `eth3` are used for virtual machine VLAN traffic, while `eth4` and `eth5` are used for the Longhorn storage network. The red line indicates that Longhorn sends replication traffic through `eth4`.
 
-  ![storagenetwork-diff.png](/img/v1.2/storagenetwork/storagenetwork-diff.png)
+  ![storagenetwork-diff.png](/img/storagenetwork/storagenetwork-diff.png)
 
   :::note
 
@@ -126,7 +126,7 @@ Using the Harvester UI to configure the `storage-network` setting is strongly re
 
 1. Go to **Advanced > Settings > storage-network**.
 
-  ![storage-network-enabled.png](/img/v1.4/storagenetwork/storage-network-enabled.png)
+  ![storage-network-enabled.png](/img/storagenetwork/storage-network-enabled.png)
 
 1. Select **Enabled**.
 
@@ -138,7 +138,7 @@ Using the Harvester UI to configure the `storage-network` setting is strongly re
 
 1. Go to **Advanced > Settings > storage-network**.
 
-  ![storage-network-disabled.png](/img/v1.4/storagenetwork/storage-network-disabled.png)
+  ![storage-network-disabled.png](/img/storagenetwork/storage-network-disabled.png)
 
 1. Select **Disabled**.
 

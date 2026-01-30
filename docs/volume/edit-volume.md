@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 2
 sidebar_label: Edit a Volume
 title: "Edit a Volume"
@@ -11,13 +11,13 @@ description: Edit volume from the Volume page.
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/volume/edit-volume"/>
 </head>
 
-After creating a volume, you can edit your volume by clicking the `⋮` button and selecting the `Edit Config` option.
+After creating a volume, you can edit your volume by clicking the `â‹®` button and selecting the `Edit Config` option.
 
 ## Expand a Volume
 
 Harvester supports offline volume expansion, provided that the underlying storage provider supports volume resizing. You can increase the size of a volume when the associated virtual machine is powered off or when the volume is detached from the virtual machine.
 
-![expand-volume](/img/v1.2/volume/expand-volume.png)
+![expand-volume](/img/volume/expand-volume.png)
 
 ### Online Volume Expansion
 
@@ -42,9 +42,9 @@ Additionally, you cannot use the [Edit Config](../vm/edit-vm.md) feature on the 
 
 ## Cancel a Failed Volume Expansion
 
-If you specify a size larger than Longhorn's capacity during the expansion, the status of the volume expansion will be stuck in `Resizing`. You can cancel the failed volume expansion by clicking the `⋮` button and selecting the `Cancel Expand` option.
+If you specify a size larger than Longhorn's capacity during the expansion, the status of the volume expansion will be stuck in `Resizing`. You can cancel the failed volume expansion by clicking the `â‹®` button and selecting the `Cancel Expand` option.
 
-![cancel-failed-volume-expansion](/img/v1.2/volume/cancel-failed-volume-expansion.png)
+![cancel-failed-volume-expansion](/img/volume/cancel-failed-volume-expansion.png)
 
 ## Change the StorageClass of an Existing Volume
 
