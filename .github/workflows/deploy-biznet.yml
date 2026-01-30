@@ -8,85 +8,91 @@ on:
 
 jobs:
   build:
+    name: Build Docusaurus Site
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Free disk space
+      # 1. Optimize Disk Space
+      - name: Free Disk Space
         run: |
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /opt/ghc
           sudo rm -rf /usr/local/share/boost
 
-      - name: Setup swap
+      # 2. Configure Swap (Resize Strategy)
+      # We disable the existing swap first to avoid "Text file busy" errors
+      - name: Configure Swap Space (4GB)
         run: |
+          echo "Disabling current swap..."
+          sudo swapoff -a
+
+          echo "Removing old swap file..."
+          sudo rm -f /swapfile
+
+          echo "Allocating new 4GB swap file..."
           sudo fallocate -l 4G /swapfile
           sudo chmod 600 /swapfile
           sudo mkswap /swapfile
           sudo swapon /swapfile
+
+          echo "Memory Status:"
           free -h
 
-      - name: Set up Node.js 20
+      - name: Setup Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
           npm install -g yarn
-          PUPPETEER_DOWNLOAD_BASE_URL=https://storage.googleapis.com/chrome-for-testing-public yarn install --frozen-lockfile
+          yarn install --frozen-lockfile
 
-      - name: Generate API docs
+      - name: Generate API Documentation
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
         run: yarn gen-api-docs || true
 
-      - name: Build site
+      - name: Build Static Site
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
         run: yarn build
 
-      - name: Verify build output
-        run: |
-          ls -la build/
-          du -sh build/
-
-      - name: Upload build artifact
+      - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: build-artifact
           path: build/
           retention-days: 1
           if-no-files-found: error
 
   deploy:
+    name: Deploy to Production
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: Download build artifact
+      - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
-          name: build
+          name: build-artifact
           path: build/
 
-      - name: Deploy to Biznet Cloud VPS
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.BIZNET_HOST }}
-          username: ${{ secrets.BIZNET_USERNAME }}
-          key: ${{ secrets.BIZNET_SSH_KEY }}
-          port: ${{ secrets.BIZNET_SSH_PORT }}
-          source: "build/*"
-          target: ${{ secrets.BIZNET_DEPLOY_PATH }}
-          strip_components: 1
-          rm: true
-          timeout: 600s
-          debug: true
+      - name: Compress Build Artifact
+        run: |
+          echo "📦 Compressing build artifact..."
+          tar -czf build.tar.gz -C build .
 
-      - name: Reload Caddy
+          echo "📊 Size comparison:"
+          echo "Original size: $(du -sh build | cut -f1)"
+          echo "Compressed size: $(du -sh build.tar.gz | cut -f1)"
+
+          ls -lh build.tar.gz
+
+      - name: Verify SSH Connection
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.BIZNET_HOST }}
@@ -94,4 +100,65 @@ jobs:
           key: ${{ secrets.BIZNET_SSH_KEY }}
           port: ${{ secrets.BIZNET_SSH_PORT }}
           script: |
+            echo "✅ SSH connection successful"
+            echo "Server: $(hostname)"
+            echo "Disk space: $(df -h ${{ secrets.BIZNET_DEPLOY_PATH }} | tail -1)"
+
+      - name: Deploy to Biznet VPS (SCP)
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.BIZNET_HOST }}
+          username: ${{ secrets.BIZNET_USERNAME }}
+          key: ${{ secrets.BIZNET_SSH_KEY }}
+          port: ${{ secrets.BIZNET_SSH_PORT }}
+          source: "build.tar.gz"
+          target: "/tmp/"
+          rm: false
+          timeout: 600s
+          debug: true
+
+      - name: Extract and Deploy
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.BIZNET_HOST }}
+          username: ${{ secrets.BIZNET_USERNAME }}
+          key: ${{ secrets.BIZNET_SSH_KEY }}
+          port: ${{ secrets.BIZNET_SSH_PORT }}
+          script: |
+            echo "📂 Extracting build artifact..."
+
+            # Create temporary extraction directory
+            TEMP_DIR=$(mktemp -d)
+            echo "Temporary directory: $TEMP_DIR"
+
+            # Extract to temporary directory
+            tar -xzf /tmp/build.tar.gz -C "$TEMP_DIR"
+
+            # Remove old deployment files
+            echo "🗑️  Removing old files from ${{ secrets.BIZNET_DEPLOY_PATH }}"
+            rm -rf ${{ secrets.BIZNET_DEPLOY_PATH }}/*
+
+            # Move new files to deployment path
+            echo "📦 Moving new files to ${{ secrets.BIZNET_DEPLOY_PATH }}"
+            mv "$TEMP_DIR"/* ${{ secrets.BIZNET_DEPLOY_PATH }}/
+
+            # Cleanup
+            echo "🧹 Cleaning up..."
+            rm -rf "$TEMP_DIR"
+            rm -f /tmp/build.tar.gz
+
+            echo "✅ Deployment complete!"
+            echo "Files in deployment path:"
+            ls -lah ${{ secrets.BIZNET_DEPLOY_PATH }} | head -20
+
+      - name: Reload Caddy Server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.BIZNET_HOST }}
+          username: ${{ secrets.BIZNET_USERNAME }}
+          key: ${{ secrets.BIZNET_SSH_KEY }}
+          port: ${{ secrets.BIZNET_SSH_PORT }}
+          script: |
+            echo "🔄 Reloading Caddy service..."
             sudo systemctl reload caddy
+            echo "✅ Caddy reloaded successfully!"
