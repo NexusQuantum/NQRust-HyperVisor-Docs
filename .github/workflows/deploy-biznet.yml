@@ -29,7 +29,7 @@ jobs:
         run: |
           echo "Disabling current swap..."
           sudo swapoff -a
-          
+
           echo "Removing old swap file..."
           sudo rm -f /swapfile
 
@@ -38,7 +38,7 @@ jobs:
           sudo chmod 600 /swapfile
           sudo mkswap /swapfile
           sudo swapon /swapfile
-          
+
           echo "Memory Status:"
           free -h
 
@@ -82,6 +82,29 @@ jobs:
           name: build-artifact
           path: build/
 
+      - name: Compress Build Artifact
+        run: |
+          echo "📦 Compressing build artifact..."
+          tar -czf build.tar.gz -C build .
+
+          echo "📊 Size comparison:"
+          echo "Original size: $(du -sh build | cut -f1)"
+          echo "Compressed size: $(du -sh build.tar.gz | cut -f1)"
+
+          ls -lh build.tar.gz
+
+      - name: Verify SSH Connection
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.BIZNET_HOST }}
+          username: ${{ secrets.BIZNET_USERNAME }}
+          key: ${{ secrets.BIZNET_SSH_KEY }}
+          port: ${{ secrets.BIZNET_SSH_PORT }}
+          script: |
+            echo "✅ SSH connection successful"
+            echo "Server: $(hostname)"
+            echo "Disk space: $(df -h ${{ secrets.BIZNET_DEPLOY_PATH }} | tail -1)"
+
       - name: Deploy to Biznet VPS (SCP)
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -89,11 +112,45 @@ jobs:
           username: ${{ secrets.BIZNET_USERNAME }}
           key: ${{ secrets.BIZNET_SSH_KEY }}
           port: ${{ secrets.BIZNET_SSH_PORT }}
-          source: "build/*"
-          target: ${{ secrets.BIZNET_DEPLOY_PATH }}
-          strip_components: 1
-          rm: true
+          source: "build.tar.gz"
+          target: "/tmp/"
+          rm: false
           timeout: 600s
+          debug: true
+
+      - name: Extract and Deploy
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.BIZNET_HOST }}
+          username: ${{ secrets.BIZNET_USERNAME }}
+          key: ${{ secrets.BIZNET_SSH_KEY }}
+          port: ${{ secrets.BIZNET_SSH_PORT }}
+          script: |
+            echo "📂 Extracting build artifact..."
+
+            # Create temporary extraction directory
+            TEMP_DIR=$(mktemp -d)
+            echo "Temporary directory: $TEMP_DIR"
+
+            # Extract to temporary directory
+            tar -xzf /tmp/build.tar.gz -C "$TEMP_DIR"
+
+            # Remove old deployment files
+            echo "🗑️  Removing old files from ${{ secrets.BIZNET_DEPLOY_PATH }}"
+            rm -rf ${{ secrets.BIZNET_DEPLOY_PATH }}/*
+
+            # Move new files to deployment path
+            echo "📦 Moving new files to ${{ secrets.BIZNET_DEPLOY_PATH }}"
+            mv "$TEMP_DIR"/* ${{ secrets.BIZNET_DEPLOY_PATH }}/
+
+            # Cleanup
+            echo "🧹 Cleaning up..."
+            rm -rf "$TEMP_DIR"
+            rm -f /tmp/build.tar.gz
+
+            echo "✅ Deployment complete!"
+            echo "Files in deployment path:"
+            ls -lah ${{ secrets.BIZNET_DEPLOY_PATH }} | head -20
 
       - name: Reload Caddy Server
         uses: appleboy/ssh-action@v1.2.0
@@ -105,3 +162,4 @@ jobs:
           script: |
             echo "🔄 Reloading Caddy service..."
             sudo systemctl reload caddy
+            echo "✅ Caddy reloaded successfully!"
