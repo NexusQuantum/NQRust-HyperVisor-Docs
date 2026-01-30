@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - test
       - "feat/**"
   workflow_dispatch:
 
