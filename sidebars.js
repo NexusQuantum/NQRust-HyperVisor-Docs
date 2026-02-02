@@ -24,8 +24,9 @@ const sidebars = {
         description:
           "This is the API doc of the Harvester server. The APIs are broken down into the categories below:",
       },
-      items: require("./docs/api/sidebar.js"),
+      items: require(require('path').join(__dirname, "docs/api/sidebar.js")),
     },
   ],
 };
+
 module.exports = sidebars;
