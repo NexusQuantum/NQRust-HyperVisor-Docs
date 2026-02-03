@@ -39,7 +39,7 @@ description: Create a volume from the Volume page.
 
 ### Oversized Volumes
 
-In Harvester v1.5.0, which uses Longhorn v1.8.1, oversized volumes (for example, 999999 Gi in size) are marked **Not Ready** and cannot be deleted.
+In Hypervisor v1.0, which uses Longhorn v1.8.1, oversized volumes (for example, 999999 Gi in size) are marked **Not Ready** and cannot be deleted.
 
 To resolve this issue, perform the following steps:
 
@@ -67,7 +67,7 @@ To resolve this issue, perform the following steps:
      -p='[{"op": "add", "path": "/webhooks/0/rules/-", "value": {"apiGroups":[""],"apiVersions":["v1"],"operations":["UPDATE"],"resources":["persistentvolumeclaims"],"scope":"Namespaced"}}]'
    ```
 
-The issue will be addressed in Longhorn v1.8.2, which will likely be included in Harvester v1.5.1.
+The issue will be addressed in Longhorn v1.8.2, which will likely be included in Harvester v1.0.
 
 Related issues:
 - Harvester: [Issue #8096](https://github.com/harvester/harvester/issues/8096)
