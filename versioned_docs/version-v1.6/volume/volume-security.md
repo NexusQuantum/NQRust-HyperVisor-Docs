@@ -13,7 +13,7 @@ keywords:
 
 _Available as of v1.4.0_
 
-Harvester allows you to encrypt and decrypt virtual machine images. The encryption mechanism utilizes the Linux kernel module dm_crypt and the command-line utility cryptsetup.
+Hypervisor allows you to encrypt and decrypt virtual machine images. The encryption mechanism utilizes the Linux kernel module dm_crypt and the command-line utility cryptsetup.
 
 ## Prerequisites
 
@@ -51,7 +51,7 @@ Prepare the following resources:
   | CRYPTO_KEY_SIZE | 256, 384, 512 |
   | CRYPTO_PBKDF | argon2i, argon2id, pbkdf2 |
 
-  You can create a secret in the system namespace using kubectl or the Harvester UI (**Edit as YAML** feature). Resources in the system namespace are not displayed on the Harvester UI **Secrets** screen.
+  You can create a secret in the system namespace using kubectl or the Hypervisor UI (**Edit as YAML** feature). Resources in the system namespace are not displayed on the Hypervisor UI **Secrets** screen.
   :::
 
 - StorageClass: Images are encrypted using Longhorn, so required fields must be passed to the Longhorn CSI Driver. You can specify the encryption secret when creating a StorageClass. For more information, see [Image StorageClass](../image/upload-image#image-storageclass).
@@ -84,7 +84,7 @@ Prepare the following resources:
 
   :::info important
 
-  You can create a secret in the system namespace using the Harvester UI (**Edit as YAML** feature) and kubectl. Resources in the system namespace are not displayed on the Harvester UI **Secrets** screen.
+  You can create a secret in the system namespace using the Hypervisor UI (**Edit as YAML** feature) and kubectl. Resources in the system namespace are not displayed on the Hypervisor UI **Secrets** screen.
 
   :::
 
