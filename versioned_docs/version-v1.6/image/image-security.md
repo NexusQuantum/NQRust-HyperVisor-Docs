@@ -39,7 +39,7 @@ Prepare the following resources:
 
 - Secret: A Kubernetes secret is used as the passphrase of dm_crypt. You must specify the value of the `CRYPTO_KEY_VALUE` field. All other fields are fixed.
 
-  ![](/img/v1.4/image/create-encryption-used-secret.png)
+  ![](/img/v1.3/image-hv/create-encryption-used-secret.png)
 
   Example of a secret:
 
@@ -74,7 +74,7 @@ Prepare the following resources:
 
 - StorageClass: Images are encrypted using Longhorn, so required fields must be passed to the Longhorn CSI Driver. You can specify the encryption secret when creating a StorageClass. For more information, see [Image StorageClass](./upload-image#image-storageclass). 
 
-  ![](/img/v1.4/image/create-storage-class.png)
+  ![](/img/v1.3/image-hv/create-storage-class.png)
 
   Example of a StorageClass:
 
