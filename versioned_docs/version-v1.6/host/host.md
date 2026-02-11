@@ -9,19 +9,19 @@ title: "Host Management"
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/host"/>
 </head>
 
-Users can view and manage Harvester nodes from the host page. The first node always defaults to be a management node of the cluster. When there are three or more nodes, the two other nodes that first joined are automatically promoted to management nodes to form a HA cluster.
+Users can view and manage Hypervisor nodes from the host page. The first node always defaults to be a management node of the cluster. When there are three or more nodes, the two other nodes that first joined are automatically promoted to management nodes to form a HA cluster.
 
 :::note
 
-Because Harvester is built on top of Kubernetes and uses etcd as its database, the maximum node fault toleration is one when there are three management nodes.
+Because Hypervisor is built on top of Kubernetes and uses etcd as its database, the maximum node fault toleration is one when there are three management nodes.
 
 :::
 
-![host.png](/img/v1.2/host/host.png)
+![host.png](/img/v1.2/host-hv/host.png)
 
 :::info
 
-Harvester reserves CPU resources for system-level operations on each node. For more information, see [Calculation of Shared CPU Pool](../vm/cpu-pinning.md#calculation-of-shared-cpu-pool). This is why the total cores shown on the CPU column is slightly less than the real CPU cores on each node.
+Hypervisor reserves CPU resources for system-level operations on each node. For more information, see [Calculation of Shared CPU Pool](../vm/cpu-pinning.md#calculation-of-shared-cpu-pool). This is why the total cores shown on the CPU column is slightly less than the real CPU cores on each node.
 
 :::
 ## Node Maintenance
@@ -41,21 +41,21 @@ You can force a collective shutdown of all VMs on a node on the **Enable Mainten
 
 If you want to execute a special command before shutting down a VM, consider using the [container lifecycle hook](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks) `PreStop`.
 
-![node-maintenance.png](/img/v1.2/host/node-maintenance.png)
+![node-maintenance.png](/img/v1.2/host-hv/node-maintenence.png)
 
 ## Cordoning a Node
 
 Cordoned nodes are marked as unschedulable. Cordoning is useful when you want to prevent new workloads from being scheduled on a node. You can uncordon a node to make it schedulable again.
 
-![cordon-node.png](/img/v1.2/host/cordon-nodes.png)
+![cordon-node.png](/img/v1.2/host-hv/cordon-nodes.png)
 
 ## Deleting a Node
 
 :::caution
 
-Before removing a node from a Harvester cluster, determine if the remaining nodes have enough computing and storage resources to take on the workload from the node to be removed. Check the following:
+Before removing a node from a Hypervisor cluster, determine if the remaining nodes have enough computing and storage resources to take on the workload from the node to be removed. Check the following:
 
-- Current resource usage in the cluster (on the **Hosts** screen of the Harvester UI)
+- Current resource usage in the cluster (on the **Hosts** screen of the Hypervisor UI)
 - Ability of the remaining nodes to maintain enough replicas for all volumes
 
 If the remaining nodes do not have enough resources, VMs might fail to migrate and volumes might degrade when you remove a node.
@@ -68,7 +68,7 @@ You can safely remove a control plane node depending on the quantity and availab
 
 - The cluster has three control plane nodes and one or more worker nodes.
 
-  When you remove a control plane node, a worker node will be promoted to control plane node. Harvester v1.3.0 allows you to assign a role to each node that joins a cluster. In earlier Harvester versions, worker nodes were randomly selected for promotion. If you prefer to promote specific nodes, please see [Role Management](./host.md#role-management) and [Harvester Configuration](../install/harvester-configuration.md#installrole) for more information.
+  When you remove a control plane node, a worker node will be promoted to control plane node. Hypervisor v1.3.0 allows you to assign a role to each node that joins a cluster. In earlier Hypervisor versions, worker nodes were randomly selected for promotion. If you prefer to promote specific nodes, please see [Role Management](./host.md#role-management) and [Harvester Configuration](../install/harvester-configuration.md#installrole) for more information.
 
   :::note
   Automatic node promotion occurs only when a control plane node is deleted from the cluster. This does not include situations wherein a node becomes unavailable due to failed health checks. The unhealthy node retains its role.
@@ -124,14 +124,14 @@ Check if there are any [non-migratable virtual machine](../vm/live-migration.md#
 
 ### 5. Evict workloads from the node to be removed.
 
-If your cluster is running Harvester v1.1.2 or later, you can enable [Maintenance Mode](./host.md#node-maintenance) on the node to automatically live-migrate VMs and workloads. You can also [manually live-migrate](/vm/live-migration.md#starting-a-migration) VMs to other nodes.
+If your cluster is running Hypervisor v1.1.2 or later, you can enable [Maintenance Mode](./host.md#node-maintenance) on the node to automatically live-migrate VMs and workloads. You can also [manually live-migrate](/vm/live-migration.md#starting-a-migration) VMs to other nodes.
 
 All workloads have been successfully evicted if the node state is **Maintenance**.
 
-![node-maintain-completed.png](/img/v1.3/host/node-maintain-completed.png)
+![node-maintain-completed.png](/img/v1.2/host-hv/node-maintenence-complete.png)
 
 :::info important
-If a cluster has only two control plane nodes, Harvester does not allow you to enable Maintenance Mode on any node. You can manually drain the node to be removed using the following command:
+If a cluster has only two control plane nodes, Hypervisor does not allow you to enable Maintenance Mode on any node. You can manually drain the node to be removed using the following command:
 
 ```
 kubectl drain <node_name> --force --ignore-daemonsets --delete-local-data --pod-selector='app!=csi-attacher,app!=csi-provisioner'
@@ -157,22 +157,22 @@ Once resolved, you can skip this step.
 
 ### 7. Remove the node.
 
-1. On the Harvester UI, go to the **Hosts** screen.
+1. On the Hypervisor UI, go to the **Hosts** screen.
 
 1. Locate the node that you want to remove, and then click **⋮ > Delete**.
 
-![delete.png](/img/v1.2/host/delete-node.png)
+![delete.png](/img/v1.2/host-hv/delete-node.png)
 
 ## Role Management
 
-Hardware issues may force you to replace the management node. In earlier Harvester versions, accurately promoting a specific worker node to a management node was not easy. Harvester v1.3.0 improves the process by introducing the following roles:
+Hardware issues may force you to replace the management node. In earlier Hypervisor versions, accurately promoting a specific worker node to a management node was not easy. Hypervisor v1.3.0 improves the process by introducing the following roles:
 
-- **Management**: Allows a node to be prioritized when Harvester promotes nodes to management nodes.
+- **Management**: Allows a node to be prioritized when Hypervisor promotes nodes to management nodes.
 - **Witness**: Restricts a node to being a witness node (only functions as an etcd node) in a specific cluster.
 - **Worker**: Restricts a node to being a worker node (never promoted to management node) in a specific cluster.
 
 :::caution
-Harvester currently allows only one witness node in the cluster.
+Hypervisor currently allows only one witness node in the cluster.
 :::
 
 For more information about assigning roles to nodes, see [ISO Installation](/v1.3/install/index).
@@ -186,15 +186,15 @@ Users can view and add multiple disks as additional data volumes from the edit h
 1. Go to the **Hosts** page.
 2. On the node you want to modify, click **⋮ > Edit Config**.
 
-![Edit Config](/img/v1.4/host/multidisk-mgmt-01.png)
+![Edit Config](/img/v1.2/host-hv/multidisk-mgmt-01.png)
 
 3. Select the **Storage** tab and click **Add Disk**.
 
-![Add Disks](/img/v1.4/host/multidisk-mgmt-02.png)
+![Add Disks](/img/v1.2/host-hv/multidisk-mgmt-02.png)
 
 :::caution
 
-As of Harvester v1.0.2, we no longer support adding partitions as additional disks. If you want to add it as an additional disk, be sure to delete all partitions first (e.g., using `fdisk`).
+As of Hypervisor v1.0.2, we no longer support adding partitions as additional disks. If you want to add it as an additional disk, be sure to delete all partitions first (e.g., using `fdisk`).
 
 :::
 
@@ -224,18 +224,18 @@ You can also add [storage tags](#storage-tags) if you want Longhorn volume data 
 
 ![disk tag 01](/img/v1.4/host/multidisk-mgmt-06.png)
 
-![disk tag 02](/img/v1.4/host/multidisk-mgmt-07.png)
+![disk tag 02](/img/v1.2/host-hv/multidisk-mgmt-07.png)
 
 :::note
 
-In order for Harvester to identify the disks, each disk needs to have a unique [WWN](https://en.wikipedia.org/wiki/World_Wide_Name). Otherwise, Harvester will refuse to add the disk.
-If your disk does not have a WWN, you can format it with the `EXT4` filesystem to help Harvester recognize the disk.
+In order for Hypervisor to identify the disks, each disk needs to have a unique [WWN](https://en.wikipedia.org/wiki/World_Wide_Name). Otherwise, Hypervisor will refuse to add the disk.
+If your disk does not have a WWN, you can format it with the `EXT4` filesystem to help Hypervisor recognize the disk.
 
 :::
 
 :::note
 
-If you are testing Harvester in a QEMU environment, you'll need to use QEMU v6.0 or later. Previous versions of QEMU will always generate the same WWN for NVMe disks emulation. This will cause Harvester to not add the additional disks, as explained above. However, you can still add a virtual disk with the SCSI controller. The WWN information could be added manually along with the disk attach operation. For more details, please refer to the [script](https://github.com/harvester/vagrant-rancherd/blob/2782981b6017754d016f5b72d630dff4895f7ad6/scripts/attach-disk.sh#L75).
+If you are testing Hypervisor in a QEMU environment, you'll need to use QEMU v6.0 or later. Previous versions of QEMU will always generate the same WWN for NVMe disks emulation. This will cause Hypervisor to not add the additional disks, as explained above. However, you can still add a virtual disk with the SCSI controller. The WWN information could be added manually along with the disk attach operation. For more details, please refer to the [script](https://github.com/harvester/vagrant-rancherd/blob/2782981b6017754d016f5b72d630dff4895f7ad6/scripts/attach-disk.sh#L75).
 
 :::
 
@@ -247,7 +247,7 @@ This feature supports both disks and nodes.
 
 #### Setup
 
-The tags can be set up through the Harvester UI on the host page:
+The tags can be set up through the Hypervisor UI on the host page:
 
 1. Click `Hosts` -> `Edit Config` -> `Storage`
 1. Click `Add Host/Disk Tags` to start typing and hit enter to add new tags.
@@ -277,7 +277,7 @@ The replica data would be rebuilt to another disk automatically to keep the high
 2. On the node containing the disk, select the node name and go to the **Storage** tab.
 3. Find the disk you want to remove. Let's assume we want to remove `/dev/sdb`, and the disk's mount point is `/var/lib/harvester/extra-disks/1b805b97eb5aa724e6be30cbdb373d04`.
 
-![Find disk to remove](/img/v1.2/host/remove-disks-harvester-find-disk.png)
+![Find disk to remove](/img/v1.2/host-hv/remove-disks-harvester-find-disk.png)
 
 #### Evict replicas (Longhorn dashboard)
 1. Please follow [this session](../troubleshooting/harvester.md#access-embedded-rancher-and-longhorn-dashboards) to enable the embedded Longhorn dashboard.
@@ -306,7 +306,7 @@ The replica data would be rebuilt to another disk automatically to keep the high
 2. On the node containing the disk, select **⋮ > Edit Config**.
 3. Go to the **Storage** tab and select **x**  to remove the disk.
 
-![Remove disk](/img/v1.2/host/remove-disks-harvester-remove.png)
+![Remove disk](/img/v1.2/host-hv/remove-disks-harvester-remove.png)
 
 4. Select **Save** to remove the disk.
 
@@ -315,7 +315,7 @@ The replica data would be rebuilt to another disk automatically to keep the high
 
 _Available as of v1.1.0_
 
-[Node labels](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#node-labels) are used to identify the topology domains that each node is in. You can configure labels such as [`topology.kubernetes.io/zone`](https://kubernetes.io/docs/reference/labels-annotations-taints/#topologykubernetesiozone) on the Harvester UI.
+[Node labels](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/#node-labels) are used to identify the topology domains that each node is in. You can configure labels such as [`topology.kubernetes.io/zone`](https://kubernetes.io/docs/reference/labels-annotations-taints/#topologykubernetesiozone) on the Hypervisor UI.
 
 1. Go to the **Hosts** screen.
 1. Locate the target node in the list, and then select **⋮ > Edit Config**.
@@ -338,12 +338,12 @@ Ksmtuned is a KSM automation tool deployed as a DaemonSet to run Ksmtuned on eac
 3. Select the **Ksmtuned** tab and select **Run** in **Run Strategy**.
 4. (Optional) You can modify **Threshold Coefficient** as needed.
 
-![Edit Ksmtuned](/img/v1.2/host/edit-ksmtuned.png)
+![Edit Ksmtuned](/img/v1.2/host-hv/edit-ksmtuned.png)
 
 5. Click **Save** to update.
 6. Wait for about 1-2 minutes and you can check its **Statistics** by clicking **Your Node > Ksmtuned tab**.
 
-![View Ksmtuned Statistics](/img/v1.2/host/view-ksmtuned-statistics.png)
+![View Ksmtuned Statistics](/img/v1.2/host-hv/view-ksmtuned-statistics.png)
 
 ### Parameters
 
@@ -410,17 +410,17 @@ KSM will stop when the available memory is above the **Threshold Coefficient**. 
 
 ## NTP Configuration
 
-Time synchronization is an important aspect of distributed cluster architecture. Because of this, Harvester now provides a simpler way for configuring NTP settings.
+Time synchronization is an important aspect of distributed cluster architecture. Because of this, Hypervisor now provides a simpler way for configuring NTP settings.
 
-In previous Harvester versions, NTP settings were mainly configurable [during the installation process](https://docs.harvesterhci.io/v1.2/install/harvester-configuration#osntp_servers). To modify the settings, you needed to manually update the configuration file on each node.
+In previous Hypervisor versions, NTP settings were mainly configurable [during the installation process](https://docs.harvesterhci.io/v1.2/install/harvester-configuration#osntp_servers). To modify the settings, you needed to manually update the configuration file on each node.
 
-Beginning with version v1.2.0, Harvester is supporting NTP configuration on the Harvester UI Settings screen (**Advanced** > **Settings**). You can configure NTP settings for the entire Harvester cluster at any time, and the settings are applied to all nodes in the cluster.
+Beginning with version v1.2.0, Hypervisor is supporting NTP configuration on the Hypervisor UI Settings screen (**Advanced** > **Settings**). You can configure NTP settings for the entire Hypervisor cluster at any time, and the settings are applied to all nodes in the cluster.
 
-![](/img/v1.3/host/harvester-ntp-settings.png)
+![](/img/v1.2/host-hv/harvester-ntp-settings.png)
 
 You can set up multiple NTP servers at once.
 
-![](/img/v1.3/host/harvester-ntp-settings-multiple.png)
+![](/img/v1.2/host-hv/harvester-ntp-settings-multiple.png)
 
 You can check the settings in the `node.harvesterhci.io/ntp-service` annotation in Kubernetes nodes:
 - `ntpSyncStatus`: Status of the connection to NTP servers (possible values: `disabled`, `synced` and `unsynced`)
@@ -433,24 +433,24 @@ $ kubectl get nodes harvester-node-0 -o yaml |yq -e '.metadata.annotations.["nod
 
 > **Note:**
 >
-> 1. Do not modify the NTP configuration file on each node. Harvester will automatically sync the settings that you configured on the Harvester UI to the nodes.
-> 1. If you upgraded Harvester from an earlier version, the **ntp-servers** list on the Settings screen will be empty (see screenshot). You must manually configure the NTP settings because Harvester is unaware of the previous settings and is unable to detect conflicts.
+> 1. Do not modify the NTP configuration file on each node. Hypervisor will automatically sync the settings that you configured on the Hypervisor UI to the nodes.
+> 1. If you upgraded Hypervisor from an earlier version, the **ntp-servers** list on the Settings screen will be empty (see screenshot). You must manually configure the NTP settings because Hypervisor is unaware of the previous settings and is unable to detect conflicts.
 
-![](/img/v1.3/host/harvester-ntp-settings-empty.png)
+![](/img/v1.2/host-hv/harvester-ntp-settings-empty.png)
 
 ## Cloud-Native Node Configuration
 
-You may need to customize one or more nodes after installing Harvester. This process usually entails updating the [runtime configuration](/v1.3/install/update-harvester-configuration/) and modifying files in the `/oem` directory of each node to make changes persist after rebooting.
+You may need to customize one or more nodes after installing Hypervisor . This process usually entails updating the [runtime configuration](/v1.3/install/update-harvester-configuration/) and modifying files in the `/oem` directory of each node to make changes persist after rebooting.
 
-In Harvester v1.3.0, these customizations can be described in a Kubernetes manifest and then applied to the underlying cluster using kubectl or other GitOps-centric tools such as [Fleet](https://fleet.rancher.io/).
+In Hypervisor v1.3.0, these customizations can be described in a Kubernetes manifest and then applied to the underlying cluster using kubectl or other GitOps-centric tools such as [Fleet](https://fleet.rancher.io/).
 
 :::danger
-Misconfigurations might compromise the ability of a Harvester node to boot up, or even damage the overall stability of the cluster. You can prevent such issues by reading the Elemental toolkit documentation to learn how to [correctly customize Elemental](https://rancher.github.io/elemental-toolkit/docs/customizing/).
+Misconfigurations might compromise the ability of a Hypervisor node to boot up, or even damage the overall stability of the cluster. You can prevent such issues by reading the Elemental toolkit documentation to learn how to [correctly customize Elemental](https://rancher.github.io/elemental-toolkit/docs/customizing/).
 :::
 
 ### Creating a CloudInit Resource
 
-Harvester node customization is bounded only by your creativity and by what the Elemental toolkit markup can syntactically express. The documentation, therefore, cannot provide an exhaustive list of possible customizations and use cases.
+Hypervisor node customization is bounded only by your creativity and by what the Elemental toolkit markup can syntactically express. The documentation, therefore, cannot provide an exhaustive list of possible customizations and use cases.
 
 **Example: You want to add an SSH authorized key for the default `rancher` user on all nodes.**
 
@@ -481,7 +481,7 @@ This manifest describes an Elemental cloud-init document that will be applied to
 Apply this example using the command `kubectl apply -f ssh_access.yaml`.
 
 :::tip
-Reboot the relevant Harvester nodes so that the Elemental toolkit executor can apply the new configuration at boot.
+Reboot the relevant Hypervisor nodes so that the Elemental toolkit executor can apply the new configuration at boot.
 :::
 
 #### CloudInit Resource Spec
@@ -523,14 +523,14 @@ You can use the command `kubectl edit` to update a CloudInit resource. However, 
 
 ### Deleting a CloudInit Resource
 
-You can use the command `kubectl delete` to remove a CloudInit resource from the Harvester cluster.
+You can use the command `kubectl delete` to remove a CloudInit resource from the Hypervisor cluster.
 
 ```console
 # kubectl delete cloudinit CLOUDINIT_NAME
 ```
 
 :::note
-Harvester is unable to "roll back" previously described customizations because the CloudInit resource can describe anything that can be expressed as an Elemental toolkit customization, including arbitrary shell commands.
+Hypervisor is unable to "roll back" previously described customizations because the CloudInit resource can describe anything that can be expressed as an Elemental toolkit customization, including arbitrary shell commands.
 
 In the [Creating a CloudInit Resource](#creating-a-cloudinit-resource) example, the YAML file contains the `authorized_keys` stanza. This is an append-only action in the Elemental toolkit. When the resource is changed or deleted, the `authorized_keys` file in Rancher will still contain the old public key.
 
@@ -574,11 +574,11 @@ This pod is part of a daemonset, so it may be worth checking the pod that is run
 
 You can configure the URL of the console for remote server management. This console is particularly useful in environments where physical access is limited.
 
-1. On the Harvester UI, go to **Hosts**.
+1. On the Hypervisor UI, go to **Hosts**.
 
 1. Locate the target host, and then select **⋮ > Edit Config**.
 
-  ![](/img/remote_console_config.png)
+  ![](/img/v1.2/host-hv/remote_console_config.png)
 
 1. Specify the **Console URL**, and then click **Save**.
 
@@ -588,7 +588,7 @@ You can configure the URL of the console for remote server management. This cons
 
 1. Click **Console** to access the remote server.
 
-  ![](/img/remote_console_button.png)
+  ![](/img/v1.2/host-hv/remote_console_button.png)
 
 ## Rotate Expired Certificates
 
