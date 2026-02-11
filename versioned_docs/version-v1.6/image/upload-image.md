@@ -40,7 +40,7 @@ This issue is fixed in v1.6.1.
 
 :::
 
-![](/img/v1.2/upload-image.png)
+![](/img/v1.3/image-hv/upload-image.png)
 
 </TabItem>
 <TabItem value="api" label="API">
@@ -92,7 +92,7 @@ Currently, qcow2, raw, and ISO images are supported.
 
 :::
 
-![](/img/v1.2/upload-image-local.png)
+![](/img/v1.3/image-hv/upload-image-local.png)
 
 
 #### HTTP 413 Error in Rancher Multi-Cluster Management
@@ -175,4 +175,4 @@ You can add labels to the image, which will help identify the OS type more accur
 
 If your image name or URL contains any valid information, the UI will automatically recognize the OS type and image category for you. If not, you can also manually specify those corresponding labels on the UI.
 
-![](/img/v1.2/image-labels.png)
+![](/img/v1.3/image-hv/image-labels.png)
