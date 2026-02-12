@@ -41,7 +41,7 @@ For creating Linux virtual machines, please refer to [this page](./create-vm.md)
 1. Configure the number of `CPU` cores assigned to the VM.
 1. Configure the amount of `Memory` assigned to the VM.
 
-![create-windows-vm](/img/v1.2/vm/create-windows-vm.png)
+![create-windows-vm](/img/v1.2/vm-hv/create-windows-vm.png)
 
 :::note
 
@@ -76,7 +76,7 @@ The `bootOrder` values need to be set with the installation image first. If you 
     4. `Bus`: The value `SATA` is set by default. We recommend not changing this value.
 4. You can add additional disks using the buttons `Add Volume`, `Add Existing Volume`, `Add VM Image`, or `Add Container`.
 
-![create-windows-vm-volumes](/img/v1.2/vm/create-windows-vm-volumes.png)
+![create-windows-vm-volumes](/img/v1.2/vm-hv/create-windows-vm-volumes.png)
 
 ### Networks Tab
 
@@ -87,11 +87,11 @@ The `bootOrder` values need to be set with the installation image first. If you 
     4. `Type`: The value `masquerade` is set by default. You can keep it or change it to the other available option, `bridge`.
 2. You can add additional networks by clicking  `Add Network`.
 
-![create-windows-vm-networks](/img/v1.2/vm/create-windows-vm-networks.png)
+![create-windows-vm-networks](/img/v1.2/vm-hv/create-windows-vm-network.png)
 
 :::caution
 
-Changing the `Node Scheduling` settings can impact Harvester features, such as disabling `Live migration`.
+Changing the `Node Scheduling` settings can impact Hypervisor features, such as disabling `Live migration`.
 
 :::
 
@@ -99,7 +99,7 @@ Changing the `Node Scheduling` settings can impact Harvester features, such as d
 
 1. `Node Scheduling` is set to `Run VM on any available node` by default. You can keep it or change it to the other available options from the dropdown.
 
-![create-windows-vm-scheduling](/img/v1.2/vm/create-windows-vm-scheduling.png)
+![create-windows-vm-scheduling](/img/v1.2/vm-hv/creata-windows-vm-schaduling.png)
 
 ### Advanced Options Tab
 
@@ -115,7 +115,7 @@ Currently, only non-persistent vTPMs are supported, and their state is erased af
 
 :::
 
-![create-windows-vm-advanced](/img/v1.2/vm/create-windows-vm-advanced.png)
+![create-windows-vm-advanced](/img/v1.2/vm-hv/creata-windows-vm-advanced.png)
 
 ### Footer Section
 
@@ -128,7 +128,7 @@ And if you want to cancel all changes made, click `Cancel`.
 
 :::
 
-## Installation of Windows
+<!-- ## Installation of Windows
 
 1. Select the VM you just created, and click `Start` to boot up the VM.
 
@@ -199,7 +199,7 @@ This can be fixed by allocating at least 256MiB of reserved memory to the templa
 
 There is a known issue with Windows VM using Windows Server 2016 and above, a BSoD with error code `KMODE_EXCEPTION_NOT_HANDLED` may appears at the first boot time of Windows. We are still looking into it and will fix this issue in the future release.
 
-As a workaround, you can create or modify the file `/etc/modprobe.d/kvm.conf` within the installation of Harvester by updating `/oem/99_custom.yaml` like below:
+As a workaround, you can create or modify the file `/etc/modprobe.d/kvm.conf` within the installation of Hypervisor by updating `/oem/99_custom.yaml` like below:
 
 ```YAML
 name: Harvester Configuration
@@ -216,7 +216,7 @@ stages:
       encoding: ""
       ownerstring: ""
       # ...
-```
+``` -->
 
 :::note
 
