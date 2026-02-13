@@ -19,9 +19,9 @@ _Available as of v1.4.0_
 
 ## Background
 
-Harvester can now be installed on and booted from external disks. This is particularly useful in environments where hosts have NICs or HBA cards that support booting from external iSCSI devices or SAN storage arrays. Such diskless systems are common in large datacenters.
+Hypervisor can now be installed on and booted from external disks. This is particularly useful in environments where hosts have NICs or HBA cards that support booting from external iSCSI devices or SAN storage arrays. Such diskless systems are common in large datacenters.
 
-The following sections provide information about installing Harvester on an external iSCSI device. The workflow for SAN arrays is similar, but a different set of kernel arguments may be needed to allow Harvester to successfully boot from a SAN array.
+The following sections provide information about installing Hypervisor on an external iSCSI device. The workflow for SAN arrays is similar, but a different set of kernel arguments may be needed to allow Hypervisor to successfully boot from a SAN array.
 
 ## iSCSI-Based Installation
 
@@ -48,9 +48,9 @@ See your system provider's documentation for more information about boot setting
 
 ![target-details.png](/img/v1.4/external-disk/target-details.png)
 
-### Install Harvester
+### Install Hypervisor
 
-You can load the Harvester ISO using any of the standard methods. The installer should automatically detect the iSCSI device. Select this device when you are prompted to specify the installation disk.
+You can load the Hypervisor ISO using any of the standard methods. The installer should automatically detect the iSCSI device. Select this device when you are prompted to specify the installation disk.
 
 The information displayed on the installer differs slightly when you select an iSCSI target.
 
@@ -86,7 +86,7 @@ The `multiPathConfig` structure has changed since v1.7.0. Check the [latest conf
 
 :::
 
-The test setup uses multiple tagged VLANs, such as VLAN 2017 (used for connecting with the iSCSI volume) and VLAN 2011 (used for the Harvester management interface).
+The test setup uses multiple tagged VLANs, such as VLAN 2017 (used for connecting with the iSCSI volume) and VLAN 2011 (used for the Hypervisor management interface).
 
 The kernel argument `vlan=enp4s0f0.2017:enp4s0f0 ip=10.115.48.10::10.115.55.254:255.255.248.0::enp4s0f0.2017:none` is necessary only if the iSCSI volume is accessible via an interface on a tagged VLAN. The arguments ensure that an additional tagged interface is created during boot and that a static address is allocated to the interface. See [dracut.cmdline](https://manpages.opensuse.org/Tumbleweed/dracut/dracut.cmdline.7.en.html) for more information about configuring the kernel arguments to match your use case.
 

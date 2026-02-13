@@ -17,7 +17,7 @@ There are a couple of ways to create a USB installation flash drive.
 
 To resolve this, you can use the patched [ISO](https://releases.rancher.com/harvester/v1.2.0/harvester-v1.2.0-patch1-amd64.iso). This patched version only corrects the partition label, and there are no other changes. You can also use the related sha512 [file](https://releases.rancher.com/harvester/v1.2.0/harvester-v1.2.0-patch1-amd64.iso.sha512sum) to verify the ISO.
 
-Refer to the [Harvester interactive ISO hangs with the USB installation method](#harvester-interactive-iso-hangs-with-the-usb-installation-method) for details and a workaround.
+Refer to the [Hypervisor interactive ISO hangs with the USB installation method](#harvester-interactive-iso-hangs-with-the-usb-installation-method) for details and a workaround.
 
 No matter which tool you use, creating a bootable device erases your USB device data. Please back up all data on your USB device before making a bootable device.
 :::
@@ -27,7 +27,7 @@ No matter which tool you use, creating a bootable device erases your USB device 
 [Rufus](https://rufus.ie/) allows you to create an ISO image on your USB flash drive on a Windows computer.
 1. Open Rufus and insert a clean USB stick into your computer.
 2. Rufus automatically detects your USB. Select the USB device you want to use from the **Device** drop-down menu.
-3. For **Boot Selection**, choose **Select** and find the Harvester installation ISO image you want to burn onto the USB.
+3. For **Boot Selection**, choose **Select** and find the Hypervisor installation ISO image you want to burn onto the USB.
 
 	<img src="/img/v1.2/install-usb-hv/rufus.png" alt="Rufus setup" width="600" height="400" />
 
