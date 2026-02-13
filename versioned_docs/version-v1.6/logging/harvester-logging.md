@@ -4,7 +4,7 @@ sidebar_position: 1
 sidebar_label: Logging
 title: "Logging"
 keywords:
-- Harvester
+- Hypervisor
 - Logging
 - Audit
 - Event
@@ -16,35 +16,35 @@ keywords:
 
 _Available as of v1.2.0_
 
-It is important to know what is happening/has happened in the `Harvester Cluster`.
+It is important to know what is happening/has happened in the `Hypervisor Cluster`.
 
-`Harvester` collects the `cluster running log`, kubernetes `audit` and `event` log right after the cluster is powered on, which is helpful for monitoring, logging, auditing and troubleshooting.
+`Hypervisor` collects the `cluster running log`, kubernetes `audit` and `event` log right after the cluster is powered on, which is helpful for monitoring, logging, auditing and troubleshooting.
 
-`Harvester` supports sending those logs to various types of log servers.
+`Hypervisor` supports sending those logs to various types of log servers.
 
 :::note
-The size of logging data is related to the cluster scale, workload and other factors. `Harvester` does not use persistent storage to store log data inside the cluster. Users need to set up a log server to receive logs accordingly.
+The size of logging data is related to the cluster scale, workload and other factors. `Hypervisor` does not use persistent storage to store log data inside the cluster. Users need to set up a log server to receive logs accordingly.
 :::
 
 The logging feature is now implemented with an addon and is disabled by default in new installations.
 
-Users can enable/disable the `rancher-logging` [addon](../advanced/addons.md) from the Harvester UI after installation.
+Users can enable/disable the `rancher-logging` [addon](../advanced/addons.md) from the Hypervisor UI after installation.
 
-Users can also enable/disable the `rancher-logging` addon in their Harvester installation by customizing the [harvester-configuration](../install/harvester-configuration.md#installaddons) file.
+Users can also enable/disable the `rancher-logging` addon in their Harvester installation by customizing the [hypervisor-configuration](../install/harvester-configuration.md#installaddons) file.
 
-For Harvester clusters upgraded from version v1.1.x, the logging feature is converted to an addon automatically and kept enabled as before.
+For Hypervisor clusters upgraded from version v1.1.x, the logging feature is converted to an addon automatically and kept enabled as before.
 
 ## High-level Architecture
 
-Both Harvester and Rancher use the [Logging Operator](https://kube-logging.dev/docs/#overview) to manage specific components and operations of the internal logging infrastructure.
+Both Hypervisor and Rancher use the [Logging Operator](https://kube-logging.dev/docs/#overview) to manage specific components and operations of the internal logging infrastructure.
 
 ![](/img/v1.2/logging/logging-operator.png)
 
-In Harvester's practice, the `Logging`, `Audit` and `Event` shares one architecture, the `Logging` is the infrastructure, while the `Audit` and `Event` are on top of it.
+In Hypervisor's practice, the `Logging`, `Audit` and `Event` shares one architecture, the `Logging` is the infrastructure, while the `Audit` and `Event` are on top of it.
 
 ## Logging
 
-The Harvester logging infrastructure allows you to aggregate Harvester logs into an external service such as [Graylog](https://www.graylog.org), [Elasticsearch](https://www.elastic.co/elasticsearch/), [Splunk](https://www.splunk.com/), [Grafana Loki](https://grafana.com/oss/loki/) and others.
+The Hypervisor logging infrastructure allows you to aggregate Hypervisor logs into an external service such as [Graylog](https://www.graylog.org), [Elasticsearch](https://www.elastic.co/elasticsearch/), [Splunk](https://www.splunk.com/), [Grafana Loki](https://grafana.com/oss/loki/) and others.
 
 ### Collected Logs
 See below for a list logs that are collected:
@@ -137,7 +137,7 @@ To prevent the error from occurring again, perform the following actions before 
 
 ### Configuring Log Destinations
 
-Logging operations are backed by the [Logging Operator](https://kube-logging.dev/docs/#overview) and controlled using Fluentd resources, particularly [Flow and ClusterFlow](https://kube-logging.dev/docs/configuration/flow/) and [Outputs and ClusterOutput](https://kube-logging.dev/docs/configuration/output/). You can route and filter logs by applying these CRDs to the Harvester cluster.
+Logging operations are backed by the [Logging Operator](https://kube-logging.dev/docs/#overview) and controlled using Fluentd resources, particularly [Flow and ClusterFlow](https://kube-logging.dev/docs/configuration/flow/) and [Outputs and ClusterOutput](https://kube-logging.dev/docs/configuration/output/). You can route and filter logs by applying these CRDs to the Hypervisor cluster.
 
 When applying new `Outputs` and `Flows` to the cluster, it can take some time for the logging operator to effectively apply them. So please allow a few minutes for the logs to start flowing.
 
@@ -166,15 +166,15 @@ UI images are for `Output` and `Flow` whose configuration process is almost iden
  4. Select the logging type.
  5. Select the logging output type.
 
-![](/img/v1.2/logging/create-output.png)
+![](/img/v1.2/logging-hv/create-output.png)
 
  6. Configure the output buffer if necessary.
 
-![](/img/v1.2/logging/create-output-buffer.png)
+![](/img/v1.2/logging-hv/create-output-buffer.png)
 
  7. Add any labels or annotations.
 
-![](/img/v1.2/logging/create-output-labels-and-annotations.png)
+![](/img/v1.2/logging-hv/create-output-labels-and-annotations.png)
 
  8. Once done, click `Create` on the lower right.
 
@@ -201,7 +201,7 @@ You can append labels and annotations to the created resource.
  3. Add a name for the resource.
  4. Select any nodes whose logs to include or exclude.
 
-![](/img/v1.2/logging/create-flow-matches.png)
+![](/img/v1.2/logging-hv/create-flow-matches.png)
 
  5. Select target `Outputs` and `ClusterOutputs`.
 
@@ -315,7 +315,7 @@ sudo docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e xpack.security
 
 :::note
 
-To use Elasticsearch with Harvester v1.5.0, ensure that the Elasticsearch server is running version 8.11.0 or later.
+To use Elasticsearch with Hypervisor v1.5.0, ensure that the Elasticsearch server is running version 8.11.0 or later.
 
 You must upgrade Elasticsearch when the `rancher-logging-root-fluentd-0` pod reports an error such as `#0 unexpected error error_class=Elastic::Transport::Transport::Error error="no address for http (Resolv::ResolvError)" Client can’t recognise the server.`.
 
@@ -517,7 +517,7 @@ spec:
 
 ## Audit
 
-Harvester collects Kubernetes `audit` and is able to send the `audit` to various types of log servers.
+Hypervisor collects Kubernetes `audit` and is able to send the `audit` to various types of log servers.
 
 The policy file to guide `kube-apiserver` is [here](https://github.com/harvester/harvester-installer/blob/5991dcf6307aa5da79c5d6926566541f48105778/pkg/config/templates/rke2-92-harvester-kube-audit-policy.yaml).
 
@@ -564,17 +564,17 @@ Kubernetes apiserver logs audit with following JSON format into a local file.
 
 #### Audit Log Format before Being Sent to Log Servers
 
-Harvester keeps the `audit` log unchanged before sending it to the log server.
+Hypervisor keeps the `audit` log unchanged before sending it to the log server.
 
 ### Audit Log Output/ClusterOutput
 
 To output audit related log, the `Output`/`ClusterOutput` requires the value of `loggingRef` to be `harvester-kube-audit-log-ref`.
 
-When you configure from the Harvester dashboard, the field is added automatically.
+When you configure from the Hypervisor dashboard, the field is added automatically.
 
 Select type `Audit Only` from the `Type` drpo-down list.
 
-![](/img/v1.2/logging/cluster-output-type.png)
+![](/img/v1.2/logging-hv/cluster-output-type.png)
 
 When you configure from the CLI, please add the field manually.
 
@@ -603,11 +603,11 @@ spec:
 
 To route audit related logs, the `Flow`/`ClusterFlow` requires the value of `loggingRef` to be `harvester-kube-audit-log-ref`.
 
-When you configure from the Harvester dashboard, the field is added automatically.
+When you configure from the Hypervisor dashboard, the field is added automatically.
 
 Select type `Audit`.
 
-![](/img/v1.2/logging/cluster-flow-type.png)
+![](/img/v1.2/logging-hv/cluster-flow-type.png)
 
 When you config from the CLI, please add the field manually.
 
@@ -625,11 +625,11 @@ spec:
   loggingRef: harvester-kube-audit-log-ref  # this reference is fixed and must be here
 ```
 
-### Harvester
+### Hypervisor
 
 ## Event
 
-Harvester collects Kubernetes `event` and is able to send the `event` to various types of log servers.
+Hypervisor collects Kubernetes `event` and is able to send the `event` to various types of log servers.
 
 ### Event Definition
 
@@ -708,17 +708,17 @@ Events share the `Output`/`ClusterOutput` with `Logging`.
 
 Select `Logging/Event` from the `Type` drop-down list.
 
-![](/img/v1.2/logging/cluster-output-type.png)
+![](/img/v1.2/logging-hv/cluster-output-type.png)
 
 ### Event Log Flow/ClusterFlow
 
 Compared with the normal Logging `Flow`/`ClusterFlow`, the `Event` related `Flow`/`ClusterFlow`, has one more match field with the value of `event-tailer`.
 
-When you configure from the Harvester dashboard, the field is added automatically.
+When you configure from the Hypervisor dashboard, the field is added automatically.
 
 Select `Event` from the `Type` drop-down list.
 
-![](/img/v1.2/logging/cluster-flow-type.png)
+![](/img/v1.2/logging-hv/cluster-flow-type.png)
 
 When you configure from the CLI, please add the field manually.
 
