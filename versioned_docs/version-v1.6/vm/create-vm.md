@@ -46,7 +46,7 @@ Please refer to [this page](./create-windows-vm.md) for creating Windows virtual
 1. (Optional) Set workload affinity rules on the **VM Scheduling** tab.
 1. Advanced options such as run strategy, os type and cloud-init data are optional. You may configure these in the **Advanced Options** section when applicable.
 
-![create-vm](/img/v1.2/vm/create-vm.png)
+![create-vm](/img/v1.2/vm-hv/create-vm.png)
 </TabItem>
 <TabItem value="api" label="API">
 
@@ -159,11 +159,11 @@ If you are using external storage, ensure that the correct **StorageClass** and 
 
 When creating volumes from a VM image, ensure that the volume size is greater than or equal to the image size. The volume may become corrupted if the configured volume size is less than the size of the underlying image. This is particularly important for qcow2 images because the virtual size is typically greater than the physical size.
 
-By default, Harvester sets the volume size to either 10 GiB or the virtual size of the VM image, whichever is greater.
+By default, Hypervisor sets the volume size to either 10 GiB or the virtual size of the VM image, whichever is greater.
 
 :::
 
-![create-vm](/img/v1.2/vm/create-vm-volumes.png)
+![create-vm](/img/v1.2/vm-hv/create-vm-volumes.png)
 
 ### Adding a container disk
 
@@ -175,7 +175,7 @@ A container disk is added when creating a VM by providing a Docker image. When c
 
 1. Go to the **Volumes** tab.
 1. Select **Add Container**.
-  ![add-container-volume](/img/v1.2/vm/add-container-volume-1.png)
+  ![add-container-volume](/img/v1.2/vm-hv/add-container-volume-1.png)
 1. Enter a **Name** for the container disk.
 1. Choose a disk **Type**.
 1. Add a **Docker Image**.
@@ -183,7 +183,7 @@ A container disk is added when creating a VM by providing a Docker image. When c
     - Raw and qcow2 formats are supported, but qcow2 is recommended in order to reduce the container image's size. If you use an unsupported image format, the VM will get stuck in a `Running` state.
     - A container disk also allows you to store disk images in the `/disk` directory. An example of creating such a container image can be found [here](https://kubevirt.io/user-guide/virtual_machines/disks_and_volumes/#containerdisk-workflow-example).
 1. Choose a **Bus** type.
-  ![add-container-volume](/img/v1.2/vm/add-container-volume-2.png)
+  ![add-container-volume](/img/v1.2/vm-hv/add-container-volume-2.png)
 
 ## Networks
 
@@ -204,7 +204,7 @@ By default, VMs are accessible through the management network within the cluster
 
 ### Secondary Network
 
-It is also possible to connect VMs using additional networks with Harvester's built-in [VLAN networks](../networking/harvester-network.md).
+It is also possible to connect VMs using additional networks with Hypervisor's built-in [VLAN networks](../networking/harvester-network.md).
 
 In bridge VLAN, virtual machines are connected to the host network through a linux `bridge`. The network IPv4 address is delegated to the virtual machine via DHCPv4. The virtual machine should be configured to use DHCP to acquire IPv4 addresses.
 
@@ -212,7 +212,7 @@ In bridge VLAN, virtual machines are connected to the host network through a lin
 
 `Node Scheduling` allows you to constrain which nodes your VMs can be scheduled on based on node labels.
 
-![vm-node-scheduling](/img/v1.6/vm/vm-node-scheduling.png)
+![vm-node-scheduling](/img/v1.2/vm-hv/vm-node-scheduling.png)
 
 You can choose to run virtual machines on the following:
 
@@ -263,13 +263,13 @@ See the [Kubernetes Pod Affinity and Anti-Affinity Documentation](https://kubern
 
 ### Automatically Applied Affinity Rules
 
-Harvester might automatically apply certain affinity rules based on the definition of virtual machine. These rules dictate which nodes are eligible as scheduling/migration targets. If no nodes meet the criteria, the virtual machine fails to be scheduled/migrated.
+Hypervisor might automatically apply certain affinity rules based on the definition of virtual machine. These rules dictate which nodes are eligible as scheduling/migration targets. If no nodes meet the criteria, the virtual machine fails to be scheduled/migrated.
 
 For more information, see [Unschedulable Virtual Machine](../troubleshooting/vm.md#unschedulable-virtual-machine).
 
 :::info important
 
-The Harvester webhook reverts manual changes to automatically applied rules.
+The Hypervisor webhook reverts manual changes to automatically applied rules.
 
 :::
 
@@ -293,9 +293,9 @@ Following example lists the processes to set up a cluster network and define a v
 - A virtual machine named `VM vm1` attaches to a secondary network named `cn2-nad-100`.
 
 
-Harvester ensures the following:
+Hypervisor ensures the following:
 
-- The Harvester controller automatically labels Kubernetes `node` objects.
+- The Hypervisor controller automatically labels Kubernetes `node` objects.
 
 `kubectl get node node1 -oyaml`
 
@@ -309,7 +309,7 @@ metadata:
 ...
 ```
 
-- The Harvester webhook automatically updates the `virtualmachine` object.
+- The Hypervisor webhook automatically updates the `virtualmachine` object.
 
 ```
 spec:
@@ -330,7 +330,7 @@ spec:
 
 :::info important
 
-Harvester applies multiple affinity rules when a virtual machine connects to multiple VM networks that are backed by multi cluster networks. The applied rules collectively determine the nodes that are eligible as scheduling/migration targets.
+Hypervisor applies multiple affinity rules when a virtual machine connects to multiple VM networks that are backed by multi cluster networks. The applied rules collectively determine the nodes that are eligible as scheduling/migration targets.
 
 No affinity rules are applied when a virtual machine connects to VM networks that are backed by [`mgmt`](../networking/clusternetwork.md#built-in-cluster-network) (the built-in cluster network). `mgmt` covers all nodes by default, so all nodes are eligible as scheduling/migration targets.
 
@@ -344,7 +344,7 @@ The virtual machine is [non-migratable](./live-migration.md#non-migratable-virtu
 
 #### Related CPU Pinning Concepts
 
-When you enable the [CPU Manager](./cpu-pinning.md#enable-and-disable-cpu-manager) on nodes, Harvester applies the following label to related `node` objects.
+When you enable the [CPU Manager](./cpu-pinning.md#enable-and-disable-cpu-manager) on nodes, Hypervisor applies the following label to related `node` objects.
 
 ```
 ...
@@ -354,7 +354,7 @@ metadata:
 ...
 ```
 
-When you enable [CPU Pinning](./cpu-pinning.md#enable-cpu-pinning-on-a-new-vm) during virtual machine creation, Harvester applies an affinity rule that ensures the virtual machine is scheduled only on nodes where CPU Manager is enabled.
+When you enable [CPU Pinning](./cpu-pinning.md#enable-cpu-pinning-on-a-new-vm) during virtual machine creation, Hypervisor applies an affinity rule that ensures the virtual machine is scheduled only on nodes where CPU Manager is enabled.
 
 ```
 spec:
@@ -379,9 +379,9 @@ The virtual machine is [non-migratable](./live-migration.md#non-migratable-virtu
 
 ## Annotations
 
-Harvester allows you to attach custom metadata to virtual machines using annotations. These key-value pairs enable extended features or behaviors without requiring changes to the core virtual machine configuration.
+Hypervisor allows you to attach custom metadata to virtual machines using annotations. These key-value pairs enable extended features or behaviors without requiring changes to the core virtual machine configuration.
 
-You can use the `harvesterhci.io/custom-ip` annotation to set an IP address on the Harvester UI *for display purposes*. This is useful when the virtual machine is unable to report its IP address because of a missing `qemu-guest-agent` or other reasons.
+You can use the `harvesterhci.io/custom-ip` annotation to set an IP address on the Hypervisor UI *for display purposes*. This is useful when the virtual machine is unable to report its IP address because of a missing `qemu-guest-agent` or other reasons.
 
 ## Advanced Options
 
@@ -389,7 +389,7 @@ You can use the `harvesterhci.io/custom-ip` annotation to set an IP address on t
 
 _Available as of v1.0.2_
 
-Prior to v1.0.2, Harvester used the `Running` (a boolean) field to determine if the VM instance should be running. However, a simple boolean value is not always sufficient to fully describe the user's desired behavior. For example, in some cases the user wants to be able to shut down the instance from inside the virtual machine. If the `running` field is used, the VM will be restarted immediately.
+Prior to v1.0.2, Hypervisor used the `Running` (a boolean) field to determine if the VM instance should be running. However, a simple boolean value is not always sufficient to fully describe the user's desired behavior. For example, in some cases the user wants to be able to shut down the instance from inside the virtual machine. If the `running` field is used, the VM will be restarted immediately.
 
 In order to meet the scenario requirements of more users, the `RunStrategy` field is introduced. This is mutually exclusive with `Running` because their conditions overlap somewhat. There are currently four `RunStrategies` defined:
 
@@ -404,11 +404,11 @@ In order to meet the scenario requirements of more users, the `RunStrategy` fiel
 
 ### Reserved Memory
 
-Each VM is configured with a memory value, this memory is targeted for the VM guest OS to see and use. In Harvester, the VM is carried by a Kubernetes POD. The memory limitation is achieved by Kubernetes [Resource requests and limits of Pod and container](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-requests-and-limits-of-pod-and-container). Certain amount of memory is required to simulate and manage the `CPU/Memory/Storage/Network/...` for the VM to run. Harvester and KubeVirt summarize such additional memory as the VM `Memory Overhead`. The `Memory Overhead` is computed by a complex formula. However, sometimes the OOM(Out Of Memory) can still happen and the related VM is killed by the Harvester OS, the direct cause is that the whole POD/Container exceeds its memory limits. From practice, the `Memory Overhead` varies on different kinds of VM, different kinds of VM operating system, and also depends on the running workloads on the VM.
+Each VM is configured with a memory value, this memory is targeted for the VM guest OS to see and use. In Hypervisor, the VM is carried by a Kubernetes POD. The memory limitation is achieved by Kubernetes [Resource requests and limits of Pod and container](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-requests-and-limits-of-pod-and-container). Certain amount of memory is required to simulate and manage the `CPU/Memory/Storage/Network/...` for the VM to run. Hypervisor and KubeVirt summarize such additional memory as the VM `Memory Overhead`. The `Memory Overhead` is computed by a complex formula. However, sometimes the OOM(Out Of Memory) can still happen and the related VM is killed by the Hypervisor OS, the direct cause is that the whole POD/Container exceeds its memory limits. From practice, the `Memory Overhead` varies on different kinds of VM, different kinds of VM operating system, and also depends on the running workloads on the VM.
 
-Harvester adds a `Reserved Memory` field and a setting `additional-guest-memory-overhead-ratio` for users to adjust the guest OS memory and the `Total Memory Overhead`.
+Hypervisor adds a `Reserved Memory` field and a setting `additional-guest-memory-overhead-ratio` for users to adjust the guest OS memory and the `Total Memory Overhead`.
 
-The `Total Memory Overhead` = automatically computed `Memory Overhead` + Harvester `Reserved Memory`.
+The `Total Memory Overhead` = automatically computed `Memory Overhead` + Hypervisor `Reserved Memory`.
 
 All the details are described in the setting [additional-guest-memory-overhead-ratio](../advanced/settings.md#additional-guest-memory-overhead-ratio).
 
@@ -421,7 +421,7 @@ Read the document carefully, understand how it works and set a proper value on t
 
 ### Cloud Configuration
 
-Harvester supports the ability to assign a startup script to a virtual machine instance which is executed automatically when the VM initializes.
+Hypervisor supports the ability to assign a startup script to a virtual machine instance which is executed automatically when the VM initializes.
 
 These scripts are commonly used to automate injection of users and SSH keys into VMs in order to provide remote access to the machine. For example, a startup script can be used to inject credentials into a VM that allows an Ansible job running on a remote host to access and provision the VM.
 
@@ -429,7 +429,7 @@ These scripts are commonly used to automate injection of users and SSH keys into
 #### Cloud-init
 [Cloud-init](https://cloudinit.readthedocs.io/en/latest/) is a widely adopted project and the industry standard multi-distribution method for cross-platform cloud instance initialization. It is supported across all major cloud image provider like SUSE, Redhat, Ubuntu and etc., cloud-init has established itself as the defacto method of providing startup scripts to VMs.
 
-Harvester supports injecting your custom cloud-init startup scripts into a VM instance through the use of an ephemeral disk. VMs with the cloud-init package installed will detect the ephemeral disk and execute custom user-data and network-data scripts at boot.
+Hypervisor supports injecting your custom cloud-init startup scripts into a VM instance through the use of an ephemeral disk. VMs with the cloud-init package installed will detect the ephemeral disk and execute custom user-data and network-data scripts at boot.
 
 
 
@@ -484,7 +484,9 @@ The QEMU guest agent is a daemon that runs on the virtual machine instance and p
 
 `Install guest agent` checkbox is enabled by default when a new VM is created.
 
-![](/img/v1.2/vm/qga.png)
+![](/img/v1.2/vm-hv/qga-1.png)
+
+![](/img/v1.2/vm-hv/qga-2.png)
 
 :::note
 
@@ -500,7 +502,7 @@ _Available as of v1.2.0_
 
 According to [Windows 11 Requirements](https://learn.microsoft.com/en-us/windows/whats-new/windows-11-requirements), the TPM 2.0 device is a hard requirement of Windows 11.
 
-In the Harvester UI, you can add an emulated TPM 2.0 device to a VM by checking the `Enable TPM` box in the **Advanced Options** tab.
+In the Hypervisor UI, you can add an emulated TPM 2.0 device to a VM by checking the `Enable TPM` box in the **Advanced Options** tab.
 
 :::note
 
@@ -520,7 +522,7 @@ The following example describes how to install an ISO image using [openSUSE Leap
 4. Click **Add Volume** and select an existing **StorageClass**.
 5. Drag **Volume** to the top of **Image Volume** as follows. In this way, the **bootOrder** of **Volume** will become `1`.
 
-![one-time-boot-create-vm-bootorder](/img/v1.2/vm/one-time-boot-create-vm-bootorder.png)
+![one-time-boot-create-vm-bootorder](/img/v1.2/vm-hv/one-time-boot-create-vm-bootorder.png)
 
 6. Click **Create**.
 7. Open the VM web-vnc you just created and follow the instructions given by the installer.

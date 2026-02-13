@@ -1,4 +1,5 @@
 {
     "position": 4,
-    "label": "Upgrade"
+    "label": "Upgrade",
+    "className": "hide-sidebar-item"
 }
