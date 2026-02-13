@@ -1,14 +1,14 @@
----
+ypervisor---
 sidebar_position: 5
-sidebar_label: Harvester Configuration
-title: "Harvester Configuration"
+sidebar_label: Hypervisor Configuration
+title: "Hypervisor Configuration"
 keywords:
-  - Harvester
+  - Hypervisor
   - harvester
   - Rancher
   - rancher
-  - Harvester Configuration
-description: Harvester configuration file can be provided during manual or automatic installation to configure various settings.
+  - Hypervisor Configuration
+description: Hypervisor configuration file can be provided during manual or automatic installation to configure various settings.
 ---
 
 <head>
@@ -17,7 +17,7 @@ description: Harvester configuration file can be provided during manual or autom
 
 ## Configuration Example
 
-Harvester configuration file can be provided during manual or automatic installation to configure various settings. The following is a configuration example:
+Hypervisor configuration file can be provided during manual or automatic installation to configure various settings. The following is a configuration example:
 
 ```yaml
 scheme_version: 1
@@ -106,8 +106,8 @@ Below is a reference of all configuration keys.
 :::
 
 :::note
-**Configuration Priority**: When you provide a remote Harvester Configuration file during the install of Harvester, the Harvester Configuration file will not overwrite the values for the inputs you had previously filled out and selected.  Priority is given to the values that you input during the guided install.
-For instance, if you have in your Harvester Configuration file specified `os.hostname` and during install you fill in the field of `hostname` when prompted, the value that you filled in will take priority over your Harvester Configuration's `os.hostname`.
+**Configuration Priority**: When you provide a remote Hypervisor Configuration file during the install of Hypervisor, the Hypervisor Configuration file will not overwrite the values for the inputs you had previously filled out and selected.  Priority is given to the values that you input during the guided install.
+For instance, if you have in your Hypervisor Configuration file specified `os.hostname` and during install you fill in the field of `hostname` when prompted, the value that you filled in will take priority over your Hypervisor Configuration's `os.hostname`.
 :::
 
 ### `scheme_version`
@@ -116,10 +116,10 @@ For instance, if you have in your Harvester Configuration file specified `os.hos
 
 The version of scheme reserved for future configuration migration.
 
-This configuration is mandatory for migrating the configuration to a new scheme version. It tells Harvester the previous version and the need to migrate.
+This configuration is mandatory for migrating the configuration to a new scheme version. It tells Hypervisor the previous version and the need to migrate.
 
 :::note
-This field didn't take any effect in the current Harvester version.
+This field didn't take any effect in the current Hypervisor version.
 :::
 
 :::caution
@@ -130,13 +130,13 @@ Make sure that your custom configuration always has the correct scheme version.
 
 #### Definition
 
-`server_url` is the URL of the Harvester cluster, which is used for the new `node` to join the cluster.
+`server_url` is the URL of the Hypervisor cluster, which is used for the new `node` to join the cluster.
 
 This configuration is mandatory when the installation is in `JOIN` mode. The default format of `server_url` is `https://cluster-VIP:443`.
 
 :::note
 
-To ensure a high availability (HA) Harvester cluster, please use either the Harvester cluster [VIP](#installvip) or a domain name in `server_url`.
+To ensure a high availability (HA) Hypervisor cluster, please use either the Hypervisor cluster [VIP](#installvip) or a domain name in `server_url`.
 
 :::
 
@@ -155,7 +155,7 @@ install:
 The cluster secret or node token. If the value matches the format of a node token it will
 automatically be assumed to be a node token. Otherwise it is treated as a cluster secret.
 
-In order for a new node to join the Harvester cluster, the token should match what the server has.
+In order for a new node to join the Hypervisor cluster, the token should match what the server has.
 
 #### Example
 
@@ -232,7 +232,7 @@ The `os.persistent_state_paths` option allows you to configure custom paths wher
 
 #### Example
 
-Refer to the following example config for installing `rook-ceph` in Harvester:
+Refer to the following example config for installing `rook-ceph` in Hypervisor:
 
 ```yaml
 os:
@@ -252,7 +252,7 @@ You can add additional software packages with `after_install_chroot_commands`. T
 
 #### Example
 
-Refer to the following example config for installing an RPM package in Harvester:
+Refer to the following example config for installing an RPM package in Hypervisor:
 
 ```yaml
 os:
@@ -275,7 +275,7 @@ os:
 
 :::note
 
-Upgrading Harvester causes the changes to the OS in the `after-install-chroot` stage to be lost. You must also configure the `after-upgrade-chroot` to make your changes persistent across an upgrade. Refer to [Runtime persistent changes](https://rancher.github.io/elemental-toolkit/docs/customizing/runtime_persistent_changes/) before upgrading Harvester.
+Upgrading Hypervisor causes the changes to the OS in the `after-install-chroot` stage to be lost. You must also configure the `after-upgrade-chroot` to make your changes persistent across an upgrade. Refer to [Runtime persistent changes](https://rancher.github.io/elemental-toolkit/docs/customizing/runtime_persistent_changes/) before upgrading Hypervisor.
 
 :::
 
@@ -362,7 +362,7 @@ If you set a password at runtime it will be reset on the next boot. The
 value of the password can be clear text or an encrypted form. The easiest way to get this encrypted
 form is to change your password on a Linux system and copy the value of the second field from
 `/etc/shadow`. You can also encrypt a password using OpenSSL. For the encryption algorithms
-supported by Harvester, please refer to the table below.
+supported by Hyypervisor, please refer to the table below.
 
 | Algorithm | Command | Support |
 |:---:|:---:|:---:|
@@ -406,7 +406,7 @@ os:
 :::note
 
 This example sets the HTTP(S) proxy for **foundational OS components**.
-To set up an HTTP(S) proxy for Harvester components such as fetching external images and backup to S3 services,
+To set up an HTTP(S) proxy for Hypervisor components such as fetching external images and backup to S3 services,
 see [Settings/http-proxy](../advanced/settings.md#http-proxy).
 
 :::
@@ -431,7 +431,7 @@ os:
 
 #### Definition
 
-Subsystem used to configure the OpenSSH Daemon (sshd). Harvester currently only supports `sftp`.
+Subsystem used to configure the OpenSSH Daemon (sshd). Hypervisor currently only supports `sftp`.
 
 #### Example
 
@@ -448,7 +448,7 @@ os:
 
 **Versions**: v1.2.0 and later
 
-**Definition**: Setting that defines the default addon status. Harvester addons are disabled by default.
+**Definition**: Setting that defines the default addon status. Hypervisor addons are disabled by default.
 
 **Supported values**:
 - `vm-import-controller` (chartName: harvester-vm-import-controller)
@@ -497,7 +497,7 @@ install:
 
 ### `install.device`
 
-**Definition**: Device on which the Harvester OS is installed.
+**Definition**: Device on which the Hypervisor OS is installed.
 
 When installing via PXE, use `/dev/disk/by-id/$id` or `/dev/disk/by-path/$path` to specify the storage device if the server contains multiple physical volumes.
 
@@ -511,9 +511,9 @@ When installing via PXE, use `/dev/disk/by-id/$id` or `/dev/disk/by-path/$path` 
 
 **Definition**: Setting that forces usage of MBR partitioning on BIOS systems.
 
-Harvester uses GPT partitioning on UEFI and BIOS systems by default. Compatibility issues may require you to use MBR partitioning instead.
+Hypervisor uses GPT partitioning on UEFI and BIOS systems by default. Compatibility issues may require you to use MBR partitioning instead.
 
-If you specify the same storage device for both `install.device` and `install.data_disk`, Harvester creates an additional partition for storing VM data. This additional partition is not created when you force usage of MBR partitioning. Instead, VM data is stored in a partition that stores OS data.
+If you specify the same storage device for both `install.device` and `install.data_disk`, Hypervisor creates an additional partition for storing VM data. This additional partition is not created when you force usage of MBR partitioning. Instead, VM data is stored in a partition that stores OS data.
 
 **Example**:
 
@@ -528,7 +528,7 @@ install:
 
 **Definition**: Percentage of the total allocatable CPU on each node to be reserved for each Longhorn Instance Manager pod.
 
-Using the default value is recommended for high system availability. When deploying single-node Harvester clusters, you can specify a value less than 12.
+Using the default value is recommended for high system availability. When deploying single-node Hypervisor clusters, you can specify a value less than 12.
 
 For more information about how to set the correct value, see [Guaranteed Instance Manager CPU](https://longhorn.io/docs/1.6.0/references/settings/#guaranteed-instance-manager-cpu) in the Longhorn documentation.
 
@@ -549,9 +549,9 @@ For more information about how to set the correct value, see [Guaranteed Instanc
 
 **Versions**: v1.1.2 and later
 
-**Definition**: Replica count of the default Harvester StorageClass `harvester-longhorn`.
+**Definition**: Replica count of the default Hypervisor StorageClass `harvester-longhorn`.
 
-Using the default value is recommended for high storage availability. When deploying single-node Harvester clusters, you must set the value to 1.
+Using the default value is recommended for high storage availability. When deploying single-node Hypervisor clusters, you must set the value to 1.
 
 For more information, see [Default Replica Count](https://longhorn.io/docs/1.6.0/references/settings/#default-replica-count) in the Longhorn documentation.
 
@@ -570,17 +570,17 @@ install:
 
 ### `install.iso_url`
 
-**Definition**: URL of ISO image to be downloaded and used to install Harvester when booting from the kernel or vmlinuz.
+**Definition**: URL of ISO image to be downloaded and used to install Hypervisor when booting from the kernel or vmlinuz.
 
 ### `install.management_interface`
 
 **Definition**: Network interfaces for the host machine.
 
-Harvester uses the [systemd net naming scheme](https://www.freedesktop.org/software/systemd/man/systemd.net-naming-scheme.html). Ensure that the interface name is present on the target machine before installation.
+Hypervisor uses the [systemd net naming scheme](https://www.freedesktop.org/software/systemd/man/systemd.net-naming-scheme.html). Ensure that the interface name is present on the target machine before installation.
 
 **Fields**:
 - `method`: Method used to assign an IP to the network. Supported values:
-  - `dhcp`: Harvester requests an IP from the DHCP server.
+  - `dhcp`: Hypervisor requests an IP from the DHCP server.
   - `static`: IP and gateway addresses are manually assigned.
 - `ip`: Static IP assigned to the network. This field is required when the value of `method` is `static`.
 - `subnet_mask`: Subnet mask of the network. This field is required when the value of `method` is `static`.
@@ -615,11 +615,11 @@ install:
 
 ### `install.mode`
 
-**Definition**: Mode of installing Harvester.
+**Definition**: Mode of installing Hypervisor.
 
 **Supported values**:
-- `create`: Create a new Harvester installation.
-- `join`: Join an existing Harvester installation. You must specify the `server_url`.
+- `create`: Create a new Hypervisor installation.
+- `join`: Join an existing Hypervisor installation. You must specify the `server_url`.
 
 **Example**:
 
@@ -657,10 +657,10 @@ install:
 
 ### `install.role`
 
-**Definition**: Role assigned to a node at the time of installation. When unspecified, Harvester assigns the `default` role.
+**Definition**: Role assigned to a node at the time of installation. When unspecified, Hypervisor assigns the `default` role.
 
 - `default`: Allows a node to function as a management node or a worker node.
-- `management`: Allows a node to be prioritized when Harvester promotes nodes to management nodes.
+- `management`: Allows a node to be prioritized when Hypervisor promotes nodes to management nodes.
 - `worker`: Restricts a node to being a worker node (never promoted to management node) in a specific cluster.
 - `witness`: Restricts a node to being a witness node (only functions as an etcd node) in a specific cluster.
 
@@ -698,17 +698,17 @@ install:
 
 ### `install.vip`
 
-**Definition**: VIP of the Harvester management endpoint.
+**Definition**: VIP of the Hypervisor management endpoint.
 
-After installation, you can access the Harvester UI at `https://<VIP>`.
+After installation, you can access the Hypervisor UI at `https://<VIP>`.
 
 ### `install.vip_mode`
 
 **Definition**: Mode of assigning the VIP.
 
 **Supported values**:
-- `dhcp`: Harvester sends DHCP requests to get the VIP. You must specify the hardware address using the `install.vip_hw_addr` field.
-- `static`: Harvester uses a static VIP.
+- `dhcp`: Hypervisor sends DHCP requests to get the VIP. You must specify the hardware address using the `install.vip_hw_addr` field.
+- `static`: Hypervisor uses a static VIP.
 
 **Example**:
 
@@ -735,7 +735,7 @@ install:
 
 ### `install.cluster_pod_cidr`
 
-**Definition**: CIDR of the Harvester pods.
+**Definition**: CIDR of the Hypervisor pods.
 
 Use this field to override the default pod CIDR of 10.52.0.0/16.
 
@@ -748,7 +748,7 @@ install:
 
 ### `install.cluster_service_cidr`
 
-**Definition**: CIDR of the Harvester services.
+**Definition**: CIDR of the Hypervisor services.
 
 Use this field to override the default service CIDR of 10.53.0.0/16.
 
@@ -767,7 +767,7 @@ install:
 
 ### `install.cluster_dns`
 
-**Definition**: IP of the Harvester DNS service.
+**Definition**: IP of the Hypervisor DNS service.
 
 Use this field to override the default DNS service IP of 10.53.0.10.
 
@@ -798,8 +798,8 @@ The installer sends HTTP requests to the specified URL. Multiple requests can be
   - `FAILED`: The installation was unsuccessful.
 - `method`: HTTP method
 - `url`: URL to which HTTP requests are sent
-- `insecure`: When set to `true`, Harvester does not verify the server's certificate. The default value is `false`.
-- `basicAuth`: When set to `true`, Harvester uses the "Basic" HTTP authentication scheme.
+- `insecure`: When set to `true`, Hypervisor does not verify the server's certificate. The default value is `false`.
+- `basicAuth`: When set to `true`, Hypervisor uses the "Basic" HTTP authentication scheme.
 - `headers`: When set to `true`, custom headers are included in the HTTP requests. Headers such as `Content-Length` are automatically included.
 - `payload`*: When set to `true`, payload data is sent with the HTTP requests. You may need to set the correct Content-Type header in the `headers` field to ensure that the server accepts the request.
 
@@ -865,7 +865,7 @@ install:
 
 **Definition**: Setting that determines if images are pulled from the internet after installation.
 
-The value of this field is typically derived from the kernel parameter `harvester.install.with_net_images`. When the value is `true`, Harvester does not preload images packaged in the installation medium, and instead pulls images from the internet when necessary.
+The value of this field is typically derived from the kernel parameter `harvester.install.with_net_images`. When the value is `true`, Hypervisor does not preload images packaged in the installation medium, and instead pulls images from the internet when necessary.
 
 ---
 <p>&nbsp;</p>
@@ -874,14 +874,14 @@ The value of this field is typically derived from the kernel parameter `harveste
 
 #### Definition
 
-You can overwrite the default Harvester system settings by configuring `system_settings`.
+You can overwrite the default Hypervisor system settings by configuring `system_settings`.
 See the [Settings](../advanced/settings.md) page for additional information and the list of all the options.
 
 :::note
 
-Overwriting system settings only works when Harvester is installed in "create" mode.
-If you install Harvester in "join" mode, this setting is ignored.
-Installing in "join" mode will adopt the system settings from the existing Harvester system.
+Overwriting system settings only works when Hypervisor is installed in "create" mode.
+If you install Hypervisor in "join" mode, this setting is ignored.
+Installing in "join" mode will adopt the system settings from the existing Hypervisor system.
 
 :::
 

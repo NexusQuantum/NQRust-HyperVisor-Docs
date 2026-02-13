@@ -2,6 +2,7 @@
 sidebar_position: 11
 sidebar_label: Post-installation steps
 title: "Post-Installation Steps"
+draft: true
 keywords:
   - Harvester
   - Installation
@@ -13,7 +14,7 @@ description: Post-installation steps.
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/install/post-install"/>
 </head>
 
-You can enhance the security and performance of your Harvester cluster by performing the following procedures after installation is completed.
+You can enhance the security and performance of your Hypervisor cluster by performing the following procedures after installation is completed.
 
 ## Disable SSH Password
 

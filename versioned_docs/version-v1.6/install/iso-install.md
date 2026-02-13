@@ -4,21 +4,21 @@ sidebar_position: 2
 sidebar_label: ISO Installation
 title: "ISO Installation"
 keywords:
-  - Harvester
+  - Hypervisor
   - harvester
   - Rancher
   - rancher
   - ISO Installation
-description: To get the Harvester ISO, download it from the Github releases. During the installation you can either choose to form a new cluster, or join the node to an existing cluster.
+description: To get the Hypervisor ISO, download it from the Github releases. During the installation you can either choose to form a new cluster, or join the node to an existing cluster.
 ---
 
 <head>
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.7/install/index"/>
 </head>
 
-Harvester ships as a bootable appliance image, you can install it directly on a bare metal server with the ISO image. To get the ISO image, download **💿 harvester-v1.x.x-amd64.iso** from the [Harvester releases](https://github.com/harvester/harvester/releases) page.
+Hypervisor ships as a bootable appliance image, you can install it directly on a bare metal server with the ISO image. To get the ISO image, download **💿 harvester-v1.x.x-amd64.iso** from the [Hypervisor releases](https://github.com/harvester/harvester/releases) page.
 
-During the installation, you can either choose to **create a new Harvester cluster** or **join the node to an existing Harvester cluster**.
+During the installation, you can either choose to **create a new Hypervisor cluster** or **join the node to an existing Hypervisor cluster**.
 
 The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an ISO installation.
 
@@ -28,7 +28,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 ## Installation Steps
 
-1. Mount the Harvester ISO file and boot the server by selecting the `Harvester Installer` option.
+1. Mount the Hypervisor ISO file and boot the server by selecting the `Hypervisor Installer` option.
 
    ![iso-installation.png](/img/v1.0/install-hv/iso-installation.png)
 
@@ -40,22 +40,22 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
    ![choose-installation-mode.png](/img/v1.0/install-hv/choose-installation-mode.png)
 
-	- `Create a new Harvester cluster`: creates an entirely new Harvester cluster.
+	- `Create a new Hypervisor cluster`: creates an entirely new Hypervisor cluster.
 
-	- `Join an existing Harvester cluster`: joins an existing Harvester cluster. You need the VIP and cluster token of the cluster you want to join.
+	- `Join an existing Hypervisor cluster`: joins an existing Hypervisor cluster. You need the VIP and cluster token of the cluster you want to join.
 
-	- `Install Harvester binaries only`: If you choose this option, additional setup is required after the first bootup.
+	- `Install Hypervisor binaries only`: If you choose this option, additional setup is required after the first bootup.
 
 	:::info
-	When there are 3 nodes, the other 2 nodes added first are automatically promoted to management nodes to form an HA cluster. If you want to promote management nodes from different zones, you can add the node label `topology.kubernetes.io/zone` in the [os.labels](./harvester-configuration.md#oslabels) config by providing a URL of [Harvester configuration](./harvester-configuration.md) on the customize the host step. In this case, at least three different zones are required.
+	When there are 3 nodes, the other 2 nodes added first are automatically promoted to management nodes to form an HA cluster. If you want to promote management nodes from different zones, you can add the node label `topology.kubernetes.io/zone` in the [os.labels](./harvester-configuration.md#oslabels) config by providing a URL of [Hypervisor configuration](./harvester-configuration.md) on the customize the host step. In this case, at least three different zones are required.
 	:::
 
-1. Choose a role for the node. You are required to perform this step if you selected the installation mode `Join an existing Harvester cluster`.
+1. Choose a role for the node. You are required to perform this step if you selected the installation mode `Join an existing Hypervisor cluster`.
 
    ![choose-node-role.png](/img/v1.0/install-hv/select-role.png)
 
 	- `Default Role`: Allows a node to function as a management node or a worker node. This role does not have any specific privileges or restrictions.
-	- `Management Role`: Allows a node to be prioritized when Harvester promotes nodes to management nodes.
+	- `Management Role`: Allows a node to be prioritized when Hypervisor promotes nodes to management nodes.
 	- `Witness Role`: Restricts a node to being a witness node (only functions as an etcd node) in a specific cluster.
 	- `Worker Role`: Restricts a node to being a worker node (never promoted to management node) in a specific cluster.
 
@@ -63,15 +63,15 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 	![config-password.png](/img/v1.2/install/config-password.png)
 
-1. Choose the installation disk you want to install the Harvester cluster on and the data disk you want to store VM data on. By default, Harvester uses [GUID Partition Table (GPT)](https://en.wikipedia.org/wiki/GUID_Partition_Table) partitioning schema for both UEFI and BIOS. If you use the BIOS boot, then you will have the option to select [Master boot record (MBR)](https://en.wikipedia.org/wiki/Master_boot_record).
+1. Choose the installation disk you want to install the Hypervisor cluster on and the data disk you want to store VM data on. By default, Hypervisor uses [GUID Partition Table (GPT)](https://en.wikipedia.org/wiki/GUID_Partition_Table) partitioning schema for both UEFI and BIOS. If you use the BIOS boot, then you will have the option to select [Master boot record (MBR)](https://en.wikipedia.org/wiki/Master_boot_record).
 
 	:::info important
-	Support for legacy BIOS booting is deprecated in v1.7.0 and will be removed in a later release. Existing Harvester clusters that use this boot mode will continue to function, but upgrading to later versions may require re-installation in UEFI mode. To avoid issues and disruptions, use UEFI in new installations.
+	Support for legacy BIOS booting is deprecated in v1.7.0 and will be removed in a later release. Existing Hypervisor clusters that use this boot mode will continue to function, but upgrading to later versions may require re-installation in UEFI mode. To avoid issues and disruptions, use UEFI in new installations.
 	:::
 
    ![choose-installation-target-data-disk.png](/img/v1.0/install-hv/choose-installation-target-data-disk.png)
 
-	- `Installation disk`: The disk to install the Harvester cluster on.
+	- `Installation disk`: The disk to install the Hypervisor cluster on.
 	- `Data disk`: The disk to store VM data on. Choosing a separate disk to store VM data is recommended. Not applicable for witness nodes.
 	- `Persistent size`: If you only have one disk or use the same disk for both OS and VM data, you need to configure persistent partition size to store system packages and container images. The default and minimum persistent partition size is 150 GiB. You can specify a size like 200Gi or 153600Mi.
 
@@ -79,7 +79,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
    ![config-hostname.png](/img/v1.2/install/config-hostname.png)
 
-1. Configure network interface(s) for the management network. By default, Harvester creates a [bonded NIC](./requirements.md#hardware-requirements) named `mgmt-bo` for the [built-in management cluster network](../networking/clusternetwork.md#built-in-cluster-network), and the IP address can be configured via DHCP or statically assigned.
+1. Configure network interface(s) for the management network. By default, Hypervisor creates a [bonded NIC](./requirements.md#hardware-requirements) named `mgmt-bo` for the [built-in management cluster network](../networking/clusternetwork.md#built-in-cluster-network), and the IP address can be configured via DHCP or statically assigned.
 
    ![config-network.png](/img/v1.0/install-hv/config-network.png)
 
@@ -87,7 +87,7 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 	Physical switches connected to `bonded NIC` must be configured strictly as trunk ports. These ports must accept tagged traffic and send traffic tagged with the VLAN ID used by the VM network.
 
-	It is not possible to change the node IP throughout the lifecycle of a Harvester cluster. If using DHCP, you must ensure the DHCP server always offers the same IP for the same node. If the node IP is changed, the related node cannot join the cluster and might even break the cluster.
+	It is not possible to change the node IP throughout the lifecycle of a Hypervisor cluster. If using DHCP, you must ensure the DHCP server always offers the same IP for the same node. If the node IP is changed, the related node cannot join the cluster and might even break the cluster.
 
 	In addition, you are required to add the *routers* option (`option routers`) when configuring the DHCP server. This option is used to add the default route on the Harvester host. Without the default route, the node will fail to start.
 	For example:
@@ -152,18 +152,18 @@ The following [video](https://youtu.be/X0VIGZ_lExQ) shows a quick overview of an
 
 	![import-ssh-keys.png](/img/v1.2/install/import-ssh-keys.png)
 
-1. (Optional) If you need to customize the host with a [Harvester configuration](./harvester-configuration.md) file, enter the `HTTP URL` here.
+1. (Optional) If you need to customize the host with a [Hypervisor configuration](./harvester-configuration.md) file, enter the `HTTP URL` here.
 
 	![remote-config.png](/img/v1.2/install/remote-config.png)
 
-1. Review and confirm your installation options. After confirming the installation options, Harvester will be installed to your host. The installation may take a few minutes to be complete.
+1. Review and confirm your installation options. After confirming the installation options, Hypervisor will be installed to your host. The installation may take a few minutes to be complete.
 
    ![confirm-install.png](/img/v1.0/install-hv/confirm-install.png)
 
-1. Once the installation is complete, your node restarts. After the restart, the Harvester console displays the management URL and status. The default URL of the web interface is `https://your-virtual-ip`. You can use `F12` to switch from the Harvester console to the Shell and type `exit` to go back to the Harvester console.
+1. Once the installation is complete, your node restarts. After the restart, the Hypervisor console displays the management URL and status. The default URL of the web interface is `https://your-virtual-ip`. You can use `F12` to switch from the Hypervisor console to the Shell and type `exit` to go back to the Hypervisor console.
 
 	:::note
-	Choosing `Install Harvester binaries only` on the first page requires additional setup after the first bootup.
+	Choosing `Install Hypervisor binaries only` on the first page requires additional setup after the first bootup.
 	:::
 
    ![iso-installed.png](/img/v1.0/install-hv/iso-installed.png)

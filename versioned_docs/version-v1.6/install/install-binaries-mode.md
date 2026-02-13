@@ -1,14 +1,14 @@
 ---
 sidebar_position: 8
-sidebar_label: Install Harvester Binaries Only
-title: "Install Harvester Binaries Only"
+sidebar_label: Install Hypervisor Binaries Only
+title: "Install Hypervisor Binaries Only"
 keywords:
-  - Harvester
+  - Hypervisor
   - harvester
   - Rancher
   - rancher
   - ISO Installation
-description: To get the Harvester ISO, download it from the GitHub releases. During the installation, you can choose to install the binaries only.
+description: To get the Hypervisor ISO, download it from the GitHub releases. During the installation, you can choose to install the binaries only.
 ---
 
 <head>
@@ -17,26 +17,26 @@ description: To get the Harvester ISO, download it from the GitHub releases. Dur
 
 _Available as of v1.2.0_
 
-The `Install Harvester binaries only` mode allows you to install and configure binaries only, making it ideal for cloud and edge use cases.
+The `Install Hypervisor binaries only` mode allows you to install and configure binaries only, making it ideal for cloud and edge use cases.
 
-![choose-installation-mode.png](/img/v1.2/install/choose-installation-mode.png)
+![choose-installation-mode.png](/img/v1.2/install-hv/choose-installation-mode.png)
 
 ### Background
-Currently when a new Harvester node is launched it needs to be the first node in the cluster or join an existing cluster.
-These two modes are useful when you already know enough about the environment to install the Harvester node.
-However, for use cases such as bare-metal cloud providers and the edge, these installation modes load the OS and Harvester content to the node without letting you configure the network. Moreover, the K8s and networking configuration will not be applied.
+Currently when a new Hypervisor node is launched it needs to be the first node in the cluster or join an existing cluster.
+These two modes are useful when you already know enough about the environment to install the Hypervisor node.
+However, for use cases such as bare-metal cloud providers and the edge, these installation modes load the OS and Hypervisor content to the node without letting you configure the network. Moreover, the K8s and networking configuration will not be applied.
 
-If you choose `Install Harvester binaries only`, you will need to perform additional configuration after the first bootup:
+If you choose `Install Hypervisor binaries only`, you will need to perform additional configuration after the first bootup:
 
-- Create/Join option for Harvester
+- Create/Join option for Hypervisor
 - Management network interface details
 - Cluster token
 - Node password
 
-Then, the installer will apply the endpoint configuration and boot Harvester. No further reboots will be required.
+Then, the installer will apply the endpoint configuration and boot Hypervisor. No further reboots will be required.
 
 ### Stream disk mode
-Harvester has published a raw image artifact for pre-installed Harvester. The Harvester installer now allows streaming a pre-installed image directly to disk to support better integration with cloud providers.
+Hypervisor has published a raw image artifact for pre-installed Hypervisor. The Hypervisor installer now allows streaming a pre-installed image directly to disk to support better integration with cloud providers.
 
 On `Equinix Metal`, you can use the following kernel arguments to use the streaming mode:
 

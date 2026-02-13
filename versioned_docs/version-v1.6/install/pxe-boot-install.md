@@ -18,11 +18,11 @@ description: Starting from version `0.2.0`, Harvester can be installed automatic
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/install/pxe-boot-install"/>
 </head>
 
-Starting from version `0.2.0`, Harvester can be installed automatically. This document provides an example to do an automatic installation with PXE boot.
+Starting from version `0.2.0`, Hypervisor can be installed automatically. This document provides an example to do an automatic installation with PXE boot.
 
 We recommend using [iPXE](https://ipxe.org/) to perform the network boot. It has more features than the traditional PXE Boot program and is likely available in modern NIC cards. If the iPXE firmware is not available for your NIC card, the iPXE firmware images can be loaded from the TFTP server first.
 
-To see sample iPXE scripts, please visit [Harvester iPXE Examples](https://github.com/harvester/ipxe-examples).
+To see sample iPXE scripts, please visit [Hypervisor iPXE Examples](https://github.com/harvester/ipxe-examples).
 
 ## Prerequisite
 
@@ -39,7 +39,7 @@ Let's assume the NGINX HTTP server's IP is `10.100.0.10`, and it serves the `/us
 
 ## Preparing Boot Files
 
-- Download the required files from the [Harvester releases page](https://github.com/harvester/harvester/releases).
+- Download the required files from the [Hypervisor releases page](https://github.com/harvester/harvester/releases).
     - The ISO: `harvester-<version>-amd64.iso`
     - The kernel: `harvester-<version>-vmlinuz-amd64`
     - The initrd: `harvester-<version>-initrd-amd64`
@@ -61,10 +61,10 @@ Let's assume the NGINX HTTP server's IP is `10.100.0.10`, and it serves the `/us
 
 When performing an automatic installation, there are two modes:
 
-- `CREATE`: we are installing a node to construct an initial Harvester cluster.
-- `JOIN`: we are installing a node to join an existing Harvester cluster.
+- `CREATE`: we are installing a node to construct an initial Hypervisor cluster.
+- `JOIN`: we are installing a node to join an existing Hypervisor cluster.
 
-Harvester v1.3.0 introduces roles that you can assign to nodes to support different scenarios. For more information, see [Harvester Configuration](harvester-configuration#installrole).
+<!-- Hypervisor v1.3.0 introduces roles that you can assign to nodes to support different scenarios. For more information, see [Hypervisor Configuration](harvester-configuration#installrole). -->
 
 ### CREATE Mode
 
@@ -74,7 +74,7 @@ Harvester v1.3.0 introduces roles that you can assign to nodes to support differ
 
 :::
 
-Create a [Harvester configuration file](./harvester-configuration.md) called `config-create.yaml` for `CREATE` mode. Modify the values as needed:
+Create a [Hypervisor configuration file](./harvester-configuration.md) called `config-create.yaml` for `CREATE` mode. Modify the values as needed:
 
 ```YAML
 # cat /usr/share/nginx/html/harvester/config-create.yaml
@@ -136,7 +136,7 @@ Use `ip=` parameter to designate the booting interface only, as we only support 
 
 :::
 
-Create a [Harvester configuration file](./harvester-configuration.md) called `config-join.yaml` for `JOIN` mode. Modify the values as needed:
+Create a [Hypervisor configuration file](./harvester-configuration.md) called `config-join.yaml` for `JOIN` mode. Modify the values as needed:
 
 ```YAML
 # cat /usr/share/nginx/html/harvester/config-join.yaml
@@ -184,7 +184,7 @@ This assumes the iPXE script is stored in `/usr/share/nginx/html/harvester/ipxe-
 
 :::note
 
-In the PXE installation scenario, you are required to add the *routers* option (`option routers`) when configuring the DHCP server. This option is used to add the default route on the Harvester host. Without the default route, the node will fail to start.
+In the PXE installation scenario, you are required to add the *routers* option (`option routers`) when configuring the DHCP server. This option is used to add the default route on the Hypervisor host. Without the default route, the node will fail to start.
 
 In the ISO installation scenario, when the management network interface is in DHCP mode, you are also required to add the *routers* option (`option routers`) when configuring the DHCP server.
 
@@ -335,9 +335,9 @@ The Internet Systems Consortium (ISC) announced the final [end-of-life (EOL) for
 ]
 ```
 
-## Harvester Configuration
+## Hypervisor Configuration
 
-For more information about Harvester configuration, please refer to the [Harvester configuration](./harvester-configuration.md) page.
+For more information about Hypervisor configuration, please refer to the [Hypervisor configuration](./harvester-configuration.md) page.
 
 By default, the first node will be the management node of the cluster. When there are 3 nodes, the other 2 nodes added first are automatically promoted to management nodes to form an HA cluster.
 
@@ -427,7 +427,7 @@ The parameter `initrd=harvester-<version>-initrd` is required.
 
 ## Tagged VLAN Network Boot
 
-To perform PXE boot over tagged VLAN network, the Harvester hosts must be configured with the following BIOS/UEFI settings:
+To perform PXE boot over tagged VLAN network, the Hypervisor hosts must be configured with the following BIOS/UEFI settings:
 
 - VLAN ID is set to the network identity
 - Boot protocol is set to `PXE`
@@ -458,7 +458,7 @@ boot
 
 ## Useful Kernel Parameters
 
-Besides the Harvester configuration, you can also specify other kernel parameters that are useful in different scenarios.
+Besides the Hypervisor configuration, you can also specify other kernel parameters that are useful in different scenarios.
 See also [dracut.cmdline(7)](https://man7.org/linux/man-pages/man7/dracut.cmdline.7.html).
 
 ### `ip=dhcp`
@@ -492,4 +492,4 @@ Specifies what teletype console to start the installer on.
 
 ### `net.ifnames=1`
 
-Enables predictable network interface names in the installer, which will match the system default after Harvester is installed. This allows the system to utilize the correct interfaces.
+Enables predictable network interface names in the installer, which will match the system default after Hypervisor is installed. This allows the system to utilize the correct interfaces.
