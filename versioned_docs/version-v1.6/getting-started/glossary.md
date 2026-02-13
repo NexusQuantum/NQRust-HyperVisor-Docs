@@ -37,13 +37,13 @@ Hypervisor clusters can be imported into and managed by Rancher. Within the Ranc
 
 Certain versions of Hypervisor and Rancher allow you to deploy container workloads directly to Hypervisor clusters (with some limitations). When this [experimental feature](../rancher/rancher-integration.md#harvester-baremetal-container-workload-support-experimental) is enabled, container workloads seamlessly interact with VM workloads.
 
-## **NQRust hypervisor** 
+## **NQRust Hypervisor** 
 
 Specialized operating system and [software stack](../index.md#harvester-architecture) that runs on a single physical server.
 
 ## **Hypervisor node**
 
-Physical server on which the NQRust hypervisor is installed. 
+Physical server on which the NQRust Hypervisor is installed. 
 
 Each node that joins a Hypervisor cluster must be assigned a [role](../host/host.md#role-management) that determines the functions the node can perform within the cluster. All Hypervisor nodes process data but not all can store data.
 
