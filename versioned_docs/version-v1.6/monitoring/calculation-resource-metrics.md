@@ -13,17 +13,17 @@ keywords:
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/monitoring/calculation-resource-metrics"/>
 </head>
 
-Harvester calculates resource metrics using data that is dynamically collected from the system. Host-level resource metrics are calculated and then aggregated to obtain the cluster-level metrics.
+Hypervisor calculates resource metrics using data that is dynamically collected from the system. Host-level resource metrics are calculated and then aggregated to obtain the cluster-level metrics.
 
-You can view resource-related metrics on the Harvester UI.
+You can view resource-related metrics on the Hypervisor UI.
 
 - **Hosts** screen: Displays host-level metrics
 
-  ![Host-level resource metrics](/img/v1.5/monitoring/host-resource-usage.png)
+  ![Host-level resource metrics](/img/v1.2/monitoring-hv/host-resource-usage.png)
 
 - **Dashboard** screen: Displays cluster-level metrics
 
-  ![Cluster-level resource metrics](/img/v1.5/monitoring/cluster-resource-usage.png)
+  ![Cluster-level resource metrics](/img/v1.2/monitoring-hv/cluster-resource-usage.png)
 
 ## CPU and Memory
 
@@ -89,7 +89,7 @@ items:
 
 ### Resource Usage
 
-CPU and memory usage data is continuously collected and stored in the `NodeMetrics` object. Harvester reads the data from `usage.cpu` and `usage.memory`.
+CPU and memory usage data is continuously collected and stored in the `NodeMetrics` object. Hypervisor reads the data from `usage.cpu` and `usage.memory`.
 
 Example:
 
@@ -111,7 +111,7 @@ items:
 
 ### Resource Reservation
 
-Harvester dynamically calculates the resource limits and requests of all pods running on a host, and updates the information to the annotations of the `NodeMetrics` object.
+Hypervisor dynamically calculates the resource limits and requests of all pods running on a host, and updates the information to the annotations of the `NodeMetrics` object.
 
 Example:
 
@@ -124,7 +124,7 @@ For more information, see [Requests and Limits](https://kubernetes.io/docs/conce
 
 ## Storage
 
-Longhorn, which is the default Container Storage Interface (CSI) driver of Harvester, provides storage management features such as distributed block storage and tiering.
+Longhorn, which is the default Container Storage Interface (CSI) driver of Hypervisor, provides storage management features such as distributed block storage and tiering.
 
 ### Reserved Storage in Longhorn
 
@@ -134,7 +134,7 @@ Depending on the disk size, you can modify the default value using the [embedded
 
 ### Data Sources and Calculation
 
-Harvester uses the following data to calculate metrics for storage resources.
+Hypervisor uses the following data to calculate metrics for storage resources.
 
 - Sum of the `storageMaximum` values of all disks (`status.diskStatus.disk-name`): Total storage capacity
 - Sum of the `storageAvailable` values of all disks (`status.diskStatus.disk-name`): Data source for the **Used** field on the **Hosts** screen

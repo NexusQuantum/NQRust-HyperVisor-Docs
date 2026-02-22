@@ -13,19 +13,19 @@ _Available as of v1.2.0_
 
 The monitoring feature is now implemented with an addon and is disabled by default in new installations.
 
-Users can enable/disable `rancher-monitoring` [addon](../advanced/addons.md) from the Harvester WebUI after installation.
+Users can enable/disable `rancher-monitoring` [addon](../advanced/addons.md) from the Hypervisor WebUI after installation.
 
-Users can also enable/disable the `rancher-monitoring` addon in their Harvester installation by customizing the [harvester-configuration](../install/harvester-configuration.md#installaddons) file.
+Users can also enable/disable the `rancher-monitoring` addon in their Hypervisor installation by customizing the [harvester-configuration](../install/harvester-configuration.md#installaddons) file.
 
-For Harvester clusters upgraded from version v1.1.x, the monitoring feature is converted to an addon automatically and kept enabled as before.
+For Hypervisor clusters upgraded from version v1.1.x, the monitoring feature is converted to an addon automatically and kept enabled as before.
 
 ## Dashboard Metrics
-Harvester has provided a built-in monitoring integration using [Prometheus](https://prometheus.io/). Monitoring is automatically enabled during the Harvester installations.
+Hypervisor has provided a built-in monitoring integration using [Prometheus](https://prometheus.io/). Monitoring is automatically enabled during the Hypervisor installations.
 
 From the `Dashboard` page, users can view the cluster metrics and top 10 most used VM metrics respectively.
 Also, users can click the [Grafana](http://grafana.com/) dashboard link to view more dashboards on the Grafana UI.
 
-![](/img/v1.2/monitoring/monitoring-dashboard.png)
+![](/img/v1.2/monitoring-hv/monitoring-dashboard.png)
 
 :::note
 
@@ -41,7 +41,7 @@ Reference: [values.yaml](https://github.com/rancher/charts/tree/dev-v2.7/charts/
 
 For VMs, you can view VM metrics by clicking on the `VM details page > VM Metrics`.
 
-![](/img/v1.2/monitoring/vm-metrics.png)
+![](/img/v1.2/monitoring-hv/vm-metrics.png)
 
 :::note
 
@@ -64,7 +64,7 @@ The corresponding `Memory Usage` is `(1 - 4.6/7.7) * 100%`, roughly `40%`.
 
 _Available as of v1.6.0_
 
-Live migration is a critical feature for ensuring workload uptime. You can monitor the progress of virtual machine live migration directly from the Harvester UI via the [rancher-monitoring](../advanced/addons.md) add-on.
+Live migration is a critical feature for ensuring workload uptime. You can monitor the progress of virtual machine live migration directly from the Hypervisor UI via the [rancher-monitoring](../advanced/addons.md) add-on.
 
 1. Enable the **rancher-monitoring** add-on.
 1. Go to **Virtual Machines**.
@@ -94,7 +94,7 @@ The **Migration** tab is divided into the following sections:
 
 _Available as of v1.0.2_
 
-Monitoring has several components that help to collect and aggregate metric data from all Nodes/Pods/VMs. The resources required for monitoring depend on your workloads and hardware resources. Harvester sets defaults based on general use cases, and you can change them accordingly.
+Monitoring has several components that help to collect and aggregate metric data from all Nodes/Pods/VMs. The resources required for monitoring depend on your workloads and hardware resources. Hypervisor sets defaults based on general use cases, and you can change them accordingly.
 
 Currently, `Resources Settings` can be configured for the following components:
 
@@ -109,7 +109,7 @@ On the **Advanced** page, you can view and change the resource settings as follo
  2. From the **Prometheus** tab, change the resource requests and limits.
  3. Select **Save** when finished configuring the settings for the **rancher-monitoring** addon. The **Monitoring** deployments restart within a few seconds. Please be aware that the reboot can take time to reload previous data.
 
-![](/img/v1.2/monitoring/modify-prometheus-settings-from-addon.png)
+![](/img/v1.2/monitoring-hv/modify-prometheus-settings-from-addon.png)
 
 :::note
 
@@ -170,7 +170,7 @@ You can still make configuration adjustments when the addon is disabled. However
 
 ## Alertmanager
 
-`Harvester` uses `Alertmanager` to collect and manage all the alerts that happened/happening in the cluster.
+`Hypervisor` uses `Alertmanager` to collect and manage all the alerts that happened/happening in the cluster.
 
 ### Alertmanager Config
 
@@ -178,7 +178,7 @@ You can still make configuration adjustments when the addon is disabled. However
 
 `Alertmanager` is enabled by default. You may disable it from the following config path.
 
-![](/img/v1.2/monitoring/modify-alertmanager-from-addon.png)
+![](/img/v1.2/monitoring-hv/modify-alertmanager-from-addon.png)
 
 #### Change Resource Setting
 
@@ -192,23 +192,23 @@ On the WebUI, navigate to `Monitoring & Logging` -> `Monitoring` -> `Alertmanage
 
 On the `Alertmanager Config: Create` page, click `Namespace` to select the target namespace from the drop-down list and set the `Name`. After this, click `Create` in the lower right corner.
 
-![](/img/v1.2/monitoring/alertmanager-config-create-1.png)
+![](/img/v1.2/monitoring-hv/alertmanager-config-create-1.png)
 
 Click the `Alertmanager Configs` you just created to continue the configuration.
 
-![](/img/v1.2/monitoring/view-alertmanager-config.png)
+![](/img/v1.2/monitoring-hv/view-alertmanager-config.png)
 
 Click `Add Receiver`.
 
-![](/img/v1.2/monitoring/prepare-to-add-receiver.png)
+![](/img/v1.2/monitoring-hv/prepare-to-add-receiver.png)
 
 Set the `Name` for the receiver. After this, select the receiver type, for example, `Webhook`, and click `Add Webhook`.
 
-![](/img/v1.2/monitoring/webhook-receiver-1.png)
+![](/img/v1.2/monitoring-hv/webhook-receiver-1.png)
 
 Fill in the required parameters and click `Create`.
 
-![](/img/v1.2/monitoring/webhook-receiver-2.png)
+![](/img/v1.2/monitoring-hv/webhook-receiver-2.png)
 
 To set up Microsoft Teams or SMS webhooks, first install the rancher-alerting-drivers app using the following commands:
 
@@ -224,7 +224,7 @@ helm install rancher-charts/rancher-alerting-drivers \
 
 For detailed configuration instructions, see [Rancher Monitoring Receiver Configuration](https://ranchermanager.docs.rancher.com/reference-guides/monitoring-v2-configuration/receivers) in the Rancher documentation.
 
-If your environment does not have direct internet access (air-gapped), you must manually download the Helm chart and related container images, and then upload them to the Harvester cluster.
+If your environment does not have direct internet access (air-gapped), you must manually download the Helm chart and related container images, and then upload them to the Hypervisor cluster.
 
 1. Download the rancher-alerting-drivers Helm chart and package it.
 
@@ -239,20 +239,20 @@ If your environment does not have direct internet access (air-gapped), you must 
     docker save -o prom2teams.tar rancher/mirrored-idealista-prom2teams:<VERSION>
     ```
 
-1. Upload the chart and images to the Harvester cluster.
+1. Upload the chart and images to the Hypervisor cluster.
 
-1. Load the images on all Harvester nodes.
+1. Load the images on all Hypervisor nodes.
 
     ```
     docker load -i sachet.tar
     docker load -i prom2teams.tar
     ```
 
-1. Install rancher-alerting-drivers on the Harvester cluster.
+1. Install rancher-alerting-drivers on the Hypervisor cluster.
 
 :::info important
 
-Harvester does not manage upgrades of the rancher-alerting-drivers app, which is not part of the Harvester project. You must upgrade the app manually.
+Hypervisor does not manage upgrades of the rancher-alerting-drivers app, which is not part of the Hypervisor project. You must upgrade the app manually.
 
 :::
 
@@ -326,9 +326,9 @@ Different receivers may present the alerts in different formats. For details, pl
 
 The `AlertmanagerConfig` is enforced by the `namespace`. Gloabl-level `AlertmanagerConfig` without a namespace is not supported.
 
-We have already created a [GithHb issue](https://github.com/harvester/harvester/issues/2760) to track upstream changes. Once the feature is available, `Harvester` will adopt it.
+We have already created a [GithHb issue](https://github.com/harvester/harvester/issues/2760) to track upstream changes. Once the feature is available, `Hypervisor` will adopt it.
 
-### View and Manage Alerts
+<!-- ### View and Manage Alerts
 
 #### From Alertmanager Dashboard
 
@@ -352,7 +352,7 @@ You can visit the original dashboard of `Prometheus` from the link below. Note t
 
 The `Alerts` menu in the top navigation bar shows all defined rules in Prometheus. You can use the filters `Inactive`, `Pending`, and `Firing` to quickly find the information that you need.
 
-![](/img/v1.2/monitoring/prometheus-original-alerts.png)
+![](/img/v1.2/monitoring/prometheus-original-alerts.png) -->
 
 
 ## Troubleshooting
