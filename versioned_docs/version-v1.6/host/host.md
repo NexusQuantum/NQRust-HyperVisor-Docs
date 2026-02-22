@@ -68,7 +68,7 @@ You can safely remove a control plane node depending on the quantity and availab
 
 - The cluster has three control plane nodes and one or more worker nodes.
 
-  When you remove a control plane node, a worker node will be promoted to control plane node. Hypervisor v1.3.0 allows you to assign a role to each node that joins a cluster. In earlier Hypervisor versions, worker nodes were randomly selected for promotion. If you prefer to promote specific nodes, please see [Role Management](./host.md#role-management) and [Harvester Configuration](../install/harvester-configuration.md#installrole) for more information.
+  When you remove a control plane node, a worker node will be promoted to control plane node. Hypervisor v1.3.0 allows you to assign a role to each node that joins a cluster. In earlier Hypervisor versions, worker nodes were randomly selected for promotion. If you prefer to promote specific nodes, please see [Role Management](./host.md#role-management) and [Hypervisor Configuration](../install/harvester-configuration.md#installrole) for more information.
 
   :::note
   Automatic node promotion occurs only when a control plane node is deleted from the cluster. This does not include situations wherein a node becomes unavailable due to failed health checks. The unhealthy node retains its role.
@@ -202,19 +202,19 @@ As of Hypervisor v1.0.2, we no longer support adding partitions as additional di
 
   - **LonghornV1 (CSI)**: This is the default provisioner.
 
-    ![Provisioner LonghornV1](/img/v1.4/host/multidisk-mgmt-03.png)
+    ![Provisioner LonghornV1](/img/v1.2/host-hv/multidisk-mgmt-03.png)
 
     You must set **Force Formatted** to **Yes** if the block device has never been force-formatted.
 
-    ![Force Format](/img/v1.4/host/multidisk-mgmt-08.png)
+    ![Force Format](/img/v1.2/host-hv/multidisk-mgmt-08.png)
 
   - **LonghornV2 (CSI)**: Select this provisioner if you want to use the [Longhorn V2 Data Engine](../advanced/longhorn-v2.md).
 
-    ![Provisioner LonghornV2](/img/v1.4/host/multidisk-mgmt-04.png)
+    ![Provisioner LonghornV2](/img/v1.2/host-hv/multidisk-mgmt-04.png)
 
   - **LVM**: Select this provisioner if you want to use [local storage](../advanced/addons/lvm-local-storage.md) to create persistent volumes for your workloads.
 
-    ![Provisioner LVM](/img/v1.4/host/multidisk-mgmt-05.png)
+    ![Provisioner LVM](/img/v1.2/host-hv/multidisk-mgmt-05.png)
 
 5. Click **Save**.
 
@@ -272,7 +272,7 @@ The replica data would be rebuilt to another disk automatically to keep the high
 
 :::
 
-#### Identify the disk to remove (Harvester dashboard)
+<!-- #### Identify the disk to remove (Hypervisor dashboard)
 1. Go to the **Hosts** page.
 2. On the node containing the disk, select the node name and go to the **Storage** tab.
 3. Find the disk you want to remove. Let's assume we want to remove `/dev/sdb`, and the disk's mount point is `/var/lib/harvester/extra-disks/1b805b97eb5aa724e6be30cbdb373d04`.
@@ -299,9 +299,9 @@ The replica data would be rebuilt to another disk automatically to keep the high
 
 6. The disk will be disabled. Please wait until the disk replica count becomes `0` to proceed with removing the disk.
 
-![Wait replicas](/img/v1.2/host/remove-disks-longhorn-wait-replicas.png)
+![Wait replicas](/img/v1.2/host/remove-disks-longhorn-wait-replicas.png) -->
 
-#### Remove the disk (Harvester dashboard)
+#### Remove the disk (Hypervisor dashboard)
 1. Go to the **Hosts** page.
 2. On the node containing the disk, select **⋮ > Edit Config**.
 3. Go to the **Storage** tab and select **x**  to remove the disk.
