@@ -64,7 +64,7 @@ Virtual machines that do not have the properties of non-migratable virtual machi
 
 ### `VirtualMachineInstanceMigration` Object
 
-When a virtual machine migration action is triggered, a `VirtualMachineInstanceMigration` object is created to track the state and progress of the operation. The Harvester controller correlates the `VirtualMachineInstanceMigration` object with the `VirtualMachineInstance` object by ensuring the instance object's identity is reflected in the migration object.
+When a virtual machine migration action is triggered, a `VirtualMachineInstanceMigration` object is created to track the state and progress of the operation. The Hypervisor controller correlates the `VirtualMachineInstanceMigration` object with the `VirtualMachineInstance` object by ensuring the instance object's identity is reflected in the migration object.
 
 In the following example, the virtual machine named `demo` has an associated migration object. The UID of this object is added to the instance object's `.status.migrationState.migrationUID` property during migration.
 
@@ -95,7 +95,7 @@ When a migration is triggered [automatically](#automatically-triggered-batch-mig
 
 :::note
 
-The Harvester UI does not specify the source of the migration. You must check the name of `VirtualMachineInstanceMigration` object to retrieve this information.
+The Hypervisor UI does not specify the source of the migration. You must check the name of `VirtualMachineInstanceMigration` object to retrieve this information.
 
 :::
 
@@ -121,7 +121,7 @@ However, `host-model` only allows migration of the VM to a node with same CPU mo
 1. Find the virtual machine that you want to migrate and select **⋮ > Migrate**.
 1. Choose the node to which you want to migrate the virtual machine. Click **Apply**.
 
-![](/img/v1.2/vm/migrate-action.png)
+![](/img/v1.2/vm-hv/migrate-action.png)
 
 :::note
 
@@ -133,7 +133,7 @@ The **Migrate** menu option is not available in the following situations:
 
 :::
 
-![](/img/v1.2/vm/migrate.png)
+![](/img/v1.2/vm-hv/migrate.png)
 
 ## Aborting a Migration
 
@@ -156,7 +156,7 @@ Do not use this UI feature if the migration process was created using [batch mig
 
 1. The controller creates a `VirtualMachineInstanceMigration` object for each [live-migratable virtual machine](#live-migratable-virtual-machines) on the current node.
 
-1. The migrations are queued, scheduled internally, and processed in batches. The Harvester UI shows the statuses **Pending migration** and **Migrating** to indicate progress.
+1. The migrations are queued, scheduled internally, and processed in batches. The Hypervisor UI shows the statuses **Pending migration** and **Migrating** to indicate progress.
 
 1. The controller monitors the processing and waits until all are completed or have timed out.
 
