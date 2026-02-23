@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
-sidebar_label: Harvester
-title: "Harvester"
+sidebar_label: Hypervisor
+title: "Hypervisor"
 ---
 
 <head>
@@ -10,15 +10,15 @@ title: "Harvester"
 
 ## Fail to Deploy a Multi-node Cluster Due to Incorrect HTTP Proxy Setting
 
-### ISO Installation Without a Harvester Configuration File
+### ISO Installation Without a Hypervisor Configuration File
 
-#### Configure HTTP Proxy During Harvester Installation
+#### Configure HTTP Proxy During Hypervisor Installation
 
-In some environments, you configure [http-proxy](../airgap.md#configure-an-http-proxy-during-installation) of [OS Environment](../install/harvester-configuration.md#osenvironment) during Harvester installation.
+In some environments, you configure [http-proxy](../airgap.md#configure-an-http-proxy-during-installation) of [OS Environment](../install/harvester-configuration.md#osenvironment) during Hypervisor installation.
 
 #### Configure HTTP Proxy After First Node is Ready
 
-After the first node is installed successfully, you login into the `Harvester GUI` to configure [http-proxy](../airgap.md#configure-an-http-proxy-in-harvester-settings) of [Harvester System Settings](../install/harvester-configuration.md#system_settings).
+After the first node is installed successfully, you login into the `Hypervisor GUI` to configure [http-proxy](../airgap.md#configure-an-http-proxy-in-harvester-settings) of [Hypervisor System Settings](../install/harvester-configuration.md#system_settings).
 
 Then you continue to add more nodes to the cluster.
 
@@ -44,28 +44,28 @@ For example, your cluster assigns IPs from CIDR `172.26.50.128/27` to nodes via 
 
 After setting this, you can continue to add new nodes to the cluster.
 
-For more details, please refer to [Harvester issue 3091](https://github.com/harvester/harvester/issues/3091).
+For more details, please refer to [Hypervisor issue 3091](https://github.com/harvester/harvester/issues/3091).
 
-### ISO Installation With a Harvester Configuration File
+### ISO Installation With a Hypervisor Configuration File
 
-When a Harvester configuration file is used in ISO installation, please configure proper `http-proxy` in [Harvester System Settings](../install/harvester-configuration.md#system_settings).
+When a Hypervisor configuration file is used in ISO installation, please configure proper `http-proxy` in [Hypervisor System Settings](../install/harvester-configuration.md#system_settings).
 
 ### PXE Boot Installation
 
-When [PXE Boot Installation](../install/pxe-boot-install.md) is adopted, please configure proper `http-proxy` in [OS Environment](../install/harvester-configuration.md#osenvironment) and [Harvester System Settings](../install/harvester-configuration.md#system_settings).
+When [PXE Boot Installation](../install/pxe-boot-install.md) is adopted, please configure proper `http-proxy` in [OS Environment](../install/harvester-configuration.md#osenvironment) and [Hypervisor System Settings](../install/harvester-configuration.md#system_settings).
 
 ## Generate a Support Bundle
 
-Users can generate a support bundle in the Harvester GUI with the following steps:
+Users can generate a support bundle in the Hypervisor GUI with the following steps:
 
-- Click the `Support` link at the bottom-left of Harvester Web UI.
-    ![](/img/v1.2/troubleshooting/harvester-sb-support-link.png)
+- Click the `Support` link at the bottom-left of Hypervisor Web UI.
+    ![](/img/v1.2/troubleshooting-hv/harvester-sb-support-link.png)
 
 - Click `Generate Support Bundle` button.
-    ![](/img/v1.2/troubleshooting/harvester-sb-support-button.png)
+    ![](/img/v1.2/troubleshooting-hv/harvester-sb-support-button.png)
 
 - Enter a useful description for the support bundle and click `Create` to generate and download a support bundle.
-    ![](/img/v1.2/troubleshooting/harvester-sb-support-modal.png)
+    ![](/img/v1.2/troubleshooting-hv/harvester-sb-support-modal.png)
 
 :::note
 
@@ -85,7 +85,7 @@ For information about collecting guest cluster logs and configuration files, see
 
 ### Manually Download and Retain a Support Bundle File
 
-By default, a support bundle file is automatically generated, downloaded, and deleted after you click **Create** on the Harvester UI. However, you may want to retain a file for various reasons, including the following:
+By default, a support bundle file is automatically generated, downloaded, and deleted after you click **Create** on the Hypervisor UI. However, you may want to retain a file for various reasons, including the following:
 
 - You are unable to download the file because of network connectivity errors and other issues.
 
@@ -93,11 +93,11 @@ By default, a support bundle file is automatically generated, downloaded, and de
 
 - You want to view information that only exists in a previously generated file.
 
-Even if the file remains in the cluster, the Harvester UI does not provide a download link. Use the following workaround to generate, manually download, and retain a support bundle file:
+Even if the file remains in the cluster, the Hypervisor UI does not provide a download link. Use the following workaround to generate, manually download, and retain a support bundle file:
 
 #### Generate the File and Prevent Automatic Downloading
 
-1. On the Harvester UI, click **Generate Support Bundle**.
+1. On the Hypervisor UI, click **Generate Support Bundle**.
 
 1. When the progress indicator reaches 20% to 80%, close the browser tab to prevent automatic downloading of the generated file.
 
@@ -195,7 +195,7 @@ You can delete the related resources using the following methods:
     $ kubectl get supportbundle -A
     No resources found
     ```
-- Automatic: Harvester deletes the related resources based on how the following settings are configured:
+- Automatic: Hypervisor deletes the related resources based on how the following settings are configured:
 
     - [support-bundle-expiration](../advanced/index#support-bundle-expiration): Defines the time allowed for retaining a support bundle file
 
@@ -213,7 +213,7 @@ kubectl cp harvester-system/supportbundle-manager-bundle-dtl2k-69dcc69b59-w64vl:
 
 ### Manually Collect Data for Support Bundle
 
-Harvester is unable to collect data and generate a support bundle when the node is inaccessible or not ready. The workaround is to run a script and compress the generated files.
+Hypervisor is unable to collect data and generate a support bundle when the node is inaccessible or not ready. The workaround is to run a script and compress the generated files.
 
 1. Prepare the environment.
     ```sh
@@ -319,7 +319,7 @@ Harvester is unable to collect data and generate a support bundle when the node 
 
 For more information, see [Issue 3383](https://github.com/harvester/harvester/issues/3383).
 
-## Access Embedded Rancher and Longhorn Dashboards
+<!-- ## Access Embedded Rancher and Longhorn Dashboards
 
 _Available as of v1.1.0_
 
@@ -332,17 +332,17 @@ You can now access the embedded Rancher and Longhorn dashboards directly on the 
 We only support using the embedded Rancher and Longhorn dashboards for debugging and validation purposes.
 For Rancher's multi-cluster and multi-tenant integration, please refer to the docs [here](../rancher/rancher-integration.md).
 
-:::
+::: -->
 
-## I can't access Harvester after I changed SSL/TLS enabled protocols and ciphers
+## I can't access Hypervisor after I changed SSL/TLS enabled protocols and ciphers
 
 If you changed
 [SSL/TLS enabled protocols and ciphers settings](../advanced/settings.md#ssl-parameters)
-and you no longer have access to Harvester GUI and API,
+and you no longer have access to Hypervisor GUI and API,
 it's highly possible that NGINX Ingress Controller has stopped working due to the misconfigured SSL/TLS protocols and ciphers.
 Follow these steps to reset the setting:
 
-1. Following [FAQ](../faq.md) to SSH into Harvester node and switch to `root` user.
+1. Following [FAQ](../faq.md) to SSH into Hypervisor node and switch to `root` user.
 ```
 $ sudo -s
 ```

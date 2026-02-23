@@ -8,11 +8,11 @@ title: "Operating System"
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/troubleshooting/os"/>
 </head>
 
-Harvester runs on an OpenSUSE-based OS. The OS is an artifact produced by the [elemental-toolkit](https://github.com/rancher/elemental-toolkit). The following sections contain information and tips to help users troubleshoot OS-related issues.
+Hypervisor runs on an OpenSUSE-based OS. The OS is an artifact produced by the [elemental-toolkit](https://github.com/rancher/elemental-toolkit). The following sections contain information and tips to help users troubleshoot OS-related issues.
 
-## How to log in to a Harvester node
+## How to log in to a Hypervisor node
 
-Users can log in to a Harvester node with the username `rancher` and the password or SSH keypair provided during installation.
+Users can log in to a Hypervisor node with the username `rancher` and the password or SSH keypair provided during installation.
 The user `rancher` can execute privileged commands without entering a password:
 
 ```
@@ -27,9 +27,9 @@ node1:~ # blkid
 
 The OS file system, like a container image, is image-based and immutable except in some directories.
 
-We recommend using a **toolbox container** to run programs not packaged in the Harvester OS for debugging purposes. Please see [this article](https://harvesterhci.io/kb/package_your_own_toolbox_image/) to learn how to build and run a toolbox container.
+We recommend using a **toolbox container** to run programs not packaged in the Hypervisor OS for debugging purposes. Please see [this article](https://harvesterhci.io/kb/package_your_own_toolbox_image/) to learn how to build and run a toolbox container.
 
-The Harvester OS also provides a way to enable the read-write mode temporarily. Please follow the following steps:
+The Hypervisor OS also provides a way to enable the read-write mode temporarily. Please follow the following steps:
 
 :::caution
 
@@ -37,7 +37,7 @@ Enabling read-write mode might break your system if files are modified. Please u
 
 :::
 
-- For version `v0.3.0`, we need to apply a workaround first to [make some directories non-overlaid](https://github.com/harvester/harvester/issues/1388) after enabling read-write mode. On a running Harvester node, run the following command as root:
+- For version `v0.3.0`, we need to apply a workaround first to [make some directories non-overlaid](https://github.com/harvester/harvester/issues/1388) after enabling read-write mode. On a running Hypervisor node, run the following command as root:
 
     ```
     cat > /oem/91_hack.yaml <<'EOF'
@@ -54,17 +54,17 @@ Enabling read-write mode might break your system if files are modified. Please u
 
 - Reboot the system to GRUB menu. Press ESC to stay on the menu.
 
-    ![](/img/v1.2/troubleshooting/grub-menu.png)
+    ![](/img/v1.2/troubleshooting-hv/grub-menu.png)
 
 - Press `e` on first menuentry. Append `rd.cos.debugrw` to the `linux (loop0)$kernel $kernelcmd` line. Press `Ctrl + x` to boot the system.
 
-    ![](/img/v1.2/troubleshooting/edit-boot-parameter.png)
+    ![](/img/v1.2/troubleshooting-hv/edit-boot-parameter.png)
 
 ## How to permanently edit kernel parameters
 
 :::note
 
-The following steps are a workaround. Harvester will inform the community once a permanent resolution is in place.
+The following steps are a workaround. Hypervisor will inform the community once a permanent resolution is in place.
 
 :::
 
@@ -134,10 +134,10 @@ If kernel panic traces are not recorded in the system log when a system crashes,
 To enable outputting of kernel messages to a serial console, please use the following steps:
 
 - Boot the system to GRUB menu. Press ESC to stay on the menu.
-    ![](/img/v1.2/troubleshooting/grub-menu.png)
+    ![](/img/v1.2/troubleshooting-hv/grub-menu.png)
 - Press `e` on first menuentry. Append `console=ttyS0,115200n8` to the `linux (loop0)$kernel $kernelcmd` line. Press `Ctrl + x` to boot the system.
 
-    ![](/img/v1.2/troubleshooting/edit-boot-parameter-serial.png)
+    ![](/img/v1.2/troubleshooting-hv/edit-boot-parameter-serial.png)
 
 :::note
 
@@ -151,6 +151,6 @@ For kernel panic crashes, you can use kdump to collect crash dumps.
 
 By default, the OS is booted without the kdump feature enabled. Users can enable the feature by selecting the `debug` menuentry when booting, as in the following example:
 
-![](/img/v1.2/troubleshooting/grub-menu-debug.png)
+![](/img/v1.2/troubleshooting-hv/grub-menu-debug.png)
 
 When a system crashes, a crash dump will be stored in the `/var/crash/<time>` directory. Providing the crash dump to developers helps them to troubleshoot and resolve issues.

@@ -2,6 +2,7 @@
 sidebar_position: 2
 sidebar_label: Rancher
 title: "Rancher"
+draft: true
 ---
 
 <head>
@@ -26,13 +27,13 @@ You can collect guest cluster logs and configuration files. Perform the followin
 For more information, see [The Rancher v2.x Linux log collector script](https://www.suse.com/support/kb/doc/?id=000020191).
 
 
-## Importing of Harvester Clusters into Rancher
+## Importing of Hypervisor Clusters into Rancher
 
-After the `cluster-registration-url` is set on Harvester, a deployment named `cattle-system/cattle-cluster-agent` is created for importing of the Harvester cluster into Rancher.
+After the `cluster-registration-url` is set on Hypervisor, a deployment named `cattle-system/cattle-cluster-agent` is created for importing of the Hypervisor cluster into Rancher.
 
 ### Import Pending Due to `unable to read CA file` Error
 
-The following error messages in the `cattle-cluster-agent-*` pod logs indicate that the Harvester cluster cannot be imported into Rancher.
+The following error messages in the `cattle-cluster-agent-*` pod logs indicate that the Hypervisor cluster cannot be imported into Rancher.
 
 ```
 2025-02-13T17:25:22.520593546Z time="2025-02-13T17:25:22Z" level=info msg="Rancher agent version v2.10.2 is starting"

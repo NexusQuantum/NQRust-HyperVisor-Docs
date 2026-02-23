@@ -8,29 +8,29 @@ title: "VM"
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/troubleshooting/vm"/>
 </head>
 
-The following sections contain information useful in troubleshooting issues related to Harvester VM management.
+The following sections contain information useful in troubleshooting issues related to Hypervisor VM management.
 
 ## VM Start Button is Not Visible
 
 ### Issue Description
 
-On rare occasions, the **Start** button is unavailable on the Harvester UI for VMs that are *Off*. Without that button, users are unable to start the VMs.
+On rare occasions, the **Start** button is unavailable on the Hypervisor UI for VMs that are *Off*. Without that button, users are unable to start the VMs.
 
-![](/img/v1.2/troubleshooting/vm-start-button-is-not-visible.png)
+![](/img/v1.2/troubleshooting-hv/vm-start-button-is-not-visible.png)
 
 ### VM General Operations
 
-On the Harvester UI, the **Stop** button is visible after a VM is created and started.
+On the Hypervisor UI, the **Stop** button is visible after a VM is created and started.
 
-![](/img/v1.2/troubleshooting/stop-vm-from-webui.png)
+![](/img/v1.2/troubleshooting-hv/stop-vm-from-webui.png)
 
 The **Start** button is visible after the VM is stopped.
 
-![](/img/v1.2/troubleshooting/start-vm-after-vm-is-stopped-from-webui.png)
+![](/img/v1.2/troubleshooting-hv/start-vm-after-vm-is-stopped-from-webui.png)
 
 When the VM is powered off from inside the VM, both the **Start** and **Restart** buttons are visible.
 
-![](/img/v1.2/troubleshooting/actively-powered-off-vm.png)
+![](/img/v1.2/troubleshooting-hv/actively-powered-off-vm.png)
 
 ### General VM Related Objects
 
@@ -52,7 +52,7 @@ NAME                      READY   STATUS    RESTARTS   AGE
 virt-launcher-vm8-tl46h   1/1     Running   0          80s
 ```
 
-#### A VM Stopped Using the Harvester UI
+#### A VM Stopped Using the Hypervisor UI
 
 Only the object `vm` exists and its status is `Stopped`. Both `vmi` and `pod` disappear.
 
@@ -238,7 +238,7 @@ func (vf *vmformatter) isVMStarting(vm *kubevirtv1.VirtualMachine) bool {
 
 To address the issue, you can force delete the pod using the command `kubectl delete pod virt-launcher-ocffm031v000-rrkss -n namespace --force`.
 
-After the pod is successfully deleted, the `Start` button becomes visible again on the Harvester UI.
+After the pod is successfully deleted, the `Start` button becomes visible again on the Hypervisor UI.
 
 ### Related Issue
 
@@ -250,9 +250,9 @@ https://github.com/harvester/harvester/issues/4659
 
 ### Issue Description
 
-Some VMs may fail to start and then become unresponsive after the cluster or some nodes are restarted. On the **Dashboard** screen of the Harvester UI, the status of the affected VMs is stuck at *Starting*.
+Some VMs may fail to start and then become unresponsive after the cluster or some nodes are restarted. On the **Dashboard** screen of the Hypervisor UI, the status of the affected VMs is stuck at *Starting*.
 
-![](/img/v1.3/troubleshooting/vm-stuck-at-starting.png)
+![](/img/v1.2/troubleshooting-hv/vm-stuck-at-starting.png)
 
 ### Issue Analysis
 
@@ -360,21 +360,21 @@ Cluster level operation:
     default                    vm1-disk-0-9gc6h           Bound    pvc-f1798969-5b72-4d76-9f0e-64854af7b59c   1Gi        RWX            longhorn-image-fxsqr   7d22h
     ```
 
-1. [Stop](#vm-general-operations) the affected VMs from Harvester UI.
+1. [Stop](#vm-general-operations) the affected VMs from Hypervisor UI.
 
    The VM may stuck in `Stopping`, continue the next step.
 
 1. Delete the backing pods forcely.
 
     ```
-    $ kubectl delete pod virt-launcher-vm1-nxfm4 --force
+    $ kubectl delete pod virt-launcher-vm01-nxfm4 --force
     Warning: Immediate deletion does not wait for confirmation that the running resource has been terminated. The resource may continue to run on the cluster indefinitely.
     pod "virt-launcher-vm1-nxfm4" force deleted
     ```
 
     The VM is off now.
 
-    ![](/img/v1.3/troubleshooting/vm-is-off.png)
+    ![](/img/v1.2/troubleshooting-hv/vm-is-off.png)
 
 Node level operation, node by node:
 
@@ -399,7 +399,7 @@ Node level operation, node by node:
 
     Wait some time, the VM will run successfully.
 
-    ![](/img/v1.3/troubleshooting/start-vm-and-run.png)
+    ![](/img/v1.2/troubleshooting-hv/start-vm-and-run.png)
 
     The newly generated csi file is an expected device file.
 
@@ -421,7 +421,7 @@ https://github.com/longhorn/longhorn/issues/8009
 
 #### Description
 
-The **Virtual Machines** screen on the Harvester UI does not display the IP address of a newly created or imported virtual machine.
+The **Virtual Machines** screen on the Hypervisor UI does not display the IP address of a newly created or imported virtual machine.
 
 #### Analysis
 
@@ -437,7 +437,7 @@ The output does not contain the string `guest-agent` when the `qemu-guest-agent`
 
 You can [install the QEMU guest agent](../vm/create-vm.md#installing-the-qemu-guest-agent) by editing the virtual machine configuration.
 
-1. On the Harvester UI, go to **Virtual Machines**.
+1. On the Hypervisor UI, go to **Virtual Machines**.
 
 1. Locate the affected virtual machine, and then select **⋮ > Edit Config**.
 
@@ -461,11 +461,11 @@ https://github.com/harvester/harvester/issues/6644
 
 #### Description
 
-The Harvester UI does not display the IP address of the virtual machine whenever the `virt-launcher` pod's network interface acquires an IPv6 link-local address.
+The Hypervisor UI does not display the IP address of the virtual machine whenever the `virt-launcher` pod's network interface acquires an IPv6 link-local address.
 
 #### Analysis
 
-The QEMU guest agent is responsible for reporting information about the guest operating system, including interface details, to the virtual machine instance for displaying on the Harvester UI. The issue occurs when the virtual machine's pod interface acquires an IPv6 link-local address and reports it to the virtual machine instance before the QEMU guest agent can provide its own information. Once this happens, the IPv4 address from the QEMU guest agent is never reported due to a bug in KubeVirt.
+The QEMU guest agent is responsible for reporting information about the guest operating system, including interface details, to the virtual machine instance for displaying on the Hypervisor UI. The issue occurs when the virtual machine's pod interface acquires an IPv6 link-local address and reports it to the virtual machine instance before the QEMU guest agent can provide its own information. Once this happens, the IPv4 address from the QEMU guest agent is never reported due to a bug in KubeVirt.
 
 You can check the IP address of the pod interface and the virtual machine instance using the following steps:
 
@@ -497,7 +497,7 @@ In some cases, this issue may impact Rancher integration, causing the provisioni
 
 #### Workaround
 
-The workaround is to disable IPv6 in the [kernel parameters](./os.md#how-to-permanently-edit-kernel-parameters) of Harvester.
+The workaround is to disable IPv6 in the [kernel parameters](./os.md#how-to-permanently-edit-kernel-parameters) of Hypervisor.
 
 In the above example, you must add `ipv6.disable=1` and reboot the nodes to prevent virtual machine pod interfaces from acquiring an IPv6 link-local address.
 
@@ -509,11 +509,11 @@ In the above example, you must add `ipv6.disable=1` and reboot the nodes to prev
 
 #### Description
 
-The IP address of new virtual machines intermittently disappears and reappears on the Harvester UI.
+The IP address of new virtual machines intermittently disappears and reappears on the Hypervisor UI.
 
 #### Analysis
 
-The QEMU guest agent is responsible for reporting information about the guest operating system, including interface details, to the virtual machine instance for displaying on the Harvester UI. The issue occurs when the virtual machine instance is updated with domain data that contain empty network interfaces, which is caused by an upstream KubeVirt issue.
+The QEMU guest agent is responsible for reporting information about the guest operating system, including interface details, to the virtual machine instance for displaying on the Hypervisor UI. The issue occurs when the virtual machine instance is updated with domain data that contain empty network interfaces, which is caused by an upstream KubeVirt issue.
 
 This behavior is more commonly observed in Alma Linux 9 and Rocky Linux 9, wherein the QEMU guest agent frequently updates file system information to the virtual machine instance.
 
@@ -545,7 +545,7 @@ While no direct workaround is available for this issue, an [upstream fix](https:
 
 The state of a virtual machine is `Unschedulable` because of an unsatisfied affinity rule.
 
-![](/img/v1.5/troubleshooting/unschedulable-vm.png)
+![](/img/v1.2/troubleshooting-hv/unschedulable-vm.png)
 
 The `VirtualMachine` object contains an affinity rule similar to the following:
 
@@ -608,7 +608,7 @@ status:
 
 ### Root Cause
 
-Harvester migtht [automatically apply affinity rules](../vm/create-vm.md#automatically-applied-affinity-rules) based on the definition of a virtual machine. In the above example, the virtual machine `vm100` attaches to the cluster network `cn2`, and Harvester applies the affinity rule `network.harvesterhci.io/cn2`. However, no nodes meet the rule's criteria, so the virtual machine cannot be scheduled.
+Hypervisor migtht [automatically apply affinity rules](../vm/create-vm.md#automatically-applied-affinity-rules) based on the definition of a virtual machine. In the above example, the virtual machine `vm100` attaches to the cluster network `cn2`, and Hypervisor applies the affinity rule `network.harvesterhci.io/cn2`. However, no nodes meet the rule's criteria, so the virtual machine cannot be scheduled.
 
 ### Solution
 
@@ -668,7 +668,7 @@ To mitigate the issue, perform the following steps:
       -p='[{"op": "replace", "path": "/spec/template/spec/volumes/'$VOLUME_INDEX'/cloudInitNoCloud/secretRef/name", "value": "'"$NEW_SECRET"'"}, {"op": "replace", "path": "/spec/template/spec/volumes/'$VOLUME_INDEX'/cloudInitNoCloud/networkDataSecretRef/name", "value": "'"$NEW_SECRET"'"}]'
     ```
 
-Once the Cloud Config is backed by a unique secret, you can use the Harvester UI's YAML editor to edit the virtual machine configuration without affecting the source template.
+Once the Cloud Config is backed by a unique secret, you can use the Hypervisor UI's YAML editor to edit the virtual machine configuration without affecting the source template.
 
 
 Related issue: [#9207](https://github.com/harvester/harvester/issues/9207)
