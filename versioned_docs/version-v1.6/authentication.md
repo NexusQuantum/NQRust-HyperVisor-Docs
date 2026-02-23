@@ -4,7 +4,7 @@ sidebar_position: 5
 sidebar_label: Authentication
 title: "Authentication"
 keywords:
-  - Harvester
+  - Hypervisor
   - harvester
   - Rancher
   - rancher
@@ -18,7 +18,7 @@ description: With ISO installation mode, user will be prompted to set the passwo
 
 After installation, user will be prompted to set the password for the default `admin` user on the first-time login.
 
-![auth](/img/v1.2/install/first-time-login.png)
+![auth](\img\v1.0\install-hv\first-time-login.png)
 
 :::note
 

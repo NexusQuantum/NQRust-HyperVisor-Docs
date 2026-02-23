@@ -4,7 +4,7 @@ sidebar_position: 3
 sidebar_label: Air Gapped Environment
 title: "Air Gapped Environment"
 keywords:
-- Harvester
+- Hypervisor
 - offline
 - Air-gap
 - HTTP proxy
@@ -14,9 +14,9 @@ keywords:
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/airgap"/>
 </head>
 
-This section describes how to use Harvester in an air gapped environment. Some use cases could be where Harvester will be installed offline, behind a firewall, or behind a proxy.
+This section describes how to use Hypervisor in an air gapped environment. Some use cases could be where Hypervisor will be installed offline, behind a firewall, or behind a proxy.
 
-The Harvester ISO image contains all the packages to make it work in an air gapped environment.
+The Hypervisor ISO image contains all the packages to make it work in an air gapped environment.
 
 ## Working Behind an HTTP Proxy
 
@@ -26,21 +26,21 @@ In some environments, the connection to external services, from the servers or V
 
 You can configure the HTTP(S) proxy during the [ISO installation](./install/iso-install.md) as shown in picture below:
 
-![iso-proxy](/img/v1.2/iso-proxy.png)
+![iso-proxy](/img/v1.2/air-gapped-hv/iso-proxy.png)
 
-### Configure an HTTP Proxy in Harvester Settings
+### Configure an HTTP Proxy in Hypervisor Settings
 
-You can configure the HTTP(S) proxy in the settings page of the Harvester dashboard:
+You can configure the HTTP(S) proxy in the settings page of the Hypervisor dashboard:
 
-1. Go to the settings page of the Harvester UI.
+1. Go to the settings page of the Hypervisor UI.
 1. Find the `http-proxy` setting, click **⋮ > Edit setting**
 1. Enter the value(s) for `http-proxy`, `https-proxy` and `no-proxy`.
 
-![proxy-setting](/img/v1.2/proxy-setting.png)
+![proxy-setting](/img/v1.2/air-gapped-hv/proxy-setting.png)
 
 :::note
 
-Harvester appends necessary addresses to user configured `no-proxy` to ensure the internal traffic works.
+Hypervisor appends necessary addresses to user configured `no-proxy` to ensure the internal traffic works.
 i.e., `localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,longhorn-system,cattle-system,cattle-system.svc,harvester-system,.svc,.cluster.local`. `harvester-system` was added into the list since v1.1.2.
 
 When the nodes in the cluster do not use a proxy to communicate with each other, the CIDR needs to be added to `http-proxy.noProxy` after the first node is installed successfully. Please refer to [fail to deploy a multi-node cluster](./troubleshooting/harvester.md#fail-to-deploy-a-multi-node-cluster-due-to-incorrect-http-proxy-setting).
@@ -49,37 +49,37 @@ When the nodes in the cluster do not use a proxy to communicate with each other,
 
 ## Guest Cluster Images
 
-All necessary images to install and run Harvester are conveniently packaged into the ISO, eliminating the need to pre-load images on bare-metal nodes. A Harvester cluster manages them independently and effectively behind the scenes.
+All necessary images to install and run Hypervisor are conveniently packaged into the ISO, eliminating the need to pre-load images on bare-metal nodes. A Hypervisor cluster manages them independently and effectively behind the scenes.
 
-However, it's essential to understand a guest K8s cluster (e.g., RKE2 cluster) created by the [Harvester node driver](./rancher/node/node-driver.md) is a distinct entity from a Harvester cluster. A guest cluster operates within VMs and requires pulling images either from the internet or a [private registry](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/global-default-private-registry#configure-a-private-registry-with-credentials-when-creating-a-cluster).
+However, it's essential to understand a guest K8s cluster (e.g., RKE2 cluster) created by the [Hypervisor node driver](./rancher/node/node-driver.md) is a distinct entity from a Hypervisor cluster. A guest cluster operates within VMs and requires pulling images either from the internet or a [private registry](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/global-default-private-registry#configure-a-private-registry-with-credentials-when-creating-a-cluster).
 
-If the **Cloud Provider** option is configured to **Harvester** in a guest K8s cluster, it deploys the Harvester cloud provider and Container Storage Interface (CSI) driver.
+If the **Cloud Provider** option is configured to **Hypervisor** in a guest K8s cluster, it deploys the Hypervisor cloud provider and Container Storage Interface (CSI) driver.
 
 ![cluster-registry](/img/v1.2/cluster-registry.png)
 
-As a result, we recommend monitoring each [RKE2 release](https://github.com/rancher/rke2/releases) in your air gapped environment and pulling the required images into your private registry. Please refer to the **Harvester CCM & CSI Driver** with RKE2 Releases section on the [Harvester support matrix page](https://www.suse.com/suse-harvester/support-matrix/all-supported-versions/harvester-v1-1-2/) for the best Harvester cloud provider and CSI driver capability support.
+As a result, we recommend monitoring each [RKE2 release](https://github.com/rancher/rke2/releases) in your air gapped environment and pulling the required images into your private registry. Please refer to the **Hypervisor CCM & CSI Driver** with RKE2 Releases section on the [Hypervisor support matrix page](https://www.suse.com/suse-harvester/support-matrix/all-supported-versions/harvester-v1-1-2/) for the best Hypervisor cloud provider and CSI driver capability support.
 
-## Integrate with an External Rancher
+<!-- ## Integrate with an External Rancher
 
-Rancher determines the `rancher-agent` image to be used whenever a Harvester cluster is imported. If the image is not included in the Harvester ISO, it must be pulled from the internet and loaded on each node, or pushed to the Harvester cluster's registry.
+Rancher determines the `rancher-agent` image to be used whenever a Hypervisor cluster is imported. If the image is not included in the Hypervisor ISO, it must be pulled from the internet and loaded on each node, or pushed to the Hypervisor cluster's registry.
 
 ```bash
-# Run the following commands on a computer that can access both the internet and the Harvester cluster.
+# Run the following commands on a computer that can access both the internet and the Hypervisor cluster.
 docker pull rancher/rancher-agent:<version>
 docker save rancher/rancher-agent:<version> -o rancher-agent-<version>.tar
 
 # Copy the image TAR file to the air-gapped environment.
 scp rancher-agent-<version>.tar rancher@<harvester-node-ip>:/tmp
 
-# Use SSH to connect to the Harvester node, and then load the image.
+# Use SSH to connect to the Hypervisor node, and then load the image.
 ssh rancher@<harvester-node-ip>
 sudo -i
 docker load -i /tmp/rancher-agent-<version>.tar
 ```
 
-## Harvester UI extension with Rancher Integration
+## Hypervisor UI extension with Rancher Integration
 
-The Harvester UI Extension is required to access the Harvester UI in Rancher v2.10.x and later versions. However, installing the extension over the network is not possible in air-gapped environments, so you must perform the following workaround:
+The Hypervisor UI Extension is required to access the Hypervisor UI in Rancher v2.10.x and later versions. However, installing the extension over the network is not possible in air-gapped environments, so you must perform the following workaround:
 
 
 
@@ -112,27 +112,27 @@ The Harvester UI Extension is required to access the Harvester UI in Rancher v2.
 
   ![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-03.png)
 
-1. On the **Available** tab, locate the extension named **Harvester**, and then click **Install**.
+1. On the **Available** tab, locate the extension named **Hypervisor**, and then click **Install**.
 
   ![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-04.png)
 
-1. Select the version that matches the Harvester cluster, and then click **Install**.
+1. Select the version that matches the Hypervisor cluster, and then click **Install**.
 
-  For more information, see the [Harvester UI Extension Support Matrix](/v1.5/rancher/harvester-ui-extension/#support-matrix).
+  For more information, see the [Hypervisor UI Extension Support Matrix](/v1.5/rancher/harvester-ui-extension/#support-matrix).
 
   ![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-05.png)
 
   ![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-06.png) 
 
-1. Go to **Virtualization Management > Harvester Clusters**.
+1. Go to **Virtualization Management > Hypervisor Clusters**.
 
-  You can now import Harvester clusters and access the Harvester UI.
+  You can now import Hypervisor clusters and access the Hypervisor UI.
 
   ![](/img/v1.5/air-gapped/air-gappted-harvester-ui-extension-07.png)
 
 ## Time Requirements
 
-A reliable Network Time Protocol (NTP) server is critical for maintaining the correct system time across all nodes in a Kubernetes cluster, especially when running Harvester. Kubernetes relies on etcd, a distributed key-value store, which requires precise time synchronization to ensure data consistency and prevent issues with leader election, log replication, and cluster stability.
+A reliable Network Time Protocol (NTP) server is critical for maintaining the correct system time across all nodes in a Kubernetes cluster, especially when running Hypervisor. Kubernetes relies on etcd, a distributed key-value store, which requires precise time synchronization to ensure data consistency and prevent issues with leader election, log replication, and cluster stability.
 
 In an air-gapped environment, where external time sources are unavailable, maintaining an accurate and synchronized time becomes even more crucial. Without proper time synchronization, cluster nodes may experience authentication failures, scheduling issues, or even data corruption. To mitigate these risks, organizations should deploy a robust, internal NTP server that synchronizes time across all systems within the network.
 
@@ -176,4 +176,4 @@ spec:
     endpoint: http://ui-plugin-catalog-svc.cattle-ui-plugin-system:8080/plugin/harvester-1.0.3
 ```
 
-Ensure that `svc.namespace` is accessible from Rancher. If that endpoint is not accessible, you can directly use a cluster IP such as `10.43.33.58:8080/plugin/harvester-1.0.3`.
+Ensure that `svc.namespace` is accessible from Rancher. If that endpoint is not accessible, you can directly use a cluster IP such as `10.43.33.58:8080/plugin/harvester-1.0.3`. -->
