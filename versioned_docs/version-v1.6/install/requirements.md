@@ -60,8 +60,8 @@ Hypervisor nodes require the following port connections or inbound rules. Typica
 
 | Protocol  |   Port                 |  Source                                |   Description                           |
 |:----------|:---------------------------|:-----------------------------------------|:----------------------------------------|
-| TCP    |   2379                 |  Harvester management nodes            |   Etcd client port                      |
-| TCP       | 2381                     | Harvester management nodes              | Etcd metrics collection                |
+| TCP    |   2379                 |  Hypervisor management nodes            |   Etcd client port                      |
+| TCP       | 2381                     | Hypervisor management nodes              | Etcd metrics collection                |
 | TCP       | 2380                     | Hypervisor management nodes              | Etcd peer port                        |
 | TCP       | 2382                     | Hypervisor management nodes              | Etcd client port (HTTP only)          |
 | TCP       | 10010                    | Hypervisor management and compute nodes  | Containerd                            |

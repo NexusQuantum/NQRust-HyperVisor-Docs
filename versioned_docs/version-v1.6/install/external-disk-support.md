@@ -3,11 +3,11 @@ sidebar_position: 10
 sidebar_label: External Disk Support
 title: "External Disk Support"
 keywords:
-  - Harvester
+  - Hypervisor
   - Net ISO Installation
   - BMC ISO Redirection
   - BMC Virtual Media
-description: Install Harvester on diskless systems.
+description: Install Hypervisor on diskless systems.
 ---
 
 
@@ -46,7 +46,7 @@ Configuration tasks that you must perform include the following:
 
 See your system provider's documentation for more information about boot settings and firmware functions. A link to a sample document is provided in the References section.
 
-![target-details.png](/img/v1.4/external-disk/target-details.png)
+![target-details.png](/img/v1.4/external-disk-hv/target-details.png)
 
 ### Install Hypervisor
 

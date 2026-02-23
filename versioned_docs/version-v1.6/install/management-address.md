@@ -19,7 +19,7 @@ If you selected the IP address to be configured via DHCP, you will need to confi
 
 :::
 
-![](/img/v1.2/install/iso-installed.png)
+![](/img/v1.0/install-hv/iso-installed.png)
 
 ## Requirements
 
@@ -84,4 +84,4 @@ The management address:
 
 - Allows the access to the Hypervisor API/UI via `HTTPS` protocol.
 - Allows other nodes to join the cluster.
-  ![](/img/v1.2/install/configure-management-address.png)
+  ![](/img/v1.0/install-hv/configure-management-address.png)
