@@ -43,8 +43,6 @@ Once the `pcidevices-controller` addon is deployed successfully, it can take a f
    Please do not use `host-owned` PCI devices (e.g., management and VLAN NICs). Incorrect device allocation may cause damage to your cluster, including node failure.
    :::
 
-   ![](/img/v1.2/pcidevices/enable-pcidevices-inprogress.png)
-
    ![](/img/v1.2/pcidevices/enable-pcidevices-done.png)
 
 ## Attaching PCI Devices to a VM
