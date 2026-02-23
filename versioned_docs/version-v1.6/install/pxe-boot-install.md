@@ -3,15 +3,15 @@ sidebar_position: 4
 sidebar_label: PXE Boot Installation
 title: "PXE Boot Installation"
 keywords:
-  - Harvester
+  - Hypervisor
   - harvester
   - Rancher
   - rancher
-  - Install Harvester
-  - Installing Harvester
-  - Harvester Installation
+  - Install Hypervisor
+  - Installing Hypervisor
+  - Hypervisor Installation
   - PXE Boot Install
-description: Starting from version `0.2.0`, Harvester can be installed automatically. This document provides an example to do an automatic installation with PXE boot.
+description: Starting from version `0.2.0`, Hypervisor can be installed automatically. This document provides an example to do an automatic installation with PXE boot.
 ---
 
 <head>
@@ -103,7 +103,7 @@ install:
   iso_url: http://10.100.0.10/harvester/harvester-<version>-amd64.iso
 #  tty: ttyS1,115200n8   # For machines without a VGA console
 
-  vip: 10.100.0.99        # The VIP to access the Harvester GUI. Make sure the IP is free to use
+  vip: 10.100.0.99        # The VIP to access the Hypervisor GUI. Make sure the IP is free to use
   vip_mode: static        # Or dhcp, check configuration file for more information
 #  vip_hw_addr: 52:54:00:ec:0e:0b   # Leave empty when vip_mode is static
 ```
@@ -191,7 +191,7 @@ In the ISO installation scenario, when the management network interface is in DH
 For example:
 
 ```
-	Harvester Host:~ # ip route
+	Hypervisor Host:~ # ip route
 	default via 192.168.122.1 dev mgmt-br proto dhcp
 ```
 

@@ -4,7 +4,7 @@ sidebar_label: Post-installation steps
 title: "Post-Installation Steps"
 draft: true
 keywords:
-  - Harvester
+  - Hypervisor
   - Installation
 description: Post-installation steps.
 ---
@@ -18,9 +18,9 @@ You can enhance the security and performance of your Hypervisor cluster by perfo
 
 ## Disable SSH Password
 
-By default during installation, SSH password authentication is enabled on the Harvester nodes. This allows administrator to access the nodes for installation diagnosis. 
+By default during installation, SSH password authentication is enabled on the Hypervisor nodes. This allows administrator to access the nodes for installation diagnosis. 
 
-Once installation is completed, however, disabling SSH password authentication is recommended. You can run the following command, which uses `kubectl` to apply a [`CloudInit`](https://docs.harvesterhci.io/v1.6/advanced/cloudinitcrd/) configuration, to disable SSH password authentication on all Harvester nodes:
+Once installation is completed, however, disabling SSH password authentication is recommended. You can run the following command, which uses `kubectl` to apply a [`CloudInit`](https://docs.harvesterhci.io/v1.6/advanced/cloudinitcrd/) configuration, to disable SSH password authentication on all Hypervisor nodes:
 
 ```sh
 cat <<EOF | kubectl apply -f -
@@ -30,7 +30,7 @@ metadata:
   name: ssh-config
 spec:
   matchSelector: 
-    harvesterhci.io/managed: "true" # apply to all Harvester nodes
+    harvesterhci.io/managed: "true" # apply to all Hypervisor nodes
   filename: 99-ssh-config
   contents: |
     stages:
@@ -47,12 +47,12 @@ EOF
 
 :::note
 
-- The `matchSelector` field is used to select Harvester nodes with specific labels.
+- The `matchSelector` field is used to select Hypervisor nodes with specific labels.
 - All the affected nodes must be rebooted for the `CloudInit` configuration to take effect.
 
 :::
 
-Once the configuration is applied, any attempts to access the Harvester nodes with the SSH password are denied.
+Once the configuration is applied, any attempts to access the Hypervisor nodes with the SSH password are denied.
 
 ```sh
 $ ssh -o PreferredAuthentications=password rancher@<node-ip>

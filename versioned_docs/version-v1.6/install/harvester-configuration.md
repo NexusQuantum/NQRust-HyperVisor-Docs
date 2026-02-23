@@ -653,7 +653,7 @@ install:
 
 ### `install.rawdiskimagepath`
 
-**Definition**: Setting that forces the installer to only install the Harvester hypervisor (without any configuration). You must enable `harvester.install.automatic` to use this setting.
+**Definition**: Setting that forces the installer to only install the Hypervisor hypervisor (without any configuration). You must enable `harvester.install.automatic` to use this setting.
 
 ### `install.role`
 

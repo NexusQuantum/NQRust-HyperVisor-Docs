@@ -41,7 +41,7 @@ No matter which tool you use, creating a bootable device erases your USB device 
 
 [balenaEtcher](https://www.balena.io/etcher/) supports writing an image to a USB flash drive on most Linux distros, macOS, and Windows. It has a GUI and is easy to use.
 
-1. Select the Harvester installation ISO.
+1. Select the Hypervisor installation ISO.
 2. Select the target USB device to create a USB installation flash drive.
 
 	![balena-etcher.png](/img/v1.2/install/balena-etcher.png)
@@ -70,14 +70,14 @@ You can press `e` to edit the GRUB menu entry and append `nomodeset` to the boot
 
 ![](/img/v1.2/install/usb-install-nomodeset.png)
 
-### Harvester installer is not displayed
+### Hypervisor installer is not displayed
 
 If a USB flash driver boots, but you can't see the harvester installer, try one of the following workarounds:
 
 - Plug the USB flash drive into a USB 2.0 slot.
 - For version `v0.3.0` or above, remove the `console=ttyS0` parameter when booting. Press `e` to edit the GRUB menu entry and remove the `console=ttyS0` parameter.
 
-### Harvester interactive ISO hangs with the USB installation method
+### Hypervisor interactive ISO hangs with the USB installation method
 
 During installation from a USB flash drive with v1.2.0 ISO image (created by tools like `balenaEtcher`, `dd`, etc.), the installation process may get stuck on the initial image loading process because a required label is missing on the boot partition. Therefore, the installation cannot mount the data partition correctly, causing some checks in `dracut` to be blocked.
 
