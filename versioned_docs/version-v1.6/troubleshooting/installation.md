@@ -11,7 +11,7 @@ title: "Installation"
 
 The following sections contain tips to troubleshoot or get assistance with failed installations.
 
-## Logging into the Harvester Installer (a live OS)
+## Logging into the Hypervisor Installer (a live OS)
 
 Users can press the key combination `CTRL + ALT + F2` to switch to another TTY and log in with the following credentials:
 
@@ -65,7 +65,7 @@ token: 'ThisIsTheCorrectOne'
 To ensure the change is persistent across reboots, update the `token` value of the OS configuration file `/oem/90_custom.yaml`:
 
 ```yaml
-name: Harvester Configuration
+name: Hypervisor Configuration
 stages:
   ...
   initramfs:
@@ -106,13 +106,13 @@ $ sudo yq eval .token /etc/rancher/rancherd/config.yaml
 
 :::
 
-## Check the status of Harvester components
+## Check the status of Hypervisor components
 
-Before checking the status of Harvester components, obtain a copy of the Harvester cluster's kubeconfig file following the [guide](../faq.md#how-can-i-access-the-kubeconfig-file-of-the-harvester-cluster).
+Before checking the status of Hypervisor components, obtain a copy of the Hypervisor cluster's kubeconfig file following the [guide](../faq.md#how-can-i-access-the-kubeconfig-file-of-the-harvester-cluster).
 
 After you obtain a copy of the kubeconfig file, run the following script against the cluster to check the readiness of each component.
 
-- Harvester components script
+- Hypervisor components script
   ```shell
   #!/bin/bash
 
@@ -160,7 +160,7 @@ Please include the following information in a bug report when reporting a failed
 - System information and logs.
     - Available as of v1.0.2
 
-    Please follow the guide in [Logging into the Harvester Installer (a live OS)](#logging-into-the-harvester-installer-a-live-os) to log in. And run the command to generate a tarball that contains troubleshooting information:
+    Please follow the guide in [Logging into the Hypervisor Installer (a live OS)](#logging-into-the-harvester-installer-a-live-os) to log in. And run the command to generate a tarball that contains troubleshooting information:
 
     ```
     supportconfig -k -c
@@ -168,21 +168,21 @@ Please include the following information in a bug report when reporting a failed
 
     The command output messages contain the generated tarball path. For example the path is `/var/loq/scc_aaa_220520_1021 804d65d-c9ba-4c54-b12d-859631f892c5.txz` in the following example:
 
-    ![](/img/v1.2/troubleshooting/installation-support-config-example.png)
+    ![](/img/v1.2/troubleshooting-hv/installation-support-config-example.png)
 
     :::note
 
-    A failure PXE Boot installation automatically generates a tarball if the [`install.debug`](../install/harvester-configuration.md#installdebug) field is set to `true` in the Harvester configuration file.
+    A failure PXE Boot installation automatically generates a tarball if the [`install.debug`](../install/harvester-configuration.md#installdebug) field is set to `true` in the Hypervisor configuration file.
 
     :::
 
-## Harvester Console shows "Setting up Harvester" after day 0 Installation
+## Hypervisor Console shows "Setting up Hypervisor" after day 0 Installation
 
 ### Issue Description
 
-After a successful installation, the Harvester console persistently shows `Setting up Harvester`. While most UI and CLI operations remain unaffected, attempts to [start an upgrade](../upgrade/automatic.md#start-an-upgrade) are blocked.
+After a successful installation, the Hypervisor console persistently shows `Setting up Hypervisor`. While most UI and CLI operations remain unaffected, attempts to [start an upgrade](../upgrade/automatic.md#start-an-upgrade) are blocked.
 
-![](/img/v1.6/troubleshooting/setting-up-harvester-after-day-0.png)
+![](/img/v1.2/troubleshooting-hv/setting-up-harvester-after-day-0.png)
 
 The following information is displayed after you run the command `kubectl get managedchart -n fleet-local harvester -oyaml`:
 
@@ -205,7 +205,7 @@ status:
 
 ### Root Cause
 
-The Harvester console runs the following command to determine if the status of the `harvester` ManagedChart (in the `fleet-local` namespace) is `Ready`.
+The Hypervisor console runs the following command to determine if the status of the `harvester` ManagedChart (in the `fleet-local` namespace) is `Ready`.
 
 ```
 cmd := exec.Command("/bin/sh", "-c", kubectl -n fleet-local get ManagedChart harvester -o jsonpath='{.status.conditions}' | 

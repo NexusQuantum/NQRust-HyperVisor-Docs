@@ -2,21 +2,22 @@
 sidebar_position: 4
 sidebar_label: Monitoring
 title: "Monitoring"
+draft: true
 ---
 
 <head>
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/troubleshooting/monitoring"/>
 </head>
 
-The following sections contain tips to troubleshoot Harvester Monitoring.
+The following sections contain tips to troubleshoot Hypervisor Monitoring.
 
 ## Monitoring is unusable
 
-When the Harvester Dashboard is not showing any monitoring metrics, it can be caused by the following reasons.
+When the Hypervisor Dashboard is not showing any monitoring metrics, it can be caused by the following reasons.
 
 ### Monitoring is unusable due to Pod being stuck in `Terminating` status
 
-Harvester Monitoring pods are deployed randomly on the cluster Nodes. When the Node hosting the pods accidentally goes down, the related pods may become stuck in the `Terminating` status rendering the Monitoring unusable from the WebUI.
+Hypervisor Monitoring pods are deployed randomly on the cluster Nodes. When the Node hosting the pods accidentally goes down, the related pods may become stuck in the `Terminating` status rendering the Monitoring unusable from the WebUI.
 
 ```shell
 $ kubectl get pods -n cattle-monitoring-system
@@ -73,13 +74,13 @@ rancher-monitoring-grafana-d9c56d79b-cp86w               3/3     Running   0    
 
 ## Expand PV/Volume Size
 
-`Harvester` integrates `Longhorn` as the default storage provider.
+`Hypervisor` integrates `Longhorn` as the default storage provider.
 
-Harvester `Monitoring` uses `Persistent Volume (PV)` to store running data. When a cluster has been running for a certain time, the `Persistent Volume` may need to expand its size.
+Hypervisor `Monitoring` uses `Persistent Volume (PV)` to store running data. When a cluster has been running for a certain time, the `Persistent Volume` may need to expand its size.
 
-Based on the `Longhorn` `Volume` expansion guide, `Harvester` illustrates how to [expand the volume size](https://longhorn.io/docs/1.3.2/volumes-and-nodes/expansion/).
+Based on the `Longhorn` `Volume` expansion guide, `Hypervisor` illustrates how to [expand the volume size](https://longhorn.io/docs/1.3.2/volumes-and-nodes/expansion/).
 
-### View Volume
+<!-- ### View Volume
 
 #### From Embedded Longhorn WebUI
 
@@ -185,15 +186,15 @@ The `Volume` is attached to the new POD.
 
 ![](/img/v1.2/troubleshooting/6-after-scale-up.png)
 
-To now, the `Volume` is expanded to the new size and the POD is using it smoothly.
+To now, the `Volume` is expanded to the new size and the POD is using it smoothly. -->
 
 ## Fail to Enable `rancher-monitoring` Addon
 
-You may encounter this when you install the Harvester v1.3.0 or higher version cluster with the minimal 250 GB disk per [hardware requirements](../install/requirements.md#hardware-requirements).
+You may encounter this when you install the Hypervisor v1.3.0 or higher version cluster with the minimal 250 GB disk per [hardware requirements](../install/requirements.md#hardware-requirements).
 
 ### Reproduce Steps
 
-1. Install the Harvester v1.3.0 cluster.
+1. Install the Hypervisor v1.3.0 cluster.
 
 1. Enable the `rancher-monitoring` [addon](../advanced/addons.md), you will observe:
 
@@ -275,13 +276,13 @@ You may encounter this when you install the Harvester v1.3.0 or higher version c
     alertmanager-rancher-monitoring-alertmanager-db-alertmanager-rancher-monitoring-alertmanager-0   Bound    pvc-cea6316e-f74f-4771-870b-49edb5442819   5Gi        RWO            harvester-longhorn   16m
     ```
 
-1. On the **Addons** screen of the Harvester UI, select **⋮** (menu icon) and then select **Edit YAML**.
+1. On the **Addons** screen of the Hypervisor UI, select **⋮** (menu icon) and then select **Edit YAML**.
 
-    ![](/img/v1.3/troubleshooting/edit-rancher-monitoring.png)
+    ![](/img/v1.3/troubleshooting-hv/edit-rancher-monitoring.png)
 
 1. As indicated below, change the two occurrences of the number `50` to `30` under prometheusSpec, and then save. The `prometheus` feature will use a 30GiB disk to store data.
 
-    ![](/img/v1.3/troubleshooting/edit-rancher-monitoring-yaml.png)
+    ![](/img/v1.3/troubleshooting-hv/edit-rancher-monitoring-yaml.png)
 
     Alternatively, you can use `kubectl` to edit the object.
 
@@ -382,7 +383,7 @@ fleet-local   mcc-rancher-logging-crd                       1/1
 fleet-local   mcc-rancher-monitoring-crd                    0/1                       Modified(1) [Cluster fleet-local/local]; clusterrole.rbac.authorization.k8s.io rancher-monitoring-crd-manager missing; clusterrolebinding.rbac.authorization.k8s.io rancher-monitoring-crd-manager missing; configmap.v1 cattle-monitoring-system/rancher-monitoring-crd-manifest missing; serviceaccount.v1 cattle-monitoring-system/rancher-monitoring-crd-manager missing
 ```
 
-When the issue exists and you [start an upgrade](../upgrade/automatic.md#start-an-upgrade), Harvester may return the following error message: `admission webhook "validator.harvesterhci.io" denied the request: managed chart rancher-monitoring-crd is not ready, please wait for it to be ready`.
+When the issue exists and you [start an upgrade](../upgrade/automatic.md#start-an-upgrade), Hypervisor may return the following error message: `admission webhook "validator.harvesterhci.io" denied the request: managed chart rancher-monitoring-crd is not ready, please wait for it to be ready`.
 
 Also, when you search for the objects marked as `missing`, you will find that they exist in the cluster.
 
@@ -638,7 +639,7 @@ The `prometheus` CRD object includes the `storage-network.settings.harvesterhci.
     creationTimestamp: "2025-05-20T06:40:25Z"
 ```
 
-The Harvester pod logs ('harvester-system/harvester' deployment) indicate that the attempt to change the `storage-network` setting was blocked.
+The Hypervisor pod logs ('harvester-system/harvester' deployment) indicate that the attempt to change the `storage-network` setting was blocked.
 
 ```
 ...
@@ -652,13 +653,13 @@ The Harvester pod logs ('harvester-system/harvester' deployment) indicate that t
 
 ### Root Cause
 
-When you make changes to the [storage-network](../advanced/storagenetwork.md#storage-network-setting) setting, the Harvester controller waits for the attached volumes to be detached before applying the changes. In addition, the controller automatically terminates the pods related to Prometheus, Alertmanager, and Grafana because those pods use volumes to store data.
+When you make changes to the [storage-network](../advanced/storagenetwork.md#storage-network-setting) setting, the Hypervisor controller waits for the attached volumes to be detached before applying the changes. In addition, the controller automatically terminates the pods related to Prometheus, Alertmanager, and Grafana because those pods use volumes to store data.
 
 This process usually takes a short time to complete, but can be disrupted when the following occur:
 
-- Attached volumes prevent the Harvester controller from applying the changes to the setting.
+- Attached volumes prevent the Hypervisor controller from applying the changes to the setting.
 - A user or the `monitoring-operator` attempts to enable the `rancher-monitoring` add-on.
-- The Harvester controller terminates the pods.
+- The Hypervisor controller terminates the pods.
 
 ### Workaround
 
@@ -666,7 +667,7 @@ This process usually takes a short time to complete, but can be disrupted when t
 
 1. Check if the [storage-network](../advanced/storagenetwork.md#storage-network-setting) setting is enabled or disabled.
 
-1. Check for error indicators in the Harvester pod logs. If volumes are still attached, stop the related virtual machines until no errors appear after the `storage network change` message.
+1. Check for error indicators in the Hypervisor pod logs. If volumes are still attached, stop the related virtual machines until no errors appear after the `storage network change` message.
 
 1. Enable the `rancher-monitoring` add-on.
 
