@@ -9,25 +9,25 @@ title: "FAQ"
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/faq"/>
 </head>
 
-This FAQ is a work in progress designed to answer the questions our users most frequently ask about Harvester.
+This FAQ is a work in progress designed to answer the questions our users most frequently ask about Hypervisor.
 
-### How can I ssh login to the Harvester node?
+### How can I ssh login to the Hypervisor node?
 ```shell
 $ ssh rancher@node-ip
 ```
 
-### What is the default login username and password of the Harvester dashboard?
+### What is the default login username and password of the Hypervisor dashboard?
 ```shell
 username: admin
 password: # you will be promoted to set the default password when logging in for the first time
 ```
 
-### How can I access the kubeconfig file of the Harvester cluster?
+### How can I access the kubeconfig file of the Hypervisor cluster?
 
-Option 1. You can download the kubeconfig file from the support page of the Harvester dashboard.
-![harvester-kubeconfig.png](/img/v1.2/harvester-kubeconfig.png)
+Option 1. You can download the kubeconfig file from the support page of the Hypervisor dashboard.
+![harvester-kubeconfig.png](/img/v1.2/faq-hv/harvester-kubeconfig.png)
 
-Option 2. You can get the kubeconfig file from one of the Harvester management nodes. E.g.,
+Option 2. You can get the kubeconfig file from one of the Hypervisor management nodes. E.g.,
 ```shell
 $ sudo su
 $ cat /etc/rancher/rke2/rke2.yaml
@@ -52,19 +52,19 @@ New password for default administrator (user-xxxxx):
 
 ### I added an additional disk with partitions. Why is it not getting detected?
 
-As of Harvester v1.0.2, we no longer support adding additional partitioned disks, so be sure to delete all partitions first (e.g., using `fdisk`).
+As of Hypervisor v1.0.2, we no longer support adding additional partitioned disks, so be sure to delete all partitions first (e.g., using `fdisk`).
 
-### Why are there some Harvester pods that become ErrImagePull/ImagePullBackOff?
+### Why are there some Hypervisor pods that become ErrImagePull/ImagePullBackOff?
 
-This is likely because your Harvester cluster is an air-gapped setup, and some pre-loaded container images are missing. Kubernetes has a mechanism that does garbage collection against bloated image stores. When the partition which stores container images is over 85% full, `kubelet` tries to prune the images based on the last time they were used, starting with the oldest, until the occupancy is lower than 80%. These numbers (85% and 80%) are default High/Low thresholds that come with Kubernetes.
+This is likely because your Hypervisor cluster is an air-gapped setup, and some pre-loaded container images are missing. Kubernetes has a mechanism that does garbage collection against bloated image stores. When the partition which stores container images is over 85% full, `kubelet` tries to prune the images based on the last time they were used, starting with the oldest, until the occupancy is lower than 80%. These numbers (85% and 80%) are default High/Low thresholds that come with Kubernetes.
 
 To recover from this state, do one of the following depending on the cluster's configuration:
 - Pull the missing images from sources outside of the cluster (if it's an air-gapped environment, you might need to set up an HTTP proxy beforehand).
-- Manually import the images from the Harvester ISO image.
+- Manually import the images from the Hypervisor ISO image.
 
 :::note
 
-Take v1.1.2 as an example, download the Harvester ISO image from the official URL. Then extract the image list from the ISO image to decide which image tarball we're going to import. For instance, we want to import the missing container image `rancher/harvester-upgrade`
+Take v1.1.2 as an example, download the Hypervisor ISO image from the official URL. Then extract the image list from the ISO image to decide which image tarball we're going to import. For instance, we want to import the missing container image `rancher/harvester-upgrade`
 
 ```shell
 $ curl -sfL https://releases.rancher.com/harvester/v1.1.2/harvester-v1.1.2-amd64.iso -o harvester.iso
@@ -83,7 +83,7 @@ $ xorriso -osirrox on -indev harvester.iso -extract /bundle/harvester/images/har
 $ zstd -d --rm harvester.tar.zst
 ```
 
-Upload the image tarball to the Harvester nodes that need recover. Finally, execute the following command to import the container images on each of them.
+Upload the image tarball to the Hypervisor nodes that need recover. Finally, execute the following command to import the container images on each of them.
 
 ```shell
 $ ctr -n k8s.io images import harvester.tar
@@ -94,7 +94,7 @@ $ rm harvester.tar
 
 - Find the missing images on that node from the other nodes, then export the images from the node where the images still exist and import them on the missing node.
 
-To prevent this from happening, we recommend cleaning up unused container images from the previous version after each successful Harvester upgrade if the image store disk space is stressed. We provided a [harv-purge-images script](https://github.com/harvester/upgrade-helpers/blob/main/bin/harv-purge-images.sh) that makes cleaning up disk space easy, especially for container image storage. The script has to be executed on each Harvester node. For example, if the cluster was originally in v1.1.2, and now it gets upgraded to v1.2.0, you can do the following to discard the container images that are only used in v1.1.2 but no longer needed in v1.2.0:
+To prevent this from happening, we recommend cleaning up unused container images from the previous version after each successful Hypervisor upgrade if the image store disk space is stressed. We provided a [harv-purge-images script](https://github.com/harvester/upgrade-helpers/blob/main/bin/harv-purge-images.sh) that makes cleaning up disk space easy, especially for container image storage. The script has to be executed on each Hypervisor node. For example, if the cluster was originally in v1.1.2, and now it gets upgraded to v1.2.0, you can do the following to discard the container images that are only used in v1.1.2 but no longer needed in v1.2.0:
 
 ```shell
 # on each node
