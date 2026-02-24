@@ -3,7 +3,7 @@ sidebar_position: 11
 sidebar_label: CPU Pinning
 title: "CPU Pinning"
 keywords:
-  - Harvester
+  - Hypervisor
   - harvester
   - Virtual Machine
   - virtual machine
@@ -24,20 +24,20 @@ description: Create VM with CPU pinning
 
 _Available as of v1.4.0_
 
-Harvester supports VM CPU pinning. To use this feature, you must first enable the CPU Manager on the nodes, and then enable CPU pinning when you create the VM.
+Hypervisor supports VM CPU pinning. To use this feature, you must first enable the CPU Manager on the nodes, and then enable CPU pinning when you create the VM.
 
 ## Kubernetes CPU Manager
 
 The [CPU Manager](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/) feature improves CPU resource allocation in Kubernetes clusters, ensuring that workloads with strict performance needs receive stable and predictable CPU resources. This is especially important for high-performance and latency-sensitive applications.
 
-Harvester uses the `static` CPU Manager policy when the CPU Manager is enabled. This policy manages a shared pool of CPUs that initially includes all CPUs on nodes with the following configuration:
+Hypervisor uses the `static` CPU Manager policy when the CPU Manager is enabled. This policy manages a shared pool of CPUs that initially includes all CPUs on nodes with the following configuration:
 
 - Pods in the [`Guaranteed`](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#guaranteed) quality of service (QoS) class that request whole CPU cores (for example, CPU: "2") are assigned dedicated CPUs. These CPUs are "pinned" to the pod and are removed from the shared CPU pool.
 - Pods in the [`Burstable`](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#burstable) and [`BestEffort`](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#besteffort) QoS classes share the remaining CPUs in the shared pool.
 
 ### Calculation of Shared CPU Pool
 
-Harvester reserves CPU resources for system-level operations based on the [GKE formula](https://cloud.google.com/kubernetes-engine/docs/concepts/plan-node-sizes#cpu_reservations), with the [`systemReserved`](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/#system-reserved) and [`kubeReserved`](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/#kube-reserved) values allocated in a 2:3 ratio.
+Hypervisor reserves CPU resources for system-level operations based on the [GKE formula](https://cloud.google.com/kubernetes-engine/docs/concepts/plan-node-sizes#cpu_reservations), with the [`systemReserved`](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/#system-reserved) and [`kubeReserved`](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/#kube-reserved) values allocated in a 2:3 ratio.
 
 Example (node with 16 CPU cores):
 ```
@@ -50,18 +50,18 @@ When a VM (pod) in the Guaranteed QoS class requests 4 CPUs, 4 cores are dedicat
 
 ## Enable and Disable CPU Manager
 
-When you enable the CPU Manager, Harvester sets the CPU Manager policy to `static`. When you disable the feature, Harvester switches the CPU Manager policy back to `none`. 
+When you enable the CPU Manager, Hypervisor sets the CPU Manager policy to `static`. When you disable the feature, Hypervisor switches the CPU Manager policy back to `none`. 
 
 You must enable or disable the CPU Manager on each node separately.
 
-1. On the Harvester UI, go to **Hosts**.
+1. On the Hypervisor UI, go to **Hosts**.
 
 1. Locate the node in the list, and then select **⋮** > **Enable CPU Manager** or **Disable CPU Manager**.
 
-Allow some time for Harvester to apply the corresponding CPU Manager policy.
+Allow some time for Hypervisor to apply the corresponding CPU Manager policy.
 
-![enable-cpu-manager](/img/v1.4/cpu-pinning/enable-cpu-manager.png)
-![disable-cpu-manager](/img/v1.4/cpu-pinning/disable-cpu-manager.png)
+![enable-cpu-manager](/img/v1.4/cpu-pinning-hv/enable-cpu-manager.png)
+![disable-cpu-manager](/img/v1.4/cpu-pinning-hv/disable-cpu-manager.png)
 
 ### Limitations
 
@@ -85,11 +85,11 @@ Allow some time for Harvester to apply the corresponding CPU Manager policy.
 
 1. Click **Create**.
 
-  ![create-vm](/img/v1.4/cpu-pinning/create-vm.png)
+  ![create-vm](/img/v1.4/cpu-pinning-hv/create-vm.png)
 
 1. On the **Advanced Options** tab, select **Enable CPU Pinning**.
 
-  ![vm-advanced-options](/img/v1.4/cpu-pinning/vm-advanced-options.png)
+  ![vm-advanced-options](/img/v1.4/cpu-pinning-hv/vm-advanced-options.png)
 
 1. Click **Save**.
 
@@ -109,4 +109,4 @@ VMs with CPU pinning enabled can be migrated only if the CPU Manager is enabled 
 
 ## Upgrades
 
-When upgrading a node, Harvester drains all pods and live migrates VMs to another node. To avoid interruptions to the upgrade process, ensure that the CPU Manager is enabled on other nodes and sufficient resources are available whenever you use VMs with CPU pinning enabled.
+When upgrading a node, Hypervisor drains all pods and live migrates VMs to another node. To avoid interruptions to the upgrade process, ensure that the CPU Manager is enabled on other nodes and sufficient resources are available whenever you use VMs with CPU pinning enabled.

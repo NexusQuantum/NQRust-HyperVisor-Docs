@@ -7,7 +7,7 @@ keywords:
   - VM
   - guest operating system
   - guest OS
-description: Information concerning virtual machines that run on top of the Harvester cluster
+description: Information concerning virtual machines that run on top of the Hypervisor cluster
 ---
 
 <head>
@@ -16,15 +16,15 @@ description: Information concerning virtual machines that run on top of the Harv
 
 You can create [Linux VMs](../vm/create-vm.md) using one of the following methods: 
 
-- Harvester UI: On the **Virtual Machines** screen, click **Create** and configure the settings on each tab. 
+- Hypervisor UI: On the **Virtual Machines** screen, click **Create** and configure the settings on each tab. 
 - Kubernetes API: Create a `VirtualMachine` object. 
-- [Harvester Terraform Provider](../terraform/terraform-provider.md): Define a `harvester_virtualmachine` resource block. 
+- [Hypervisor Terraform Provider](../terraform/terraform-provider.md): Define a `harvester_virtualmachine` resource block. 
 
-Creating [Windows VMs](../vm/create-windows-vm.md) on the Harvester UI involves slightly different steps. Harvester provides a VM template named `windows-iso-image-base-template` that adds a volume with the Virtio drivers for Windows, which streamlines the VM configuration process. If you require Virtio devices but choose to not use the template, you must add your own Virtio drivers for Windows to enable correct hardware detection. 
+Creating [Windows VMs](../vm/create-windows-vm.md) on the Hypervisor UI involves slightly different steps. Hypervisor provides a VM template named `windows-iso-image-base-template` that adds a volume with the Virtio drivers for Windows, which streamlines the VM configuration process. If you require Virtio devices but choose to not use the template, you must add your own Virtio drivers for Windows to enable correct hardware detection. 
 
 ## Validated Guest Operating Systems
 
-The following operating systems have been validated to run in Harvester virtual machines:
+The following operating systems have been validated to run in Hypervisor virtual machines:
 
 - SUSE Linux Enterprise Micro 6.0 and 6.1
 - SUSE Linux Enterprise Server 15 SP6 and 15 SP7
@@ -33,9 +33,9 @@ The following operating systems have been validated to run in Harvester virtual 
 
 :::note
 
-The list includes only tested operating systems and is not intended to be exhaustive. Other operating systems may also run in Harvester virtual machines. However, guest operating systems must match the architecture of the Harvester cluster's hosts. x86 virtual machines can run only on x86 clusters, and ARM virtual machines can run only on ARM clusters.
+The list includes only tested operating systems and is not intended to be exhaustive. Other operating systems may also run in Hypervisor virtual machines. However, guest operating systems must match the architecture of the Hypervisor cluster's hosts. x86 virtual machines can run only on x86 clusters, and ARM virtual machines can run only on ARM clusters.
 
-You are responsible for obtaining, activating, and managing licenses for any commercial software that you decide to use. Harvester cannot be held responsible for damage or loss of data that may occur through the use of untested, unpatched, and outdated operating systems.
+You are responsible for obtaining, activating, and managing licenses for any commercial software that you decide to use. Hypervisor cannot be held responsible for damage or loss of data that may occur through the use of untested, unpatched, and outdated operating systems.
 
 The contents of this document may not reflect the most current situation and may change at any time without notice.
 

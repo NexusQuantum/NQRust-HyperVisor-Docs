@@ -3,7 +3,7 @@ sidebar_position: 3
 sidebar_label: Create a Windows Virtual Machine
 title: "Create a Windows Virtual Machine"
 keywords:
-  - Harvester
+  - Hypervisor
   - harvester
   - Rancher
   - rancher
@@ -83,7 +83,7 @@ The `bootOrder` values need to be set with the installation image first. If you 
 1. The **Management Network** is added by default with the following values: 
     1. `Name`:  The value `default` is set by default. You can keep it or change it.
     2. `Model`: The value `e1000` is set by default. You can keep it or change it to the other available options from the dropdown.
-    3. `Network`: The value `management Network` is set by default. You can't change this option if no other network has been created. See [Harvester Network](../networking/harvester-network.md) for the full description on how to create new networks.
+    3. `Network`: The value `management Network` is set by default. You can't change this option if no other network has been created. See [Hypervisor Network](../networking/harvester-network.md) for the full description on how to create new networks.
     4. `Type`: The value `masquerade` is set by default. You can keep it or change it to the other available option, `bridge`.
 2. You can add additional networks by clicking  `Add Network`.
 
@@ -202,7 +202,7 @@ There is a known issue with Windows VM using Windows Server 2016 and above, a BS
 As a workaround, you can create or modify the file `/etc/modprobe.d/kvm.conf` within the installation of Hypervisor by updating `/oem/99_custom.yaml` like below:
 
 ```YAML
-name: Harvester Configuration
+name: Hypervisor Configuration
 stages:
   initramfs:
   - commands: # ...

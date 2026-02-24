@@ -3,7 +3,7 @@ sidebar_position: 6
 sidebar_label: VM Backup, Snapshot & Restore
 title: "VM Backup, Snapshot & Restore"
 keywords:
-  - Harvester
+  - Hypervisor
   - harvester
   - Rancher
   - rancher
@@ -20,26 +20,26 @@ description: VM backups are created from the Virtual Machines page. The VM backu
 _Available as of v0.3.0_
 
 VM backups are created from the **Virtual Machines** page. The VM backup volumes will be stored in the **Backup Target** (an NFS or S3 server), and they can be used to either restore a new VM or replace an existing VM.
-![vm-backup.png](/img/v1.2/vm/vm-backup.png)
+![vm-backup.png](/img/v1.2/vm-hv/vm-backup.png)
 
 :::note
 
 A backup target must be set up. For more information, see [Configure Backup Target](#configure-backup-target). If the backup target has not been set, you’ll be prompted with a message to do so.
 
-Backup support is currently limited to Longhorn V1 Data Engine volumes. Harvester is unable to create backups of volumes in external storage.
+Backup support is currently limited to Longhorn V1 Data Engine volumes. Hypervisor is unable to create backups of volumes in external storage.
 
 :::
 
 ### Configure Backup Target
 
-A backup target is an endpoint used to access a backup store in Harvester. A backup store is an NFS server or S3 compatible server that stores the backups of VM volumes. The backup target can be set at `Settings > backup-target`.
+A backup target is an endpoint used to access a backup store in Hypervisor. A backup store is an NFS server or S3 compatible server that stores the backups of VM volumes. The backup target can be set at `Settings > backup-target`.
 
 The following table outlines the parameters that are common to all backup targets.
 
 | Parameter        | Type    | Description                                                                                                                                                                        |
 | :--------------- | :------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Type             | string  | Type of server that stores the backups of volumes used by virtual machines. You can select either `NFS` or `S3`.                                                                   |
-| Refresh Interval | integer | Number of seconds that Harvester waits before syncing backups with the backupstore. When the value is `0`, backups are synced only if all backup volumes are in the `Ready` state. |
+| Refresh Interval | integer | Number of seconds that Hypervisor waits before syncing backups with the backupstore. When the value is `0`, backups are synced only if all backup volumes are in the `Ready` state. |
 
 <Tabs>
 <TabItem value="s3" label="S3" default>
@@ -54,7 +54,7 @@ The following table outlines the parameters that are common to all backup target
 | Certificate        | string  | Self-signed SSL certificate of the S3 server                                                                                           |
 | VirtualHostedStyle | boolean | Option to use virtual-hosted–style URLs, wherein the bucket name is part of the domain name in the URL (`bucket.example.com`)          |
 
-![backuptarget-s3.png](/img/backuptarget-s3.png)
+![backuptarget-s3.png](/img/v1.2/vm-hv/backuptarget-s3.png)
 
 </TabItem>
 <TabItem value="nfs" label="NFS">
@@ -63,7 +63,7 @@ The following table outlines the parameters that are common to all backup target
 | :----------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------- |
 | Endpoint           | string | URL of the [NFS server](https://longhorn.io/docs/1.8.0/snapshots-and-backups/backup-and-restore/set-backup-target/#set-up-nfs-backupstore) |
 
-![backuptarget-nfs.png](/img/backuptarget-nfs.png)
+![backuptarget-nfs.png](/img/v1.2/vm-hv/backuptarget-nfs.png)
 
 </TabItem>
 </Tabs>
@@ -73,13 +73,13 @@ The following table outlines the parameters that are common to all backup target
 1. Once the backup target is set, go to the `Virtual Machines` page.
 1. Click `Take Backup` of the VM actions to create a new VM backup.
 1. Set a custom backup name and click `Create` to create a new VM backup.
-![create-backup.png](/img/v1.2/vm/create-backup.png)
+![create-backup.png](/img/v1.2/vm-hv/create-backup.png)
 
 **Result:** The backup is created. You will receive a notification message, and you can also go to the `Backup & Snapshot > VM Backups` page to view all VM backups.
 
 The `State` will be set to `Ready` once the backup is complete.
 
-![vm-backup-results.png](/img/v1.2/vm/vm-backup-results.png)
+![vm-backup-results.png](/img/v1.2/vm-hv/vm-backup-results.png)
 
 Users can either restore a new VM or replace an existing VM using this backup.
 
@@ -109,7 +109,7 @@ To restore a new VM from a backup, follow these steps:
 1. Click the `Restore Backup` button at the top right.
 1. Specify the new VM name and click `Create`.
 1. A new VM will be restored using the backup volumes and metadata, and you can access it from the `Virtual Machines` page.
-![restore-vm.png](/img/v1.2/vm/restore-vm.png)
+![restore-vm.png](/img/v1.2/vm-hv/restore-vm.png)
 
 ### Replace an existing VM using a backup
 
@@ -123,9 +123,9 @@ You can choose to either delete or retain the previous volumes. By default, all 
 1. Click the `Restore Backup` button at the top right.
 1. Click `Replace Existing`.
 1. You can view the restore process from the `Virtual Machines` page.
-![vm-restore-existing.png](/img/v1.2/vm/vm-restore-existing.png)
+![vm-restore-existing.png](/img/v1.2/vm-hv/vm-restore-existing.png)
 
-### Restore a new VM on another Harvester cluster
+### Restore a new VM on another Hypervisor cluster
 
 _Available as of v1.0.0_
 
@@ -141,7 +141,7 @@ Users can now restore a new VM on another cluster by leveraging the VM metadata 
 
 1. Download the virtual machine image from the existing cluster.
 
-  ![vm-snapshot.png](/img/v1.5/vm/download-vm-image.png)
+  ![vm-snapshot.png](/img/v1.2/vm-hv/download-vm-image.png)
 
 1. Decompress the downloaded image.
   ```
@@ -184,7 +184,7 @@ Users can now restore a new VM on another cluster by leveraging the VM metadata 
   ```
   :::info important
 
-  Harvester can restore virtual machines only if the image name and configuration on both old and new clusters are identical.
+  Hypervisor can restore virtual machines only if the image name and configuration on both old and new clusters are identical.
 
   :::
 
@@ -200,20 +200,20 @@ Users can now restore a new VM on another cluster by leveraging the VM metadata 
 _Available as of v1.1.0_
 
 VM snapshots are created from the **Virtual Machines** page. The VM snapshot volumes will be stored in the cluster, and they can be used to either restore a new VM or replace an existing VM.
-![vm-snapshot.png](/img/v1.2/vm/vm-snapshot.png)
+![vm-snapshot.png](/img/v1.2/vm-hv/vm-snapshot.png)
 
 ### Create a VM snapshot
 
 1. Go to the `Virtual Machines` page.
 1. Click `Take VM Snapshot` of the VM actions to create a new VM snapshot.
 1. Set a custom snapshot name and click `Create` to create a new VM snapshot.
-![create-snapshot.png](/img/v1.2/vm/create-snapshot.png)
+![create-snapshot.png](/img/v1.2/vm-hv/create-snapshot.png)
 
 **Result:** The snapshot is created. You can also go to the `Backup & Snapshot > VM Snapshots` page to view all VM snapshots.
 
 The `State` will be set to `Ready` once the snapshot is complete.
 
-![vm-snapshot-results.png](/img/v1.2/vm/vm-snapshot-results.png)
+![vm-snapshot-results.png](/img/v1.2/vm-hv/vm-snapshot-results.png)
 
 Users can either restore a new VM or replace an existing VM using this snapshot.
 
@@ -249,7 +249,7 @@ To restore a new VM from a snapshot, follow these steps:
 1. Click the `Restore Snapshot` button at the top right.
 1. Specify the new VM name and click `Create`.
 1. A new VM will be restored using the snapshot volumes and metadata, and you can access it from the `Virtual Machines` page.
-![restore-vm-snapshot.png](/img/v1.2/vm/restore-vm-snapshot.png)
+![restore-vm-snapshot.png](/img/v1.2/vm-hv/restore-vm-snapshot.png)
 
 ### Replace an existing VM using a snapshot
 
@@ -279,15 +279,15 @@ Volumes consume extra disk space in the cluster whenever you create a new virtua
 
 1. Locate the target namespace, and then select **⋮ > Edit Quota**.
 
-    ![edit-quota-namespace.png](/img/v1.4/vm/edit-quota-namespace.png)
+    ![edit-quota-namespace.png](/img/v1.2/vm-hv/edit-quota-namespace.png)
 
 1. Specify the maximum amount of disk space that can be consumed by all snapshots in the namespace, and then and click **Save**.
 
-    ![edit-quota-namespace-save.png](/img/v1.4/vm/edit-quota-namespace-save.png)
+    ![edit-quota-namespace-save.png](/img/v1.2/vm-hv/edit-quota-namespace-save.png)
 
 1. Verify that the configured value is displayed on the **Namespaces** screen.
 
-    ![edit-quota-namespace-read.png](/img/v1.4/vm/edit-quota-namespace-read.png)
+    ![edit-quota-namespace-read.png](/img/v1.2/vm-hv/edit-quota-namespace-read.png)
 
 ### Configure the Snapshot Space Usage Limit at the Virtual Machine Level
 
@@ -295,25 +295,25 @@ Volumes consume extra disk space in the cluster whenever you create a new virtua
 
 1. Locate the target virtual machine, and then select **⋮ > Edit VM Quota**.
 
-    ![edit-quota-vm.png](/img/v1.4/vm/edit-quota-vm.png)
+    ![edit-quota-vm.png](/img/v1.2/vm-hv/edit-quota-vm.png)
 
 1. Specify the maximum total amount of disk space that can be consumed by all snapshots for the virtual machine, and then and click **Save**.
 
-    ![edit-quota-vm-save.png](/img/v1.4/vm/edit-quota-vm-save.png)
+    ![edit-quota-vm-save.png](/img/v1.2/vm-hv/edit-quota-vm-save.png)
 
 1. Verify that the configured value is displayed on the **Quotas** tab of the virtual machine details screen.
 
-    ![edit-quota-vm-read.png](/img/v1.4/vm/edit-quota-vm-read.png)
+    ![edit-quota-vm-read.png](/img/v1.2/vm-hv/edit-quota-vm-read.png)
 
 ## Filesystem Freeze for Virtual Machine Backups and Snapshots
 
-When a guest virtual machine is connected with the **QEMU Guest Agent**, the Harvester controller performs filesystem freeze operations through Kubevirt's [virt-freezer](https://github.com/kubevirt/kubevirt/blob/main/docs/freeze.md#virt-freezer) application to ensure filesystem consistency during virtual machine backups and snapshots.
+When a guest virtual machine is connected with the **QEMU Guest Agent**, the Hypervisor controller performs filesystem freeze operations through Kubevirt's [virt-freezer](https://github.com/kubevirt/kubevirt/blob/main/docs/freeze.md#virt-freezer) application to ensure filesystem consistency during virtual machine backups and snapshots.
 
 This feature is particularly valuable for virtual machines with high I/O activity or critical data that requires point-in-time consistency guarantees.
 
 ### Prerequisites
 
-Filesystem freeze and thaw functionality depends on virtual machine configuration, which is _not controlled by Harvester_. You must ensure that virtual machines are configured correctly and support the required libvirt commands.
+Filesystem freeze and thaw functionality depends on virtual machine configuration, which is _not controlled by Hypervisor_. You must ensure that virtual machines are configured correctly and support the required libvirt commands.
 
 - **Red Hat Enterprise Linux (RHEL)** and **SUSE Linux Enterprise (SLE) Micro**: These systems may lack sufficient permissions for filesystem freeze operations by default. You may be required to create custom SELinux policies.
 - **Windows**: Filesystem freeze operations are available on these systems only when the Volume Shadow Copy Service (VSS) service is enabled.
@@ -357,7 +357,7 @@ To verify that your virtual machine supports filesystem freeze operations, perfo
 
 A `Failed to freeze filesystem` error may cause backup or snapshot failures on some Linux distributions.
 
-![fs-freeze-fail.png](/img/fs-freeze-fail.png)
+![fs-freeze-fail.png](/img/v1.2/vm-hv/fs-freeze-fail.png)
 
 This issue typically occurs when SELinux denies read access to the QEMU Guest Agent (`qemu-ga`). You can verify the cause using the following steps:
 
@@ -407,17 +407,17 @@ virt-freezer --unfreeze --namespace <VM namespace> --name <VM name>
 
 _Available as of v1.4.0_
 
-Harvester supports the creation of virtual machine backups and snapshots on a scheduled basis, with the option to retain a specific number of backups and snapshots. You can suspend, resume, and update the schedule at runtime.
+Hypervisor supports the creation of virtual machine backups and snapshots on a scheduled basis, with the option to retain a specific number of backups and snapshots. You can suspend, resume, and update the schedule at runtime.
 
 ### Create the Virtual Machine Schedule
 
 1. Go to the **Virtual Machine Schedules** screen, and then click **Create Schedule**.
 
-  ![create-schedule.png](/img/v1.4/vm/create-schedule.png)
+  ![create-schedule.png](/img/v1.2/vm-hv/create-schadule.png)
 
 2. Configure the following settings:
 
-  ![configure-schedule.png](/img/v1.4/vm/configure-schedule.png)
+  ![configure-schedule.png](/img/v1.2/vm-hv/configure-schedule.png)
 
   - **Type**: Select either **Backup** or **Snapshot**.
 
@@ -435,11 +435,11 @@ Harvester supports the creation of virtual machine backups and snapshots on a sc
 
   - **Retain**: Specify the number of up-to-date backups or snapshots to be retained.
 
-    When this value is exceeded, the Harvester controller deletes the oldest backups or snapshots, and Longhorn starts the snapshot purge.
+    When this value is exceeded, the Hypervisor controller deletes the oldest backups or snapshots, and Longhorn starts the snapshot purge.
 
   - **Max Failure**: Specify the maximum number of consecutive failed backup or snapshot creation attempts to be allowed.
 
-    When this value is exceeded, the Harvester controller suspends the schedule.
+    When this value is exceeded, the Hypervisor controller suspends the schedule.
 
 3. Click **Create**.
 
@@ -451,11 +451,11 @@ Harvester supports the creation of virtual machine backups and snapshots on a sc
 
 1. On the **Basics** tab, verify that the settings are correct.
 
-  ![check-schedule-basic.png](/img/v1.4/vm/check-schedule-basic.png)
+  ![check-schedule-basic.png](/img/v1.2/vm-hv/check-schadule-basic.png)
 
 1. On the **Backups** tab, check the status of the backups or snapshots that were created according to the schedule.
 
-  ![check-schedule-backups.png](/img/v1.4/vm/check-schedule-backups.png)
+  ![check-schedule-backups.png](/img/v1.2/vm-hv/check-schadule-backups.png)
 
   Backups and snapshots that are marked **Ready** can be used to restore the source virtual machine. For more information, see [VM Backup & Restore](#vm-backup--restore) and [VM Snapshot & Restore](#vm-snapshot--restore).
 
@@ -467,11 +467,11 @@ Harvester supports the creation of virtual machine backups and snapshots on a sc
 
 1. Locate the target schedule, and then select **⋮ > Edit Config**.
 
-  ![edit-schedule-config.png](/img/v1.4/vm/edit-schedule-config.png)
+  ![edit-schedule-config.png](/img/v1.2/vm-hv/edit-schedule-config.png)
 
 1. Edit the **Cron Schedule**, **Retain**, or **Max Failure** values.
 
-  ![edit-schedule-parameters.png](/img/v1.4/vm/edit-schedule-parameters.png)
+  ![edit-schedule-parameters.png](/img/v1.2/vm-hv/edit-schedule-parameters.png)
 
 1. Click **Save** to apply the changes.
 
@@ -483,11 +483,11 @@ You can suspend active schedules and resume suspended schedules.
 
 1. Locate the target schedule, and then select **⋮ > Suspend or Resume**.
 
-  ![suspend-resume-schedule.png](/img/v1.4/vm/suspend-resume-schedule.png)
+  ![suspend-resume-schedule.png](/img/v1.2/vm-hv/suspend-resume-schedule.png)
 
   The schedule is automatically suspended when the number of consecutive failed backup or snapshot creation attempts exceeds the **Max Failure** value.
 
-  Harvester does not allow you to resume a suspended schedule for backup creation if the backup target is not reachable.
+  Hypervisor does not allow you to resume a suspended schedule for backup creation if the backup target is not reachable.
 
   :::note
 
@@ -495,9 +495,9 @@ You can suspend active schedules and resume suspended schedules.
 
   :::
 
-### Virtual Machine Operations and Harvester Upgrades
+<!-- ### Virtual Machine Operations and Hypervisor Upgrades
 
-Before you upgrade Harvester, ensure that no virtual machine backups or snapshots are in use, and that all virtual machine schedules are suspended. The Harvester UI displays the following error messages when upgrade attempts are rejected:
+Before you upgrade Hypervisor, ensure that no virtual machine backups or snapshots are in use, and that all virtual machine schedules are suspended. The Hypervisor UI displays the following error messages when upgrade attempts are rejected:
 
 - Virtual machine backups or snapshots are being created, deleted, or used during the upgrade attempt
 
@@ -507,12 +507,12 @@ Before you upgrade Harvester, ensure that no virtual machine backups or snapshot
 
   ![upgrade-svmbackup.png](/img/v1.4/vm/upgrade-svmbackup.png)
 
-To avoid such issues, the Harvester team plans to implement automatic suspension of all virtual machine schedules before the upgrade process is started. The suspended schedules will also be automatically resumed after the upgrade is completed. For more information, see [Issue #6759](https://github.com/harvester/harvester/issues/6759).
+To avoid such issues, the Hypervisor team plans to implement automatic suspension of all virtual machine schedules before the upgrade process is started. The suspended schedules will also be automatically resumed after the upgrade is completed. For more information, see [Issue #6759](https://github.com/harvester/harvester/issues/6759).
 
 :::caution
 
-Longhorn has a similar feature called [recurring snapshots and backups](https://longhorn.io/docs/1.10.0/snapshots-and-backups/scheduling-backups-and-snapshots/), which uses recurring jobs to create periodic snapshots or backups of Longhorn volumes. This feature is not integrated into Harvester because it conflicts with certain Harvester operations (for example, virtual machine attachment and cluster upgrades). Recurring Longhorn snapshot and backup jobs can also generate heavy I/O without Harvester's awareness, and in some cases, even destabilize the cluster.
+Longhorn has a similar feature called [recurring snapshots and backups](https://longhorn.io/docs/1.10.0/snapshots-and-backups/scheduling-backups-and-snapshots/), which uses recurring jobs to create periodic snapshots or backups of Longhorn volumes. This feature is not integrated into Hypervisor because it conflicts with certain Hypervisor operations (for example, virtual machine attachment and cluster upgrades). Recurring Longhorn snapshot and backup jobs can also generate heavy I/O without Hypervisor's awareness, and in some cases, even destabilize the cluster.
 
-For best results, use the [scheduled virtual machine backups and snapshots](#scheduling-virtual-machine-backups-and-snapshots) feature in Harvester, which has safeguard mechanisms that mitigate heavy I/O when possible. Again, Harvester does not support recurring Longhorn snapshots and backups.
+For best results, use the [scheduled virtual machine backups and snapshots](#scheduling-virtual-machine-backups-and-snapshots) feature in Hypervisor, which has safeguard mechanisms that mitigate heavy I/O when possible. Again, Hypervisor does not support recurring Longhorn snapshots and backups.
 
-:::
+::: -->

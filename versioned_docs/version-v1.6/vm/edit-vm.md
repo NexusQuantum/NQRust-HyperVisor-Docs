@@ -3,14 +3,14 @@ sidebar_position: 4
 sidebar_label: Edit a Virtual Machine
 title: "Edit a Virtual Machine"
 keywords:
-  - Harvester
+  - Hypervisor
   - harvester
   - Rancher
   - rancher
   - Virtual Machine
   - virtual machine
   - Edit a VM
-description: Edit Virtual Machines from the Harvester VM page.
+description: Edit Virtual Machines from the Hypervisor VM page.
 ---
 
 <head>

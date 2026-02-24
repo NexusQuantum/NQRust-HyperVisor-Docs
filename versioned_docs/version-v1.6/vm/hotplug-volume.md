@@ -3,7 +3,7 @@ sidebar_position: 8
 sidebar_label: Hot-Plug Volumes
 title: "Hot-Plug Volumes"
 keywords:
-  - Harvester
+  - Hypervisor
   - Hot-plug
   - Volume
 description: Adding hot-plug volumes to a running VM.
@@ -13,7 +13,7 @@ description: Adding hot-plug volumes to a running VM.
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/vm/hotplug-volume"/>
 </head>
 
-Harvester supports adding hot-plug volumes to a running VM.
+Hypervisor supports adding hot-plug volumes to a running VM.
 
 :::info
 
@@ -28,9 +28,9 @@ The following steps assume that you have a running VM and a ready volume:
 1. Go to the **Virtual Machines** page.
 1. Find the VM that you want to add a volume to and select **⋮ > Add Volume**.
 
-  ![Add Volume Button](/img/v1.2/vm/add-volume-button.png)
+  ![Add Volume Button](/img/v1.2/vm-hv/add-volume-button.png)
 
 1. Enter the **Name** and select the **Volume**.
 1. Click **Apply**.
 
-  ![Add Volume Panel](/img/v1.2/vm/add-volume-panel.png)
+  ![Add Volume Panel](/img/v1.2/vm-hv/add-volume-panel.png)

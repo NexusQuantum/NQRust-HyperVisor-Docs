@@ -3,7 +3,7 @@ sidebar_position: 9
 sidebar_label: Resource Overcommit
 title: "Resource Overcommit"
 keywords:
-  - Harvester
+  - Hypervisor
   - Overcommit
   - Overprovision
   - ballooning
@@ -14,9 +14,9 @@ description: Overcommit resources to a VM.
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/vm/resource-overcommit"/>
 </head>
 
-Harvester supports global configuration of resource overload percentages on CPU, memory, and storage. By setting [`overcommit-config`](../advanced/settings.md#overcommit-config), this will allow scheduling of additional virtual machines even when physical resources are fully utilized.
+Hypervisor supports global configuration of resource overload percentages on CPU, memory, and storage. By setting [`overcommit-config`](../advanced/settings.md#overcommit-config), this will allow scheduling of additional virtual machines even when physical resources are fully utilized.
 
-Harvester allows you to overcommit CPU and RAM on compute nodes. This allows you to increase the number of instances running on your cloud at the cost of reducing the performance of the instances. The Compute service uses the following ratios by default:
+Hypervisor allows you to overcommit CPU and RAM on compute nodes. This allows you to increase the number of instances running on your cloud at the cost of reducing the performance of the instances. The Compute service uses the following ratios by default:
 
 - CPU allocation ratio: 1600%
 - RAM allocation ratio: 150%
@@ -34,24 +34,24 @@ Users can modify the global `overcommit-config` by following the steps below, an
 
 1. Go to the **Advanced > Settings** page.
 
-  ![overcommit page](/img/v1.2/vm/overcommit-page.png)
+  ![overcommit page](/img/v1.2/vm-hv/overcommit-page.png)
 
 1. Find the `overcommit-config` setting.
 1. Configure the desired CPU, Memory, and Storage ratio.
 
-  ![overcommit panel](/img/v1.2/vm/overcommit-panel.png)
+  ![overcommit panel](/img/v1.2/vm-hv/overcommit-panel.png)
 
 ## Configure overcommit for a single virtual machine
 
 In situations where you require specific configurations for individual virtual machines without affecting the global settings, you can easily achieve this by modifying the `spec.template.spec.domain.resources.limits.<memory|cpu>` value on the corresponding virtual machine spec directly.
 
-![vm overcommit config](/img/v1.2/vm/vm-overcommit-config.png)
+![vm overcommit config](/img/v1.2/vm-hv/vm-overcommit-config.png)
 
 ## Reserve more memory for the system overhead
 
-By default, the Harvester reserves a certain amount of system management overhead memory from the memory allocated for the virtual machine. In most cases, this will not cause any problems. However, some operating systems, such as Windows 2022, will request more memory than is reserved.
+By default, the Hypervisor reserves a certain amount of system management overhead memory from the memory allocated for the virtual machine. In most cases, this will not cause any problems. However, some operating systems, such as Windows 2022, will request more memory than is reserved.
 
-To address the issue, Harvester provides an annotation `harvesterhci.io/reservedMemory` on VirtualMachine custom resource to let you specify the amount of memory to reserve. For instance, add `harvesterhci.io/reservedMemory: 200Mi` if you decide to reserve 200 MiB for the system overhead of the VM.
+To address the issue, Hypervisor provides an annotation `harvesterhci.io/reservedMemory` on VirtualMachine custom resource to let you specify the amount of memory to reserve. For instance, add `harvesterhci.io/reservedMemory: 200Mi` if you decide to reserve 200 MiB for the system overhead of the VM.
 
 ```diff
  apiVersion: kubevirt.io/v1
@@ -68,4 +68,4 @@ To address the issue, Harvester provides an annotation `harvesterhci.io/reserved
 
 ## Why my virtual machines are scheduled unevenly?
 
-The scheduling of virtual machines depends on the underlying behavior of the kube-scheduler. We have a dedicated article explaining the details. If you would like to learn more, check out:  [Harvester Knowledge Base: VM Scheduling](https://harvesterhci.io/kb/vm-scheduling/).
+The scheduling of virtual machines depends on the underlying behavior of the kube-scheduler. We have a dedicated article explaining the details. If you would like to learn more, check out:  [Hypervisor Knowledge Base: VM Scheduling](https://harvesterhci.io/kb/vm-scheduling/).
