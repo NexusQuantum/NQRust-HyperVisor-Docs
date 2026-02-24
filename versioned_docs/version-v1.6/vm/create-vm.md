@@ -4,7 +4,7 @@ sidebar_position: 2
 sidebar_label: Create a Virtual Machine
 title: "Create a Virtual Machine"
 keywords:
-  - Harvester
+  - Hypervisor
   - harvester
   - Rancher
   - rancher
@@ -93,7 +93,7 @@ For more information, see the [API reference](../api/create-namespaced-virtual-m
 </TabItem>
 <TabItem value="terraform" label="Terraform">
 
-To create a virtual machine using the [Harvester Terraform Provider](https://registry.terraform.io/providers/harvester/harvester/latest),
+To create a virtual machine using the [Hypervisor Terraform Provider](https://registry.terraform.io/providers/harvester/harvester/latest),
 define a `harvester_virtualmachine` resource block:
 
 ```hcl

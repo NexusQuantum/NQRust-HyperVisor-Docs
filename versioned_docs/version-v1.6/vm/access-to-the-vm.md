@@ -3,39 +3,39 @@ sidebar_position: 5
 sidebar_label: Access to the Virtual Machine
 title: "Access to the Virtual Machine"
 keywords:
-  - Harvester
+  - Hypervisor
   - harvester
   - Rancher
   - rancher
   - Access to the VM
-description: Once the VM is up and running, it can be accessed using either VNC or the serial console from the Harvester UI.
+description: Once the VM is up and running, it can be accessed using either VNC or the serial console from the Hypervisor UI.
 ---
 
 <head>
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/vm/access-to-the-vm"/>
 </head>
 
-Once the VM is up and running, you can access it using either the Virtual Network Computing (VNC) client or the serial console from the Harvester UI.
+Once the VM is up and running, you can access it using either the Virtual Network Computing (VNC) client or the serial console from the Hypervisor UI.
 
 Additionally, you can connect directly from your computer's SSH client.
 
-## Access with the Harvester UI
+## Access with the Hypervisor UI
 
 VMs can be accessed from the UI directly using either VNC or the serial console.
 
 If the VGA display is not enabled on the VM, e.g., the `Ubuntu-Minimal-Cloud` image, the VM can only be accessed with the serial console.
 
-![](/img/v1.2/vm/access-to-vm.png)
+![](/img/v1.2/vm-hv/access-to-vm.png)
 
 ## SSH Access
 
-Harvester provides two ways to inject SSH public keys into virtual machines. Generally, these methods fall into two categories. [Static key injection](#static-ssh-key-injection-via-cloud-init), which places keys in the cloud-init script when the virtual machine is first powered on; [dynamic injection](#dynamic-ssh-key-injection-via-qemu-guest-agent), which allows keys or basic auth to be updated dynamically at runtime.
+Hypervisor provides two ways to inject SSH public keys into virtual machines. Generally, these methods fall into two categories. [Static key injection](#static-ssh-key-injection-via-cloud-init), which places keys in the cloud-init script when the virtual machine is first powered on; [dynamic injection](#dynamic-ssh-key-injection-via-qemu-guest-agent), which allows keys or basic auth to be updated dynamically at runtime.
 
 ### Static SSH Key Injection via cloud-init
 
 You can provide ssh keys to your virtual machines during the creation time on the `Basics` tab. Additionally, you can place the public ssh keys into your cloud-init script to allow it to take place.
 
-![](/img/v1.2/vm/vm-ssh-keys.png)
+![](/img/v1.2/vm-hv/vm-ssh-keys.png)
 
 #### Example of SSH key cloud-init configuration:
 ```yaml
@@ -49,7 +49,7 @@ ssh_authorized_keys:
 
 _Available as of v1.0.1_
 
-Harvester supports dynamically injecting public ssh keys at run time through the use of the [qemu guest agent](https://wiki.qemu.org/Features/GuestAgent). This is achieved through the `qemuGuestAgent` propagation method.
+Hypervisor supports dynamically injecting public ssh keys at run time through the use of the [qemu guest agent](https://wiki.qemu.org/Features/GuestAgent). This is achieved through the `qemuGuestAgent` propagation method.
 
 :::note
 
@@ -59,7 +59,7 @@ When using `qemuGuestAgent` propagation, the `/home/$USER/.ssh/authorized_keys` 
 
 :::
 
-You can inject your access credentials via the Harvester dashboard as below:
+You can inject your access credentials via the Hypervisor dashboard as below:
 
 1. Select the VM and click `⋮` button.
 2. Click the `Edit Config` button and go to the `Access Credentials` tab.
@@ -73,7 +73,7 @@ You need to enter the VM to edit password or remove SSH-Key after deleting the c
 
 :::
 
-![](/img/v1.2/vm/vm-add-access-credentails.png)
+![](/img/v1.2/vm-hv/vm-add-access-credentails.png)
 
 
 
