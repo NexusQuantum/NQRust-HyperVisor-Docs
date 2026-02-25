@@ -27,7 +27,7 @@ description: Create a volume from the Volume page.
 1. Select an existing `StorageClass`.
 1. Configure the `Size` of the volume.
 
-![create-empty-volume](/img/v1.2/volume/create-empty-volume.png)
+![create-empty-volume](/img/v1.2/volume-hv/create-empty-volume.png)
 
 :::caution
 
@@ -141,7 +141,7 @@ By default, Harvester will set the volume size to the virtual size of the image.
 
 :::
 
-![create-image-volume](/img/v1.2/volume/create-image-volume.png)
+![create-image-volume](/img/v1.2/volume-hv/create-image-volume.png)
 
 </TabItem>
 <TabItem value="api" label="API">
