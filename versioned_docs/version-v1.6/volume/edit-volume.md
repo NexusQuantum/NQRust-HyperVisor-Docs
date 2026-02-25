@@ -17,7 +17,7 @@ After creating a volume, you can edit your volume by clicking the `⋮` button a
 
 Hypervisor supports offline volume expansion, provided that the underlying storage provider supports volume resizing. You can increase the size of a volume when the associated virtual machine is powered off or when the volume is detached from the virtual machine.
 
-![expand-volume](/img/v1.2/volume/expand-volume.png)
+![expand-volume](/img/v1.2/volume-hv/expand-volume.png)
 
 ### Online Volume Expansion
 
@@ -44,7 +44,7 @@ Additionally, you cannot use the [Edit Config](../vm/edit-vm.md) feature on the 
 
 If you specify a size larger than Longhorn's capacity during the expansion, the status of the volume expansion will be stuck in `Resizing`. You can cancel the failed volume expansion by clicking the `⋮` button and selecting the `Cancel Expand` option.
 
-![cancel-failed-volume-expansion](/img/v1.2/volume/cancel-failed-volume-expansion.png)
+![cancel-failed-volume-expansion](/img/v1.2/volume-hv/cancel-failed-volume-expansion.png)
 
 ## Change the StorageClass of an Existing Volume
 
