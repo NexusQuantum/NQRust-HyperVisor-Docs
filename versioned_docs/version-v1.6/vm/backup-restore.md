@@ -265,7 +265,7 @@ You can only choose to retain the previous volumes.
 1. Click the `Restore Snapshot` button at the top right.
 1. Click `Replace Existing`.
 1. You can view the restore process from the `Virtual Machines` page.
-![restore-vm-snapshot-existing.png](/img/v1.2/vm/restore-vm-snapshot-existing.png)
+![restore-snapshot-existing.png](/img/v1.2/vm-hv/restore-snapshot-existing.png)
 
 ## VM Snapshot Space Management
 
@@ -459,7 +459,7 @@ Hypervisor supports the creation of virtual machine backups and snapshots on a s
 
   Backups and snapshots that are marked **Ready** can be used to restore the source virtual machine. For more information, see [VM Backup & Restore](#vm-backup--restore) and [VM Snapshot & Restore](#vm-snapshot--restore).
 
-  ![check-schedule-restore.png](/img/v1.4/vm/check-schedule-restore.png)
+  ![check-schedule-restore.png](/img/v1.4/vm-hv/check-schedule-restore.png)
 
 ### Edit a Virtual Machine Schedule
 
