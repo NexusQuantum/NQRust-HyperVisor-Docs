@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <style>
+    .outer-text { fill:#666; font-size:16px; }
+    .box { fill:#f7f7f7; stroke:#888; stroke-width:2; }
+    .label { fill:#444; font-size:16px; font-weight:600; }
+    .small { fill:#3366cc; font-size:16px; font-weight:600; }
+    .mtu { fill:#3366cc; font-size:14px; }
+    .dash { fill:none; stroke:#aaa; stroke-dasharray:6 6; stroke-width:2; }
+    .line { stroke:#888; stroke-width:2; }
+  </style>
+
+  <!-- Intro text -->
+  <text x="40" y="30" class="outer-text">In this example, applying a new MTU value 9000 needs to touch:</text>
+  <text x="60" y="55" class="outer-text">(1)  All the related ports in the external Switch/Router</text>
+  <text x="60" y="80" class="outer-text">(2)  All the related uplinks of Hypervisor nodes which join this clusternetwork cn-data</text>
+
+  <!-- dashed container -->
+  <rect x="40" y="100" width="920" height="230" class="dash"/>
+
+  <!-- left network config -->
+  <rect x="120" y="140" width="320" height="120" class="box"/>
+  <text x="280" y="165" text-anchor="middle" class="label">Network Configuration: 1</text>
+  <text x="280" y="190" text-anchor="middle" class="label">Uplink</text>
+  <text x="280" y="215" text-anchor="middle" class="label">linkAttributes</text>
+  <text x="280" y="240" text-anchor="middle" class="small">Mtu:1500</text>
+  <text x="280" y="265" text-anchor="middle" class="label">(selects node1)</text>
+
+  <!-- right network config -->
+  <rect x="560" y="140" width="320" height="120" class="box"/>
+  <text x="720" y="165" text-anchor="middle" class="label">Network Configuration: 2</text>
+  <text x="720" y="190" text-anchor="middle" class="label">Uplink</text>
+  <text x="720" y="215" text-anchor="middle" class="label">linkAttributes</text>
+  <text x="720" y="240" text-anchor="middle" class="small">Mtu:1500</text>
+  <text x="720" y="265" text-anchor="middle" class="label">(selects node2)</text>
+
+  <!-- Hypervisor clusternetwork label -->
+  <text x="650" y="320" class="label">Hypervisor ClusterNetwork: cn-data</text>
+
+  <!-- external switch boxes -->
+  <rect x="210" y="360" width="200" height="50" rx="8" ry="8" class="box"/>
+  <text x="310" y="390" text-anchor="middle" class="label">external Switch1</text>
+
+  <rect x="590" y="360" width="200" height="50" rx="8" ry="8" class="box"/>
+  <text x="690" y="390" text-anchor="middle" class="label">external Switch2</text>
+
+  <!-- router -->
+  <rect x="400" y="460" width="220" height="50" rx="8" ry="8" class="box"/>
+  <text x="510" y="490" text-anchor="middle" class="label">external Router1</text>
+
+  <!-- lines -->
+  <line x1="280" y1="260" x2="310" y2="360" class="line"/>
+  <line x1="720" y1="260" x2="690" y2="360" class="line"/>
+  <line x1="310" y1="410" x2="510" y2="460" class="line"/>
+  <line x1="690" y1="410" x2="510" y2="460" class="line"/>
+
+  <!-- mtu tags -->
+  <text x="320" y="315" class="mtu">mtu:1500</text>
+  <text x="650" y="315" class="mtu">mtu:1500</text>
+  <text x="510" y="440" class="mtu" text-anchor="middle">mtu:1500</text>
+  <text x="280" y="330" class="mtu" text-anchor="middle">port mtu:1500</text>
+  <text x="240" y="430" class="mtu" text-anchor="middle">mtu:1500</text>
+  <text x="790" y="430" class="mtu" text-anchor="middle">mtu:1500</text>
+  <text x="430" y="520" class="mtu">mtu:1500</text>
+  <text x="610" y="520" class="mtu">mtu:1500</text>
+</svg>
