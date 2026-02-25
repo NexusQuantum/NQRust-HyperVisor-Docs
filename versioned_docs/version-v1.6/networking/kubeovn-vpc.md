@@ -3,13 +3,14 @@ sidebar_position: 7
 sidebar_label: Virtual Private Cloud (VPC)
 title: "Virtual Private Cloud (VPC)"
 keywords:
-- Harvester
+- Hypervisor
 - networking
 - Kube-OVN
 - overlay network
 - subnet
 - virtual private cloud
 - VPC
+draft: true
 ---
 
 <head>
@@ -30,9 +31,9 @@ The following table outlines the key components of a VPC:
 | security group | Virtual firewall that controls inbound and outbound traffic per instance |
 | VPC peering | Optional peering or hybrid connections between different VPCs or on-premises networks |
 
-## Harvester + Kube-OVN Integration Architecture
+## Hypervisor + Kube-OVN Integration Architecture
 
-The following diagram illustrates how VPCs, subnets, overlay networks, and virtual machines are logically connected in Harvester with Kube-OVN. This architecture includes public and private subnets, allowing separation of internet-facing traffic from internal resources. Moreover, this architecture enables scalable, isolated L3 and L2 network structures across the cluster.
+The following diagram illustrates how VPCs, subnets, overlay networks, and virtual machines are logically connected in Hypervisor with Kube-OVN. This architecture includes public and private subnets, allowing separation of internet-facing traffic from internal resources. Moreover, this architecture enables scalable, isolated L3 and L2 network structures across the cluster.
 
 ```
                                  [ VPC: vpc-1 ]
@@ -56,8 +57,8 @@ IP: 172.20.10.X     IP: 172.20.10.Y                    IP: 172.20.20.Z
 | --- | --- | --- |
 | [VPC](#vpc-settings) | Kube-OVN | Top-level L3 domain, manages subnet groupings |
 | [subnet](#subnet-settings) | Kube-OVN | CIDR assignment, routing, gateway, firewall rules |
-| [overlay network](./harvester-network.md#overlay-network-experimental) | Harvester | L2 virtual switch (OVS bridge), mapped to subnet |
-| virtual machine | Harvester | Runs compute workloads, connected to overlay network |
+| [overlay network](./harvester-network.md#overlay-network-experimental) | Hypervisor | L2 virtual switch (OVS bridge), mapped to subnet |
+| virtual machine | Hypervisor | Runs compute workloads, connected to overlay network |
 
 This architecture has the following key characteristics:
 
@@ -65,22 +66,22 @@ This architecture has the following key characteristics:
 
   Each subnet includes a CIDR and gateway IP, and binds to an overlay network (as provider). Kube-OVN enforces a one-to-one mapping between the subnet and the overlay network to avoid ambiguous routing, traffic collisions, and isolation issues.
 
-- Harvester defines the overlay networks (type: `OverlayNetwork`).
+- Hypervisor defines the overlay networks (type: `OverlayNetwork`).
 
-  Each overlay network is considered a provider in Kube-OVN. When you create a subnet on the Harvester UI, you can select these overlay networks in the **Provider** list on the **Subnet:Create** screen.
+  Each overlay network is considered a provider in Kube-OVN. When you create a subnet on the Hypervisor UI, you can select these overlay networks in the **Provider** list on the **Subnet:Create** screen.
 
-- Harvester provisions virtual machines that are connected to an overlay network.
+- Hypervisor provisions virtual machines that are connected to an overlay network.
 
   Each virtual machine uses the Kube-OVN IPAM to request an IP address after booting. The virtual machine receives its IP address, gateway, and routing information from the associated subnet.
 
 - Kube-OVN handles all L3 logic (routing, NAT, VPC peering, and isolation).
 
-  Harvester focuses purely on compute and network attachment. Network policy enforcement, private subnets, and NAT egress are managed by Kube-OVN.
+  Hypervisor focuses purely on compute and network attachment. Network policy enforcement, private subnets, and NAT egress are managed by Kube-OVN.
 
 This architecture has the following benefits:
 
-- Clear separation of concerns: Harvester handles virtualization; Kube-OVN handles SDN
-- Scalability: New VPCs, subnets, and peering don’t require changes in Harvester core
+- Clear separation of concerns: Hypervisor handles virtualization; Kube-OVN handles SDN
+- Scalability: New VPCs, subnets, and peering don’t require changes in Hypervisor core
 - Kubernetes-native networking: Kube-OVN integrates tightly with Kubernetes, supporting CRDs, policies, etc.
 - Isolation and observability: Centralized control over IPs, ACLs, and routing through Kube-OVN
 
@@ -88,9 +89,9 @@ This architecture has the following benefits:
 
 ### VPC Settings
 
-In Harvester, a virtual private cloud (VPC) is a logical network container that helps manage and isolate subnets and traffic. It defines routing, NAT, and network segmentation.
+In Hypervisor, a virtual private cloud (VPC) is a logical network container that helps manage and isolate subnets and traffic. It defines routing, NAT, and network segmentation.
 
-Harvester provides a default VPC named `ovn-cluster`, and two associated subnets named `ovn-default` and `join` for internal Kube-OVN operations. You can create additional VPCs by clicking **Create** on the **Virtual Private Cloud** screen.
+Hypervisor provides a default VPC named `ovn-cluster`, and two associated subnets named `ovn-default` and `join` for internal Kube-OVN operations. You can create additional VPCs by clicking **Create** on the **Virtual Private Cloud** screen.
 
 ![](/img/default_vpc_and_subnet.png)
 
@@ -109,7 +110,7 @@ When creating custom VPCs, you must configure settings related to the routes def
 
 ### Subnet Settings
 
-Each subnet defines a CIDR block and gateway, and is mapped to a Harvester [overlay network](./harvester-network.md#overlay-network-experimental) (virtual switch). It also includes controls for NAT and [access rules](./kubeovn-vm-isolation.md#subnet-acls).
+Each subnet defines a CIDR block and gateway, and is mapped to a Hypervisor [overlay network](./harvester-network.md#overlay-network-experimental) (virtual switch). It also includes controls for NAT and [access rules](./kubeovn-vm-isolation.md#subnet-acls).
 
 When creating subnets, you must configure settings that are relevant to your use case. In most cases, you can get started by just configuring the **CIDR Block**, **Gateway**, and **Provider**. The following table outlines the settings on the **Subnet** details screen:
 
@@ -148,7 +149,7 @@ Perform the following steps to create and configure a VPC.
 
 1. Enable [kubeovn-operator](../advanced/addons/kubeovn-operator.md).
 
-    The kubeovn-operator add-on deploys Kube-OVN to the Harvester cluster.
+    The kubeovn-operator add-on deploys Kube-OVN to the Hypervisor cluster.
 
     ![](/img/kubeovn-operator.png)
 
@@ -174,7 +175,7 @@ Perform the following steps to create and configure a VPC.
 
         :::note
 
-        You must link each subnet to a dedicated overlay network. In the **Provider** field, the Harvester UI only shows overlay networks that are not linked to other subnets, automatically enforcing the one-to-one mapping.
+        You must link each subnet to a dedicated overlay network. In the **Provider** field, the Hypervisor UI only shows overlay networks that are not linked to other subnets, automatically enforcing the one-to-one mapping.
 
         :::
 
@@ -385,7 +386,7 @@ The `natOutgoing` setting enables network address translation (NAT) for traffic 
 
 VPC peering is a networking connection that enables virtual machines in different VPCs to communicate using *private IP addresses*.
 
-Each VPC is a separate network namespace with its own CIDR block, routing table, and isolation boundary. Without VPC peering, virtual machines are isolated even when they are hosted within the same Harvester cluster. Once a peering connection is established, routing rules are automatically updated to allow virtual machines to communicate privately.
+Each VPC is a separate network namespace with its own CIDR block, routing table, and isolation boundary. Without VPC peering, virtual machines are isolated even when they are hosted within the same Hypervisor cluster. Once a peering connection is established, routing rules are automatically updated to allow virtual machines to communicate privately.
 
 VPC peering offers the following key benefits:
 
@@ -395,7 +396,7 @@ VPC peering offers the following key benefits:
 
 - Keeping traffic within the internal cloud network not only improves performance but also lowers costs, providing a significant advantage over using the public internet or VPNs.
 
-The following diagram shows how VPCs and subnets in Kube-OVN map to overlay networks and virtual machines in Harvester. This architecture enables you to create scalable and isolated L3 and L2 network structures across the cluster.
+The following diagram shows how VPCs and subnets in Kube-OVN map to overlay networks and virtual machines in Hypervisor. This architecture enables you to create scalable and isolated L3 and L2 network structures across the cluster.
 
 ```
 
@@ -419,7 +420,7 @@ The following diagram shows how VPCs and subnets in Kube-OVN map to overlay netw
             │  (1:1 mapping - Provider binding)                 │                                                    │
             ▼                                                   ▼                                                    ▼
 ┌──────────────────────────────┐                 ┌──────────────────────────────┐                    ┌──────────────────────────────┐
-│ Harvester Overlay: vswitch1  │                 │ Harvester Overlay: vswitch3  │                    │ Harvester Overlay: vswitch4  │
+│ Hypervisor Overlay: vswitch1  │                 │ Hypervisor Overlay: vswitch3  │                    │ Hypervisor Overlay: vswitch4  │
 │ Type: OverlayNetwork         │                 │ Type: OverlayNetwork         │                    │ Type: OverlayNetwork         │
 └──────────────────────────────┘                 └──────────────────────────────┘                    └──────────────────────────────┘
             │                                                   │                                                    │
@@ -430,7 +431,7 @@ The following diagram shows how VPCs and subnets in Kube-OVN map to overlay netw
 └──────────────────────┘                            └──────────────────────┘       vswitch (overlay)      └──────────────────────┘
             ▲
             │
-VM launched and managed by Harvester
+VM launched and managed by Hypervisor
 
 ```
 
@@ -476,7 +477,7 @@ For more information about VPC peering prerequisites and configuration, see [VPC
 
 1. Create two VPCs named `vpcpeer-1` and `vpcpeer-2`.
 
-    Harvester creates two isolated network spaces that are ready for subnet creation.
+    Hypervisor creates two isolated network spaces that are ready for subnet creation.
 
 1. Create one subnet in each VPC with the following settings:
 

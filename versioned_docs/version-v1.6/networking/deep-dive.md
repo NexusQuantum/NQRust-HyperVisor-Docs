@@ -1,9 +1,9 @@
 ---
 sidebar_position: 3
-sidebar_label: Harvester Network Deep Dive
-title: "Harvester Network Deep Dive"
+sidebar_label: Hypervisor Network Deep Dive
+title: "Hypervisor Network Deep Dive"
 keywords:
-- Harvester
+- Hypervisor
 - Networking
 - Topology
 ---
@@ -14,19 +14,19 @@ keywords:
 
 ## Network Topology
 
-The network topology below reveals how we implement the Harvester network.
+The network topology below reveals how we implement the Hypervisor network.
 
-![](/img/v1.2/networking/topology.png)
+![](/img/v1.2/networking-hv/topology.png)
 
 The diagram contains [the built-in cluster network mgmt](./clusternetwork.md#built-in-cluster-network) and a [custom cluster network](./clusternetwork.md#custom-cluster-network) called `oob`.
 
-As shown above, the Harvester network primarily focuses on OSI model layer 2. We leverage Linux network devices and protocols to construct traffic paths for the communication between VM to VM, VM to host, and VM to external network devices.
+As shown above, the Hypervisor network primarily focuses on OSI model layer 2. We leverage Linux network devices and protocols to construct traffic paths for the communication between VM to VM, VM to host, and VM to external network devices.
 
-The Harvester network is composed of three layers, including:
+The Hypervisor network is composed of three layers, including:
 
 - KubeVirt networking layer
 
-- Harvester networking layer
+- Hypervisor networking layer
 
 - External networking layer
 
@@ -35,9 +35,9 @@ The Harvester network is composed of three layers, including:
 The general purpose of KubeVirt is to run VM inside the Kubernetes pod. The KubeVirt network builds the network path between the pod and VM.
 Please refer to the [KubeVirt official document](https://kubevirt.io/2018/KubeVirt-Network-Deep-Dive.html) for more details.
 
-## Harvester Networking
+## Hypervisor Networking
 
-Harvester networking is designed to build the network path between pods and the host network. It implements a management network, VLAN networks and untagged networks. We can refer to the last two networks as **bridge networks**, because bridge plays a vital role in their implementation.
+Hypervisor networking is designed to build the network path between pods and the host network. It implements a management network, VLAN networks and untagged networks. We can refer to the last two networks as **bridge networks**, because bridge plays a vital role in their implementation.
 
 ### Bridge Network
 
@@ -89,7 +89,7 @@ We leverage [multus CNI](https://github.com/k8snetworkplumbingwg/multus-cni) and
 
 The management network is based on [Canal](https://projectcalico.docs.tigera.io/getting-started/kubernetes/flannel/flannel).
 
-It is worth mentioning that the Canal interface where the Harvester configures the node IP is the bridge `mgmt-br` or a VLAN sub-interface of `mgmt-br`. This design has two benefits:
+It is worth mentioning that the Canal interface where the Hypervisor configures the node IP is the bridge `mgmt-br` or a VLAN sub-interface of `mgmt-br`. This design has two benefits:
 
 - The built-in `mgmt` cluster network supports both the management network and bridge network.
 - With the VLAN network interface, we can assign a VLAN ID to the management network.

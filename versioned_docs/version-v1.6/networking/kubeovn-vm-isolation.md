@@ -3,7 +3,7 @@ sidebar_position: 8
 sidebar_label: Kube-OVN Virtual Machine Isolation
 title: "Kube-OVN Virtual Machine Isolation"
 keywords:
-- Harvester
+- Hypervisor
 - networking
 - Kube-OVN
 - access control list

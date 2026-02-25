@@ -12,7 +12,7 @@ keywords:
 
 _Available as of v1.2.0_
 
-Harvester IP Pool is a built-in IP address management (IPAM) solution exclusively available to Harvester load balancers (LBs).
+Hypervisor IP Pool is a built-in IP address management (IPAM) solution exclusively available to Hypervisor load balancers (LBs).
 
 ## Features
 - **Multiple IP ranges:** Each IP pool can contain multiple IP ranges or CIDRs.
@@ -30,17 +30,17 @@ To create a new IP pool:
 1. Go to the **Networks** > **IP Pools** page and select **Create**.
 1. Specify the **Name** of the IP pool.
 1. Go to the **Range** tab to specify the **IP ranges** for the IP pool. You can add multiple IP ranges.
-   ![](/img/v1.2/networking/multiple-ranges.png)
+![](/img/v1.2/networking-hv/multiple-ranges.png)
 1. Go to the **Selector** tab to specify the **Scope** and **Priority** of the IP pool.
-   ![](/img/v1.2/networking/ippool-scope.png)
+![](/img/v1.2/networking-hv/ippool-scope.png)
 
-When you operate from the Harvester UI, the `Scope` only includes `Namespace`. Click `Add Scope` to add new items.
+When you operate from the Hypervisor UI, the `Scope` only includes `Namespace`. Click `Add Scope` to add new items.
 
 ### Create IP Pool from Rancher Manager UI
 
-If the Harvester cluster is imported to `Rancher Manager` from `Rancher Manager UI > Virtualization Management`, the `Network` tab in the IP Pools section looks different.
+If the Hypervisor cluster is imported to `Rancher Manager` from `Rancher Manager UI > Virtualization Management`, the `Network` tab in the IP Pools section looks different.
 
-![](/img/v1.6/networking/create-ippool-from-rancher-manager.png)
+![](/img/v1.2/networking-hv/create-ippool-from-rancher-manager.png)
 
 The `Scope` includes `Project`, `Namespace` and `Guest Kubernetes Cluster`. For more information, see [Multi-Tenancy Example](../rancher/virtualization-management.md#multi-tenancy-example) and [Projects and Kubernetes Namespaces with Rancher](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/manage-clusters/projects-and-namespaces#about-projects).
 
@@ -139,7 +139,7 @@ Each IP pool will have a specific range, and you can specify the corresponding r
 
 ### IPPool for VM type Loadbalancer
 
-1. It is better to [Create IP Pool from Harvester UI directly](#how-to-create), which leaves the seletor scope `Project` and `Guest Kubernetes Cluster` blank.
+1. It is better to [Create IP Pool from Hypervisor UI directly](#how-to-create), which leaves the seletor scope `Project` and `Guest Kubernetes Cluster` blank.
 
 1. If you can only [Create IP Pool from Rancher Managery UI](#create-ip-pool-from-rancher-manager-ui), set the scope `Project` and `Guest Kubernetes Cluster` to be `All` or `None`.
 

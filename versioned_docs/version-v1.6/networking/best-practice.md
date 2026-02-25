@@ -1,9 +1,9 @@
 ---
 sidebar_position: 6
-sidebar_label: Harvester Network Best Practice
-title: "Harvester Network Best Practice"
+sidebar_label: Hypervisor Network Best Practice
+title: "Hypervisor Network Best Practice"
 keywords:
-- Harvester
+- Hypervisor
 - Networking
 - Best Practice
 ---
@@ -14,7 +14,7 @@ keywords:
 
 ## Replace Ethernet NICs
 
-You may want to replace the Ethernet NICs of a bare-metal node in a Harvester cluster for various reasons, including the following:
+You may want to replace the Ethernet NICs of a bare-metal node in a Hypervisor cluster for various reasons, including the following:
 
 - Malfunction or damage
 
@@ -26,21 +26,21 @@ You can follow the steps below and run them in each node step by step.
 
 ### Pre-Replacement Checks
 
-1. Verify that the installed Harvester version supports the new NICs.
+1. Verify that the installed Hypervisor version supports the new NICs.
 
 1. Test the new NICs in non-production environment.
 
-1. On the [**Virtual Machines** screen of the Harvester UI](../vm/access-to-the-vm.md#access-with-the-harvester-ui), verify that the status of all VMs is either *Running* or *Stopped*.
+1. On the [**Virtual Machines** screen of the Hypervisor UI](../vm/access-to-the-vm.md#access-with-the-harvester-ui), verify that the status of all VMs is either *Running* or *Stopped*.
 
 1. On the [embedded Longhorn dashboard](../troubleshooting/harvester.md#access-embedded-rancher-and-longhorn-dashboards), verify that the status of all Longhorn volumes is *Healthy*.
 
-1. (Optional) On the **Harvester Support** screen, generate a [support bundle](../troubleshooting/harvester.md#generate-a-support-bundle) for comparison purposes.
+1. (Optional) On the **Hypervisor Support** screen, generate a [support bundle](../troubleshooting/harvester.md#generate-a-support-bundle) for comparison purposes.
 
 ### Collect Information
 
 Before any action is taken, it is important to collect the current network information and status.
 
-- Harvester network configuration: By default, Harvester creates a bond interface named `mgmt-bo` for the management network and one new bond interface for each cluster network. Harvester saves network configuration details in the file `/oem/90_custom.yaml`.
+- Hypervisor network configuration: By default, Hypervisor creates a bond interface named `mgmt-bo` for the management network and one new bond interface for each cluster network. Hypervisor saves network configuration details in the file `/oem/90_custom.yaml`.
 
     Example: A NIC named `ens3` was added to the `mgmt-bo` bond interface.
 
@@ -113,7 +113,7 @@ Before any action is taken, it is important to collect the current network infor
 
 - Linux kernel log: You can use the command `dmesg` to display kernel messages, which include most of the required information. If you save the messages to `kernel.log`, you can check the driver and link status.
 
-    Harvester places sub-NICs into the bond interfaces. In the following example, an additional bond interface named `data-bo` is created in the cluster.
+    Hypervisor places sub-NICs into the bond interfaces. In the following example, an additional bond interface named `data-bo` is created in the cluster.
 
     ```
     $ grep "(slave" kernel.log  (or: dmesg | grep "(slave")
@@ -121,7 +121,7 @@ Before any action is taken, it is important to collect the current network infor
     Jan 08 00:35:00 localhost kernel: mgmt-bo: (slave eno5): Enslaving as a backup interface with an up link
     Jan 08 00:35:00 localhost kernel: mgmt-bo: (slave ens4f0): Enslaving as a backup interface with an up link
     Jan 08 00:37:34 localhost kernel: data-bo: (slave eno6): Enslaving as a backup interface with an up link
-    Jan 08 00:37:35 localhost kernel: data-bo: (slave ens4f1): Enslaving as a backup interface with an up link
+    Jan 08 00:37:35 localhost kernel: data-bo: (slave ens4f1): Enslaving as a backup interface with anypervisor
     ```
 
     The NICs are renamed.
@@ -179,7 +179,7 @@ Before any action is taken, it is important to collect the current network infor
 
 ### (Optional) Update the Network Config
 
-There are one or more [Network Config](./clusternetwork.md#create-a-new-cluster-network) under every [Cluster Network](./clusternetwork.md#cluster-network) on Harvester. Each `Network Config` is backed by a `VlanConfig` CRD object.
+There are one or more [Network Config](./clusternetwork.md#create-a-new-cluster-network) under every [Cluster Network](./clusternetwork.md#cluster-network) on Hypervisor. Each `Network Config` is backed by a `VlanConfig` CRD object.
 
 :::info important
 
@@ -189,7 +189,7 @@ Updating the `Network Config` is **required** if the new NICs will be placed in 
 
 1. Check the node.
 
-    When a Harvester cluster node belongs to a `Network Config`, the `Node` object has a label with the key `network.harvesterhci.io/vlanconfig`.
+    When a Hypervisor cluster node belongs to a `Network Config`, the `Node` object has a label with the key `network.harvesterhci.io/vlanconfig`.
 
     Example:
 
@@ -262,13 +262,13 @@ Updating the `Network Config` is **required** if the new NICs will be placed in 
 
 You may find that some Longhorn replicas remain active on the node even after completing the previously outlined procedures.
 
-1. Drain the node. (This is optional in Harvester.)
+1. Drain the node. (This is optional in Hypervisor.)
 
     - Scenario 1: The `numReplicas` value of all volumes is `3`, which means that each Longhorn volume has three active replicas.
 
       The Longhorn Engine recognizes that it can no longer communicate with the replica on the drained node, and then marks that replica as failed. None of the replicas hold any special significance to Longhorn so it functions as long as it can communicate with at least one replica.
 
-    - Scenario 2: Some Longhorn volumes have *fewer* than three active replicas, or you manually attached volumes using the Harvester UI or Longhorn UI.
+    - Scenario 2: Some Longhorn volumes have *fewer* than three active replicas, or you manually attached volumes using the Hypervisor UI or Longhorn UI.
 
       You must manually detach the replicas or move them to other nodes, and then [drain the node](https://longhorn.io/docs/1.4.3/volumes-and-nodes/maintenance/#updating-the-node-os-or-container-runtime) using the command `kubectl drain --ignore-daemonsets <node name>`. The option `--ignore-daemonsets` is required because Longhorn deploys daemonsets such as Longhorn Manager, Longhorn CSI plugin, and Longhorn Engine image.
 
@@ -280,7 +280,7 @@ You may find that some Longhorn replicas remain active on the node even after co
 
     During system maintenance, you can modify the [`replica-replenishment-wait-interval`](https://longhorn.io/docs/1.4.3/references/settings/#replica-replenishment-wait-interval) value using the [embedded Longhorn UI](../troubleshooting/harvester.md#access-embedded-rancher-and-longhorn-dashboards) to enable faster replica rebuilding.
 
-    Harvester v1.3.0 uses Longhorn v1.6.0, while Harvester v1.2.1 uses Longhorn v1.4.3.
+    Hypervisor v1.3.0 uses Longhorn v1.6.0, while Hypervisor v1.2.1 uses Longhorn v1.4.3.
 
 ### Replace the Nics
 
@@ -326,7 +326,7 @@ Updating the `Network Config` is **required** if the new NICs will be placed in 
 
 ### Troubleshooting
 
-Harvester uses multiple network-related pods and CRDs. When troubleshooting, check the pod logs and the status of CRD objects.
+Hypervisor uses multiple network-related pods and CRDs. When troubleshooting, check the pod logs and the status of CRD objects.
 
 Pods:
 

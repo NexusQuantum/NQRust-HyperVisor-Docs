@@ -4,7 +4,7 @@ sidebar_position: 1
 sidebar_label: Cluster Network
 title: "Cluster Network"
 keywords:
-- Harvester
+- Hypervisor
 - Networking
 - ClusterNetwork
 - NetworkConfig
@@ -20,19 +20,19 @@ keywords:
 ### Cluster Network
 _Available as of v1.1.0_
 
-In Harvester v1.1.0, we introduced a new concept called cluster network for traffic isolation.
+In Hypervisor v1.1.0, we introduced a new concept called cluster network for traffic isolation.
 
 The following diagram describes a typical network architecture that separates data-center (DC) traffic from out-of-band (OOB) traffic.
 
-![](/img/v1.2/networking/traffic-isolation.png)
+![](/img/v1.2/networking-hv/traffic-isolation.png)
 
-We abstract the sum of devices, links, and configurations on a traffic-isolated forwarding path on Harvester as a cluster network.
+We abstract the sum of devices, links, and configurations on a traffic-isolated forwarding path on Hypervisor as a cluster network.
 
 In the above case, there will be two cluster networks corresponding to two traffic-isolated forwarding paths.
 
 ### Network Configuration
 
-Specifications including network devices of the Harvester hosts can be different. To be compatible with such a heterogeneous cluster, we designed the network configuration.
+Specifications including network devices of the Hypervisor hosts can be different. To be compatible with such a heterogeneous cluster, we designed the network configuration.
 
 Network configuration only works under a certain cluster network. Each network configuration corresponds to a set of hosts with uniform network specifications. Therefore, multiple network configurations are required for a cluster network on non-uniform hosts.
 
@@ -40,14 +40,14 @@ Network configuration only works under a certain cluster network. Each network c
 
 A VM network is an interface in a virtual machine that connects to the host network. As with a network configuration, every network except the built-in [management network](./harvester-network.md#management-network) must be under a cluster network.
 
-Harvester supports adding multiple networks to one VM. If a network's cluster network is not enabled on some hosts, the VM that owns this network will not be scheduled to those hosts.
+Hypervisor supports adding multiple networks to one VM. If a network's cluster network is not enabled on some hosts, the VM that owns this network will not be scheduled to those hosts.
 
 Please refer to [network part](./harvester-network.md) for more details about networks.
 
 ### Relationship Between Cluster Network, Network Config, VM Network
 The following diagram shows the relationship between a cluster network, a network config, and a VM network.
 
-![](/img/v1.2/networking/relation.png)
+![](/img/v1.2/networking-hv/relation.png)
 
 All `Network Configs` and `VM Networks` are grouped under a cluster network. 
 
@@ -70,19 +70,19 @@ Overall, this diagram provides a clear visualization of the relationship between
 
 ## Cluster Network Details
 
-Cluster networks are traffic-isolated forwarding paths for transmission of network traffic within a Harvester cluster.
+Cluster networks are traffic-isolated forwarding paths for transmission of network traffic within a Hypervisor cluster.
 
-A cluster network called `mgmt` is automatically created when a Harvester cluster is deployed. You can also create custom cluster networks that can be dedicated to virtual machine traffic.
+A cluster network called `mgmt` is automatically created when a Hypervisor cluster is deployed. You can also create custom cluster networks that can be dedicated to virtual machine traffic.
 
 ### Built-in Cluster Network
 
-When a Harvester cluster is deployed, a cluster network named `mgmt` is automatically created for intra-cluster communications. `mgmt` consists of the same bridge, bond, and NICs as the external infrastructure network to which each Harvester host attaches with management NICs. Because of this design, `mgmt` also allows virtual machines to be accessed from the external infrastructure network for cluster management purposes.
+When a Hypervisor cluster is deployed, a cluster network named `mgmt` is automatically created for intra-cluster communications. `mgmt` consists of the same bridge, bond, and NICs as the external infrastructure network to which each Hypervisor host attaches with management NICs. Because of this design, `mgmt` also allows virtual machines to be accessed from the external infrastructure network for cluster management purposes.
 
 `mgmt` does not require a network configuration and is always enabled on all hosts. You cannot disable and delete `mgmt`.
 
 :::note
 
-In Harvester v1.5.x and earlier versions, the entire VLAN ID range (2 to 4094) was assigned to the `mgmt` interfaces. However, this exceeded the upper limit of supported VLANs on certain network cards, so hardware VLAN offloading stopped working correctly.
+In Hypervisor v1.5.x and earlier versions, the entire VLAN ID range (2 to 4094) was assigned to the `mgmt` interfaces. However, this exceeded the upper limit of supported VLANs on certain network cards, so hardware VLAN offloading stopped working correctly.
 
 For more information, see [issue #7650](https://github.com/harvester/harvester/issues/7650).
 
@@ -94,9 +94,9 @@ During installation of the first cluster node, you can configure the MTU value f
 
 :::caution
 
-- Certain [ARP settings](https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt) can break cluster communications. With `arp_ignore=2`, for example, replies are sent only if the sender IP address is in the same subnet as the target IP address for which the MAC address is requested. This is not the case in a Harvester cluster, so using `arp_ignore=2` on all interfaces results in failed connectivity checks and prevents Longhorn pods (specifically, `backing-image` and `instance-manager`) from transitioning to the `Ready` state. Volumes cannot be attached to virtual machines if these Longhorn pods are not ready.
+- Certain [ARP settings](https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt) can break cluster communications. With `arp_ignore=2`, for example, replies are sent only if the sender IP address is in the same subnet as the target IP address for which the MAC address is requested. This is not the case in a Hypervisor cluster, so using `arp_ignore=2` on all interfaces results in failed connectivity checks and prevents Longhorn pods (specifically, `backing-image` and `instance-manager`) from transitioning to the `Ready` state. Volumes cannot be attached to virtual machines if these Longhorn pods are not ready.
 
-- All nodes in a Harvester cluster must use the same MTU value. Because Harvester does not automatically detect discrepancies when nodes join, you must manually ensure that the values are identical to prevent unexpected system behavior.
+- All nodes in a Hypervisor cluster must use the same MTU value. Because Hypervisor does not automatically detect discrepancies when nodes join, you must manually ensure that the values are identical to prevent unexpected system behavior.
 
 :::
 
@@ -248,11 +248,11 @@ To simplify cluster maintenance, create one network configuration for each node 
 
 1. Specify a name for the cluster network.
 
-    ![](/img/v1.2/networking/create-clusternetwork.png)
+    ![](/img/v1.2/networking-hv/create-clusternetwork.png)
 
 1. On the **ClusterNetworks/Configs** screen, click the **Create Network Config** button of the cluster network you created.
 
-    ![](/img/v1.2/networking/create-network-config-button.png)
+    ![](/img/v1.2/networking-hv/create-network-config-button.png)
 
 1. On the **Network Config:Create** screen, specify a name for the configuration.
 
@@ -271,15 +271,15 @@ To simplify cluster maintenance, create one network configuration for each node 
 
     - **NICs**: The list contains NICs that are common to all selected nodes. NICs that cannot be selected are unavailable on one or more nodes and must be configured. Once troubleshooting is completed, refresh the screen and verify that the NICs can be selected.
     - **Bond Options**: The default bonding mode is **active-backup**.
-    - **Attributes**: You must use the same MTU across all network configurations of a custom cluster network. If you do not specify an MTU, the default value **1500** is used. The Harvester webhook rejects a new network configuration if its MTU does not match the MTU of existing network configurations.
+    - **Attributes**: You must use the same MTU across all network configurations of a custom cluster network. If you do not specify an MTU, the default value **1500** is used. The Hypervisor webhook rejects a new network configuration if its MTU does not match the MTU of existing network configurations.
 
-   ![](/img/v1.2/networking/config-uplink.png)
+   ![](/img/v1.2/networking-hv/config-uplink.png)
 
 1. Click **Save**.
 
 ### Change a Network Configuration
 
-Changes to existing network configurations may affect Harvester virtual machines and workloads, and external devices such as switches and routers. For more information, see [Network Topology](./deep-dive.md#network-topology).
+Changes to existing network configurations may affect Hypervisor virtual machines and workloads, and external devices such as switches and routers. For more information, see [Network Topology](./deep-dive.md#network-topology).
 
 :::info important
 
@@ -293,17 +293,17 @@ You must stop all affected virtual machines before changing a network configurat
 
     In the following example, the cluster network is `cn-data` and the network configuration is `nc-1`.
 
-    ![](/img/v1.4/networking/network-configuration-1.png)
+    ![](/img/v1.2/networking-hv/network-configuration-1.png)
 
 1. Select **⋮ > Edit Config**, and then change the relevant fields.
 
     - **Node Selector** tab:
 
-    ![](/img/v1.4/networking/network-configuration-2.png)
+    ![](/img/v1.2/networking-hv/network-configuration-2.png)
 
     - **Uplink** tab:
 
-    ![](/img/v1.4/networking/network-configuration-3.png)
+    ![](/img/v1.2/networking-hv/network-configuration-3.png)
 
     :::info important
 
@@ -315,7 +315,7 @@ You must stop all affected virtual machines before changing a network configurat
 
 The following sections outline the steps you must perform to change the MTU of a network configuration. The sample cluster network used in these sections has `cn-data` that was built with a MTU value `1500` and is intended to be changed with value `9000`.
 
-![](/img/v1.4/networking/set-a-new-mtu-value.png)
+![](/img/v1.2/networking-hv/set-a-new-mtu-value.svg)
 
 #### Change the MTU of a Network Configuration with No Attached Storage Network
 
@@ -323,7 +323,7 @@ In this scenario, the [storage network](../advanced/storagenetwork.md#storage-ne
 
 :::caution
 
-- The MTU affects Harvester nodes and networking devices such as switches and routers. Careful planning and testing are required to ensure that changing the MTU does not adversely affect the system. For more information, see [Network Topology](./deep-dive.md#network-topology).
+- The MTU affects Hypervisor nodes and networking devices such as switches and routers. Careful planning and testing are required to ensure that changing the MTU does not adversely affect the system. For more information, see [Network Topology](./deep-dive.md#network-topology).
 - You must use the same MTU across all network configurations of a custom cluster network.
 - Cluster operations are interrupted during the configuration change.
 - The information in this section does not apply to the built-in `mgmt` cluster network.
@@ -334,7 +334,7 @@ If you must change the MTU, perform the following steps:
 
 1. Stop all virtual machines that are attached to the target cluster network.
 
-    You can check this using the [VM network](./harvester-network.md#create-a-vm-network) and any [secondary networks](../vm/create-vm.md#secondary-network) you may have used. Harvester does not allow you to change the MTU when any of the connected virtual machines are still running.
+    You can check this using the [VM network](./harvester-network.md#create-a-vm-network) and any [secondary networks](../vm/create-vm.md#secondary-network) you may have used. Hypervisor does not allow you to change the MTU when any of the connected virtual machines are still running.
 
 1. Check the network configurations of the target cluster network.
 
@@ -348,12 +348,12 @@ If you must change the MTU, perform the following steps:
 
     :::
 
-1. Verify that the MTU was changed using the Linux `ip link` command. If the network configuration selects multiple Harvester nodes, run the command on each node.
+1. Verify that the MTU was changed using the Linux `ip link` command. If the network configuration selects multiple Hypervisor nodes, run the command on each node.
 
     The output must show the new MTU of the related `*-br` device and the state `UP`. In the following example, the device is `cn-data-br` and the new MTU is `9000`.
 
     ```
-    Harvester node $ ip link show dev cn-data-br
+    Hypervisor node $ ip link show dev cn-data-br
 
                                                     |new MTU|              |state UP|
     3: cn-data-br: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc noqueue state UP mode DEFAULT group default qlen 1000
@@ -362,11 +362,11 @@ If you must change the MTU, perform the following steps:
 
     :::note
 
-    When the state is `UNKNOWN`, it is likely that the MTU values on Harvester and the external switch or router do not match.
+    When the state is `UNKNOWN`, it is likely that the MTU values on Hypervisor and the external switch or router do not match.
 
     :::
 
-1. Test the new MTU on Harvester nodes using commands such as `ping`. You must send the messages to a Harvester node with the new MTU or a node with an external IP.
+1. Test the new MTU on Hypervisor nodes using commands such as `ping`. You must send the messages to a Hypervisor node with the new MTU or a node with an external IP.
 
     In the following example, the network is `cn-data`, the CIDR is `192.168.100.0/24`, and the gateway is `192.168.100.1`.
 
@@ -418,7 +418,7 @@ If you must change the MTU, perform the following steps:
 
     :::info important
 
-    You must change the MTU in each one, and verify that the new MTU was applied. The Harvester webhook rejects a new network configuration if its MTU does not match the MTU of existing network configurations.
+    You must change the MTU in each one, and verify that the new MTU was applied. The Hypervisor webhook rejects a new network configuration if its MTU does not match the MTU of existing network configurations.
 
     :::
 
@@ -459,7 +459,7 @@ If you must change the MTU, perform the following steps:
 
 :::info important
 
-Harvester cannot be held responsible for any damage or loss of data that may occur when the MTU value is changed.
+Hypervisor cannot be held responsible for any damage or loss of data that may occur when the MTU value is changed.
 
 :::
 
@@ -467,11 +467,11 @@ Harvester cannot be held responsible for any damage or loss of data that may occ
 
 In this scenario, the [storage network](../advanced/storagenetwork.md#storage-network-setting) is enabled and attached to the target cluster network.
 
-The storage network is used by `driver.longhorn.io`, which is Harvester's default CSI driver. Longhorn is responsible for provisioning [root volumes](../vm/create-vm.md#volumes), so changing the MTU affects all virtual machines.
+The storage network is used by `driver.longhorn.io`, which is Hypervisor's default CSI driver. Longhorn is responsible for provisioning [root volumes](../vm/create-vm.md#volumes), so changing the MTU affects all virtual machines.
 
 :::caution
 
-- The MTU affects Harvester nodes and networking devices such as switches and routers. Careful planning and testing are required to ensure that changing the MTU does not adversely affect the system. For more information, see [Network Topology](./deep-dive.md#network-topology).
+- The MTU affects Hypervisor nodes and networking devices such as switches and routers. Careful planning and testing are required to ensure that changing the MTU does not adversely affect the system. For more information, see [Network Topology](./deep-dive.md#network-topology).
 - You must use the same MTU across all network configurations of a custom cluster network.
 - All cluster operations are interrupted during the configuration change.
 - The information in this section does not apply to the built-in `mgmt` cluster network.
@@ -500,12 +500,12 @@ If you must change the MTU, perform the following steps:
 
 1. Verify that the MTU was changed using the Linux `ip link` command.
 
-    If the network configuration selects multiple Harvester nodes, run the command on each node.
+    If the network configuration selects multiple Hypervisor nodes, run the command on each node.
 
     The output must show the new MTU of the related `*-br` device and the state `UP`. In the following example, the device is `cn-data-br` and the new MTU is `9000`.
 
     ```
-    Harvester node $ ip link show dev cn-data-br
+    Hypervisor node $ ip link show dev cn-data-br
 
                                                     |new MTU|              |state UP|
     3: cn-data-br: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9000 qdisc noqueue state UP mode DEFAULT group default qlen 1000
@@ -514,11 +514,11 @@ If you must change the MTU, perform the following steps:
 
     :::note
 
-    When the state is `UNKNOWN`, it is likely that the MTU values on Harvester and the external switch or router do not match.
+    When the state is `UNKNOWN`, it is likely that the MTU values on Hypervisor and the external switch or router do not match.
 
     :::
 
-1. Test the new MTU on Harvester nodes using commands such as `ping`. You must send the messages to a Harvester node with the new MTU or to a node with an external IP.
+1. Test the new MTU on Hypervisor nodes using commands such as `ping`. You must send the messages to a Hypervisor node with the new MTU or to a node with an external IP.
 
     In the following example, the network is `cn-data`, the CIDR is `192.168.100.0/24`, and the gateway is `192.168.100.1`.
 
@@ -570,11 +570,11 @@ If you must change the MTU, perform the following steps:
 
     :::info important
 
-    You must change the MTU in each one, and verify that the new MTU was applied. The Harvester webhook rejects a new network configuration if its MTU does not match the MTU of existing network configurations.
+    You must change the MTU in each one, and verify that the new MTU was applied. The Hypervisor webhook rejects a new network configuration if its MTU does not match the MTU of existing network configurations.
 
     :::
 
-1. Enable and configure the Harvester [storage network setting](../advanced/storagenetwork.md#enable-the-storage-network), ensuring that the [prerequisites](../advanced/storagenetwork.md#prerequisites) are met.
+1. Enable and configure the Hypervisor [storage network setting](../advanced/storagenetwork.md#enable-the-storage-network), ensuring that the [prerequisites](../advanced/storagenetwork.md#prerequisites) are met.
 
 1. Allow some time for the setting to be enabled, and then [verify that the change was applied](../advanced/storagenetwork.md#post-configuration-steps). The `storagenetwork` runs with the new MTU value.
 
@@ -615,6 +615,6 @@ If you must change the MTU, perform the following steps:
 
 :::info important
 
-Harvester cannot be held responsible for any damage or loss of data that may occur when the MTU value is changed.
+Hypervisor cannot be held responsible for any damage or loss of data that may occur when the MTU value is changed.
 
 :::
