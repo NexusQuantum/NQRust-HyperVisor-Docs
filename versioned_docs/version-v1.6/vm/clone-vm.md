@@ -31,5 +31,5 @@ Cloning a VM without volume data creates a new VM with the same configuration as
 
 1. On the `Virtual Machines` page, click `Clone` of the VM actions.
 1. Unclick the `clone volume data` checkbox.
-1. Set a new VM name and click `Create` to create a new VM.
+1. Set click `Create` to create a new VM.
 ![clone-vm-without-data.png](/img/v1.2/vm-hv/clone-vm-without-data.png)

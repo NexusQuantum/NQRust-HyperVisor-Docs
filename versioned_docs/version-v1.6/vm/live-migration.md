@@ -160,7 +160,7 @@ Do not use this UI feature if the migration process was created using [batch mig
 
 1. The controller monitors the processing and waits until all are completed or have timed out.
 
-![batch-migrations](/img/v1.6/vm/batch-migrations.png)
+![batch-migrations](/img/v1.6/vm-hv/batch-migrations.png)
 
 ## Migration Timeouts
 
