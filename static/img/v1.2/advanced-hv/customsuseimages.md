@@ -3,10 +3,10 @@ id: customsuseimages
 sidebar_position: 8
 sidebar_label: Custom SUSE VM Images
 title: "Custom SUSE VM Images"
-draft: true
 keywords:
 - Custom Images
 Description: How to create custom SLES and openSUSE guest virtual machine images
+draft: true
 ---
 
 <head>

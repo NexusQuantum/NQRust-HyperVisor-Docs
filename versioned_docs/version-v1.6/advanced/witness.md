@@ -10,20 +10,20 @@ title: "Witness Node"
 
 _Available as of v1.3.0_
 
-Harvester clusters deployed in production environments require a control plane for node and pod management. A typical three-node cluster has three management nodes that each contain the complete set of control plane components. One key component is etcd, which Kubernetes uses to store its data (configuration, state, and metadata). The etcd node count must always be an odd number (for example, 3 is the default count in Harvester) to ensure that a quorum is maintained.
+Hypervisor clusters deployed in production environments require a control plane for node and pod management. A typical three-node cluster has three management nodes that each contain the complete set of control plane components. One key component is etcd, which Kubernetes uses to store its data (configuration, state, and metadata). The etcd node count must always be an odd number (for example, 3 is the default count in Hypervisor) to ensure that a quorum is maintained.
 
 Some situations may require you to avoid deploying workloads and user data to management nodes. In these situations, one cluster node can be assigned the *witness* role, which limits it to functioning as an etcd cluster member. The witness node is responsible for establishing a member quorum (a majority of nodes), which must agree on updates to the cluster state.
 
 Witness nodes do not store any data, but the [hardware recommendations](https://etcd.io/docs/v3.3/op-guide/hardware/) for etcd nodes must still be considered. Using hardware with limited resources significantly affects cluster performance, as described in the article [Slow etcd performance (performance testing and optimization)](https://www.suse.com/support/kb/doc/?id=000020100). 
 
-Harvester v1.3.0 supports clusters with two management nodes and one witness node (and optionally, one or more worker nodes). For more information about node roles in Harvester, see [Role Management](../host/host.md#role-management).
+Hypervisor v1.3.0 supports clusters with two management nodes and one witness node (and optionally, one or more worker nodes). For more information about node roles in Hypervisor, see [Role Management](../host/host.md#role-management).
 
 
 :::info important
 A node can be assigned the *witness* role only at the time it joins a cluster. Each cluster can have only one witness node.
 :::
 
-## Creating a Harvester Cluster with a Witness Node
+## Creating a Hypervisor Cluster with a Witness Node
 
 You can assign the *witness* role to a node when it joins a newly created cluster.
 
@@ -54,9 +54,9 @@ The general upgrade requirements and procedures apply to clusters with a witness
 
 ## Longhorn Replicas in Clusters with a Witness Node
 
-Harvester uses Longhorn, a distributed block storage system, for management of block device volumes. Longhorn is provisioned to management and worker nodes but not to witness nodes, which do not store any data.
+Hypervisor uses Longhorn, a distributed block storage system, for management of block device volumes. Longhorn is provisioned to management and worker nodes but not to witness nodes, which do not store any data.
 
-Longhorn creates replicas of each volume to increase availability. Replicas contain a chain of snapshots of the volume, with each snapshot storing the change from a previous snapshot. In Harvester, the default StorageClass `harvester-longhorn` has a replica count value of `3`.
+Longhorn creates replicas of each volume to increase availability. Replicas contain a chain of snapshots of the volume, with each snapshot storing the change from a previous snapshot. In Hypervisor, the default StorageClass `harvester-longhorn` has a replica count value of `3`.
 
 ## Limitations
 
@@ -67,25 +67,25 @@ In summary, you must use a StorageClass that matches the cluster configuration.
 - 2 management nodes + 1 witness node: Create a new default StorageClass with the **Number of Replicas** parameter set to **2**. This ensures that only two replicas are created for each Longhorn volume.
 - 2 management nodes + 1 witness node + 1 or more worker nodes: You can use the existing default StorageClass.
   
-![new storageclass replica 2](/img/v1.3/advanced/new-storageclass-rep-2.png)
-![set to default](/img/v1.3/advanced/set-to-default-sc.png)
+![new storageclass replica 2](/img/v1.2/advanced-hv/new-storageclass-rep-2.png)
+![set to default](/img/v1.2/advanced-hv/set-to-default-sc.png)
 
-If you already created volumes using the original default StorageClass, you can modify the replica count on the **Volume** screen of the [embedded Longhorn UI](../troubleshooting/harvester/#access-embedded-rancher-and-longhorn-dashboards).
+<!-- If you already created volumes using the original default StorageClass, you can modify the replica count on the **Volume** screen of the [embedded Longhorn UI](../troubleshooting/harvester/#access-embedded-rancher-and-longhorn-dashboards).
 
-![redirect-to-longhorn-volume-page](/img/v1.3/advanced/redirect-to-longhorn-vol-page.png)
-![update-replica-count-to-2](/img/v1.3/advanced/update-replica-2.png)
+![redirect-to-longhorn-volume-page](/img/v1.3/advanced/redirect-to-longhorn-vol-page.png) -->
+<!-- ![update-replica-count-to-2](/img/v1.3/advanced/update-replica-2.png) -->
 
 ## Known Issues
 
-### 1. When creating a cluster with a witness node, the **Network Config: Create** screen on the Harvester UI is unable to identify any NICs that can be used with all nodes.
+### 1. When creating a cluster with a witness node, the **Network Config: Create** screen on the Hypervisor UI is unable to identify any NICs that can be used with all nodes.
 
-  ![create network config with all nodes](/img/v1.3/advanced/create-policy-with-all-nodes.png)
-  ![no uplink](/img/v1.3/advanced/no-uplink.png)
+  ![create network config with all nodes](/img/v1.2/advanced-hv/create-policy-with-all-nodes.png)
+  ![no uplink](/img/v1.2/advanced-hv/no-uplink.png)
 
   The workaround is to select a non-witness node and then select a NIC that can be used with that specific node.
 
-  ![create network config with specific node](/img/v1.3/advanced/create-policy-with-specific-node.png)
-  ![get uplink](/img/v1.3/advanced/get-uplink.png)
+  ![create network config with specific node](/img/v1.5/advanced-hv/create-policy-with-specific-node.png)
+  ![get uplink](/img/v1.2/advanced-hv/get-uplink.png)
 
 You must repeat this procedure for every non-witness node in the cluster. The same uplink settings can be used across nodes.
 
@@ -93,7 +93,7 @@ You must repeat this procedure for every non-witness node in the cluster. The sa
 
 ### 2. When selecting a target node for VM migration, the target list includes the witness node.
 
-![vm migration target witness node](/img/v1.3/advanced/vm-migration-witness-node.png)
+![vm migration target witness node](/img/v1.2/advanced-hv/vm-migration-witness-node.png)
 
 Do not select the witness node as the migration target. If you do, VM migration will fail.
 

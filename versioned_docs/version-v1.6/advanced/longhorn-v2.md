@@ -4,6 +4,7 @@ sidebar_position: 11
 sidebar_label: Longhorn V2 Data Engine
 title: "Longhorn V2 Data Engine"
 Description: How to enable and use the Longhorn V2 Data Engine
+draft: true
 ---
 
 <head>
@@ -39,7 +40,7 @@ The Longhorn V2 Data Engine currently does not support the following operations:
 
 :::
 
-- Snapshots of V2 volumes cannot be created because snapshot and restoration functionality in Harvester relies on volume cloning.
+- Snapshots of V2 volumes cannot be created because snapshot and restoration functionality in Hypervisor relies on volume cloning.
 
 - SSDs and other non-NVMe disks are managed using the SPDK AIO bdev driver, which does not support the unmap operation. If you are using non-NVMe disks, avoid trimming the filesystem because this results in I/O errors and paused virtual machines. For example, when creating an ext4 filesystem on a Linux virtual machine, use `mkfs.ext4 -E nodiscard /dev/vdb` (assuming `/dev/vdb` is your device path). On Windows virtual machines, you can disable trimming for NTFS by running the command `fsutil behavior set disabledeletenotify NTFS 1`.
 
@@ -47,11 +48,11 @@ The Longhorn V2 Data Engine currently does not support the following operations:
 
 The Longhorn V2 Data Engine is only available for newly created volumes and images. Existing volumes, virtual machine images and virtual machine root volumes will continue to use the V1 Data Engine.
 
-1. On the Harvester UI, go to **Advanced** > **Settings**.
+1. On the Hypervisor UI, go to **Advanced** > **Settings**.
 
 1. Set `longhorn-v2-data-engine-enabled` to `true`.
 
-  Harvester automatically loads the kernel modules required by the Longhorn V2 Data Engine, and attempts to allocate 1024 × 2 MiB-sized huge pages (for example, 2 GiB of RAM) on all nodes. 
+  Hypervisor automatically loads the kernel modules required by the Longhorn V2 Data Engine, and attempts to allocate 1024 × 2 MiB-sized huge pages (for example, 2 GiB of RAM) on all nodes. 
 
   Changing this setting automatically restarts RKE2 on all nodes but does not affect running virtual machine workloads.
 
@@ -72,7 +73,7 @@ The Longhorn V2 Data Engine is only available for newly created volumes and imag
 
   :::info important
 
-  Harvester sets the [Longhorn disk driver](https://longhorn.io/docs/1.7.2/v2-data-engine/features/node-disk-support/) to `auto` so that NVMe disks use the SPDK NVMe bdev driver, which provides the best performance and also supports advanced operations such as trim (also known as discard).
+  Hypervisor sets the [Longhorn disk driver](https://longhorn.io/docs/1.7.2/v2-data-engine/features/node-disk-support/) to `auto` so that NVMe disks use the SPDK NVMe bdev driver, which provides the best performance and also supports advanced operations such as trim (also known as discard).
   
   SSDs and other non-NVMe disks are managed using the SPDK AIO bdev driver, which requires a disk size that is an *even multiple of 4096 bytes*. Non-NVMe disks that do not meet this size requirement cannot be added.  Additionally, the SPDK AIO bdev driver does not support the unmap operation. If you are using non-NVMe disks, avoid trimming the filesystem because this results in I/O errors and paused virtual machines.
 
@@ -88,11 +89,11 @@ The Longhorn V2 Data Engine is only available for newly created volumes and imag
 
   Volumes and images created using the new StorageClass are backed by the Longhorn V2 Data Engine.
 
-## Upgrading from Harvester v1.4.x
+## Upgrading from Hypervisor v1.4.x
 
-In Harvester v1.4 (which uses Longhorn v1.7), V2 volumes did not support live migration, nor could the V2 data engine be used for virtual machine images, which meant VM boot volumes could not use the V2 Data Engine.
+In Hypervisor v1.4 (which uses Longhorn v1.7), V2 volumes did not support live migration, nor could the V2 data engine be used for virtual machine images, which meant VM boot volumes could not use the V2 Data Engine.
 
-Starting with Harvester v1.5.0 and Longhorn v1.8.1, these limitations are removed, but only for volumes and images that are created _after_ the system is upgraded. Any V2 StorageClass created with Harvester v1.4.0 will have the migratable option set to "false", and like other StorageClass properties, this cannot be changed once set. Similarly, any existing V2 volumes will remain non-migratable after the upgrade.  If you have used the V2 data engine on Harvester v1.4, and later upgrade to Harvester v1.5, you will need to create a new V2 StorageClass, which will default to having migratable set to "true".  Volumes and images created using _this_ Storage Class _will_ be live-migratable.
+Starting with Hypervisor v1.5.0 and Longhorn v1.8.1, these limitations are removed, but only for volumes and images that are created _after_ the system is upgraded. Any V2 StorageClass created with Hypervisor v1.4.0 will have the migratable option set to "false", and like other StorageClass properties, this cannot be changed once set. Similarly, any existing V2 volumes will remain non-migratable after the upgrade.  If you have used the V2 data engine on Hypervisor v1.4, and later upgrade to Hypervisor v1.5, you will need to create a new V2 StorageClass, which will default to having migratable set to "true".  Volumes and images created using _this_ Storage Class _will_ be live-migratable.
 
 :::info important
 
@@ -100,7 +101,7 @@ Starting with Harvester v1.5.0 and Longhorn v1.8.1, these limitations are remove
 
 - If you are using the SPDK NVMe bdev driver (i.e. your disks were added using `/dev/nvme*` device paths), V2 volumes created before the upgrade will function after the upgrade, but will continue to use the Longhorn v1.7.x engine.  As mentioned above, these volumes will remain non-migratable, but it is possible to export the data and create new migratable volumes (see below for details).
 
-- All virtual machines with V2 volumes attached need to be stopped before upgrading to Harvester v1.5.0.  If there are any V2 volumes active during the upgrade, the process will stall part way through "upgrading system services".  The logs of the `apply-manifests` pod will show repeated messages similar to the following:
+- All virtual machines with V2 volumes attached need to be stopped before upgrading to Hypervisor v1.5.0.  If there are any V2 volumes active during the upgrade, the process will stall part way through "upgrading system services".  The logs of the `apply-manifests` pod will show repeated messages similar to the following:
   
   ```
   instance-manager (aio)(v2) (image=longhornio/longhorn-instance-manager:v1.8.1) state is not running on node harvester-node-0, will retry...

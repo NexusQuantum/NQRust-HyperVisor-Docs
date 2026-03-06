@@ -39,7 +39,7 @@ You can [enable](#enable-the-vm-migration-network) and [disable](#disable-the-vm
 
 :::tip
 
-Using the Harvester UI to configure the `vm-migration-network` setting is strongly recommended.
+Using the Hypervisor UI to configure the `vm-migration-network` setting is strongly recommended.
 
 :::
 
@@ -53,7 +53,7 @@ Using the Harvester UI to configure the `vm-migration-network` setting is strong
 
 1. Click **Save**.
 
-![vm-migration-network-enabled.png](/img/v1.6/vm-migration-network/vm-migration-network-enabled.png)
+![vm-migration-network-enabled.png](/img/v1.6/vm-migration-network-hv/vm-migration-network-enabled.png)
 
 #### Disable the VM Migration Network
 
@@ -65,7 +65,7 @@ Using the Harvester UI to configure the `vm-migration-network` setting is strong
 
 Once the VM migration network is disabled, KubeVirt starts using `mgmt` for VM migration-related operations.
 
-![vm-migration-network-disabled.png](/img/v1.6/vm-migration-network/vm-migration-network-disabled.png)
+![vm-migration-network-disabled.png](/img/v1.6/vm-migration-network-hv/vm-migration-network-disabled.png)
 
 </TabItem>
 
@@ -108,7 +108,7 @@ The VM migration network is disabled when you remove the value field or set it t
 
 :::caution
 
-Harvester considers extra insignificant characters in a JSON string as a different configuration.
+Hypervisor considers extra insignificant characters in a JSON string as a different configuration.
 
 :::
 
@@ -117,7 +117,7 @@ Harvester considers extra insignificant characters in a JSON string as a differe
 
 The following occur once the `vm-migration-network` setting is applied:
 
-- Harvester creates a new `NetworkAttachmentDefinition` and updates the KubeVirt configuration.
+- Hypervisor creates a new `NetworkAttachmentDefinition` and updates the KubeVirt configuration.
 - KubeVirt restarts all `virt-handler` pods to apply the new network configuration.
 
 ### Post-Configuration Steps

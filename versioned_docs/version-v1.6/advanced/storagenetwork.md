@@ -8,7 +8,7 @@ title: "Storage Network"
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/storagenetwork"/>
 </head>
 
-Harvester uses Longhorn to provide block device volumes for virtual machines and pods. If you want to isolate Longhorn replication traffic from `mgmt` (the built-in cluster network) or other cluster-wide workloads, you can use a dedicated storage network for better network bandwidth and performance.
+Hypervisor uses Longhorn to provide block device volumes for virtual machines and pods. If you want to isolate Longhorn replication traffic from `mgmt` (the built-in cluster network) or other cluster-wide workloads, you can use a dedicated storage network for better network bandwidth and performance.
 
 For more information, see [Longhorn Storage Network](https://longhorn.io/docs/1.8.1/advanced-resources/deploy/storage-network/).
 
@@ -66,7 +66,7 @@ Before you begin configuring the storage network, ensure that the following requ
 
   :::caution
 
-  Harvester sends a graceful shutdown signal to virtual machines that are stopped using the Harvester UI. However, workloads are interrupted and remain unavailable until you manually start the virtual machines after confirming that the storage network configuration was applied successfully.
+  Hypervisor sends a graceful shutdown signal to virtual machines that are stopped using the Hypervisor UI. However, workloads are interrupted and remain unavailable until you manually start the virtual machines after confirming that the storage network configuration was applied successfully.
 
   :::
 
@@ -80,7 +80,7 @@ The routing of Longhorn replication traffic depends on whether virtual machine V
 
 - **Same physical interfaces**: In the following example, both `eth2` and `eth3` are used for virtual machine VLAN traffic and the Longhorn storage network. The red line indicates that Longhorn sends replication traffic through `eth3`.
 
-  ![storagenetwork-same.png](/img/v1.2/storagenetwork/storagenetwork-same.png)
+  ![storagenetwork-same.png](/img/v1.4/storagenetwork-hv/storagenetwork-same.png)
 
   :::note
 
@@ -90,7 +90,7 @@ The routing of Longhorn replication traffic depends on whether virtual machine V
 
 - **Different physical interfaces**: In the following example, `eth2` and `eth3` are used for virtual machine VLAN traffic, while `eth4` and `eth5` are used for the Longhorn storage network. The red line indicates that Longhorn sends replication traffic through `eth4`.
 
-  ![storagenetwork-diff.png](/img/v1.2/storagenetwork/storagenetwork-diff.png)
+  ![storagenetwork-diff.png](/img/v1.4/storagenetwork-hv/storagenetwork-diff.png)
 
   :::note
 
@@ -106,8 +106,8 @@ You can [enable](#enable-the-storage-network) and [disable](#disable-the-storage
 
 The following occur once the `storage-network` setting is applied:
 
-- Harvester stops all pods that are related to Longhorn volumes, Prometheus, Grafana, Alertmanager, and the VM Import Controller.
-- Harvester creates a new `NetworkAttachmentDefinition` and updates the Longhorn Storage Network setting.
+- Hypervisor stops all pods that are related to Longhorn volumes, Prometheus, Grafana, Alertmanager, and the VM Import Controller.
+- Hypervisor creates a new `NetworkAttachmentDefinition` and updates the Longhorn Storage Network setting.
 - Longhorn restarts all `instance-manager` and `backing-image-manager` pods to apply the new network configuration.
 
 ### Configuration Steps
@@ -117,7 +117,7 @@ The following occur once the `storage-network` setting is applied:
 
 :::tip
 
-Using the Harvester UI to configure the `storage-network` setting is strongly recommended.
+Using the Hypervisor UI to configure the `storage-network` setting is strongly recommended.
 
 :::
 
@@ -125,7 +125,7 @@ Using the Harvester UI to configure the `storage-network` setting is strongly re
 
 1. Go to **Advanced > Settings > storage-network**.
 
-  ![storage-network-enabled.png](/img/v1.4/storagenetwork/storage-network-enabled.png)
+  ![storage-network-enabled.png](/img/v1.4/storagenetwork-hv/storage-network-enabled.png)
 
 1. Select **Enabled**.
 
@@ -137,7 +137,7 @@ Using the Harvester UI to configure the `storage-network` setting is strongly re
 
 1. Go to **Advanced > Settings > storage-network**.
 
-  ![storage-network-disabled.png](/img/v1.4/storagenetwork/storage-network-disabled.png)
+  ![storage-network-disabled.png](/img/v1.4/storagenetwork-hv/storage-network-disabled.png)
 
 1. Select **Disabled**.
 
@@ -189,7 +189,7 @@ The storage network is disabled when you remove the value field.
 
 :::caution
 
-Harvester considers extra insignificant characters in a JSON string as a different configuration.
+Hypervisor considers extra insignificant characters in a JSON string as a different configuration.
 
 :::
 
@@ -204,7 +204,7 @@ See [Change the MTU of a Network Configuration with an Attached Storage Network]
 
 :::info important
 
-Harvester does not start virtual machines automatically. You must ensure that the configuration is correct and applied successfully, and then start the virtual machines when necessary.
+Hypervisor does not start virtual machines automatically. You must ensure that the configuration is correct and applied successfully, and then start the virtual machines when necessary.
 
 :::
 
@@ -396,7 +396,7 @@ Harvester does not start virtual machines automatically. You must ensure that th
 
       The storage network may malfunction because of issues with the external network, such as the following:
 
-      - Physical NICs (installed on Harvester nodes) that are associated with the storage network were not added to the same VLAN in the external switches.
+      - Physical NICs (installed on Hypervisor nodes) that are associated with the storage network were not added to the same VLAN in the external switches.
       - The external switches are not correctly connected and configured.
 
 Once the configuration is verified, you can manually start virtual machines when necessary.
