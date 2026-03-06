@@ -9,7 +9,7 @@ title: "Settings"
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/index"/>
 </head>
 
-The following is a list of advanced settings that you can use in Harvester. You can modify the `settings.harvesterhci.io` custom resource using both the Harvester UI and the `kubectl` command.
+The following is a list of advanced settings that you can use in Hypervisor. You can modify the `settings.harvesterhci.io` custom resource using both the Hypervisor UI and the `kubectl` command.
 
 ---
 <p>&nbsp;</p>
@@ -18,7 +18,7 @@ The following is a list of advanced settings that you can use in Harvester. You 
 
 ### `additional-ca`
 
-**Definition**: Additional trusted CA certificates that enable Harvester to access external services.
+**Definition**: Additional trusted CA certificates that enable Hypervisor to access external services.
 
 :::caution
 
@@ -38,7 +38,7 @@ SOME-CA-CERTIFICATES
 
 ### `auto-disk-provision-paths` [Experimental]
 
-**Definition**: Setting that allows Harvester to automatically add disks that match the specified glob pattern as VM storage.
+**Definition**: Setting that allows Hypervisor to automatically add disks that match the specified glob pattern as VM storage.
 
 This setting only adds formatted disks that are mounted to the system. When specifying multiple patterns, separate values using commas.
 
@@ -64,7 +64,7 @@ The following example adds disks that match the glob pattern `/dev/sd*` or `/dev
 
 **Definition**: Setting that allows you to automatically rotate certificates for RKE2 services. This setting is disabled by default.
 
-Use the field `expiringInHours` to specify the validity period of each certificate (`1` to `8759` hours). If the certificate expires within the specified period, Harvester automatically replaces the certificate.
+Use the field `expiringInHours` to specify the validity period of each certificate (`1` to `8759` hours). If the certificate expires within the specified period, Hypervisor automatically replaces the certificate.
 
 For more information, see the **Certificate Rotation** section of the [Rancher](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/manage-clusters/rotate-certificates) and [RKE2](https://docs.rke2.io/advanced#certificate-rotation) documentation.
 
@@ -103,16 +103,16 @@ For more information, see the [Longhorn documentation](https://longhorn.io/docs/
 
 ### `cluster-registration-url`
 
-**Definition**: URL used to import the Harvester cluster into Rancher for multi-cluster management.
+**Definition**: URL used to import the Hypervisor cluster into Rancher for multi-cluster management.
 
-When you configure this setting, a new pod called `cattle-cluster-agent-*` is created in the namespace `cattle-system` for registration purposes. This pod uses the container image `rancher/rancher-agent:related-version`, which is not packed into the Harvester ISO and is instead determined by Rancher. The `related-version` is usually the same as the Rancher version. For example, when you register Harvester to Rancher v2.7.9, the image is `rancher/rancher-agent:v2.7.9`. For more information, see [Find the required assets for your Rancher version](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/publish-images#1-find-the-required-assets-for-your-rancher-version) in the Rancher documentation.
+When you configure this setting, a new pod called `cattle-cluster-agent-*` is created in the namespace `cattle-system` for registration purposes. This pod uses the container image `rancher/rancher-agent:related-version`, which is not packed into the Hypervisor ISO and is instead determined by Rancher. The `related-version` is usually the same as the Rancher version. For example, when you register Hypervisor to Rancher v2.7.9, the image is `rancher/rancher-agent:v2.7.9`. For more information, see [Find the required assets for your Rancher version](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/publish-images#1-find-the-required-assets-for-your-rancher-version) in the Rancher documentation.
 
-Depending on your Harvester settings, the image is downloaded from either of the following locations:
+Depending on your Hypervisor settings, the image is downloaded from either of the following locations:
 
-- Harvester containerd-registry: You can configure a [private registry for the Harvester cluster](#containerd-registry).
+- Hypervisor containerd-registry: You can configure a [private registry for the Hypervisor cluster](#containerd-registry).
 - Docker Hub (docker.io): This is the default option when you do not configure a private registry in Rancher.
 
-Alternatively, you can obtain a copy of the image and manually upload it to all Harvester nodes.
+Alternatively, you can obtain a copy of the image and manually upload it to all Hypervisor nodes.
 
 **Default value**: None
 
@@ -124,15 +124,15 @@ https://172.16.0.1/v3/import/w6tp7dgwjj549l88pr7xmxb4x6m54v5kcplvhbp9vv2wzqrrjhr
 
 ### `containerd-registry`
 
-**Definition**: Configuration of a private registry created for the Harvester cluster.
+**Definition**: Configuration of a private registry created for the Hypervisor cluster.
 
 The value is stored in the `registries.yaml` file of each node (path: `/etc/rancher/rke2/registries.yaml`). For more information, see [Containerd Registry Configuration](https://docs.rke2.io/install/private_registry) in the RKE2 documentation.
 
-For security purposes, Harvester automatically removes the username and password configured for the private registry after those credentials are stored in the `registries.yaml` file.
+For security purposes, Hypervisor automatically removes the username and password configured for the private registry after those credentials are stored in the `registries.yaml` file.
 
-**Example**:
+<!-- **Example**:
 
-![containerd-registry](/img/v1.2/advanced/containerd-registry.png)
+![containerd-registry](/img/v1.2/advanced/containerd-registry.png) -->
 
 ```json
 {
@@ -160,7 +160,7 @@ For security purposes, Harvester automatically removes the username and password
 
 **Versions**: v1.2.0 and later
 
-**Definition**: Configuration necessary for using third-party CSI drivers installed in the Harvester cluster.
+**Definition**: Configuration necessary for using third-party CSI drivers installed in the Hypervisor cluster.
 
 You must configure the following information before using features related to backups and snapshots:
 
@@ -187,9 +187,9 @@ You must configure the following information before using features related to ba
 
 Depending on the underlying storage provider, you may need to take extra steps to use the online volume expansion feature.
 
-- **Longhorn**: Harvester considers Longhorn to have support for online volume expansion, even if differences exist between versions of the Longhorn Data Engine. Currently, the V1 Data Engine fully supports online volume expansion, while the V2 Data Engine does not support volume expansion at all (regardless of the volume's attachment state). The Harvester webhook manages the differences between these versions.
+- **Longhorn**: Hypervisor considers Longhorn to have support for online volume expansion, even if differences exist between versions of the Longhorn Data Engine. Currently, the V1 Data Engine fully supports online volume expansion, while the V2 Data Engine does not support volume expansion at all (regardless of the volume's attachment state). The Hypervisor webhook manages the differences between these versions.
 
-- **Third-party storage**: Harvester rejects online volume expansion requests for third-party storage by default. If you have confirmed that your storage provider supports online volume expansion, you can use this setting to mark that storage provider as validated and force Harvester to allow associated online expansion requests.
+- **Third-party storage**: Hypervisor rejects online volume expansion requests for third-party storage by default. If you have confirmed that your storage provider supports online volume expansion, you can use this setting to mark that storage provider as validated and force Hypervisor to allow associated online expansion requests.
 
 **Default value**: `{"driver.longhorn.io":true}`
 
@@ -197,9 +197,9 @@ Depending on the underlying storage provider, you may need to take extra steps t
 
 **Versions**: v1.2.0 and later
 
-**Definition**: Number of seconds Harvester waits before forcibly shutting down a VM that was stopped using the Harvester UI.
+**Definition**: Number of seconds Hypervisor waits before forcibly shutting down a VM that was stopped using the Hypervisor UI.
 
-Harvester sends a graceful shutdown signal to any VM that is stopped using the Harvester UI. If the graceful shutdown process is not completed within the specified number of seconds, Harvester forcibly shuts down the VM.
+Hypervisor sends a graceful shutdown signal to any VM that is stopped using the Hypervisor UI. If the graceful shutdown process is not completed within the specified number of seconds, Hypervisor forcibly shuts down the VM.
 
 **Default value**: `120`
 
@@ -225,10 +225,10 @@ You must specify key information in the `noProxy` field if you configured the fo
 
 | Configured option/setting | Required value in `noProxy` | Reason |
 | --- | --- | --- |
-| `httpProxy` and `httpsProxy` | Harvester node's CIDR | Not specifying the node's CIDR can break the Harvester cluster. |
-| `cluster-registration-url` | Host of `cluster-registration-url` | The host information allows you to access the Harvester cluster from Rancher. |
+| `httpProxy` and `httpsProxy` | Hypervisor node's CIDR | Not specifying the node's CIDR can break the Hypervisor cluster. |
+| `cluster-registration-url` | Host of `cluster-registration-url` | The host information allows you to access the Hypervisor cluster from Rancher. |
 
-Harvester appends necessary addresses to user-specified `noProxy` values (for example,`localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,longhorn-system,cattle-system,cattle-system.svc,harvester-system,.svc,.cluster.local`). This ensures that internal traffic flows as expected.
+ypervisorr appends necessary addresses to user-specified `noProxy` values (for example,`localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,longhorn-system,cattle-system,cattle-system.svc,harvester-system,.svc,.cluster.local`). This ensures that internal traffic flows as expected.
 
 **Example**:
 
@@ -242,7 +242,7 @@ Harvester appends necessary addresses to user-specified `noProxy` values (for ex
 
 ### `log-level`
 
-**Definition**: Log level for the Harvester host.
+**Definition**: Log level for the Hypervisor host.
 
 **Default value**: `info`
 
@@ -268,7 +268,7 @@ debug
 
 **Definition**: Setting that enables and disables the Longhorn V2 Data Engine.
 
-When set to `true`, Harvester automatically loads the kernel modules required by the Longhorn V2 Data Engine, and attempts to allocate 1024 × 2 MiB-sized huge pages (for example, 2 GiB of RAM) on all nodes.
+When set to `true`, Hypervisor automatically loads the kernel modules required by the Longhorn V2 Data Engine, and attempts to allocate 1024 × 2 MiB-sized huge pages (for example, 2 GiB of RAM) on all nodes.
 
 Changing this setting automatically restarts RKE2 on all nodes but does not affect running virtual machine workloads.
 
@@ -295,7 +295,7 @@ true
 
 **Versions**: v1.2.0 and later
 
-**Definition**: NTP servers for time synchronization on Harvester nodes.
+**Definition**: NTP servers for time synchronization on Hypervisor nodes.
 
 You can define NTP servers during [installation](../install/harvester-configuration.md#osntp_servers) and update the addresses after installation.
 
@@ -332,7 +332,7 @@ With the default values, it would be possible to schedule the following:
 - 1.5x the amount of physical RAM on a host
 - 2x the amount of physical storage in Longhorn
 
-A VM that is configured to use 2 CPUs (equivalent to 2,000 milliCPU) can consume the full allocation as long as the resources are available. However, if the host is running heavy workloads and an overcommit value is set (for example, 1600%), Harvester only requests 125 milliCPU from the Kubernetes scheduler (2000/16 = 125 milliCPU).
+A VM that is configured to use 2 CPUs (equivalent to 2,000 milliCPU) can consume the full allocation as long as the resources are available. However, if the host is running heavy workloads and an overcommit value is set (for example, 1600%), Hypervisor only requests 125 milliCPU from the Kubernetes scheduler (2000/16 = 125 milliCPU).
 
 **Example**:
 
@@ -348,7 +348,7 @@ A VM that is configured to use 2 CPUs (equivalent to 2,000 milliCPU) can consume
 
 **Definition**: The ratio to futher tune the VM `memory overhead`.
 
-Each VM is configured with a memory value, this memory is targeted for the VM guest OS to see and use. In Harvester, the VM run in a virt-launcher pod. CPU/VM resource limits are translated and applied to the launcher pod [Resource requests and limits of Pod and container](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-requests-and-limits-of-pod-and-container). Kubevirt ensures certain amount of memory is reserved in the pod for managing the virtualization process. Harvester and KubeVirt summarize such additional memory as the VM `Memory Overhead`. The `Memory Overhead` is computed by a complex formula. However, sometimes the OOM(Out Of Memory) can still happen and the related VM is killed by the Harvester OS, the direct cause is that the whole POD/Container exceeds its memory limits. From practice, the `Memory Overhead` varies on different kinds of VM, different kinds of VM operating system, and also depends on the running workloads on the VM.
+Each VM is configured with a memory value, this memory is targeted for the VM guest OS to see and use. In Hypervisor, the VM run in a virt-launcher pod. CPU/VM resource limits are translated and applied to the launcher pod [Resource requests and limits of Pod and container](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-requests-and-limits-of-pod-and-container). Kubevirt ensures certain amount of memory is reserved in the pod for managing the virtualization process. Hypervisor and KubeVirt summarize such additional memory as the VM `Memory Overhead`. The `Memory Overhead` is computed by a complex formula. However, sometimes the OOM(Out Of Memory) can still happen and the related VM is killed by the Hypervisor OS, the direct cause is that the whole POD/Container exceeds its memory limits. From practice, the `Memory Overhead` varies on different kinds of VM, different kinds of VM operating system, and also depends on the running workloads on the VM.
 
 This setting is for more flexibly tuning the VM `Memory Overhead`.
 
@@ -373,13 +373,13 @@ value: ""
 
 When the `value` field is `""`, the `default` field is used.
 
-When the `value` field is `"0"`, the `additional-guest-memory-overhead-ratio` setting is not used, Harvester will fallback to the legacy [Reserved Memory](https://docs.harvesterhci.io/v1.3/vm/index#reserved-memory) which is used in Harvester v1.3.x, v1.2.x and earlier versions. When a new VM is created and the `Reserved Memory` field on WebUI is not filled, this VM will get the `100Mi default Reserved Memory`.
+When the `value` field is `"0"`, the `additional-guest-memory-overhead-ratio` setting is not used, Hypervisor will fallback to the legacy [Reserved Memory](https://docs.harvesterhci.io/v1.3/vm/index#reserved-memory) which is used in Hypervisor v1.3.x, v1.2.x and earlier versions. When a new VM is created and the `Reserved Memory` field on WebUI is not filled, this VM will get the `100Mi default Reserved Memory`.
 
-If you have already set a valid value on the `spec.configuration.additionalGuestMemoryOverheadRatio` field of `kubevirt` object before Harvester v1.4.0 and then upgrade to v1.4.0, Harvester will fetch and convert it to the `value` field of this setting on the upgrade path. After that, Harvester will always use this setting to sync to the `kubevirt` object.
+If you have already set a valid value on the `spec.configuration.additionalGuestMemoryOverheadRatio` field of `kubevirt` object before Hypervisor v1.4.0 and then upgrade to v1.4.0, Hypervisor will fetch and convert it to the `value` field of this setting on the upgrade path. After that, Hypervisor will always use this setting to sync to the `kubevirt` object.
 
 This setting and the VM configuration field [Reserved Memory](../vm/create-vm.md#reserved-memory) are both taken into account to get a final `Total Memory Overhead` for each VM.
 
-The `Total Memory Overhead` = automatically computed `Memory Overhead` + Harvester `Reserved Memory`.
+The `Total Memory Overhead` = automatically computed `Memory Overhead` + Hypervisor `Reserved Memory`.
 
 The following table shows how they work together.
 
@@ -428,7 +428,7 @@ The POD object:
 
 :::note
 
-To reduce the chance of hitting OOM, Harvester suggests to:
+To reduce the chance of hitting OOM, Hypervisor suggests to:
 
 - Configure this setting with value `"2"` to give all the VMs `~480 Mi` `Memory Overhead`, if the cluster has no memory resource pressure.
 
@@ -450,7 +450,7 @@ There is no `one-fit-all` solution.
 
 :::important
 
-If you have set the `Reserved Memory` field for each VM and plan to keep the legacy [Reserved Memory](https://docs.harvesterhci.io/v1.3/vm/index#reserved-memory), after the cluster is upgraded to Harvester v1.4.0, you can set the `additional-guest-memory-overhead-ratio` setting to `"0"`.
+If you have set the `Reserved Memory` field for each VM and plan to keep the legacy [Reserved Memory](https://docs.harvesterhci.io/v1.3/vm/index#reserved-memory), after the cluster is upgraded to Hypervisor v1.4.0, you can set the `additional-guest-memory-overhead-ratio` setting to `"0"`.
 
 Changing the `additional-guest-memory-overhead-ratio` setting affects the VMs per following rules:
 
@@ -470,7 +470,7 @@ Changing the `additional-guest-memory-overhead-ratio` setting affects the VMs pe
 
 **Definition**: URL for downloading the software required for upgrades.
 
-Harvester retrieves the ISO URL and checksum value from the `${URL}/${VERSION}/version.yaml` file that is accessible through the configured URL.
+Hypervisor retrieves the ISO URL and checksum value from the `${URL}/${VERSION}/version.yaml` file that is accessible through the configured URL.
 
 **Default value**: `https://releases.rancher.com/harvester`
 
@@ -489,7 +489,7 @@ spec:
 
 ### `server-version`
 
-**Definition**: Version of Harvester that is installed on Harvester nodes.
+**Definition**: Version of Hypervisor that is installed on Hypervisor nodes.
 
 **Example**:
 
@@ -499,7 +499,7 @@ v1.0.0-abcdef-head
 
 ### `ssl-certificates`
 
-**Definition**: SSL certificates for the Harvester UI and API.
+**Definition**: SSL certificates for the Hypervisor UI and API.
 
 :::caution
 
@@ -521,11 +521,11 @@ Changing this setting might cause single-node clusters to temporarily become una
 
 ### `ssl-parameters`
 
-**Definition**: Enabled SSL/TLS protocols and ciphers of the Harvester UI and API.
+**Definition**: Enabled SSL/TLS protocols and ciphers of the Hypervisor UI and API.
 
 :::info important
 
-If you misconfigure this setting and are unable to access the Harvester UI and API, see [Troubleshooting](../troubleshooting/harvester.md#i-cant-access-harvester-after-i-changed-ssltls-enabled-protocols-and-ciphers).
+If you misconfigure this setting and are unable to access the Hypervisor UI and API, see [Troubleshooting](../troubleshooting/harvester.md#i-cant-access-harvester-after-i-changed-ssltls-enabled-protocols-and-ciphers).
 
 :::
 
@@ -538,7 +538,7 @@ If you misconfigure this setting and are unable to access the Harvester UI and A
 
 For more information about the supported options, see [`ssl-protocols`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#ssl-protocols) and [`ssl-ciphers`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#ssl-ciphers) in the Ingress-Nginx Controller documentation.
 
-If you do not specify any values, Harvester uses `TLSv1.2` and `ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305`.
+If you do not specify any values, Hypervisor uses `TLSv1.2` and `ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305`.
 
 **Example**:
 
@@ -581,7 +581,7 @@ Specify an IP range in the IPv4 CIDR format. The number of IPs must be four time
 
 **Definition**: Support bundle image, with various versions available in [rancher/support-bundle-kit](https://hub.docker.com/r/rancher/support-bundle-kit/tags).
 
-**Default value**: `support-bundle-kit` image that is packed into the Harvester ISO and is specific to each Harvester release.
+**Default value**: `support-bundle-kit` image that is packed into the Hypervisor ISO and is specific to each Hypervisor release.
 
 **Example**:
 
@@ -617,9 +617,9 @@ metadata:
 status: {}
 ```
 
-After some time, a newer image tag (`v0.0.36`) is specified in the `value` field using the Harvester UI.
+After some time, a newer image tag (`v0.0.36`) is specified in the `value` field using the Hypervisor UI.
 
-![](/img/v1.3/advanced/support-bundle-image-set-customized-value.png)
+![](/img/v1.2/advanced-hv/support-bundle-image-set-customized-value.png)
 
 ```
 apiVersion: harvesterhci.io/v1beta1
@@ -665,9 +665,9 @@ metadata:
 status: {}
 ```
 
-The **Use the default value** button on the Harvester UI can be used to copy the contents of the `default` field to the `value` field.
+The **Use the default value** button on the Hypervisor UI can be used to copy the contents of the `default` field to the `value` field.
 
-![](/img/v1.3/advanced/support-bundle-image-set-use-default-value.png)
+![](/img/v1.2/advanced-hv/support-bundle-image-set-use-default-value.png)
 
 The object appears as follows after the changes are saved.
 
@@ -686,17 +686,17 @@ When the cluster is upgraded in the future, the contents of the `value` field ma
 
 :::note
 
-- The value of `tag` in the `default` field is always based on the image that is packed into the Harvester ISO. This field is automatically updated whenever the cluster is upgraded.
+- The value of `tag` in the `default` field is always based on the image that is packed into the Hypervisor ISO. This field is automatically updated whenever the cluster is upgraded.
 
-- The `default` field is used when the `value` field is not set or is left empty. Harvester checks if the default image is stored in the cluster and is up-to-date.
+- The `default` field is used when the `value` field is not set or is left empty. Hypervisor checks if the default image is stored in the cluster and is up-to-date.
 
 - Configuring this setting is not required. If you decide to specify a different image tag in the `value` field, remember that this tag may become outdated when the cluster is upgraded.
 
 - Use the command `$ kubectl edit settings.harvesterhci.io support-bundle-image` to clear the `value` field.
 
-- The **Use the default value** button on the Harvester UI only copies the contents of the `default` field to the `value` field. You may use this to replace an outdated image tag, but the copied tag will eventually become outdated as well (when the cluster is upgraded and the `default` field is updated).
+- The **Use the default value** button on the Hypervisor UI only copies the contents of the `default` field to the `value` field. You may use this to replace an outdated image tag, but the copied tag will eventually become outdated as well (when the cluster is upgraded and the `default` field is updated).
 
-- If your cluster is in an air-gapped environment and you specified a non-default image tag in the `value` field, ensure that the image is available in the local [containerd registry](#containerd-registry). Harvester is unable to [generate a support bundle](../troubleshooting/harvester.md#generate-a-support-bundle) if the image is not available.
+- If your cluster is in an air-gapped environment and you specified a non-default image tag in the `value` field, ensure that the image is available in the local [containerd registry](#containerd-registry). Hypervisor is unable to [generate a support bundle](../troubleshooting/harvester.md#generate-a-support-bundle) if the image is not available.
 
 :::
 
@@ -727,9 +727,9 @@ Namespaces that you select are appended to the predefined namespaces list.
 
 **Versions**: v1.2.0 and later
 
-**Definition**: Number of minutes Harvester allows for the completion of the support bundle generation process.
+**Definition**: Number of minutes Hypervisor allows for the completion of the support bundle generation process.
 
-The process is considered to have failed when the data collection and file packing tasks are not completed within the configured number of minutes. Harvester does not continue or retry support bundle generation processes that have timed out. When the value is `0`, the timeout feature is disabled.
+The process is considered to have failed when the data collection and file packing tasks are not completed within the configured number of minutes. Hypervisor does not continue or retry support bundle generation processes that have timed out. When the value is `0`, the timeout feature is disabled.
 
 **Default value**: `10`
 
@@ -737,9 +737,9 @@ The process is considered to have failed when the data collection and file packi
 
 **Versions**: v1.3.0 and later
 
-**Definition**: Number of minutes Harvester waits before deleting a support bundle that has been packaged but not downloaded (either deliberately or unsuccessfully) or retained.
+**Definition**: Number of minutes Hypervisor waits before deleting a support bundle that has been packaged but not downloaded (either deliberately or unsuccessfully) or retained.
 
-You can specify a value greater than or equal to 0. When the value is 0, Harvester uses the default value.
+You can specify a value greater than or equal to 0. When the value is 0, Hypervisor uses the default value.
 
 **Default value**: `30`
 
@@ -747,15 +747,15 @@ You can specify a value greater than or equal to 0. When the value is 0, Harvest
 
 **Versions**: v1.3.1 and later
 
-**Definition**: Number of minutes Harvester allows for collection of logs and configurations (Harvester) on the nodes for the support bundle.
+**Definition**: Number of minutes Hypervisor allows for collection of logs and configurations (Hypervisor) on the nodes for the support bundle.
 
-If the collection process is not completed within the allotted time, Harvester still allows you to download the support bundle (without the uncollected data). You can specify a value greater than or equal to 0. When the value is 0, Harvester uses the default value.
+If the collection process is not completed within the allotted time, Hypervisor still allows you to download the support bundle (without the uncollected data). You can specify a value greater than or equal to 0. When the value is 0, Hypervisor uses the default value.
 
 **Default value**: `30`
 
 ### `upgrade-checker-enabled`
 
-**Definition**: Setting that automatically checks for available Harvester upgrades.
+**Definition**: Setting that automatically checks for available Hypervisor upgrades.
 
 **Default value**: `true`
 
@@ -767,7 +767,7 @@ false
 
 ### `upgrade-checker-url`
 
-**Definition**: URL used to check for available Harvester upgrades.
+**Definition**: URL used to check for available Hypervisor upgrades.
 
 This setting can only be used if the `upgrade-checker-enabled` setting is set to `true`.
 
@@ -789,15 +789,15 @@ https://your.upgrade.checker-url/v99/checkupgrade
 
 - `imagePreloadOption`: Options for the image preloading phase.
 
-  The full ISO contains the core operating system components and all required container images. Harvester can preload these container images to each node during installation and upgrades. When workloads are scheduled to management and worker nodes, the container images are ready to use.
+  The full ISO contains the core operating system components and all required container images. Hypervisor can preload these container images to each node during installation and upgrades. When workloads are scheduled to management and worker nodes, the container images are ready to use.
 
 - `strategy`: Image preload strategy.
 
 - `type`: Type of image preload strategy.
 
-    - `sequential`: Harvester preloads the container images from the target ISO to each node. This is the default option.
+    - `sequential`: Hypervisor preloads the container images from the target ISO to each node. This is the default option.
 
-    - `skip`: Harvester does not preload the container images from the target ISO to each node. **Do not use this option in production environments.**
+    - `skip`: Hypervisor does not preload the container images from the target ISO to each node. **Do not use this option in production environments.**
 
       :::info important
 
@@ -814,23 +814,23 @@ https://your.upgrade.checker-url/v99/checkupgrade
 
 - `concurrency`: Number of nodes that can simultaneously preload images. This option takes effect only when `type` is set to `parallel`.
 
-  The default value is `0`, which is equivalent to following the cluster's node counts. Using `0` allows the system to dynamically follow the scale of the cluster. Values higher than the cluster's node counts are treated as `0`, while lower values are considered invalid and are rejected by Harvester.
+  The default value is `0`, which is equivalent to following the cluster's node counts. Using `0` allows the system to dynamically follow the scale of the cluster. Values higher than the cluster's node counts are treated as `0`, while lower values are considered invalid and are rejected by Hypervisor.
 
   :::note
 
-  Harvester deploys an upgrade-repo service on the cluster that serves as an HTTP server for nodes that need to preload the container images. When a `concurrency` value is set, each batch of nodes downloads the container images from this upgrade-repo in parallel. Because of this, you must consider the speed of the Harvester management network and the read speed of the default disk for Longhorn.
+  Hypervisor deploys an upgrade-repo service on the cluster that serves as an HTTP server for nodes that need to preload the container images. When a `concurrency` value is set, each batch of nodes downloads the container images from this upgrade-repo in parallel. Because of this, you must consider the speed of the Hypervisor management network and the read speed of the default disk for Longhorn.
 
   :::
 
-- `restoreVM`: Option that enables Harvester to automatically restore previously running [non-migratable virtual machines](../vm/live-migration.md#non-migratable-virtual-machines) after the upgrade is *successfully* completed. You can specify either of the following values:
+- `restoreVM`: Option that enables Hypervisor to automatically restore previously running [non-migratable virtual machines](../vm/live-migration.md#non-migratable-virtual-machines) after the upgrade is *successfully* completed. You can specify either of the following values:
 
-  - `true`: Harvester forcibly shuts down *running* and *paused* non-migratable virtual machines on each node. After the upgrade is completed, the previously running virtual machines are automatically restarted, while the paused virtual machines remain shut down.
+  - `true`: Hypervisor forcibly shuts down *running* and *paused* non-migratable virtual machines on each node. After the upgrade is completed, the previously running virtual machines are automatically restarted, while the paused virtual machines remain shut down.
 
-  - `false`: This is the default value. In multi-node environments, you must stop all non-migratable virtual machines to allow the upgrade to proceed. Harvester does not restart these virtual machines after the upgrade is completed.
+  - `false`: This is the default value. In multi-node environments, you must stop all non-migratable virtual machines to allow the upgrade to proceed. Hypervisor does not restart these virtual machines after the upgrade is completed.
 
   :::note
 
-  All virtual machines are considered non-migratable in single-node environments. Harvester forcibly shuts down all virtual machines before starting the upgrade process.
+  All virtual machines are considered non-migratable in single-node environments. Hypervisor forcibly shuts down all virtual machines before starting the upgrade process.
 
   :::
 
@@ -888,7 +888,7 @@ When the node becomes unavailable or is powered off, the VM only restarts and do
 
 **Definition**: Segregated network for virtual machine migration traffic.
 
-By default, Harvester uses the built-in cluster network `mgmt` for virtual machine migration. `mgmt` is limited to a single interface and is shared with cluster-wide workloads. If your implementation requires network segregation, you can use a [VM migration network](./vm-migration-network.md) to isolate migration traffic.
+By default, Hypervisor uses the built-in cluster network `mgmt` for virtual machine migration. `mgmt` is limited to a single interface and is shared with cluster-wide workloads. If your implementation requires network segregation, you can use a [VM migration network](./vm-migration-network.md) to isolate migration traffic.
 
 :::info important
 
@@ -940,19 +940,19 @@ The `max-hotplug-ratio` is set to `4`.
 ---
 <p>&nbsp;</p>
 
-## UI Settings
+<!-- ## UI Settings
 
 ### `branding`
 
 **Versions**: v1.2.0 and later
 
-**Definition**: Setting allows you to globally rebrand the Harvester UI by customizing the product name, logos, and color scheme.
+**Definition**: Setting allows you to globally rebrand the Hypervisor UI by customizing the product name, logos, and color scheme.
 
-**Default value**: **Harvester**
+**Default value**: **Hypervisor**
 
 :::caution
 
-Because this setting is part of the `settings.management.cattle.io` custom resource, you cannot configure any of the supported options (for example, `Logo` and `Primary Color`) using a [Harvester configuration](../install/harvester-configuration.md#system_settings) file.
+Because this setting is part of the `settings.management.cattle.io` custom resource, you cannot configure any of the supported options (for example, `Logo` and `Primary Color`) using a [Hypervisor configuration](../install/harvester-configuration.md#system_settings) file.
 
 :::
 
@@ -960,15 +960,15 @@ Because this setting is part of the `settings.management.cattle.io` custom resou
 
 **Supported options and values**:
 
-- **Private Label**: Product name or other text that replaces "Harvester" in most locations on the Harvester UI.
+- **Private Label**: Product name or other text that replaces "Hypervisor" in most locations on the Hypervisor UI.
 - **Logo**: Logo image in the top-level navigation header. You must upload logos for both light and dark modes.
 - **Favicon**: Small image displayed next to the page title in the browser tab.
-- **Primary Color**: Main color used throughout the Harvester UI.
-- **Link Color**: Color used for link text throughout the Harvester UI.
+- **Primary Color**: Main color used throughout the Hypervisor UI.
+- **Link Color**: Color used for link text throughout the Hypervisor UI.
 
 ### `ui-index`
 
-**Definition**: HTML index location for the Harvester UI.
+**Definition**: HTML index location for the Hypervisor UI.
 
 **Default value**: `https://releases.rancher.com/harvester-ui/dashboard/latest/index.html`
 
@@ -980,9 +980,9 @@ https://your.static.dashboard-ui/index.html
 
 ### `ui-path`
 
-**Definition**: Path that describes the location of `index.html`, which is used to access the Harvester UI.
+**Definition**: Path that describes the location of `index.html`, which is used to access the Hypervisor UI.
 
-`ui-path` serves as the entry point to the Harvester UI and is active only in the following situations:
+`ui-path` serves as the entry point to the Hypervisor UI and is active only in the following situations:
 
 - The value of `ui-source` is `bundled`.
 - The value of `ui-source` is `auto`, but `ui-index` is unable to retrieve the HTML file.
@@ -993,13 +993,13 @@ https://your.static.dashboard-ui/index.html
 
 `index.html` is stored in a container in `/home/samplefolder`. The value of `ui-source` is `bundled`.
 
-Scenario 1: The value of `ui-path` is `/home/samplefolder`. Whenever you access the Harvester UI, the content of `/home/samplefolder/index.html` is displayed.
+Scenario 1: The value of `ui-path` is `/home/samplefolder`. Whenever you access the Hypervisor UI, the content of `/home/samplefolder/index.html` is displayed.
 
-Scenario 2: The value of `ui-index` points to a page that is unavailable or non-existent (for example, `notexist-example.com/index.html`). When you access the Harvester UI for the first time, the content of `/home/samplefolder/index.html` is displayed. However, if you modify the `ui-index` setting to use the default value and access the Harvester UI again, the content of `/home/samplefolder/index.html` is still displayed (even if the new `ui-index` value points to an available page). For more information, see [Issue #6066](https://github.com/harvester/harvester/issues/6066).
+Scenario 2: The value of `ui-index` points to a page that is unavailable or non-existent (for example, `notexist-example.com/index.html`). When you access the Hypervisor UI for the first time, the content of `/home/samplefolder/index.html` is displayed. However, if you modify the `ui-index` setting to use the default value and access the Hypervisor UI again, the content of `/home/samplefolder/index.html` is still displayed (even if the new `ui-index` value points to an available page). For more information, see [Issue #6066](https://github.com/harvester/harvester/issues/6066).
 
 ### `ui-plugin-index`
 
-**Definition**: JavaScript address for the Harvester plugin (when accessing Harvester from Rancher).
+**Definition**: JavaScript address for the Hypervisor plugin (when accessing Hypervisor from Rancher).
 
 **Default value**: `https://releases.rancher.com/harvester-ui/plugin/harvester-latest/harvester-latest.umd.min.js`
 
@@ -1025,4 +1025,4 @@ https://your.static.dashboard-ui/*.umd.min.js
 
 ```
 external
-```
+``` -->

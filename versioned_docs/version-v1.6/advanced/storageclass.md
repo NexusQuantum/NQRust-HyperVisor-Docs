@@ -8,15 +8,15 @@ title: "StorageClass"
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/storageclass"/>
 </head>
 
-Harvester uses StorageClasses to describe how Longhorn must provision volumes. Longhorn StorageClasses can map to replica policies, node schedule policies, or disk schedule policies created by the cluster administrators. This concept is referred to as *profiles* in other storage systems.
+Hypervisor uses StorageClasses to describe how Longhorn must provision volumes. Longhorn StorageClasses can map to replica policies, node schedule policies, or disk schedule policies created by the cluster administrators. This concept is referred to as *profiles* in other storage systems.
 
 :::note
 
-The default StorageClass `harvester-longhorn` has a replica count value of `3` for high availability. If you use `harvester-longhorn` in a single-node cluster, Longhorn is unable to create the default number of replicas, and volumes are marked as *Degraded* on the Harvester UI. 
+The default StorageClass `harvester-longhorn` has a replica count value of `3` for high availability. If you use `harvester-longhorn` in a single-node cluster, Longhorn is unable to create the default number of replicas, and volumes are marked as *Degraded* on the Hypervisor UI. 
 
 To avoid this issue, you can perform either of the following actions: 
 
-- Change the [replica count](../install/harvester-configuration/#installharvesterstorage_classreplica_count) of `harvester-longhorn` to `1` using a [Harvester configuration](../install/harvester-configuration.md) file. 
+- Change the [replica count](../install/harvester-configuration/#installharvesterstorage_classreplica_count) of `harvester-longhorn` to `1` using a [Hypervisor configuration](../install/harvester-configuration.md) file. 
 
 - [Create a new StorageClass](../advanced/storageclass.md#creating-a-storageclass) with the **Number of Replicas** parameter set to `1`. Once created, locate the new StorageClass in the list and then select **⋮ > Set as Default**.
 
@@ -35,9 +35,9 @@ After a StorageClass is created, the fields in the **Parameters** section and mo
 
 :::
 
-1. On the Harvester UI, go to **Advanced > StorageClasses**.
+1. On the Hypervisor UI, go to **Advanced > StorageClasses**.
 
-    ![](/img/v1.2/storageclass/create_storageclasses_entry.png)
+    ![](/img/v1.2/storageclass-hv/create_storageclasses_entry.png)
 
 1. In the general information section, configure the following:
 
@@ -127,16 +127,16 @@ resource "harvester_storageclass" "single-replica" {
 
 You can use the `dataLocality` parameter when at least one replica of a Longhorn volume must be scheduled on the same node as the pod that uses the volume (whenever possible).
 
-Harvester officially supports data locality as of **v1.3.0**. This applies even to volumes created from [images](../image/upload-image.md). To configure data locality, create a new StorageClass on the Harvester UI (**Storage Classess** > **Create** > **Parameters**) and then add the following parameter:
+Hypervisor officially supports data locality as of **v1.3.0**. This applies even to volumes created from [images](../image/upload-image.md). To configure data locality, create a new StorageClass on the Hypervisor UI (**Storage Classess** > **Create** > **Parameters**) and then add the following parameter:
 
 - **Key**: `dataLocality`
 - **Value**: `disabled` or `best-effort`
 
-![](/img/v1.3/storageclass/data-locality.png)
+![](/img/v1.2/storageclass-hv/data-locality.png)
 
 ### Data Locality Options
 
-Harvester currently supports the following options:
+Hypervisor currently supports the following options:
 
 - `disabled`: When applied, Longhorn may or may not schedule a replica on the same node as the pod that uses the volume. This is the default option. 
 
@@ -144,7 +144,7 @@ Harvester currently supports the following options:
 
 :::note
 
-Longhorn provides a third option called `strict-local`, which forces Longhorn to keep only one replica on the same node as the pod that uses the volume. Harvester does not support this option because it can affect certain operations such as [VM Live Migration](../vm/live-migration.md)
+Longhorn provides a third option called `strict-local`, which forces Longhorn to keep only one replica on the same node as the pod that uses the volume. Hypervisor does not support this option because it can affect certain operations such as [VM Live Migration](../vm/live-migration.md)
 
 :::
 
@@ -152,23 +152,23 @@ For more information, see [Data Locality](https://longhorn.io/docs/1.6.0/high-av
 
 ## Containerized Data Importer (CDI) Settings
 
-Harvester integrates with the [Containerized Data Importer](https://kubevirt.io/user-guide/storage/containerized_data_importer) (CDI) to handle VM image management for the following StorageClasses:
+Hypervisor integrates with the [Containerized Data Importer](https://kubevirt.io/user-guide/storage/containerized_data_importer) (CDI) to handle VM image management for the following StorageClasses:
 
 - Longhorn V2 Data Engine
 - LVM
 - Third-party storage
 
-You can use the Harvester UI or CDI annotations to override the default settings of a storage class CDI attributes.
+You can use the Hypervisor UI or CDI annotations to override the default settings of a storage class CDI attributes.
 
 :::note
 
-The Harvester UI currently does not support the use of CDI with third-party storage. Instead, apply the Harvester CDI annotations directly to the third-party storage class.
+The Hypervisor UI currently does not support the use of CDI with third-party storage. Instead, apply the Hypervisor CDI annotations directly to the third-party storage class.
 
 :::
 
-To enable editing of CDI settings for day-2 operations, Harvester provides StorageClass attributes that automatically update the underlying CDI settings.
+To enable editing of CDI settings for day-2 operations, Hypervisor provides StorageClass attributes that automatically update the underlying CDI settings.
 
-![](/img/v1.6/storageclass/cdi-settings.png)
+![](/img/v1.2/storageclass-hv/cdi-settings.png)
 
 Each field on the **CDI Settings** screen corresponds to an annotation in the StorageClass.
 
@@ -195,7 +195,7 @@ metadata:
 
 :::caution
 
-Avoid changing the storage profile or CDI directly. Instead, allow the Harvester controller to synchronize and persist the storage profile configuration through the use of CDI annotations.
+Avoid changing the storage profile or CDI directly. Instead, allow the Hypervisor controller to synchronize and persist the storage profile configuration through the use of CDI annotations.
 
 :::
 
@@ -228,14 +228,14 @@ HDD is not recommended for guest RKE2 clusters or VMs with good performance disk
 
 First, add your HDD on the `Host` page and specify the disk tags as needed, such as`HDD` or `ColdStorage`. For more information on how to add extra disks and disk tags, see [Multi-disk Management](../host/host.md#multi-disk-management) for details.
 
-![](/img/v1.2/storageclass/add_hdd_on_host_page.png)
+![](/img/v1.2/storageclass-hv/add_hdd_on_host_page.png)
 
-![](/img/v1.2/storageclass/add_tags.png)
+![](/img/v1.2/storageclass-hv/add-tags.png)
 
 Then, create a new `StorageClass` for the HDD (use the above disk tags). For hard drives with large capacity but slow performance, the number of replicas can be reduced to improve performance.
 
-![](/img/v1.2/storageclass/create_hdd_storageclass.png)
+![](/img/v1.2/storageclass-hv/create-hdd-storageclasses.png)
 
 You can now create a volume using the above `StorageClass` with HDDs mostly for cold storage or archiving purpose.
 
-![](/img/v1.2/storageclass/create_volume_hdd.png)
+![](/img/v1.2/storageclass-hv/creat-volume-hdd.png)
