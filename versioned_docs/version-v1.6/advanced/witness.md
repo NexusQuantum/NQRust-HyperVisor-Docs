@@ -84,7 +84,7 @@ In summary, you must use a StorageClass that matches the cluster configuration.
 
   The workaround is to select a non-witness node and then select a NIC that can be used with that specific node.
 
-  ![create network config with specific node](/img/v1.5/advanced-hv/create-policy-with-specific-node.png)
+  ![create network config with specific node](/img/v1.2/advanced-hv/create-policy-with-specific-node.png)
   ![get uplink](/img/v1.2/advanced-hv/get-uplink.png)
 
 You must repeat this procedure for every non-witness node in the cluster. The same uplink settings can be used across nodes.

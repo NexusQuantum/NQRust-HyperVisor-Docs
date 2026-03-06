@@ -99,7 +99,7 @@ Currently, qcow2, raw, and ISO images are supported.
 
 You can upload images from the [**Multi-Cluster Management**](../rancher/virtualization-management.md#importing-harvester-cluster) screen on the **Rancher UI**. When the status of an image is *Uploading* but the progress indicator displays *0%* for an extended period, check the HTTP response status code. *413* indicates that the size of the request body exceeds the limit.
 
-![](/img/v1.3/image-hv/img-413-code.png)
+<!-- ![](/img/v1.3/image-hv/img-413-code.png) -->
 
 The maximum request body size should be specific to the cluster that is hosting Rancher (for example, RKE2 clusters have a default limit of 1 MB but no such limit exists in K3s clusters).
 

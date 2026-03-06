@@ -89,7 +89,7 @@ For more information, see [Containerized Data Importer (CDI) Settings](./storage
 1. Set the **Provisioner** to the third-party CSI driver in the settings.
 1. Next, Configure the **Volume Snapshot Class Name**. This setting points to the name of the `VolumeSnapshotClass` used for creating volume snapshots or VM snapshots.
 
-![csi-driver-config-external](/img/v1.5/advanced/csi-driver-config-external.png)
+![csi-driver-config-external](/img/v1.5/advanced-hv/csi-driver-config-external.png)
 
 ## Use the CSI Driver
 
@@ -101,7 +101,7 @@ You can use an external storage solution to store and manage virtual machine ima
 
 When [uploading a virtual machine image](../image/upload-image.md) using the Harvester UI (**Image > Create**), you must select the StorageClass for the external storage solution on the **Storage** tab. In the following example, the StorageClass is **nfs-csi**.
 
-![create-image-with-nfs-csi](/img/v1.5/advanced/create-image-with-nfs-csi.png)
+![create-image-with-nfs-csi](/img/v1.5/advanced-hv/create-image-with-nfs-csi.png)
 
 Harvester stores the created image in the external storage solution.
 

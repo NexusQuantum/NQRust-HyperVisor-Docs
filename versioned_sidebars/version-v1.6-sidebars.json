@@ -61,7 +61,7 @@
           },
           {
             "type": "category",
-            "label": "Upgrades",
+            "label": "Upgrades hapus nanti",
             "items": [
               "api/list-namespaced-upgrade",
               "api/create-namespaced-upgrade",

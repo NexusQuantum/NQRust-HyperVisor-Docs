@@ -1,14 +1,14 @@
 ---
 sidebar_position: 4
-sidebar_label: Harvester Seeder
-title: "Harvester Seeder (Experimental)"
+sidebar_label: Hypervisor Seeder
+title: "Hypervisor Seeder (Experimental)"
 keywords:
 - add-on
 - addon
 - out-of-band
 - harvester-seeder
 - Seeder
-Description: Perform out-of-band operations on Harvester hosts via IPMI and discover hardware events via Redfish
+Description: Perform out-of-band operations on Hypervisor hosts via IPMI and discover hardware events via Redfish
 ---
 
 <head>
@@ -21,7 +21,7 @@ Description: Perform out-of-band operations on Harvester hosts via IPMI and disc
 
 :::
 
-The **harvester-seeder** add-on allows you to perform out-of-band operations on Harvester hosts using the Intelligent Platform Management Interface (IPMI).
+The **harvester-seeder** add-on allows you to perform out-of-band operations on Hypervisor hosts using the Intelligent Platform Management Interface (IPMI).
 
 This add-on can also discover hardware and related events for hosts that support [Redfish](https://www.dmtf.org/standards/redfish)-based access, and then associate that hardware with the corresponding hosts.
 
@@ -47,7 +47,7 @@ Ensure that the following requirements are met before enabling the add-on.
 
 ## Enabling the Add-On and Configuring Hosts
 
-1. On the Harvester UI, go to **Advanced** > **Add-ons**.
+1. On the Hypervisor UI, go to **Advanced** > **Add-ons**.
 
 1. Select **harvester-seeder**, and then select **⋮** > **Enable**.
 
@@ -71,7 +71,7 @@ Ensure that the following requirements are met before enabling the add-on.
 
 ## Power-Related Operations
 
-You can use the Harvester UI to shut down and reboot hosts once the Out-of-Band Access settings are configured. However, you must first enable [Maintenance Mode](../../host/host.md#node-maintenance), which automatically migrates all VMs to other nodes. **harvester-seeder** communicates with the hosts via IPMI when performing the selected operation.
+You can use the Hypervisor UI to shut down and reboot hosts once the Out-of-Band Access settings are configured. However, you must first enable [Maintenance Mode](../../host/host.md#node-maintenance), which automatically migrates all VMs to other nodes. **harvester-seeder** communicates with the hosts via IPMI when performing the selected operation.
 
 ![](/img/v1.2/seeder/ShutdownReboot.png)
 
@@ -81,7 +81,7 @@ You can also power on VMs while Maintenance Mode is enabled.
 
 ## Hardware Event Aggregation
 
-If you selected **Enabled** in the **Event** section of the **Out-of-Band Access** settings screen, **harvester-seeder** leverages Redfish to query the hardware for information about component failures and fan temperatures. The information is converted to Kubernetes events during hardware reconciliation and is subsequently handled by the Kubernetes garbage collection policy. Harvester stores these events for 1 hour by default.
+If you selected **Enabled** in the **Event** section of the **Out-of-Band Access** settings screen, **harvester-seeder** leverages Redfish to query the hardware for information about component failures and fan temperatures. The information is converted to Kubernetes events during hardware reconciliation and is subsequently handled by the Kubernetes garbage collection policy. Hypervisor stores these events for 1 hour by default.
 
 ![](/img/v1.2/seeder/HardwareEvents.png)
 
