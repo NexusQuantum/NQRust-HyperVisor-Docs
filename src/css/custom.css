@@ -189,3 +189,11 @@ a.btn.navbar__github::before {
 .openapi-left-panel__container{
   border-right: 0px !important;
 }
+/* Hide items with hide-sidebar-item class (used to hide Upgrade section) */
+.menu__list-item.hide-sidebar-item { display: none !important; }
+
+/* Hide Troubleshooting > Rancher doc entry explicitly */
+.menu__list-item a.menu__link[href*="/troubleshooting/rancher"] {
+  display: none !important;
+}
+

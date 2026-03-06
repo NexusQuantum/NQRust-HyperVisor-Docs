@@ -10,19 +10,19 @@ title: "Kube-OVN Operator"
 
 _Available as of v1.6.0_
 
-[`kubeovn-operator`](https://github.com/harvester/kubeovn-operator) is used to manage the lifecycle of [Kube-OVN](https://github.com/kubeovn/kube-ovn) as a secondary CNI on underlying Harvester clusters.
+[`kubeovn-operator`](https://github.com/harvester/kubeovn-operator) is used to manage the lifecycle of [Kube-OVN](https://github.com/kubeovn/kube-ovn) as a secondary CNI on underlying Hypervisor clusters.
 
 ## Enabling `kubeovn-operator`
 
-You must enable `kubeovn-operator` to deploy Kube-OVN to a Harvester cluster for advanced SDN capabilities such as virtual private cloud (VPC) and subnets for virtual machine workloads.
+You must enable `kubeovn-operator` to deploy Kube-OVN to a Hypervisor cluster for advanced SDN capabilities such as virtual private cloud (VPC) and subnets for virtual machine workloads.
 
-1. On the Harvester UI, go to **Advanced** > **Add-ons**.
+1. On the Hypervisor UI, go to **Advanced** > **Add-ons**.
 
 1. Select **kubeovn-operator (Experimental)**, and then select **⋮** > **Enable**.
 
-  ![](/img/kubeovn-operator.png)
+  ![](/img/v1.2/advanced-hv/kubeovn-operator.png)
 
-The add-on deploys `kubeovn-operator` and creates the default `Configuration` object named `configuration.kubeovn.io`, which uses sane Harvester-specific defaults for configuring the Kube-OVN CNI.
+The add-on deploys `kubeovn-operator` and creates the default `Configuration` object named `configuration.kubeovn.io`, which uses sane Hypervisor-specific defaults for configuring the Kube-OVN CNI.
 
 The following is an example of a `Configuration` object:
 
@@ -181,13 +181,13 @@ spec:
 
 :::info important
 
-Ensure that the Kube-OVN IPv4 pod and service CIDR blocks do not overlap with the Harvester pod and service CIDR blocks.
+Ensure that the Kube-OVN IPv4 pod and service CIDR blocks do not overlap with the Hypervisor pod and service CIDR blocks.
 
 :::
 
 :::caution
 
-This `Configuration` object has been validated against Harvester installations. You can fine-tune the object by editing the `kubeovn-operator` add-on YAML, but exercise caution when making changes to the `configurationSpec` field.
+This `Configuration` object has been validated against Hypervisor installations. You can fine-tune the object by editing the `kubeovn-operator` add-on YAML, but exercise caution when making changes to the `configurationSpec` field.
 
 :::
 
@@ -250,4 +250,4 @@ done
 
 You must reboot each node to complete the uninstallation process.
 
-Once the nodes are rebooted, you can disable the `kubeovn-operator` add-on from the Harvester UI.
+Once the nodes are rebooted, you can disable the `kubeovn-operator` add-on from the Hypervisor UI.

@@ -29,7 +29,7 @@ Guest nodes are managed through a control plane that controls pod-related activi
 
 ## **Hypervisor cluster** 
 
-Group of integrated physical servers (hosts) on which the Harvester hypervisor is installed. These servers collectively manage compute, memory, and storage resources to provide an environment for running VMs.
+Group of integrated physical servers (hosts) on which the Hypervisor hypervisor is installed. These servers collectively manage compute, memory, and storage resources to provide an environment for running VMs.
 
 A three-node cluster is required to fully realize the multi-node features of Hypervisor, particularly high availability. Certain versions of Hypervisor allow you to create clusters with two management nodes and one [witness node](../advanced/witness.md) (and optionally, one or more worker nodes). You can also create [single-node clusters](../advanced/singlenodeclusters.md) that support most Hypervisor features (excluding high availability, multi-replica support, and live migration).
 

@@ -10,7 +10,7 @@ title: "VM Import"
 
 _Available as of v1.1.0_
 
-With the vm-import-controller addon users can import their virtual machines from VMware and OpenStack into Harvester.
+With the vm-import-controller addon users can import their virtual machines from VMware and OpenStack into Hypervisor.
 
 To use the VM import feature, users need to enable the vm-import-controller addon.
 
@@ -148,7 +148,7 @@ spec:
   gracefulShutdownTimeoutSeconds: 30
 ```
 
-This will trigger the controller to export the VM named "alpine-export-test" on the VMware source cluster to be exported, processed and recreated into the Harvester cluster.
+This will trigger the controller to export the VM named "alpine-export-test" on the VMware source cluster to be exported, processed and recreated into the Hypervisor cluster.
 
 The controller checks the configuration before starting the import process, and cancels the import when it detects errors such as unknown [StorageClasses](../storageclass.md) or networks. These checks are enabled by default, but can be disabled by setting `skipPreflightChecks` to `true`.
 
@@ -156,7 +156,7 @@ The duration of the import process depends on the size of the virtual machine. W
 
 If the source virtual machine is placed in a folder, you can specify the folder name in the optional `folder` field.
 
-The list of items in `networkMapping` will define how the source network interfaces are mapped to the Harvester Networks.
+The list of items in `networkMapping` will define how the source network interfaces are mapped to the Hypervisor Networks.
 If necessary, you can specify the model of each source network interface individually using the `networkInterfaceModel` field. The valid values are `e1000`, `e1000e`, `ne2k_pci`, `pcnet`, `rtl8139` and `virtio`.
 
 Specifying the default interface model using the `defaultNetworkInterfaceModel` field is particularly useful in the following situations:
@@ -170,9 +170,9 @@ If a match is not found, each unmatched network interface is attached to the def
 
 The `storageClass` field specifies the [StorageClass](../storageclass.md) to be used for images and provisioning persistent volumes during the import process. If not specified, the default StorageClass will be used.
 
-The `defaultDiskBusType` field allows you to specify the bus type for imported disks. Harvester uses this field in the following ways:
+The `defaultDiskBusType` field allows you to specify the bus type for imported disks. Hypervisor uses this field in the following ways:
 
-- VMware sources: The value is used only if Harvester is unable to automatically detect the bus type.
+- VMware sources: The value is used only if Hypervisor is unable to automatically detect the bus type.
 - OpenStack sources: The value is used for all imported disks.
 
 The valid values are `sata`, `scsi`, `usb`, and `virtio`. If you do not specify a value, `virtio` is used by default.
@@ -232,7 +232,7 @@ OpenStack allows users to have multiple instances with the same name. In such a 
 When creating a virtual machine object, the vm-import-controller add-on uses the name of the source virtual machine, which may not meet the Kubernetes object [naming criteria](https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names). You may need to rename the source virtual machine to allow successful completion of the import.
 ##### VMware-Based Virtual Machine Without VMware Tools Is Not Migrated
 
-When you attempt to import a VMware-based virtual machine in Harvester v1.6.0, the following occur if [VMware Tools](https://knowledge.broadcom.com/external/article/315382/overview-of-vmware-tools.html) is not installed on the virtual machine:
+When you attempt to import a VMware-based virtual machine in Hypervisor v1.6.0, the following occur if [VMware Tools](https://knowledge.broadcom.com/external/article/315382/overview-of-vmware-tools.html) is not installed on the virtual machine:
 
 - The vm-import-controller does not gracefully shut down the guest operating system.
 - When the graceful shutdown period (`gracefulShutdownTimeoutSeconds`) lapses, the vm-import-controller does not force a hard poweroff.
@@ -240,6 +240,6 @@ When you attempt to import a VMware-based virtual machine in Harvester v1.6.0, t
 
 To address the issue, perform one of the following workarounds:
 
-- Shut down the virtual machine before migrating it to Harvester 
+- Shut down the virtual machine before migrating it to Hypervisor 
 - In the `VirtualMachineImport` CRD spec, set the `forcePowerOff` field to `true`.  
 - Install VMware Tools or [open-vm-tools](https://knowledge.broadcom.com/external/article?legacyId=2073803).

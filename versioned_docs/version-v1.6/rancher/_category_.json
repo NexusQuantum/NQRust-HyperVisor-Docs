@@ -2,5 +2,6 @@
     "position": 14,
     "label": "Rancher Integration",
     "collapsible": true,
-    "collapsed": true
+    "collapsed": true,
+    "className": "hide-sidebar-item"
 }

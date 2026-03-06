@@ -10,17 +10,17 @@ title: "Local Storage Support (Experimental)"
 
 :::note
 
-**harvester-csi-driver-lvm** is an *experimental* add-on. It is not included in the Harvester ISO, but you can download it from the [experimental-addons repository](https://github.com/harvester/experimental-addons). For more information about experimental features, see [Feature Labels](../../getting-started/document-conventions.md#feature-labels).
+**harvester-csi-driver-lvm** is an *experimental* add-on. It is not included in the Hypervisor ISO, but you can download it from the [experimental-addons repository](https://github.com/harvester/experimental-addons). For more information about experimental features, see [Feature Labels](../../getting-started/document-conventions.md#feature-labels).
 
 :::
 
-Harvester allows you to use local storage on the host to create persistent volumes for your workloads with better performance and latency. This functionality is made possible by LVM, which provides logical volume management facilities on Linux.
+Hypervisor allows you to use local storage on the host to create persistent volumes for your workloads with better performance and latency. This functionality is made possible by LVM, which provides logical volume management facilities on Linux.
 
 The **harvester-csi-driver-lvm** add-on is a CSI driver that supports local path provisioning through LVM.
 
 ## Installing and Enabling the Add-on
 
-If you are using the Harvester kubeconfig file, you can install the add-on by performing the following steps:
+If you are using the Hypervisor kubeconfig file, you can install the add-on by performing the following steps:
 
 1. Install the add-on by running the following command:
 
@@ -28,7 +28,7 @@ If you are using the Harvester kubeconfig file, you can install the add-on by pe
     # kubectl apply -f https://raw.githubusercontent.com/harvester/experimental-addons/main/harvester-csi-driver-lvm/harvester-csi-driver-lvm.yaml
     ```
 
-1. On the Harvester UI, go to **Advanced** > **Add-ons**.
+1. On the Hypervisor UI, go to **Advanced** > **Add-ons**.
 
 1. Select **harvester-csi-driver-lvm (Experimental)**, and then select **⋮** > **Enable**.
 
@@ -40,13 +40,13 @@ A volume group combines physical volumes to create a single storage structure th
 
 :::note
 
-Harvester currently does not allow you to modify the volume group composition (add or remove disks) after you create a logical volume. This issue will be addressed in a future release.
+Hypervisor currently does not allow you to modify the volume group composition (add or remove disks) after you create a logical volume. This issue will be addressed in a future release.
 
 :::
 
 1. Verify that the **harvester-csi-driver-lvm** add-on is installed.
 
-1. On the Harvester UI, go to the **Hosts** screen.
+1. On the Hypervisor UI, go to the **Hosts** screen.
 
 1. Select the target host, and then select **⋮** > **Edit Config**.
 
@@ -80,7 +80,7 @@ You can only use one type of local volume in each volume group. If necessary, cr
 
 :::
 
-1. On the Harvester UI, go to the **Storage** screen.
+1. On the Hypervisor UI, go to the **Storage** screen.
 
 1. Create a new StorageClass and select **LVM** in the **Provisioner** list.
 
@@ -96,7 +96,7 @@ You can only use one type of local volume in each volume group. If necessary, cr
 
       ![](/img/v1.4/csi-driver-lvm/create-lvm-sc-03.png)
 
-    - **Volume Group Type**: Select the type of local volume that matches your requirements. Harvester currently supports **striped** and **dm-thin**.
+    - **Volume Group Type**: Select the type of local volume that matches your requirements. Hypervisor currently supports **striped** and **dm-thin**.
 
       ![](/img/v1.4/csi-driver-lvm/create-lvm-sc-04.png)
 
@@ -110,7 +110,7 @@ For more information, see [StorageClass](../storageclass.md).
 
 ## Creating a Volume with LVM
 
-1. On the Harvester UI, go to the **Volumes** screen.
+1. On the Hypervisor UI, go to the **Volumes** screen.
 
 1. Create a new volume using the LVM StorageClass that you created.
 
@@ -118,7 +118,7 @@ For more information, see [StorageClass](../storageclass.md).
 
     :::note
 
-    The status **Not Ready** is normal because Harvester creates the LVM volume only when the first workload is created.
+    The status **Not Ready** is normal because Hypervisor creates the LVM volume only when the first workload is created.
 
     :::
 
@@ -146,7 +146,7 @@ You can also create a new virtual machine with the volume of the LVM StorageClas
 
 ## Creating Snapshots for an LVM Volume
 
-1. On the Harvester UI, go to the **Settings** screen.
+1. On the Hypervisor UI, go to the **Settings** screen.
 
 1. In the **csi-driver-config** section, select **⋮** > **Edit Setting**.
 

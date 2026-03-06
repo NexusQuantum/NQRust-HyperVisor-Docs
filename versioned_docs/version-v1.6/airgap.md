@@ -55,7 +55,7 @@ However, it's essential to understand a guest K8s cluster (e.g., RKE2 cluster) c
 
 If the **Cloud Provider** option is configured to **Hypervisor** in a guest K8s cluster, it deploys the Hypervisor cloud provider and Container Storage Interface (CSI) driver.
 
-![cluster-registry](/img/v1.2/cluster-registry.png)
+<!-- ![cluster-registry](/img/v1.2/cluster-registry.png) -->
 
 As a result, we recommend monitoring each [RKE2 release](https://github.com/rancher/rke2/releases) in your air gapped environment and pulling the required images into your private registry. Please refer to the **Hypervisor CCM & CSI Driver** with RKE2 Releases section on the [Hypervisor support matrix page](https://www.suse.com/suse-harvester/support-matrix/all-supported-versions/harvester-v1-1-2/) for the best Hypervisor cloud provider and CSI driver capability support.
 
