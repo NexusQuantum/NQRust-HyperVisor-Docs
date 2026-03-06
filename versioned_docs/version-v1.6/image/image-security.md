@@ -4,7 +4,7 @@ sidebar_position: 2
 sidebar_label: Image Security
 title: "Image Security"
 keywords:
-  - Harvester
+  - Hypervisor
   - harvester
   - Rancher
   - rancher
@@ -17,7 +17,7 @@ keywords:
 
 _Available as of v1.4.0_
 
-Harvester allows you to encrypt and decrypt virtual machine images. The encryption mechanism utilizes the Linux kernel module dm_crypt and the command-line utility cryptsetup.
+Hypervisor allows you to encrypt and decrypt virtual machine images. The encryption mechanism utilizes the Linux kernel module dm_crypt and the command-line utility cryptsetup.
 
 :::note
 
@@ -60,7 +60,7 @@ Prepare the following resources:
 
   :::info important
 
-  The example contains the default YAML code for Kubernetes secrets. Aside from this, you can use [encryption options for LUKS mode](https://wiki.archlinux.org/title/Dm-crypt/Device_encryption#Encryption_options_for_LUKS_mode), which is a cryptsetup operating mode. Harvester v1.4.1 and later versions support these options, but you must verify that these are supported by your nodes.
+  The example contains the default YAML code for Kubernetes secrets. Aside from this, you can use [encryption options for LUKS mode](https://wiki.archlinux.org/title/Dm-crypt/Device_encryption#Encryption_options_for_LUKS_mode), which is a cryptsetup operating mode. Hypervisor v1.4.1 and later versions support these options, but you must verify that these are supported by your nodes.
 
   | Option | Possible Values |
   | --- | --- |
@@ -69,7 +69,7 @@ Prepare the following resources:
   | CRYPTO_KEY_SIZE | 256, 384, 512 |
   | CRYPTO_PBKDF | argon2i, argon2id, pbkdf2 |
 
-  You can create a secret in the system namespace using kubectl or the Harvester UI (**Edit as YAML** feature). Resources in the system namespace are not displayed on the Harvester UI **Secrets** screen.
+  You can create a secret in the system namespace using kubectl or the Hypervisor UI (**Edit as YAML** feature). Resources in the system namespace are not displayed on the Hypervisor UI **Secrets** screen.
   :::
 
 - StorageClass: Images are encrypted using Longhorn, so required fields must be passed to the Longhorn CSI Driver. You can specify the encryption secret when creating a StorageClass. For more information, see [Image StorageClass](./upload-image#image-storageclass). 
@@ -102,13 +102,13 @@ Prepare the following resources:
 
   :::info important
 
-  You can create a secret in the system namespace using the Harvester UI (**Edit as YAML** feature) and kubectl. Resources in the system namespace are not displayed on the Harvester UI **Secrets** screen.
+  You can create a secret in the system namespace using the Hypervisor UI (**Edit as YAML** feature) and kubectl. Resources in the system namespace are not displayed on the Hypervisor UI **Secrets** screen.
 
   :::
 
 ## Encrypt a Virtual Machine Image
 
-1. On the Harvester UI, go to **Images**.
+1. On the Hypervisor UI, go to **Images**.
 
 1. Click **Create**.
 
@@ -116,19 +116,19 @@ Prepare the following resources:
 
 1. On the **Basics** tab, select **Encrypt** and then select a source image.
 
-  ![](/img/v1.4/image/create-encrypted-image.png)
+  ![](/img/v1.3/image-hv/create-encrypted-image.png)
 
 1. On the **Storage** tab, select a StorageClass that includes encryption-related fields. 
 
-  Harvester passes the required fields to Longhorn.
+  Hypervisor passes the required fields to Longhorn.
 
-  ![](/img/v1.4/image/select-encryption-storage-class.png)
+  ![](/img/v1.3/image-hv/select-encryption-storage-class.png)
 
 1. Click **Create**.
 
 ## Decrypt a Virtual Machine Image
 
-1. On the Harvester UI, go to **Images**.
+1. On the Hypervisor UI, go to **Images**.
 
 1. Click **Create**.
 
@@ -136,13 +136,13 @@ Prepare the following resources:
 
 1. On the **Basics** tab, select **Decrypt** and then select a source image.
 
-  ![](/img/v1.4/image/create-decrypted-image.png)
+  ![](/img/v1.3/image-hv/create-decrypted-image.png)
 
 1. On the **Storage** tab, select **harvester-longhorn (Default)** or another commonly used StorageClass.
 
-  Harvester uses the StorageClass of the source image that you want to decrypt.
+  Hypervisor uses the StorageClass of the source image that you want to decrypt.
 
-  ![](/img/v1.4/image/select-normal-storage-class.png)
+  ![](/img/v1.3/image-hv/select-normal-storage-class.png)
 
 1. Click **Create**.
 
@@ -150,17 +150,17 @@ Prepare the following resources:
 
 You must select the image that you want to use when creating a virtual machine.
 
-![](/img/v1.4/image/create.png)
+![](/img/v1.3/image-hv/create.png)
 
 The **Virtual Machines** screen displays the following icons and messages when volumes used by virtual machines are encrypted.
 
-![](/img/v1.4/image/case1.png)
+![](/img/v1.3/image-hv/case1.png)
 
-![](/img/v1.4/image/case2.png)
+![](/img/v1.3/image-hv/case2.png)
 
 To determine which volumes are encrypted, check the **Volumes** tab on the **Virtual Machine** details screen.
 
-![](/img/v1.4/image/volume-detail.png)
+![](/img/v1.3/image-hv/volume-detail.png)
 
 ## Advanced Usage with Rancher Integration
 
