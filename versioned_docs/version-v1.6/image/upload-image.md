@@ -4,7 +4,7 @@ sidebar_position: 1
 sidebar_label: Upload Images
 title: "Upload Images"
 keywords:
-  - Harvester
+  - Hypervisor
   - harvester
   - Rancher
   - rancher
@@ -34,7 +34,7 @@ To import virtual machine images in the **Images** page, enter a URL that can be
 
 ::: caution
 
-Large image files may cause memory issues in Harvester when you use third-party StorageClasses with download URLs that are hosted on servers that do not support HTTP range requests (for example, Python's `http.server`). For reliable downloads, use NGINX or Apache instead.
+Large image files may cause memory issues in Hypervisor when you use third-party StorageClasses with download URLs that are hosted on servers that do not support HTTP range requests (for example, Python's `http.server`). For reliable downloads, use NGINX or Apache instead.
 
 This issue is fixed in v1.6.1.
 
@@ -99,11 +99,11 @@ Currently, qcow2, raw, and ISO images are supported.
 
 You can upload images from the [**Multi-Cluster Management**](../rancher/virtualization-management.md#importing-harvester-cluster) screen on the **Rancher UI**. When the status of an image is *Uploading* but the progress indicator displays *0%* for an extended period, check the HTTP response status code. *413* indicates that the size of the request body exceeds the limit.
 
-![](/img/v1.3/img-413-code.png)
+![](/img/v1.3/image-hv/img-413-code.png)
 
 The maximum request body size should be specific to the cluster that is hosting Rancher (for example, RKE2 clusters have a default limit of 1 MB but no such limit exists in K3s clusters).
 
-The current workaround is to upload images from the **Harvester UI**. If you choose to upload images from the Rancher UI, you may need to configure related settings on the ingress server (for example, [`proxy-body-size`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-max-body-size) in NGINX).
+The current workaround is to upload images from the **Hypervisor UI**. If you choose to upload images from the Rancher UI, you may need to configure related settings on the ingress server (for example, [`proxy-body-size`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-max-body-size) in NGINX).
 
 If Rancher is deployed on an RKE2 cluster, perform the following steps:
 
@@ -116,7 +116,7 @@ If Rancher is deployed on an RKE2 cluster, perform the following steps:
 2. Specify a value for `nginx.ingress.kubernetes.io/proxy-body-size`.
 
   Example:
-  ![](/img/v1.3/img-ingress-client-body.png)
+  ![](/img/v1.3/image-hv/img-ingress-client-body.png)
 
 3. Delete the stuck image, and then restart the upload process.
 
@@ -126,7 +126,7 @@ If you upload a very large image (over 10 GB) from the **Multi-Cluster Managemen
 
 This behavior is related to *proxy-request-buffering* in the ingress configuration, which is also specific to the cluster that is hosting Rancher.
 
-The current workaround is to upload images from the **Harvester UI**. If you choose to upload images from the Rancher UI, you may need to configure related settings on the ingress server (for example, [`proxy-request-buffering`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_request_buffering) in NGINX).
+The current workaround is to upload images from the **Hypervisor UI**. If you choose to upload images from the Rancher UI, you may need to configure related settings on the ingress server (for example, [`proxy-request-buffering`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_request_buffering) in NGINX).
 
 If Rancher is deployed on an RKE2 cluster, perform the following steps:
 
@@ -139,13 +139,13 @@ If Rancher is deployed on an RKE2 cluster, perform the following steps:
 2. Turn off `nginx.ingress.kubernetes.io/proxy-request-buffering`.
 
   Example:
-  ![](/img/img-ingress-request-proxy-buffering.png)
+  ![](/img/v1.3/image-hv/img-ingress-request-proxy-buffering.png)
 
 3. Delete the stuck image, and then restart the upload process.
 
-#### Uploading Images Previously Downloaded from Harvester
+#### Uploading Images Previously Downloaded from Hypervisor
 
-Starting with **v1.5.5**, Longhorn [compresses backing images for downloading](https://github.com/longhorn/backing-image-manager/pull/153). If you attempt to upload a compressed backing image, Harvester rejects the attempt and displays the message **Upload failed: the uploaded file size xxxx should be a multiple of 512 bytes since Longhorn uses directIO by default** because the compressed data violates Longhorn's data alignment.
+Starting with **v1.5.5**, Longhorn [compresses backing images for downloading](https://github.com/longhorn/backing-image-manager/pull/153). If you attempt to upload a compressed backing image, Hypervisor rejects the attempt and displays the message **Upload failed: the uploaded file size xxxx should be a multiple of 512 bytes since Longhorn uses directIO by default** because the compressed data violates Longhorn's data alignment.
 
 Before uploading, decompress backing images using the command `$ gzip -d <file name>`.
 
@@ -153,7 +153,7 @@ Before uploading, decompress backing images using the command `$ gzip -d <file n
 
 On the **Volumes** page, click **Export Image**. Enter the image name and select a StorageClass to create an image.
 
-![](/img/v1.2/volume/export-volume-to-image-1.png)
+![](/img/v1.3/image-hv/export-volume-to-image-1.png)
 
 ### Image StorageClass
 
@@ -163,11 +163,11 @@ When creating an image, you can select a [StorageClass](../advanced/storageclass
 
 The image will not use the `StorageClass` selected here directly. It's just a `StorageClass` template.
 
-Instead, it will create a special StorageClass under the hood with a prefix name of `longhorn-`. This is automatically done by the Harvester backend, but it will inherit the parameters from the StorageClass you have selected.
+Instead, it will create a special StorageClass under the hood with a prefix name of `longhorn-`. This is automatically done by the Hypervisor backend, but it will inherit the parameters from the StorageClass you have selected.
 
 :::
 
-![](/img/v1.2/image-storageclass.png)
+![](/img/v1.3/image-hv/image-storageclass.png)
 
 ### Image Labels
 
