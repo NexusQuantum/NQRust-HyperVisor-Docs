@@ -197,3 +197,16 @@ a.btn.navbar__github::before {
   display: none !important;
 }
 
+/* Hide any category or item tagged with hide-sidebar-item */
+.menu__list-item.hide-sidebar-item { display: none !important; }
+
+/* Hide Terraform Provider entry */
+.menu__list-item a.menu__link[href*="/terraform/terraform-provider"] {
+  display: none !important;
+}
+
+/* Hide Getting Started > Document Conventions entry */
+.menu__list-item a.menu__link[href*="/getting-started/document-conventions"] {
+  display: none !important;
+}
+

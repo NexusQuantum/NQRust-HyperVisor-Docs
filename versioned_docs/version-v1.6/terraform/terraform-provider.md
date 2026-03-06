@@ -3,6 +3,7 @@ id: terraform-provider
 sidebar_position: 1
 sidebar_label: Harvester Terraform Provider
 title: "Harvester Terraform Provider"
+draft: true
 ---
 
 <head>

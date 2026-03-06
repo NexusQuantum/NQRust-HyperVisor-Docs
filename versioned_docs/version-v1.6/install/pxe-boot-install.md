@@ -4,7 +4,7 @@ sidebar_label: PXE Boot Installation
 title: "PXE Boot Installation"
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Rancher
   - rancher
   - Install Hypervisor
@@ -40,21 +40,21 @@ Let's assume the NGINX HTTP server's IP is `10.100.0.10`, and it serves the `/us
 ## Preparing Boot Files
 
 - Download the required files from the [Hypervisor releases page](https://github.com/harvester/harvester/releases).
-    - The ISO: `harvester-<version>-amd64.iso`
-    - The kernel: `harvester-<version>-vmlinuz-amd64`
-    - The initrd: `harvester-<version>-initrd-amd64`
-    - The rootfs squashfs image: `harvester-<version>-rootfs-amd64.squashfs`
+    - The ISO: `hypervisor-<version>-amd64.iso`
+    - The kernel: `hypervisor-<version>-vmlinuz-amd64`
+    - The initrd: `hypervisor-<version>-initrd-amd64`
+    - The rootfs squashfs image: `hypervisor-<version>-rootfs-amd64.squashfs`
 
 - Serve the files.
 
     Copy or move the downloaded files to an appropriate location so they can be downloaded via the HTTP server. For example:
 
     ```
-    sudo mkdir -p /usr/share/nginx/html/harvester/
-    sudo cp /path/to/harvester-<version>-amd64.iso /usr/share/nginx/html/harvester/
-    sudo cp /path/to/harvester-<version>-vmlinuz-amd64 /usr/share/nginx/html/harvester/
-    sudo cp /path/to/harvester-<version>-initrd-amd64 /usr/share/nginx/html/harvester/
-    sudo cp /path/to/harvester-<version>-rootfs-amd64.squashfs /usr/share/nginx/html/harvester/
+    sudo mkdir -p /usr/share/nginx/html/hypervisor/
+    sudo cp /path/to/hypervisor-<version>-amd64.iso /usr/share/nginx/html/hypervisor/
+    sudo cp /path/to/hypervisor-<version>-vmlinuz-amd64 /usr/share/nginx/html/hypervisor/
+    sudo cp /path/to/hypervisor-<version>-initrd-amd64 /usr/share/nginx/html/hypervisor/
+    sudo cp /path/to/hypervisor-<version>-rootfs-amd64.squashfs /usr/share/nginx/html/hypervisor/
     ```
 
 ## Preparing iPXE Boot Scripts
@@ -100,7 +100,7 @@ install:
       miimon: 100
   device: /dev/sda # The target disk to install
 #  data_disk: /dev/sdb # It is recommended to use a separate disk to store VM data
-  iso_url: http://10.100.0.10/harvester/harvester-<version>-amd64.iso
+  iso_url: http://10.100.0.10/hypervisor/hypervisor-<version>-amd64.iso
 #  tty: ttyS1,115200n8   # For machines without a VGA console
 
   vip: 10.100.0.99        # The VIP to access the Hypervisor GUI. Make sure the IP is free to use
@@ -112,12 +112,12 @@ For machines that needs to be installed using `CREATE` mode, the following is an
 
 ```
 #!ipxe
-kernel harvester-<version>-vmlinuz ip=dhcp net.ifnames=1 rd.cos.disable rd.noverifyssl console=tty1 root=live:http://10.100.0.10/harvester/rootfs.squashfs harvester.install.automatic=true harvester.install.config_url=http://10.100.0.10/harvester/config-create.yaml
-initrd harvester-<version>-initrd
+kernel hypervisor-<version>-vmlinuz ip=dhcp net.ifnames=1 rd.cos.disable rd.noverifyssl console=tty1 root=live:http://10.100.0.10/hypervisor/rootfs.squashfs hypervisor.install.automatic=true hypervisor.install.config_url=http://10.100.0.10/hypervisor/config-create.yaml
+initrd hypervisor-<version>-initrd
 boot
 ```
 
-This assumes the iPXE script is stored in `/usr/share/nginx/html/harvester/ipxe-create`.
+This assumes the iPXE script is stored in `/usr/share/nginx/html/hypervisor/ipxe-create`.
 
 :::note
 
@@ -139,7 +139,7 @@ Use `ip=` parameter to designate the booting interface only, as we only support 
 Create a [Hypervisor configuration file](./harvester-configuration.md) called `config-join.yaml` for `JOIN` mode. Modify the values as needed:
 
 ```YAML
-# cat /usr/share/nginx/html/harvester/config-join.yaml
+# cat /usr/share/nginx/html/hypervisor/config-join.yaml
 scheme_version: 1
 server_url: https://10.100.0.99:443  # Should be the VIP set up in "CREATE" config
 token: token
@@ -163,7 +163,7 @@ install:
       miimon: 100
   device: /dev/sda # The target disk to install
 #  data_disk: /dev/sdb # It is recommended to use a separate disk to store VM data
-  iso_url: http://10.100.0.10/harvester/harvester-<version>-amd64.iso
+  iso_url: http://10.100.0.10/hypervisor/hypervisor-<version>-amd64.iso
 #  tty: ttyS1,115200n8   # For machines without a VGA console
 ```
 
@@ -173,12 +173,12 @@ For machines that needs to be installed in `JOIN` mode, the following is an iPXE
 
 ```
 #!ipxe
-kernel harvester-<version>-vmlinuz ip=dhcp net.ifnames=1 rd.cos.disable rd.noverifyssl console=tty1 root=live:http://10.100.0.10/harvester/rootfs.squashfs harvester.install.automatic=true harvester.install.config_url=http://10.100.0.10/harvester/config-join.yaml
-initrd harvester-<version>-initrd
+kernel hypervisor-<version>-vmlinuz ip=dhcp net.ifnames=1 rd.cos.disable rd.noverifyssl console=tty1 root=live:http://10.100.0.10/hypervisor/rootfs.squashfs hypervisor.install.automatic=true hypervisor.install.config_url=http://10.100.0.10/hypervisor/config-join.yaml
+initrd hypervisor-<version>-initrd
 boot
 ```
 
-This assumes the iPXE script is stored in `/usr/share/nginx/html/harvester/ipxe-join`.
+This assumes the iPXE script is stored in `/usr/share/nginx/html/hypervisor/ipxe-join`.
 
 ## DHCP Server Configuration
 
@@ -215,9 +215,9 @@ group {
   if exists user-class and option user-class = "iPXE" {
     # iPXE Boot
     if option architecture-type = 00:07 {
-      filename "http://10.100.0.10/harvester/ipxe-create-efi";
+      filename "http://10.100.0.10/hypervisor/ipxe-create-efi";
     } else {
-      filename "http://10.100.0.10/harvester/ipxe-create";
+      filename "http://10.100.0.10/hypervisor/ipxe-create";
     }
   } else {
     # PXE Boot
@@ -238,9 +238,9 @@ group {
   if exists user-class and option user-class = "iPXE" {
     # iPXE Boot
     if option architecture-type = 00:07 {
-      filename "http://10.100.0.10/harvester/ipxe-join-efi";
+      filename "http://10.100.0.10/hypervisor/ipxe-join-efi";
     } else {
-      filename "http://10.100.0.10/harvester/ipxe-join";
+      filename "http://10.100.0.10/hypervisor/ipxe-join";
     }
   } else {
     # PXE Boot
@@ -265,25 +265,25 @@ The Internet Systems Consortium (ISC) announced the final [end-of-life (EOL) for
   {
     "name": "iPXE UEFI/CREATE",
     "test": "option[user-class].exists and substring(option[user-class].hex,0,4) == 'iPXE' and option[client-system].hex == 0x0007",
-    "boot-file-name": "http://10.100.0.10/harvester/ipxe-create-efi",
+    "boot-file-name": "http://10.100.0.10/hypervisor/ipxe-create-efi",
     "only-if-required": true
   },
   {
     "name": "iPXE non-UEFI/CREATE",
     "test": "option[user-class].exists and substring(option[user-class].hex,0,4) == 'iPXE' and not option[client-system].hex == 0x0007",
-    "boot-file-name": "http://10.100.0.10/harvester/ipxe-create",
+    "boot-file-name": "http://10.100.0.10/hypervisor/ipxe-create",
     "only-if-required": true
   },
   {
     "name": "iPXE UEFI/JOIN",
     "test": "option[user-class].exists and substring(option[user-class].hex,0,4) == 'iPXE' and option[client-system].hex == 0x0007",
-    "boot-file-name": "http://10.100.0.10/harvester/ipxe-join-efi",
+    "boot-file-name": "http://10.100.0.10/hypervisor/ipxe-join-efi",
     "only-if-required": true
   },
   {
     "name": "iPXE non-UEFI/JOIN",
     "test": "option[user-class].exists and substring(option[user-class].hex,0,4) == 'iPXE' and not option[client-system].hex == 0x0007",
-    "boot-file-name": "http://10.100.0.10/harvester/ipxe-join",
+    "boot-file-name": "http://10.100.0.10/hypervisor/ipxe-join",
     "only-if-required": true
   },
   {
@@ -343,7 +343,7 @@ By default, the first node will be the management node of the cluster. When ther
 
 If you want to promote management nodes from different zones, you can add the node label `topology.kubernetes.io/zone` in the [os.labels](./harvester-configuration.md#oslabels) config. In this case, at least three different zones are required.
 
-Users can also provide configuration via kernel parameters. For example, to specify the `CREATE` install mode, users can pass the `harvester.install.mode=create` kernel parameter when booting. Values passed through kernel parameters have higher priority than values specified in the config file.
+Users can also provide configuration via kernel parameters. For example, to specify the `CREATE` install mode, users can pass the `hypervisor.install.mode=create` kernel parameter when booting. Values passed through kernel parameters have higher priority than values specified in the config file.
 
 ## UEFI HTTP Boot support
 
@@ -354,11 +354,11 @@ UEFI firmware supports loading a boot image from an HTTP server. This section de
 Download the iPXE UEFI program from http://boot.ipxe.org/ipxe.efi and make sure `ipxe.efi` can be downloaded from the HTTP server. For example:
 
 ```bash
-cd /usr/share/nginx/html/harvester/
+cd /usr/share/nginx/html/hypervisor/
 wget http://boot.ipxe.org/ipxe.efi
 ```
 
-The file now can be downloaded from http://10.100.0.10/harvester/ipxe.efi locally.
+The file now can be downloaded from http://10.100.0.10/hypervisor/ipxe.efi locally.
 
 ### DHCP Server Configuration
 
@@ -370,14 +370,14 @@ group {
   if exists user-class and option user-class = "iPXE" {
     # iPXE Boot
     if option architecture-type = 00:07 {
-      filename "http://10.100.0.10/harvester/ipxe-create-efi";
+      filename "http://10.100.0.10/hypervisor/ipxe-create-efi";
     } else {
-      filename "http://10.100.0.10/harvester/ipxe-create";
+      filename "http://10.100.0.10/hypervisor/ipxe-create";
     }
   } elsif substring (option vendor-class-identifier, 0, 10) = "HTTPClient" {
     # UEFI HTTP Boot
     option vendor-class-identifier "HTTPClient";
-    filename "http://10.100.0.10/harvester/ipxe.efi";
+    filename "http://10.100.0.10/hypervisor/ipxe.efi";
   } else {
     # PXE Boot
     if option architecture-type = 00:07 {
@@ -393,7 +393,7 @@ group {
 }
 ```
 
-The `elsif substring` statement is new, and it offers `http://10.100.0.10/harvester/ipxe.efi` when it sees a UEFI HTTP boot DHCP request. After the client fetches the iPXE program and runs it, the iPXE program will send a DHCP request again and load the iPXE script from the URL `http://10.100.0.10/harvester/ipxe-create-efi`.
+The `elsif substring` statement is new, and it offers `http://10.100.0.10/hypervisor/ipxe.efi` when it sees a UEFI HTTP boot DHCP request. After the client fetches the iPXE program and runs it, the iPXE program will send a DHCP request again and load the iPXE script from the URL `http://10.100.0.10/hypervisor/ipxe-create-efi`.
 
 If you want to enable UEFI HTTP boot on the Kea DHCPv4 server, you must add a new `client-class` at the end of the `client-classes`.
 
@@ -408,7 +408,7 @@ Example:
       "data": "HTTPClient"
     }
   ],
-  "boot-file-name": "http://10.100.0.10/harvester/ipxe.efi"
+  "boot-file-name": "http://10.100.0.10/hypervisor/ipxe.efi"
 }
 ```
 
@@ -418,12 +418,12 @@ It's mandatory to specify the initrd image for UEFI boot in the kernel parameter
 
 ```
 #!ipxe
-kernel harvester-<version>-vmlinuz initrd=harvester-<version>-initrd ip=dhcp net.ifnames=1 rd.cos.disable rd.noverifyssl console=tty1 root=live:http://10.100.0.10/harvester/rootfs.squashfs harvester.install.automatic=true harvester.install.config_url=http://10.100.0.10/harvester/config-create.yaml
-initrd harvester-<version>-initrd
+kernel hypervisor-<version>-vmlinuz initrd=hypervisor-<version>-initrd ip=dhcp net.ifnames=1 rd.cos.disable rd.noverifyssl console=tty1 root=live:http://10.100.0.10/hypervisor/rootfs.squashfs hypervisor.install.automatic=true hypervisor.install.config_url=http://10.100.0.10/hypervisor/config-create.yaml
+initrd hypervisor-<version>-initrd
 boot
 ```
 
-The parameter `initrd=harvester-<version>-initrd` is required.
+The parameter `initrd=hypervisor-<version>-initrd` is required.
 
 ## Tagged VLAN Network Boot
 
@@ -451,8 +451,8 @@ For example, the iPXE script given above can be updated as follows:
 
 ```sh
 #!ipxe
-kernel harvester-<version>-vmlinuz ip=dhcp net.ifnames=1 rd.cos.disable rd.noverifyssl console=tty1 root=live:http://10.100.0.10/harvester/rootfs.squashfs harvester.install.automatic=true harvester.install.config_url=http://10.100.0.10/harvester/config-create.yaml BOOTIF=<mac_address> ifname=<interface_name>:<mac_address> vlan=<vlan_id>:<interface_name>
-initrd harvester-<version>-initrd
+kernel hypervisor-<version>-vmlinuz ip=dhcp net.ifnames=1 rd.cos.disable rd.noverifyssl console=tty1 root=live:http://10.100.0.10/hypervisor/rootfs.squashfs hypervisor.install.automatic=true hypervisor.install.config_url=http://10.100.0.10/hypervisor/config-create.yaml BOOTIF=<mac_address> ifname=<interface_name>:<mac_address> vlan=<vlan_id>:<interface_name>
+initrd hypervisor-<version>-initrd
 boot
 ```
 
@@ -470,15 +470,15 @@ If you have multiple network interfaces, you could add the `ip=dhcp` parameter t
 Failing to get IP from the DHCP server would cause iPXE booting to fail. You can add parameter `rd.net.dhcp.retry=<cnt>`
 to retry DHCP request for `<cnt>` times.
 
-### `harvester.install.skipchecks=true`
+### `hypervisor.install.skipchecks=true`
 
-Installation is stopped if the hardware checks fail (because the minimum requirements for production use are not met). To override this behavior, set the kernel parameter `harvester.install.skipchecks=true`. When set to `true`, warning messages are still saved to `/var/log/console.log`, but the installation proceeds even if hardware requirements for production use are not met.
+Installation is stopped if the hardware checks fail (because the minimum requirements for production use are not met). To override this behavior, set the kernel parameter `hypervisor.install.skipchecks=true`. When set to `true`, warning messages are still saved to `/var/log/console.log`, but the installation proceeds even if hardware requirements for production use are not met.
 
-### `harvester.install.with_net_images=true`
+### `hypervisor.install.with_net_images=true`
 
 The installer does not preload images during installation and instead pulls all required images from the internet after installation is completed. Usage of this parameter is not recommended in most cases. For more information, see [Net Install ISO](./net-install.md).
 
-### `harvester.install.mode=install` 
+### `hypervisor.install.mode=install` 
 
 Automatically starts the installer in install mode at boot. 
 
@@ -486,7 +486,7 @@ Automatically starts the installer in install mode at boot.
 
 Specifies the console teletype to activate at boot. 
 
-### `harvester.install.tty=tty1`
+### `hypervisor.install.tty=tty1`
 
 Specifies what teletype console to start the installer on.
 

@@ -5,7 +5,7 @@ sidebar_label: ISO Installation
 title: "ISO Installation"
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Rancher
   - rancher
   - ISO Installation
@@ -16,7 +16,8 @@ description: To get the Hypervisor ISO, download it from the Github releases. Du
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.7/install/index"/>
 </head>
 
-Hypervisor ships as a bootable appliance image, you can install it directly on a bare metal server with the ISO image. To get the ISO image, download **💿 harvester-v1.x.x-amd64.iso** from the [Hypervisor releases](https://github.com/harvester/harvester/releases) page.
+Hypervisor ships as a bootable appliance image, you can install it directly on a bare metal server with the ISO image. 
+<!-- To get the ISO image, download **💿 harvester-v1.x.x-amd64.iso** from the [Hypervisor releases](https://github.com/harvester/harvester/releases) page. -->
 
 During the installation, you can either choose to **create a new Hypervisor cluster** or **join the node to an existing Hypervisor cluster**.
 
