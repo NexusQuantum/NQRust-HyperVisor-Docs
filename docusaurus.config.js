@@ -147,12 +147,6 @@ const config = {
         //   dropdownActiveClassDisabled: true,
         // },
         {
-          type: 'docSidebar',
-          label: 'API',
-          position: 'left',
-          sidebarId: 'api',
-        },
-        {
           type: "localeDropdown",
           position: "left",
         },
@@ -166,24 +160,8 @@ const config = {
           position: 'right',
           items: [
             {
-              href: "https://nqrhypervisorhci.io/",
-              label: "NQR HyperVisor Home",
-            },
-            {
-              href: "https://github.com/nqrhypervisor/nqrhypervisor",
-              label: 'GitHub',
-            },
-            {
-              href: "https://github.com/nqrhypervisor/docs",
-              label: 'Docs GitHub',
-            },
-            {
-              href: "https://nqrhypervisorhci.io/kb",
-              label: "Knowledge Base",
-            },
-            {
-              href: "https://www.suse.com/c/?s=nqrhypervisor",
-              label: "Blog",
+              href: "https://nexusquantum.id/",
+              label: "NexusQuantum Home",
             },
           ],
         },

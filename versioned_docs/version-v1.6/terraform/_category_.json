@@ -3,6 +3,7 @@
     "label": "Harvester Terraform Provider",
     "collapsible": false,
     "collapsed": false,
+    "className": "hide-sidebar-item",
     "link": {
         "type": "doc",
         "id": "terraform-provider"
