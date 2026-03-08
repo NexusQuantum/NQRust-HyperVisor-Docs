@@ -14,7 +14,7 @@ With the vm-import-controller addon users can import their virtual machines from
 
 To use the VM import feature, users need to enable the vm-import-controller addon.
 
-![](/img/v1.2/vm-import-controller/EnableAddon.png)
+![](/img/v1.2/vm-import-controller-hv/EnableAddon.png)
 
 By default, vm-import-controller leverages ephemeral storage, which is mounted from /var/lib/kubelet.  
 
@@ -22,7 +22,7 @@ During the migration, a large VM's node could run out of space on this mount, re
 
 To avoid this, users are advised to enable PVC-backed storage and customize the amount of storage needed. According to the best practice, the PVC size should be twice the size of the largest VM being migrated. This is essential as the PVC is used as scratch space to download the VM, and convert the disks into raw image files.
 
-![](/img/v1.2/vm-import-controller/ConfigureAddon.png)
+![](/img/v1.2/vm-import-controller-hv/ConfigureAddon.png)
 
 ## vm-import-controller
 
@@ -39,7 +39,7 @@ Sources allow users to define valid source clusters.
 For example:
 
 ```yaml
-apiVersion: migration.harvesterhci.io/v1beta1
+apiVersion: migration.hypervisorhci.io/v1beta1
 kind: VmwareSource
 metadata:
   name: vcsim
@@ -78,7 +78,7 @@ vcsim   clusterReady
 For OpenStack-based source clusters, an example definition is as follows:
 
 ```yaml
-apiVersion: migration.harvesterhci.io/v1beta1
+apiVersion: migration.hypervisorhci.io/v1beta1
 kind: OpenstackSource
 metadata:
   name: devstack
@@ -121,7 +121,7 @@ The VirtualMachineImport CRD provides a way for users to define a source VM and 
 A sample VirtualMachineImport looks like this:
 
 ```yaml
-apiVersion: migration.harvesterhci.io/v1beta1
+apiVersion: migration.hypervisorhci.io/v1beta1
 kind: VirtualMachineImport
 metadata:
   name: alpine-export-test
@@ -143,7 +143,7 @@ spec:
     name: vcsim
     namespace: default
     kind: VmwareSource
-    apiVersion: migration.harvesterhci.io/v1beta1
+    apiVersion: migration.hypervisorhci.io/v1beta1
   forcePowerOff: false
   gracefulShutdownTimeoutSeconds: 30
 ```
@@ -202,7 +202,7 @@ openstack-cirros-test   virtualMachineRunning
 Similarly, users can define a VirtualMachineImport for an OpenStack source as well:
 
 ```yaml
-apiVersion: migration.harvesterhci.io/v1beta1
+apiVersion: migration.hypervisorhci.io/v1beta1
 kind: VirtualMachineImport
 metadata:
   name: openstack-demo
@@ -218,7 +218,7 @@ spec:
     name: devstack
     namespace: default
     kind: OpenstackSource
-    apiVersion: migration.harvesterhci.io/v1beta1
+    apiVersion: migration.hypervisorhci.io/v1beta1
 ```
 
 :::note 
