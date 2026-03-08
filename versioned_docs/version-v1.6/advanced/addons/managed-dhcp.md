@@ -10,11 +10,11 @@ title: "Managed DHCP (Experimental)"
 
 :::note
 
-**harvester-vm-dhcp-controller** is an *experimental* add-on. It is not included in the Hypervisor ISO, but you can download it from the [experimental-addons repository](https://github.com/harvester/experimental-addons). For more information about experimental features, see [Feature Labels](../../getting-started/document-conventions.md#feature-labels).
+**hypervisor-vm-dhcp-controller** is an *experimental* add-on. It is not included in the Hypervisor ISO, but you can download it from the [experimental-addons repository](https://github.com/harvester/experimental-addons). For more information about experimental features, see [Feature Labels](../../getting-started/document-conventions.md#feature-labels).
 
 :::
 
-You can configure IP pool information and serve IP addresses to VMs running on Hypervisor clusters using the embedded Managed DHCP feature. This feature, which is an alternative to the standalone DHCP server, leverages the [harvester-vm-dhcp-controller](https://github.com/harvester/vm-dhcp-controller) add-on to simplify guest cluster deployment.
+You can configure IP pool information and serve IP addresses to VMs running on Hypervisor clusters using the embedded Managed DHCP feature. This feature, which is an alternative to the standalone DHCP server, leverages the [hypervisor-vm-dhcp-controller](https://github.com/harvester/vm-dhcp-controller) add-on to simplify guest cluster deployment.
 
 :::note
 
@@ -40,7 +40,7 @@ Hypervisor uses the planned infrastructure network so you must ensure that netwo
 You can install the add-on by running the following command:
 
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/harvester/experimental-addons/main/harvester-vm-dhcp-controller/harvester-vm-dhcp-controller.yaml
+kubectl apply -f https://raw.githubusercontent.com/hypervisor/experimental-addons/main/hypervisor-vm-dhcp-controller/hypervisor-vm-dhcp-controller.yaml
 ```
 
 :::note
@@ -52,12 +52,12 @@ When your cluster uses a different service CIDR, you must configure it explicitl
 Example:
 
 ```yaml
-apiVersion: harvesterhci.io/v1beta1
+apiVersion: hypervisorhci.io/v1beta1
 kind: Addon
 metadata:
   ...
-  name: harvester-vm-dhcp-controller
-  namespace: harvester-system
+  name: hypervisor-vm-dhcp-controller
+  namespace: hypervisor-system
 spec:
   ...
   valuesContent: |
@@ -86,7 +86,7 @@ After installation, enable the add-on on the **Dashboard** screen of the Hypervi
 
     ```shell
     cat <<EOF | kubectl apply -f -
-    apiVersion: network.harvesterhci.io/v1alpha1
+    apiVersion: network.hypervisorhci.io/v1alpha1
     kind: IPPool
     metadata:
       name: net-48
@@ -118,7 +118,7 @@ After installation, enable the add-on on the **Dashboard** screen of the Hypervi
 
     ```shell
     $ kubectl get ippools.network net-48 -o yaml
-    apiVersion: network.harvesterhci.io/v1alpha1
+    apiVersion: network.hypervisorhci.io/v1alpha1
     kind: IPPool
     metadata:
       creationTimestamp: "2024-02-15T13:17:21Z"
@@ -147,7 +147,7 @@ After installation, enable the add-on on the **Dashboard** screen of the Hypervi
     status:
       agentPodRef:
         name: default-net-48-agent
-        namespace: harvester-system
+        namespace: hypervisor-system
       conditions:
       - lastUpdateTime: "2024-02-15T13:17:21Z"
         status: "True"
@@ -173,7 +173,7 @@ After installation, enable the add-on on the **Dashboard** screen of the Hypervi
 
     ```shell
     $ kubectl get virtualmachinenetworkconfigs.network test-vm -o yaml
-    apiVersion: network.harvesterhci.io/v1alpha1
+    apiVersion: network.hypervisorhci.io/v1alpha1
     kind: VirtualMachineNetworkConfig
     metadata:
       creationTimestamp: "2024-02-15T13:48:02Z"
@@ -181,7 +181,7 @@ After installation, enable the add-on on the **Dashboard** screen of the Hypervi
       - wrangler.cattle.io/vm-dhcp-vmnetcfg-controller
       generation: 2
       labels:
-        harvesterhci.io/vmName: test-vm
+        hypervisorhci.io/vmName: test-vm
       name: test-vm
       namespace: default
       ownerReferences:
@@ -217,7 +217,7 @@ After installation, enable the add-on on the **Dashboard** screen of the Hypervi
 
 ## Pods and CRDs
 
-When **harvester-vm-dhcp-controller** is enabled, the following types of pods run:
+When **hypervisor-vm-dhcp-controller** is enabled, the following types of pods run:
 
 - Controller: Reconciles CRD objects to determine allocation and mapping between IP and MAC addresses. The results are persisted in the IPPool objects.
 - Webhook: Validates and mutates CRD objects when receiving requests (creation, updating, and deletion)
@@ -233,13 +233,13 @@ The add-on introduces the following new CRDs:
 The IPPool CRD allows you to define IP pool information. You must map each IPPool object to a specific NetworkAttachmentDefinition (NAD) object, which must be created beforehand.
 
 :::note
-Multiple CRDs named "IPPool" are used in the Hypervisor ecosystem, including a similarly-named CRD in the `loadbalancer.harvesterhci.io` API group. To avoid issues, ensure that you are working with the **IPPool CRD in the `network.harvesterhci.io` API group**. For more information about IPPool CRD operations in relation to load balancers, see [IP Pool](../../networking/ippool.md).
+Multiple CRDs named "IPPool" are used in the Hyypervisor ecosystem, including a similarly-named CRD in the `loadbalancer.hypervisorhci.io` API group. To avoid issues, ensure that you are working with the **IPPool CRD in the `network.hypervisorhci.io` API group**. For more information about IPPool CRD operations in relation to load balancers, see [IP Pool](../../networking/ippool.md).
 :::
 
 Example:
 
 ```yaml
-apiVersion: network.harvesterhci.io/v1alpha1
+apiVersion: network.hypervisorhci.io/v1alpha1
 kind: IPPool
 metadata:
   name: example
@@ -281,7 +281,7 @@ The VirtualMachineNetworkConfig CRD resembles a **request for IP address issuanc
 A sample VirtualMachineNetworkConfig object looks like the following:
 
 ```yaml
-apiVersion: network.harvesterhci.io/v1alpha1
+apiVersion: network.hypervisorhci.io/v1alpha1
 kind: VirtualMachineNetworkConfig
 metadata:
   name: test-vm
@@ -297,6 +297,6 @@ After the VirtualMachineNetworkConfig object is created, the controller attempts
 
 :::note
 
-Manual creation of VirtualMachineNetworkConfig objects for VMs is unnecessary in most cases because **harvester-vm-dhcp-controller** handles that task during the VirtualMachine reconciliation process. Automatically-created VirtualMachineNetworkConfig objects are deleted when VirtualMachine objects are removed.
+Manual creation of VirtualMachineNetworkConfig objects for VMs is unnecessary in most cases because **hypervisor-vm-dhcp-controller** handles that task during the VirtualMachine reconciliation process. Automatically-created VirtualMachineNetworkConfig objects are deleted when VirtualMachine objects are removed.
 
 :::

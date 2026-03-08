@@ -6,7 +6,7 @@ keywords:
 - add-on
 - addon
 - out-of-band
-- harvester-seeder
+- hypervisor-seeder
 - Seeder
 Description: Perform out-of-band operations on Hypervisor hosts via IPMI and discover hardware events via Redfish
 ---
@@ -17,11 +17,11 @@ Description: Perform out-of-band operations on Hypervisor hosts via IPMI and dis
 
 :::note
 
-**harvester-seeder** is an *experimental* add-on. For more information about experimental features, see [Feature Labels](../../getting-started/document-conventions.md#feature-labels).
+**hypervisor-seeder** is an *experimental* add-on. For more information about experimental features, see [Feature Labels](../../getting-started/document-conventions.md#feature-labels).
 
 :::
 
-The **harvester-seeder** add-on allows you to perform out-of-band operations on Hypervisor hosts using the Intelligent Platform Management Interface (IPMI).
+The **hypervisor-seeder** add-on allows you to perform out-of-band operations on Hypervisor hosts using the Intelligent Platform Management Interface (IPMI).
 
 This add-on can also discover hardware and related events for hosts that support [Redfish](https://www.dmtf.org/standards/redfish)-based access, and then associate that hardware with the corresponding hosts.
 
@@ -49,11 +49,11 @@ Ensure that the following requirements are met before enabling the add-on.
 
 1. On the Hypervisor UI, go to **Advanced** > **Add-ons**.
 
-1. Select **harvester-seeder**, and then select **⋮** > **Enable**.
+1. Select **hypervisor-seeder**, and then select **⋮** > **Enable**.
 
     After a few seconds, the value of **State** changes to **DeploySuccessful**.
 
-    ![](/img/v1.2/vm-import-controller/EnableAddon.png)
+    ![](/img/v1.2/seeder-hv/EnableAddon.png)
 
 1. Go to the **Hosts** screen.
 
@@ -61,35 +61,35 @@ Ensure that the following requirements are met before enabling the add-on.
 
 1. Select a host, and then select **⋮** > **Edit Config**.
 
-    ![](/img/v1.2/seeder/EditConfig.png)
+    ![](/img/v1.2/seeder-hv/EditConfig.png)
 
 1. On the **Out-of-Band Access** tab, select **Enabled**, configure the settings, and then select **Save**.
 
     The add-on uses the information to connect to your IPMI interface.
 
-    ![](/img/v1.2/seeder/OutOfBandAccess.png)
+    ![](/img/v1.2/seeder-hv/OutOfBandAccess.png)
 
 ## Power-Related Operations
 
-You can use the Hypervisor UI to shut down and reboot hosts once the Out-of-Band Access settings are configured. However, you must first enable [Maintenance Mode](../../host/host.md#node-maintenance), which automatically migrates all VMs to other nodes. **harvester-seeder** communicates with the hosts via IPMI when performing the selected operation.
+You can use the Hypervisor UI to shut down and reboot hosts once the Out-of-Band Access settings are configured. However, you must first enable [Maintenance Mode](../../host/host.md#node-maintenance), which automatically migrates all VMs to other nodes. **hypervisor-seeder** communicates with the hosts via IPMI when performing the selected operation.
 
-![](/img/v1.2/seeder/ShutdownReboot.png)
+![](/img/v1.2/seeder-hv/ShutdownReboot.png)
 
 You can also power on VMs while Maintenance Mode is enabled.
 
-![](/img/v1.2/seeder/PowerOn.png)
+![](/img/v1.2/seeder-hv/PowerOn.png)
 
 ## Hardware Event Aggregation
 
-If you selected **Enabled** in the **Event** section of the **Out-of-Band Access** settings screen, **harvester-seeder** leverages Redfish to query the hardware for information about component failures and fan temperatures. The information is converted to Kubernetes events during hardware reconciliation and is subsequently handled by the Kubernetes garbage collection policy. Hypervisor stores these events for 1 hour by default.
+If you selected **Enabled** in the **Event** section of the **Out-of-Band Access** settings screen, **hypervisor-seeder** leverages Redfish to query the hardware for information about component failures and fan temperatures. The information is converted to Kubernetes events during hardware reconciliation and is subsequently handled by the Kubernetes garbage collection policy. Hypervisor stores these events for 1 hour by default.
 
-![](/img/v1.2/seeder/HardwareEvents.png)
+<!-- ![](/img/v1.2/seeder/HardwareEvents.png) -->
 
 ## Troubleshooting
 
-The **Out-of-Band Access** settings screen may become unresponsive and display the message `Waiting for "inventories.metal.harvesterhci.io" to be ready`. You must refresh the page whenever this occurs. For more information, see [Issue #4412](https://github.com/harvester/harvester/issues/4412).
+The **Out-of-Band Access** settings screen may become unresponsive and display the message `Waiting for "inventories.metal.hypervisorhci.io" to be ready`. You must refresh the page whenever this occurs. For more information, see [Issue #4412](https://github.com/harvester/harvester/issues/4412).
 
-If you encounter persistent issues while using **harvester-seeder**, submit the following to SUSE Support:
+If you encounter persistent issues while using **hypervisor-seeder**, submit the following to SUSE Support:
 
 - Support bundle
-- Output of the command `kubectl get machine -n harvester-system -o yaml`
+- Output of the command `kubectl get machine -n hypervisor-system -o yaml`

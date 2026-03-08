@@ -10,13 +10,13 @@ title: "Local Storage Support (Experimental)"
 
 :::note
 
-**harvester-csi-driver-lvm** is an *experimental* add-on. It is not included in the Hypervisor ISO, but you can download it from the [experimental-addons repository](https://github.com/harvester/experimental-addons). For more information about experimental features, see [Feature Labels](../../getting-started/document-conventions.md#feature-labels).
+**hypervisor-csi-driver-lvm** is an *experimental* add-on. It is not included in the Hypervisor ISO, but you can download it from the [experimental-addons repository](https://github.com/harvester/experimental-addons). For more information about experimental features, see [Feature Labels](../../getting-started/document-conventions.md#feature-labels).
 
 :::
 
 Hypervisor allows you to use local storage on the host to create persistent volumes for your workloads with better performance and latency. This functionality is made possible by LVM, which provides logical volume management facilities on Linux.
 
-The **harvester-csi-driver-lvm** add-on is a CSI driver that supports local path provisioning through LVM.
+The **hypervisor-csi-driver-lvm** add-on is a CSI driver that supports local path provisioning through LVM.
 
 ## Installing and Enabling the Add-on
 
@@ -30,9 +30,9 @@ If you are using the Hypervisor kubeconfig file, you can install the add-on by p
 
 1. On the Hypervisor UI, go to **Advanced** > **Add-ons**.
 
-1. Select **harvester-csi-driver-lvm (Experimental)**, and then select **⋮** > **Enable**.
+1. Select **hypervisor-csi-driver-lvm (Experimental)**, and then select **⋮** > **Enable**.
 
-    ![](/img/v1.4/csi-driver-lvm/enable-lvm-addon.png)
+    ![](/img/v1.4/csi-driver-lvm-hv/enable-lvm-addon.png)
 
 ## Creating a Volume Group for LVM
 
@@ -44,7 +44,7 @@ Hypervisor currently does not allow you to modify the volume group composition (
 
 :::
 
-1. Verify that the **harvester-csi-driver-lvm** add-on is installed.
+1. Verify that the **hypervisor-csi-driver-lvm** add-on is installed.
 
 1. On the Hypervisor UI, go to the **Hosts** screen.
 
@@ -52,17 +52,17 @@ Hypervisor currently does not allow you to modify the volume group composition (
 
 1. On the Storage tab, add disks for the volume group.
 
-    ![](/img/v1.4/csi-driver-lvm/add-disk-to-vg-01.png)
+    ![](/img/v1.4/csi-driver-lvm-hv/add-disk-to-vg-01.png)
 
     Configure the following settings for each selected disk:
 
     - **Provisioner**: Select **LVM**.
 
-      ![](/img/v1.4/csi-driver-lvm/add-disk-to-vg-02.png)
+      ![](/img/v1.4/csi-driver-lvm-hv/add-disk-to-vg-02.png)
 
     - **Volume Group**: Select an existing volume group or specify a name for a new volume group.
 
-      ![](/img/v1.4/csi-driver-lvm/add-disk-to-vg-03.png)
+      ![](/img/v1.4/csi-driver-lvm-hv/add-disk-to-vg-03.png)
 
     For more information about adding disks, see [Multi-Disk Management](../../host/#multi-disk-management).
 
@@ -70,7 +70,7 @@ Hypervisor currently does not allow you to modify the volume group composition (
 
 1. On the host details screen, verify that the disks were added and the correct provisioner was set.
 
-    ![](/img/v1.4/csi-driver-lvm/add-disk-to-vg-04.png)
+    ![](/img/v1.4/csi-driver-lvm-hv/add-disk-to-vg-04.png)
 
 ## Creating a StorageClass for LVM
 
@@ -84,27 +84,27 @@ You can only use one type of local volume in each volume group. If necessary, cr
 
 1. Create a new StorageClass and select **LVM** in the **Provisioner** list.
 
-    ![](/img/v1.4/csi-driver-lvm/create-lvm-sc-01.png)
+    ![](/img/v1.4/csi-driver-lvm-hv/create-lvm-sc-01.png)
 
 1. On the **Parameters** tab, configure the following settings:
 
     - **Node**: Select the target node for the intended workloads. 
   
-      ![](/img/v1.4/csi-driver-lvm/create-lvm-sc-02.png)
+      ![](/img/v1.4/csi-driver-lvm-hv/create-lvm-sc-02.png)
 
     - **Volume Group Name**: Select the volume group that you created.
 
-      ![](/img/v1.4/csi-driver-lvm/create-lvm-sc-03.png)
+      ![](/img/v1.4/csi-driver-lvm-hv/create-lvm-sc-03.png)
 
     - **Volume Group Type**: Select the type of local volume that matches your requirements. Hypervisor currently supports **striped** and **dm-thin**.
 
-      ![](/img/v1.4/csi-driver-lvm/create-lvm-sc-04.png)
+      ![](/img/v1.4/csi-driver-lvm-hv/create-lvm-sc-04.png)
 
 1. Click **Save**.
 
 1. On the **Storage** screen, verify that the StorageClass was created and the correct provisioner was set.
 
-    ![](/img/v1.4/csi-driver-lvm/create-lvm-sc-05.png)
+    ![](/img/v1.4/csi-driver-lvm-hv/create-lvm-sc-05.png)
 
 For more information, see [StorageClass](../storageclass.md).
 
@@ -114,7 +114,7 @@ For more information, see [StorageClass](../storageclass.md).
 
 1. Create a new volume using the LVM StorageClass that you created.
 
-    ![](/img/v1.4/csi-driver-lvm/create-lvm-volume-01.png)
+    ![](/img/v1.4/csi-driver-lvm-hv/create-lvm-volume-01.png)
 
     :::note
 
@@ -132,17 +132,17 @@ For more information, see [StorageClass](../storageclass.md).
 
 1. Specify the volume that you want to attach.
 
-    ![](/img/v1.4/csi-driver-lvm/attach-lvm-volume-01.png)
+    ![](/img/v1.4/csi-driver-lvm-hv/attach-lvm-volume-01.png)
 
 1. On the **Volumes** screen, verify that the state is **In-use**.
 
-    ![](/img/v1.4/csi-driver-lvm/attach-lvm-volume-02.png)
+    ![](/img/v1.4/csi-driver-lvm-hv/attach-lvm-volume-02.png)
 
 You can also create a new virtual machine with the volume of the LVM StorageClass that you created. This virtual machine will be scheduled on the target node with local storage for the volume.
 
-![](/img/v1.4/csi-driver-lvm/create-vm-with-lvm-volume-01.png)
+![](/img/v1.4/csi-driver-lvm-hv/create-vm-with-lvm-volume-01.png)
 
-![](/img/v1.4/csi-driver-lvm/create-vm-with-lvm-volume-02.png)
+![](/img/v1.4/csi-driver-lvm-hv/create-vm-with-lvm-volume-02.png)
 
 ## Creating Snapshots for an LVM Volume
 
@@ -150,24 +150,24 @@ You can also create a new virtual machine with the volume of the LVM StorageClas
 
 1. In the **csi-driver-config** section, select **⋮** > **Edit Setting**.
 
-    ![](/img/v1.4/csi-driver-lvm/update-csi-driver-config-01.png)
+    ![](/img/v1.4/csi-driver-lvm-hv/update-csi-driver-config-01.png)
 
 1. Add an entry with the following settings:
 
-    - **Provisioner**: Select **lvm.driver.harvesterhci.io**.
+    - **Provisioner**: Select **lvm.driver.hypervisorhci.io**.
     - **Volume Snapshot Class Name**: Select **lvm-snapshot**.
 
-    ![](/img/v1.2/advanced/csi-driver-config-external.png)
+    ![](/img/v1.4/csi-driver-lvm-hv/csi-driver-config-external.png)
 
 1. On the **Virtual Machines** screen, select the target virtual machine, and then select **⋮** > **Take Virtual Machine Snapshot**.
 
     Example:
 
-    ![](/img/v1.4/csi-driver-lvm/vm-take-snapshot-with-lvm-01.png)
+    ![](/img/v1.4/csi-driver-lvm-hv/vm-take-snapshot-with-lvm-01.png)
 
 1. On the **Virtual Machine Snapshots** screen, verify that snapshot is ready to use.
 
-    ![](/img/v1.4/csi-driver-lvm/vm-take-snapshot-with-lvm-02.png)
+    ![](/img/v1.4/csi-driver-lvm-hv/vm-take-snapshot-with-lvm-02.png)
 
 ## Supported LVM Volume Features
 
