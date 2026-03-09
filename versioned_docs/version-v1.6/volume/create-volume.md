@@ -67,10 +67,10 @@ To resolve this issue, perform the following steps:
      -p='[{"op": "add", "path": "/webhooks/0/rules/-", "value": {"apiGroups":[""],"apiVersions":["v1"],"operations":["UPDATE"],"resources":["persistentvolumeclaims"],"scope":"Namespaced"}}]'
    ```
 
-The issue will be addressed in Longhorn v1.8.2, which will likely be included in Harvester v1.0.
+<!-- The issue will be addressed in Longhorn v1.8.2, which will likely be included in Harvester v1.0. -->
 
 Related issues:
-- Harvester: [Issue #8096](https://github.com/harvester/harvester/issues/8096)
+<!-- - Harvester: [Issue #8096](https://github.com/harvester/harvester/issues/8096) -->
 - Longhorn: [Issue #10741](https://github.com/longhorn/longhorn/issues/10741)
 
 </TabItem>
@@ -102,7 +102,7 @@ Do not use the `vmstate-persistence` and `longhorn-static` StorageClasses when c
 :::
 
 </TabItem>
-<TabItem value="terraform" label="Terraform">
+{/* <TabItem value="terraform" label="Terraform">
 
 To create an empty volume on Harvester with Terraform using the [Harvester Terraform Provider](https://registry.terraform.io/providers/harvester/harvester/latest), define a `harvester_volume` resource block:
 
@@ -115,7 +115,7 @@ resource "harvester_volume" "empty-volume" {
 }
 ```
 
-</TabItem>
+</TabItem> */}
 </Tabs>
 
 ## Create an Image Volume
@@ -137,7 +137,7 @@ resource "harvester_volume" "empty-volume" {
 
 When creating volumes from a VM image, ensure that the volume size is greater than or equal to the image size. The volume may become corrupted if the configured volume size is less than the size of the underlying image. This is particularly important for qcow2 images because the virtual size is typically greater than the physical size.
 
-By default, Harvester will set the volume size to the virtual size of the image.
+By default, Hypervisor will set the volume size to the virtual size of the image.
 
 :::
 
@@ -170,7 +170,7 @@ spec:
 ```
 
 </TabItem>
-<TabItem value="terraform" label="Terraform">
+{/* <TabItem value="terraform" label="Terraform">
 
 To create a volume on Harvester using Terraform and initialize it with the contents of an
 image, define a `harvester_volume` resource block and set the `image` property:
@@ -185,5 +185,5 @@ resource "harvester_volume" "opensuse154-image-disk" {
 }
 ```
 
-</TabItem>
+</TabItem> */}
 </Tabs>

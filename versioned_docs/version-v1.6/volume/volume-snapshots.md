@@ -31,11 +31,11 @@ You can create a volume snapshot from an existing volume by following these step
 
 1. Check the status of this operation and view all volume snapshots by going to the **Volumes** page and selecting the **Snapshots** tab. When the **Ready To Use** becomes **√**, the volume snapshot is ready to use.
 
-:::note
+<!-- :::note
 
 A recurring snapshot is currently not supported and is tracked via [harvester/harvester#572](https://github.com/harvester/harvester/issues/572).
 
-:::
+::: -->
 
 ## Restore a new volume from a volume snapshot
 

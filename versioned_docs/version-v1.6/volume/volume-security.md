@@ -42,7 +42,7 @@ Prepare the following resources:
 
   :::info important
 
-  The example contains the default YAML code for Kubernetes secrets. Aside from this, you can use [encryption options for LUKS mode](https://wiki.archlinux.org/title/Dm-crypt/Device_encryption#Encryption_options_for_LUKS_mode), which is a cryptsetup operating mode. Harvester v1.4.1 and later versions support these options, but you must verify that these are supported by your nodes.
+  The example contains the default YAML code for Kubernetes secrets. Aside from this, you can use [encryption options for LUKS mode](https://wiki.archlinux.org/title/Dm-crypt/Device_encryption#Encryption_options_for_LUKS_mode), which is a cryptsetup operating mode. Hypervisor support these options, but you must verify that these are supported by your nodes.
 
   | Option | Possible Values |
   | --- | --- |
