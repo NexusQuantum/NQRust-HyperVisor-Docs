@@ -30,14 +30,14 @@ Admin users can enable Maintenance Mode (select **⋮ > Enable Maintenance Mode*
 
 [Non-migratable virtual machines](../vm/live-migration.md#non-migratable-virtual-machines) can prevent the node from activating Maintenance Mode. When this occurs, you must identify and manually shut down those virtual machines. For more information, see [Live Migration](../vm/live-migration.md).
 
-If you want to force individual VMs to shut down instead of migrating to other nodes, add the label `harvesterhci.io/maintain-mode-strategy` and one of the following values to those VMs:
+If you want to force individual VMs to shut down instead of migrating to other nodes, add the label `hypervisorhci.io/maintain-mode-strategy` and one of the following values to those VMs:
 
-- `Migrate`: Live-migrates the VM to another node in the cluster. This is the default behavior if the label `harvesterhci.io/maintain-mode-strategy` is not set.
+- `Migrate`: Live-migrates the VM to another node in the cluster. This is the default behavior if the label `hypervisorhci.io/maintain-mode-strategy` is not set.
 - `ShutdownAndRestartAfterEnable`: Restarts the VM after the node switches to maintenance mode. The VM is scheduled on a different node.
 - `ShutdownAndRestartAfterDisable`: Shuts down the VM when maintenance mode is enabled, and restarts the VM when maintenance mode is disabled. The VM stays on the same node.
 - `Shutdown`: Shuts down the VM when maintenance mode is enabled. The VM remains powered off instead of restarting.
 
-You can force a collective shutdown of all VMs on a node on the **Enable Maintenance Mode** screen. This disables individual settings using the `harvesterhci.io/maintain-mode-strategy` label.
+You can force a collective shutdown of all VMs on a node on the **Enable Maintenance Mode** screen. This disables individual settings using the `hypervisorhci.io/maintain-mode-strategy` label.
 
 If you want to execute a special command before shutting down a VM, consider using the [container lifecycle hook](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks) `PreStop`.
 
@@ -222,7 +222,7 @@ As of Hypervisor v1.0.2, we no longer support adding partitions as additional di
 
 You can also add [storage tags](#storage-tags) if you want Longhorn volume data to be stored on specific nodes or disks. Storage tags can only be used with the **LonghornV1 (CSI)** and **LonghornV2 (CSI)** provisioners.
 
-![disk tag 01](/img/v1.4/host/multidisk-mgmt-06.png)
+![disk tag 01](/img/v1.2/host-hv/multidisk-mgmt-06.png)
 
 ![disk tag 02](/img/v1.2/host-hv/multidisk-mgmt-07.png)
 
@@ -327,7 +327,7 @@ The label is automatically synchronized with the corresponding Longhorn node.
 
 ## Ksmtuned Mode
 
-_Available as of v1.1.0_
+<!-- _Available as of v1.1.0_ -->
 
 Ksmtuned is a KSM automation tool deployed as a DaemonSet to run Ksmtuned on each node. It will start or stop the KSM by watching the available memory percentage ratio (**i.e. Threshold Coefficient**). By default, you need to manually enable Ksmtuned on each node UI. You will be able to see the KSM statistics from the node UI after 1-2 minutes.(check [KSM](https://www.kernel.org/doc/html/latest/admin-guide/mm/ksm.html#ksm-daemon-sysfs-interface) for more details).
 
@@ -411,8 +411,9 @@ KSM will stop when the available memory is above the **Threshold Coefficient**. 
 ## NTP Configuration
 
 Time synchronization is an important aspect of distributed cluster architecture. Because of this, Hypervisor now provides a simpler way for configuring NTP settings.
-
-In previous Hypervisor versions, NTP settings were mainly configurable [during the installation process](https://docs.harvesterhci.io/v1.2/install/harvester-configuration#osntp_servers). To modify the settings, you needed to manually update the configuration file on each node.
+<!-- ori -->
+<!-- In previous Hypervisor versions, NTP settings were mainly configurable [during the installation process](https://docs.harvesterhci.io/v1.2/install/harvester-configuration#osntp_servers). To modify the settings, you needed to manually update the configuration file on each node. -->
+In previous Hypervisor versions, NTP settings were mainly configurable during the installation process. To modify the settings, you needed to manually update the configuration file on each node.
 
 Beginning with version v1.2.0, Hypervisor is supporting NTP configuration on the Hypervisor UI Settings screen (**Advanced** > **Settings**). You can configure NTP settings for the entire Hypervisor cluster at any time, and the settings are applied to all nodes in the cluster.
 
@@ -422,12 +423,12 @@ You can set up multiple NTP servers at once.
 
 ![](/img/v1.2/host-hv/harvester-ntp-settings-multiple.png)
 
-You can check the settings in the `node.harvesterhci.io/ntp-service` annotation in Kubernetes nodes:
+You can check the settings in the `node.hypervisorhci.io/ntp-service` annotation in Kubernetes nodes:
 - `ntpSyncStatus`: Status of the connection to NTP servers (possible values: `disabled`, `synced` and `unsynced`)
 - `currentNtpServers`: List of existing NTP servers
 
 ```
-$ kubectl get nodes harvester-node-0 -o yaml |yq -e '.metadata.annotations.["node.harvesterhci.io/ntp-service"]'
+$ kubectl get nodes hypervisor-node-0 -o yaml |yq -e '.metadata.annotations.["node.hypervisorhci.io/ntp-service"]'
 {"ntpSyncStatus":"synced","currentNtpServers":"0.suse.pool.ntp.org 1.suse.pool.ntp.org"}
 ```
 
@@ -461,7 +462,7 @@ file: ssh_access.yaml
 ```
 
 ```yaml
-apiVersion: node.harvesterhci.io/v1beta1
+apiVersion: node.hypervisorhci.io/v1beta1
 kind: CloudInit
 metadata:
   name: ssh-access
@@ -498,17 +499,17 @@ The `matchSelector` field can be used to target specific nodes or groups of node
 Example:
 ```yaml
 matchSelector:
-  kubernetes.io/hostname: "harvester-node-1"
+  kubernetes.io/hostname: "hypervisor-node-1"
 ```
 
 :::note
 All label key-value pairs listed in the `matchSelector` field must match the labels of the intended nodes.
 
-In the following example, `matchSelector` will match `harvester-node-1` only if that node also has the `example.com/role` label with the value `role-a`.
+In the following example, `matchSelector` will match `hypervisor-node-1` only if that node also has the `example.com/role` label with the value `role-a`.
 
 ```yaml
 matchSelector:
-  kubernetes.io/hostname: "harvester-node-1"
+  kubernetes.io/hostname: "hypervisor-node-1"
   example.com/role: "role-a"
 ```
 :::
@@ -548,7 +549,7 @@ If an Elemental toolkit cloud-init document does not appear in `/oem` or does no
 ```yaml
 status:
   rollouts:
-    harvester-dngmf:
+    hypervisor-dngmf:
       conditions:
       - lastTransitionTime: "2024-02-28T22:31:23Z"
         message: ""
@@ -567,7 +568,7 @@ status:
         type: Present
 ```
 
-The `harvester-node-manager` pod(s) in the `harvester-system` namespace may also contain some hints as to why it is not rendering a file to a node.
+The `hypervisor-node-manager` pod(s) in the `hypervisor-system` namespace may also contain some hints as to why it is not rendering a file to a node.
 This pod is part of a daemonset, so it may be worth checking the pod that is running on the node of interest.
 
 ## Remote Console
@@ -584,7 +585,7 @@ You can configure the URL of the console for remote server management. This cons
 
   Example (with HPE iLO):
 
-  ![](/img/remote_console_url.png)
+  ![](/img/v1.2/host-hv/remote_console_url.png)
 
 1. Click **Console** to access the remote server.
 

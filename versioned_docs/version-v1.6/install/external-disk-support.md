@@ -2,6 +2,7 @@
 sidebar_position: 10
 sidebar_label: External Disk Support
 title: "External Disk Support"
+draft: true
 keywords:
   - Hypervisor
   - Net ISO Installation

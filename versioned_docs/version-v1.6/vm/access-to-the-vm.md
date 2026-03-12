@@ -4,7 +4,7 @@ sidebar_label: Access to the Virtual Machine
 title: "Access to the Virtual Machine"
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Rancher
   - rancher
   - Access to the VM

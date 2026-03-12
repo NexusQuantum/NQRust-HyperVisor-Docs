@@ -1,12 +1,13 @@
 ---
-id: harvester-monitoring
+id: hypervisor-monitoring
+slug: /monitoring/hypervisor-monitoring
 sidebar_position: 1
 sidebar_label: Monitoring
 title: "Monitoring"
 ---
 
 <head>
-  <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/monitoring/harvester-monitoring"/>
+  <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/monitoring/hypervisor-monitoring"/>
 </head>
 
 _Available as of v1.2.0_
@@ -15,7 +16,7 @@ The monitoring feature is now implemented with an addon and is disabled by defau
 
 Users can enable/disable `rancher-monitoring` [addon](../advanced/addons.md) from the Hypervisor WebUI after installation.
 
-Users can also enable/disable the `rancher-monitoring` addon in their Hypervisor installation by customizing the [harvester-configuration](../install/harvester-configuration.md#installaddons) file.
+Users can also enable/disable the `rancher-monitoring` addon in their Hypervisor installation by customizing the [hypervisor-configuration](../install/harvester-configuration.md#installaddons) file.
 
 For Hypervisor clusters upgraded from version v1.1.x, the monitoring feature is converted to an addon automatically and kept enabled as before.
 
@@ -139,12 +140,12 @@ When an increasing number of VMs get deployed on one node, the `prometheus-node-
 
 ### From CLI
 
-You can use the following `kubectl` command to change resource configurations for the `rancher-monitoring` addon: `kubectl edit addons.harvesterhci.io -n cattle-monitoring-system rancher-monitoring`.
+You can use the following `kubectl` command to change resource configurations for the `rancher-monitoring` addon: `kubectl edit addons.hypervisorhci.io -n cattle-monitoring-system rancher-monitoring`.
 
 The resource path and default values are as follows:
 
 ```
-apiVersion: harvesterhci.io/v1beta1
+apiVersion: hypervisorhci.io/v1beta1
 kind: Addon
 metadata:
   name: rancher-monitoring

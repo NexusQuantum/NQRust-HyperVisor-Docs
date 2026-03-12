@@ -5,7 +5,7 @@ sidebar_label: Image Security
 title: "Image Security"
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Rancher
   - rancher
   - Image Security
@@ -138,7 +138,7 @@ Prepare the following resources:
 
   ![](/img/v1.3/image-hv/create-decrypted-image.png)
 
-1. On the **Storage** tab, select **harvester-longhorn (Default)** or another commonly used StorageClass.
+1. On the **Storage** tab, select **hypervisor-longhorn (Default)** or another commonly used StorageClass.
 
   Hypervisor uses the StorageClass of the source image that you want to decrypt.
 

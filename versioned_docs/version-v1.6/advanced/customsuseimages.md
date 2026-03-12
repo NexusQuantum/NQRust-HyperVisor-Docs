@@ -13,7 +13,7 @@ Description: How to create custom SLES and openSUSE guest virtual machine images
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/customsuseimages"/>
 </head>
 
-SUSE provides [SUSE Linux Enterprise (SLE)](https://www.suse.com/download/sles/) and [openSUSE Leap](https://get.opensuse.org/leap/) virtual machine (VM) images suitable for use in Harvester. These images are built on the [openSUSE Build Service](https://build.opensuse.org/) (OBS) using the [Kiwi](https://osinside.github.io/kiwi/) image building tool, and can be used immediately after downloading.
+SUSE provides [SUSE Linux Enterprise (SLE)](https://www.suse.com/download/sles/) and [openSUSE Leap](https://get.opensuse.org/leap/) virtual machine (VM) images suitable for use in Hypervisor. These images are built on the [openSUSE Build Service](https://build.opensuse.org/) (OBS) using the [Kiwi](https://osinside.github.io/kiwi/) image building tool, and can be used immediately after downloading.
 
 For most cases, you can use the *Minimal VM Cloud* qcow2 images because these include the cloud-init tool necessary for automatic VM configuration. Other image variants require you to log onto the VM console and then perform initial configuration.
 
@@ -23,7 +23,7 @@ The *Minimal VM Cloud* images were named *Minimal VM OpenStack Cloud* in release
 
 ## Using the openSUSE Build Service (OBS)
 
-You can create custom images based on what SUSE provides using OBS [image templates](https://build.opensuse.org/image_templates), which are pre-configured Kiwi image configurations. For example, if you want use other packages with SLE 15 SP5, you can create an image using the *SLE 15 SP5 Minimal* template. OBS provides an interface for adding packages and automatically builds the image, which you can download and then upload to Harvester. For more information, see the [OBS User Guide](https://openbuildservice.org/help/manuals/obs-user-guide/).
+You can create custom images based on what SUSE provides using OBS [image templates](https://build.opensuse.org/image_templates), which are pre-configured Kiwi image configurations. For example, if you want use other packages with SLE 15 SP5, you can create an image using the *SLE 15 SP5 Minimal* template. OBS provides an interface for adding packages and automatically builds the image, which you can download and then upload to Hypervisor. For more information, see the [OBS User Guide](https://openbuildservice.org/help/manuals/obs-user-guide/).
 
 ### 1. Create a custom image based on an existing template.
 

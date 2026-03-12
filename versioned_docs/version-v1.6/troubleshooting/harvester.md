@@ -107,7 +107,7 @@ Even if the file remains in the cluster, the Hypervisor UI does not provide a do
     ```
     $ kubectl get supportbundle -A
     NAMESPACE          NAME           ISSUE_URL   DESCRIPTION   AGE
-    harvester-system   bundle-htl5f               sp1           3h43m
+    hypervisor-system   bundle-htl5f               sp1           3h43m
     ```
 
 1. Retrieve the details of all existing support bundles using the command `kubectl get supportbundle -A -o yaml`.
@@ -117,13 +117,13 @@ Even if the file remains in the cluster, the Hypervisor UI does not provide a do
     $ kubectl get supportbundle -A -oyaml
     apiVersion: v1
     items:
-    - apiVersion: harvesterhci.io/v1beta1
+    - apiVersion: hypervisorhci.io/v1beta1
       kind: SupportBundle
       metadata:
         creationTimestamp: "2024-02-02T11:18:09Z"
         generation: 5
         name: bundle-htl5f  // resource name
-        namespace: harvester-system
+        namespace: hypervisor-system
         resourceVersion: "1218311"
         uid: a3776373-05fe-4584-8a9a-baac3fa91bbf
       spec:
@@ -152,13 +152,13 @@ The file is ready for downloading when the value of `progress` is "100" and the 
 
     Example:
 
-    `https://{vip/dns-name}/v1/harvester/supportbundles/bundle-htl5f/download?retain=true`
+    `https://{vip/dns-name}/v1/hypervisor/supportbundles/bundle-htl5f/download?retain=true`
 
 1. Download the file using either a command-line tool (for example, curl and wget) or a web browser.
 
     Example:
 
-    `curl -k https://{vip/dns-name}/v1/harvester/supportbundles/bundle-htl5f/download?retain=true -o sb2.zip`
+    `curl -k https://{vip/dns-name}/v1/hypervisor/supportbundles/bundle-htl5f/download?retain=true -o sb2.zip`
 
 1. Verify that resources related to the support bundle were not deleted.
 
@@ -167,17 +167,17 @@ The file is ready for downloading when the value of `progress` is "100" and the 
     ```
     $ kubectl get supportbundle -A
     NAMESPACE          NAME           ISSUE_URL   DESCRIPTION   AGE
-    harvester-system   bundle-htl5f               sp1           3h43m
+    hypervisor-system   bundle-htl5f               sp1           3h43m
     ```
 
 #### (Optional) Delete the Related Resources
 
-Retained support bundle files consume memory and storage resources. Each file is backed by a `supportbundle-manager-bundle*` pod in the `harvester-system` namespace, and the generated ZIP file is stored in the `/tmp` folder of the pod's memory-based filesystem.
+Retained support bundle files consume memory and storage resources. Each file is backed by a `supportbundle-manager-bundle*` pod in the `hypervisor-system` namespace, and the generated ZIP file is stored in the `/tmp` folder of the pod's memory-based filesystem.
 
 Example:
 
 ```
-$ kubectl get pods -n harvester-system
+$ kubectl get pods -n hypervisor-system
 NAME                                                    READY   STATUS    RESTARTS       AGE
 supportbundle-manager-bundle-dtl2k-69dcc69b59-w64vl     1/1     Running   0              8m18s
 ```
@@ -189,8 +189,8 @@ You can delete the related resources using the following methods:
     Example:
 
     ```
-    $ kubectl delete supportbundle -n harvester-system bundle-htl5f
-    supportbundle.harvesterhci.io "bundle-htl5f" deleted
+    $ kubectl delete supportbundle -n hypervisor-system bundle-htl5f
+    supportbundle.hypervisorhci.io "bundle-htl5f" deleted
 
     $ kubectl get supportbundle -A
     No resources found
@@ -208,7 +208,7 @@ You can run the command `kubectl cp` to copy the generated file from the backing
 Example:
 
 ```
-kubectl cp harvester-system/supportbundle-manager-bundle-dtl2k-69dcc69b59-w64vl:/tmp/support-bundle-kit/supportbundle_db25ccb6-b52a-4f9d-97dd-db2df2b004d4_2024-02-02T11-18-10Z.zip bundle.zip
+kubectl cp hypervisor-system/supportbundle-manager-bundle-dtl2k-69dcc69b59-w64vl:/tmp/support-bundle-kit/supportbundle_db25ccb6-b52a-4f9d-97dd-db2df2b004d4_2024-02-02T11-18-10Z.zip bundle.zip
 ```
 
 ### Manually Collect Data for Support Bundle
@@ -223,9 +223,9 @@ Hypervisor is unable to collect data and generate a support bundle when the node
     ```
 
 1. Run the following commands:
-    - Download the script: `curl -o collector-harvester https://raw.githubusercontent.com/rancher/support-bundle-kit/refs/heads/master/hack/collector-harvester`
-    - Add executable permissions: `chmod +x collector-harvester`
-    - Run the script: `./collector-harvester / /tmp/support-bundle`
+    - Download the script: `curl -o collector-hypervisor https://raw.githubusercontent.com/rancher/support-bundle-kit/refs/heads/master/hack/collector-hypervisor`
+    - Add executable permissions: `chmod +x collector-hypervisor`
+    - Run the script: `./collector-hypervisor / /tmp/support-bundle`
 
 1. Compress the files in `/tmp/support-bundle`, and then attach the archive to the related issue.
 
@@ -243,13 +243,13 @@ Hypervisor is unable to collect data and generate a support bundle when the node
         $ kubectl get supportbundle -A -oyaml
         apiVersion: v1
         items:
-        - apiVersion: harvesterhci.io/v1beta1
+        - apiVersion: hypervisorhci.io/v1beta1
           kind: SupportBundle
           metadata:
             creationTimestamp: "2024-02-06T11:01:19Z"
             generation: 5
             name: bundle-yr2vq
-            namespace: harvester-system
+            namespace: hypervisor-system
             resourceVersion: "1583252"
             uid: eb8538cf-886b-4791-a7b0-dbc34dcee524
           spec:
@@ -272,7 +272,7 @@ Hypervisor is unable to collect data and generate a support bundle when the node
     1. The backing pod restarts.
 
         ```
-        $ kubectl get pods -n harvester-system supportbundle-manager-bundle-yr2vq-c5484fbdf-9pz8d -oyaml
+        $ kubectl get pods -n hypervisor-system supportbundle-manager-bundle-yr2vq-c5484fbdf-9pz8d -oyaml
         apiVersion: v1
         kind: Pod
         metadata:
@@ -282,7 +282,7 @@ Hypervisor is unable to collect data and generate a support bundle when the node
             pod-template-hash: c5484fbdf
             rancher/supportbundle: bundle-yr2vq
           name: supportbundle-manager-bundle-yr2vq-c5484fbdf-9pz8d
-          namespace: harvester-system
+          namespace: hypervisor-system
 
           containerStatuses:
           - containerID: containerd://ea82b63875c18a2b5b36afea6a47a99a5efd26464f94d401cde1727d175ef740
@@ -301,7 +301,7 @@ Hypervisor is unable to collect data and generate a support bundle when the node
         The name of the regenerated file is different from the file name recorded in the support bundle object.
 
         ```
-        $ kubectl exec -i -t -n harvester-system supportbundle-manager-bundle-yr2vq-c5484fbdf-9pz8d -- ls /tmp/support-bundle-kit -alth
+        $ kubectl exec -i -t -n hypervisor-system supportbundle-manager-bundle-yr2vq-c5484fbdf-9pz8d -- ls /tmp/support-bundle-kit -alth
         total 2.2M
         drwxr-xr-x 3 root root 4.0K Feb  6 11:05 .
         -rw-r--r-- 1 root root 2.2M Feb  6 11:05 supportbundle_db25ccb6-b52a-4f9d-97dd-db2df2b004d4_2024-02-06T11-05-34Z.zip // different with above file name
@@ -311,11 +311,11 @@ Hypervisor is unable to collect data and generate a support bundle when the node
 
         The following download URL cannot be used to access the regenerated file.
 
-       `https://{vip/dns-name}/v1/harvester/supportbundles/bundle-yr2vq/download?retain=true`.
+       `https://{vip/dns-name}/v1/hypervisor/supportbundles/bundle-yr2vq/download?retain=true`.
 
 - Retained support bundle files may affect system and node rebooting, node draining, and system upgrades.
 
-   Retained support bundle files are backed by pods in the `harvester-system` namespace. These pods are replaced during system and node rebooting, node draining, and system upgrades, consuming CPU and memory resources. Moreover, the regenerated files are very similar in content to the retained files, which means that storage resources are also unnecessarily consumed.
+   Retained support bundle files are backed by pods in the `hypervisor-system` namespace. These pods are replaced during system and node rebooting, node draining, and system upgrades, consuming CPU and memory resources. Moreover, the regenerated files are very similar in content to the retained files, which means that storage resources are also unnecessarily consumed.
 
 For more information, see [Issue 3383](https://github.com/harvester/harvester/issues/3383).
 
@@ -353,7 +353,7 @@ $ sudo -s
 3. Deleting the line `value: ...` so that NGINX Ingress Controller
 will use the default protocols and ciphers.
 ```
-apiVersion: harvesterhci.io/v1beta1
+apiVersion: hypervisorhci.io/v1beta1
 default: '{}'
 kind: Setting
 metadata:
@@ -363,7 +363,7 @@ value: '{"protocols":"TLS99","ciphers":"WRONG_CIPHER"}' # <- Delete this line
 ```
 4. Save the change and you should see the following response after exit from the editor:
 ```
-setting.harvesterhci.io/ssl-parameters edited
+setting.hypervisorhci.io/ssl-parameters edited
 ```
 
 You can further check the logs of Pod `rke2-ingress-nginx-controller` to see if NGINX Ingress Controller is working correctly.

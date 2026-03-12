@@ -8,9 +8,9 @@ title: "PCI Devices"
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/addons/pcidevices"/>
 </head>
 
-_Available as of v1.1.0_
+<!-- _Available as of v1.1.0_ -->
 
-A `PCIDevice` in Harvester represents a host device with a PCI address. 
+A `PCIDevice` in Hypervisor represents a host device with a PCI address. 
 The devices can be passed through the hypervisor to a VM by creating a `PCIDeviceClaim` resource, 
 or by using the UI to enable passthrough. Passing a device through the hypervisor means that 
 the VM can directly access the device, and effectively owns the device. A VM can even install 
@@ -106,7 +106,7 @@ The newly created PCI device can be passed through to virtual machines like any 
 
 _Available as of v1.4.0_
 
-A `USBDevice` resource in Harvester represents a USB device on the node. USB devices can be "passed through" by the hypervisor to allow direct access from VMs. This is accomplished through the `pcidevices-controller` add-on. To use USB passthrough, you can either create a `USBDeviceClaim` resource or enable the feature on the Harvester UI. 
+A `USBDevice` resource in Hypervisor represents a USB device on the node. USB devices can be "passed through" by the hypervisor to allow direct access from VMs. This is accomplished through the `pcidevices-controller` add-on. To use USB passthrough, you can either create a `USBDeviceClaim` resource or enable the feature on the Hypervisor UI. 
 
 USB passthrough is slightly different from PCI passthrough. For example, you can fully control a USB controller with four USB ports by creating a `PCIDeviceClaim`. However, you can also create a `USBDeviceClaim` to control only one USB port. The other three USB ports remain available to the node.
 
@@ -116,7 +116,7 @@ Before you remove the USB device, detach it from the virtual machine and then di
 
 ### Enable Passthrough on a USB Device
 
-1. On the Harvester UI, go to **Advanced** > **USB Devices**.
+1. On the Hypervisor UI, go to **Advanced** > **USB Devices**.
 
     ![](/img/v1.4/usbdevices-hv/index.png)
 

@@ -27,7 +27,7 @@ You can use the net install ISO in the following situations:
 
 ## Usage
 
-Download the net install ISO from the GitHub [Releases](https://github.com/harvester/harvester/releases) page, and then boot the ISO to install Hypervisor. Net install ISO file names have the suffix `net-install` (for example, https://releases.rancher.com/harvester/v1.3.0/harvester-v1.3.0-amd64-net-install.iso).
+<!-- Download the net install ISO from the GitHub [Releases](https://github.com/harvester/harvester/releases) page, and then boot the ISO to install Hypervisor. Net install ISO file names have the suffix `net-install` (for example, https://releases.rancher.com/harvester/v1.3.0/harvester-v1.3.0-amd64-net-install.iso). -->
 
 ## PXE Installation
 

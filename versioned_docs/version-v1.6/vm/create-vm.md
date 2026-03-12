@@ -5,7 +5,7 @@ sidebar_label: Create a Virtual Machine
 title: "Create a Virtual Machine"
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Rancher
   - rancher
   - Virtual Machine
@@ -32,7 +32,7 @@ Please refer to [this page](./create-windows-vm.md) for creating Windows virtual
 :::
 
 1. Choose the option to create either one or multiple VM instances.
-1. Select the namespace of your VMs, only the `harvester-public` namespace is visible to all users.
+1. Select the namespace of your VMs, only the `hypervisor-public` namespace is visible to all users.
 1. The VM Name is a required field.
 1. (Optional) VM template is optional, you can choose `iso-image`, `raw-image` or `windows-iso-image` template to speed up your VM instance creation.
 1. On the **Basics** tab, configure the following settings:
@@ -94,11 +94,11 @@ For more information, see the [API reference](../api/create-namespaced-virtual-m
 <TabItem value="terraform" label="Terraform">
 
 To create a virtual machine using the [Hypervisor Terraform Provider](https://registry.terraform.io/providers/harvester/harvester/latest),
-define a `harvester_virtualmachine` resource block:
+define a `hypervisor_virtualmachine` resource block:
 
 ```hcl
 
-resource "harvester_virtualmachine" "opensuse154" {
+resource "hypervisor_virtualmachine" "opensuse154" {
   name                 = "opensuse154"
   namespace            = "default"
   restart_after_update = true
@@ -111,12 +111,12 @@ resource "harvester_virtualmachine" "opensuse154" {
   machine_type = "q35"
 
   ssh_keys = [
-    harvester_ssh_key.mysshkey.id
+    hypervisor_ssh_key.mysshkey.id
   ]
 
   network_interface {
     name           = "nic-1"
-    network_name   = harvester_network.cluster-vlan1.id
+    network_name   = hypervisor_network.cluster-vlan1.id
     wait_for_lease = true
   }
 
@@ -127,13 +127,13 @@ resource "harvester_virtualmachine" "opensuse154" {
     bus        = "virtio"
     boot_order = 1
 
-    image       = harvester_image.opensuse154.id
+    image       = hypervisor_image.opensuse154.id
     auto_delete = true
   }
 
   cloudinit {
-    user_data_secret_name    = harvester_cloudinit_secret.cloud-config-opensuse154.name
-    network_data_secret_name = harvester_cloudinit_secret.cloud-config-opensuse154.name
+    user_data_secret_name    = hypervisor_cloudinit_secret.cloud-config-opensuse154.name
+    network_data_secret_name = hypervisor_cloudinit_secret.cloud-config-opensuse154.name
   }
 }
 
@@ -387,7 +387,7 @@ You can use the `harvesterhci.io/custom-ip` annotation to set an IP address on t
 
 ### Run Strategy
 
-_Available as of v1.0.2_
+<!-- _Available as of v1.0.2_ -->
 
 Prior to v1.0.2, Hypervisor used the `Running` (a boolean) field to determine if the VM instance should be running. However, a simple boolean value is not always sufficient to fully describe the user's desired behavior. For example, in some cases the user wants to be able to shut down the instance from inside the virtual machine. If the `running` field is used, the VM will be restarted immediately.
 

@@ -4,7 +4,7 @@ sidebar_label: Edit a Virtual Machine
 title: "Edit a Virtual Machine"
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Rancher
   - rancher
   - Virtual Machine

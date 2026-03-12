@@ -5,7 +5,7 @@ sidebar_label: Upload Images
 title: "Upload Images"
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Rancher
   - rancher
   - Import Images
@@ -50,7 +50,7 @@ To import a virtual machine image from a repository using the API, create a `Vir
 Example:
 
 ```yaml
-apiVersion: harvesterhci.io/v1beta1
+apiVersion: hypervisorhci.io/v1beta1
 kind: VirtualMachineImage
 metadata:
   name: opensuse-leap
@@ -69,9 +69,9 @@ For more information, see the [API reference](/v1.6/api/create-namespaced-virtua
 <TabItem value="terraform" label="Terraform">
 
 ```hcl
-resource "harvester_image" "opensuse154" {
+resource "hypervisor_image" "opensuse154" {
   name      = "opensuse154"
-  namespace = "harvester-public"
+  namespace = "hypervisor-public"
 
   display_name = "openSUSE-Leap-15.4.x86_64-NoCloud.qcow2"
   source_type  = "download"

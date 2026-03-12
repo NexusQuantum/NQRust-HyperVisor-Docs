@@ -4,7 +4,7 @@ sidebar_label: CPU and Memory Hotplug
 title: "CPU and Memory Hotplug"
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Virtual Machine
   - virtual machine
   - CPU

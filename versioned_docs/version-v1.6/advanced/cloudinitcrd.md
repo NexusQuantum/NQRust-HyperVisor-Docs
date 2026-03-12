@@ -1,4 +1,4 @@
-ypervisor---
+---
 sidebar_position: 10
 sidebar_label: CloudInit CRD
 title: "CloudInit CRD"
@@ -8,7 +8,7 @@ title: "CloudInit CRD"
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/cloudinitcrd"/>
 </head>
 
-_Available as of v1.3.0_
+<!-- _Available as of v1.3.0_ -->
 
 You can use the `CloudInit` CRD to configure Hypervisor operating system settings either manually or using GitOps solutions.
 
@@ -33,13 +33,13 @@ The `CloudInit` CRD is a cluster-scoped resource. Ensure that your user account 
 The following example adds SSH keys to all nodes in an existing Hypervisor cluster.
 
 ```yaml
-apiVersion: node.harvesterhci.io/v1beta1
+apiVersion: node.hypervisorhci.io/v1beta1
 kind: CloudInit
 metadata:
   name: my-ssh-keys
 spec:
   matchSelector: 
-    harvesterhci.io/managed: "true"
+    hypervisorhci.io/managed: "true"
   filename: 99-my-ssh-keys
   contents: |
     stages:
@@ -54,7 +54,7 @@ spec:
 
 The `spec` field contains the following:
 
-- `matchSelector (required)`: Label selector used to identify the nodes that the change must be applied to. `harvesterhci.io/managed: "true"` is a Hypervisor-specific label that you can use to select all nodes.
+- `matchSelector (required)`: Label selector used to identify the nodes that the change must be applied to. `hypervisorhci.io/managed: "true"` is a Hypervisor-specific label that you can use to select all nodes.
 - `filename (required)`: Name of the file in `/oem`. cloud-init files in `/oem` are applied in alphabetical order. This can be used to ensure that file changes are applied during booting.
 - `content (required)`: Inline content for the Elemental cloud-init resource that is written to target nodes.
 - `paused (optional)`: Used to pause `CloudInit` CRD reconciliation. The Hypervisor controllers monitor Elemental cloud-init files that are managed by the `CloudInit` CRD. Direct changes made to these files are immediately reconciled back to the defined state unless the CRD is paused. 
@@ -64,7 +64,7 @@ Once the object is created, you can log in to the target nodes to verify the res
 In the following example, a file named `/oem/99-my-ssh-keys.yaml` is created and subsequently monitored by the Hypervisor controllers.
 
 ```
-harvester-qhgd4:/oem # more 99-my-ssh-keys.yaml
+hypervisor-qhgd4:/oem # more 99-my-ssh-keys.yaml
 stages:
   network:
     - name: "add my ssh keys"
@@ -81,7 +81,7 @@ In the following example, the `status` values indicate that the change was appli
 ```
 status:
   rollouts:
-    harvester-kfs2c:
+    hypervisor-kfs2c:
       conditions:
       - lastTransitionTime: "2024-08-26T03:57:33Z"
         message: ""
@@ -98,7 +98,7 @@ status:
         reason: CloudInitPresentOnDisk
         status: "True"
         type: Present
-    harvester-qhgd4:
+    hypervisor-qhgd4:
       conditions:
       - lastTransitionTime: "2024-08-26T03:57:33Z"
         message: ""
@@ -115,7 +115,7 @@ status:
         reason: CloudInitPresentOnDisk
         status: "True"
         type: Present
-    harvester-rmvzg:
+    hypervisor-rmvzg:
       conditions:
       - lastTransitionTime: "2024-08-26T03:57:33Z"
         message: ""

@@ -25,7 +25,7 @@ password: # you will be promoted to set the default password when logging in for
 ### How can I access the kubeconfig file of the Hypervisor cluster?
 
 Option 1. You can download the kubeconfig file from the support page of the Hypervisor dashboard.
-![harvester-kubeconfig.png](/img/v1.2/faq-hv/harvester-kubeconfig.png)
+![hypervior-kubeconfig.png](/img/v1.2/faq-hv/harvester-kubeconfig.jpeg)
 
 Option 2. You can get the kubeconfig file from one of the Hypervisor management nodes. E.g.,
 ```shell
@@ -64,30 +64,30 @@ To recover from this state, do one of the following depending on the cluster's c
 
 :::note
 
-Take v1.1.2 as an example, download the Hypervisor ISO image from the official URL. Then extract the image list from the ISO image to decide which image tarball we're going to import. For instance, we want to import the missing container image `rancher/harvester-upgrade`
+Take v1.1.2 as an example, download the Hypervisor ISO image from the official URL. Then extract the image list from the ISO image to decide which image tarball we're going to import. For instance, we want to import the missing container image `rancher/hypervior-upgrade`
 
 ```shell
-$ curl -sfL https://releases.rancher.com/harvester/v1.1.2/harvester-v1.1.2-amd64.iso -o harvester.iso
+$ curl -sfL https://releases.rancher.com/hypervior/v1.1.2/hypervior-v1.1.2-amd64.iso -o hypervior.iso
 
-$ xorriso -osirrox on -indev harvester.iso -extract /bundle/harvester/images-lists images-lists
+$ xorriso -osirrox on -indev hypervior.iso -extract /bundle/hypervior/images-lists images-lists
 
-$ grep -R "rancher/harvester-upgrade" images-lists/
-images-lists/harvester-images-v1.1.2.txt:docker.io/rancher/harvester-upgrade:v1.1.2
+$ grep -R "rancher/hypervior-upgrade" images-lists/
+images-lists/hypervior-images-v1.1.2.txt:docker.io/rancher/hypervior-upgrade:v1.1.2
 ```
 
 Find out the location of the image tarball, and extract it from the ISO image. Decompress the extracted zstd image tarball.
 
 ```shell
-$ xorriso -osirrox on -indev harvester.iso -extract /bundle/harvester/images/harvester-images-v1.1.2.tar.zst harvester.tar.zst
+$ xorriso -osirrox on -indev hypervior.iso -extract /bundle/hypervior/images/hypervior-images-v1.1.2.tar.zst hypervior.tar.zst
 
-$ zstd -d --rm harvester.tar.zst
+$ zstd -d --rm hypervior.tar.zst
 ```
 
 Upload the image tarball to the Hypervisor nodes that need recover. Finally, execute the following command to import the container images on each of them.
 
 ```shell
-$ ctr -n k8s.io images import harvester.tar
-$ rm harvester.tar
+$ ctr -n k8s.io images import hypervior.tar
+$ rm hypervior.tar
 ```
 
 :::
@@ -98,7 +98,7 @@ To prevent this from happening, we recommend cleaning up unused container images
 
 ```shell
 # on each node
-$ ./harv-purge-images.sh v1.1.2 v1.2.0
+$ ./hypervior-purge-images.sh v1.1.2 v1.2.0
 ```
 
 :::caution

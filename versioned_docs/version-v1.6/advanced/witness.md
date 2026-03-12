@@ -27,13 +27,13 @@ A node can be assigned the *witness* role only at the time it joins a cluster. E
 
 You can assign the *witness* role to a node when it joins a newly created cluster.
 
-In the following example, a cluster with three nodes was created and the node `harvester-node-1` was assigned the *witness* role. `harvester-node-1` consumes less resources and only has etcd capabilities.
+In the following example, a cluster with three nodes was created and the node `hypervisor-node-1` was assigned the *witness* role. `hypervisor-node-1` consumes less resources and only has etcd capabilities.
 
 ```
 NAME↑               STATUS   ROLE                         VERSION               PODS     CPU      MEM    %CPU    %MEM    CPU/A    MEM/A AGE        
-harvester-node-0    Ready    control-plane,etcd,master    v1.27.10+rke2r1         70    1095    10143      10      63    10000    15976 4d13h      
-harvester-node-1    Ready    etcd                         v1.27.10+rke2r1          7     258     2258       2      14    10000    15976 4d13h      
-harvester-node-2    Ready    control-plane,etcd,master    v1.27.10+rke2r1         36     840     6905       8      43    10000    15976 4d13h      
+hypervisor-node-0    Ready    control-plane,etcd,master    v1.27.10+rke2r1         70    1095    10143      10      63    10000    15976 4d13h      
+hypervisor-node-1    Ready    etcd                         v1.27.10+rke2r1          7     258     2258       2      14    10000    15976 4d13h      
+hypervisor-node-2    Ready    control-plane,etcd,master    v1.27.10+rke2r1         36     840     6905       8      43    10000    15976 4d13h      
 ```
 
 Because the cluster must have three nodes, the promote controller will promote the other two nodes. After that, the cluster will have two control-plane nodes and one witness node.
@@ -41,7 +41,7 @@ Because the cluster must have three nodes, the promote controller will promote t
 ## Workloads on the Witness Node
 
 The witness node only runs the following essential workloads:
-- **harvester-node-manager**
+- **hypervisor-node-manager**
 - **cloud-controller-manager**
 - **etcd**
 - **kube-proxy**

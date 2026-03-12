@@ -189,7 +189,7 @@ Updating the `Network Config` is **required** if the new NICs will be placed in 
 
 1. Check the node.
 
-    When a Hypervisor cluster node belongs to a `Network Config`, the `Node` object has a label with the key `network.harvesterhci.io/vlanconfig`.
+    When a Hypervisor cluster node belongs to a `Network Config`, the `Node` object has a label with the key `network.hypervisorhci.io/vlanconfig`.
 
     Example:
 
@@ -199,7 +199,7 @@ Updating the `Network Config` is **required** if the new NICs will be placed in 
     metadata:
       labels:
         ...
-        network.harvesterhci.io/vlanconfig: vlan123
+        network.hypervisorhci.io/vlanconfig: vlan123
     ```
 
 1. Remove this node from the `Network Config`.
@@ -209,7 +209,7 @@ Updating the `Network Config` is **required** if the new NICs will be placed in 
     Example:
 
     ```
-    apiVersion: network.harvesterhci.io/v1beta1
+    apiVersion: network.hypervisorhci.io/v1beta1
     kind: VlanConfig
     spec:
       clusterNetwork: data
@@ -231,7 +231,7 @@ Updating the `Network Config` is **required** if the new NICs will be placed in 
 
 1. Check the `Node` object.
 
-    Depending on the situation, either the label `network.harvesterhci.io/vlanconfig` changes or is removed.
+    Depending on the situation, either the label `network.hypervisorhci.io/vlanconfig` changes or is removed.
 
 1. Check the `VlanStatus` object.
 
@@ -240,7 +240,7 @@ Updating the `Network Config` is **required** if the new NICs will be placed in 
     Example:
 
     ```
-    apiVersion: network.harvesterhci.io/v1beta1
+    apiVersion: network.hypervisorhci.io/v1beta1
     kind: VlanStatus
     metadata:
     ...
@@ -308,7 +308,7 @@ Updating the `Network Config` is **required** if the new NICs will be placed in 
 
 1. Check the `Node` object.
 
-    The label `network.harvesterhci.io/vlanconfig` reflects the specific `Network Config` used.
+    The label `network.hypervisorhci.io/vlanconfig` reflects the specific `Network Config` used.
 
 1. Check the `VlanStatus` object.
 
@@ -331,18 +331,18 @@ Hypervisor uses multiple network-related pods and CRDs. When troubleshooting, ch
 Pods:
 
 ```
-$ kubectl get pods -n harvester-system
+$ kubectl get pods -n hypervisor-system
 NAME                                                    READY   STATUS    RESTARTS      AGE
-harvester-network-controller-cnf22                      1/1     Running   2 (60m ago)   3d22h  // Network controller agent daemonSet, deployed in each node
-harvester-network-controller-manager-859c4bd874-xcllf   1/1     Running   2 (60m ago)   3d22h  // Network controller
-harvester-network-webhook-56b877d5d5-z42dp              1/1     Running   2 (60m ago)   3d22h
+hypervisor-network-controller-cnf22                      1/1     Running   2 (60m ago)   3d22h  // Network controller agent daemonSet, deployed in each node
+hypervisor-network-controller-manager-859c4bd874-xcllf   1/1     Running   2 (60m ago)   3d22h  // Network controller
+hypervisor-network-webhook-56b877d5d5-z42dp              1/1     Running   2 (60m ago)   3d22h
 ```
 
 CRDs:
 
 ```
-clusternetworks.network.harvesterhci.io
-linkmonitors.network.harvesterhci.io
-vlanconfigs.network.harvesterhci.io
-vlanstatuses.network.harvesterhci.io
+clusternetworks.network.hypervisorhci.io
+linkmonitors.network.hypervisorhci.io
+vlanconfigs.network.hypervisorhci.io
+vlanstatuses.network.hypervisorhci.io
 ```

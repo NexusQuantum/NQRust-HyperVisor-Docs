@@ -104,7 +104,7 @@ Starting with Hypervisor v1.5.0 and Longhorn v1.8.1, these limitations are remov
 - All virtual machines with V2 volumes attached need to be stopped before upgrading to Hypervisor v1.5.0.  If there are any V2 volumes active during the upgrade, the process will stall part way through "upgrading system services".  The logs of the `apply-manifests` pod will show repeated messages similar to the following:
   
   ```
-  instance-manager (aio)(v2) (image=longhornio/longhorn-instance-manager:v1.8.1) state is not running on node harvester-node-0, will retry...
+  instance-manager (aio)(v2) (image=longhornio/longhorn-instance-manager:v1.8.1) state is not running on node hypervisor-node-0, will retry...
   ```
   
   Stopping all Virtual Machines that are using V2 volumes will allow the upgrade to proceed.

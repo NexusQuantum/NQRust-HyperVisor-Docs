@@ -18,7 +18,7 @@ You can create [Linux VMs](../vm/create-vm.md) using one of the following method
 
 - Hypervisor UI: On the **Virtual Machines** screen, click **Create** and configure the settings on each tab. 
 - Kubernetes API: Create a `VirtualMachine` object. 
-- [Hypervisor Terraform Provider](../terraform/terraform-provider.md): Define a `harvester_virtualmachine` resource block. 
+- [Hypervisor Terraform Provider](../terraform/terraform-provider.md): Define a `hypervisor_virtualmachine` resource block. 
 
 Creating [Windows VMs](../vm/create-windows-vm.md) on the Hypervisor UI involves slightly different steps. Hypervisor provides a VM template named `windows-iso-image-base-template` that adds a volume with the Virtio drivers for Windows, which streamlines the VM configuration process. If you require Virtio devices but choose to not use the template, you must add your own Virtio drivers for Windows to enable correct hardware detection. 
 

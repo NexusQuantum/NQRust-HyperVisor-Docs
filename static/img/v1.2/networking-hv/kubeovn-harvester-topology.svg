@@ -1,109 +1,117 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="920" height="960" viewBox="0 0 920 960" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="900" viewBox="0 0 1000 900">
+  <style>
+    .box { fill: none; stroke: #c45a08; stroke-width: 2.5; }
+    .text { font-family: "Arial", sans-serif; font-size: 16px; fill: #000000; }
+    .title { font-size: 20px; font-weight: 600; }
+    .arrow { stroke: #c45a08; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+  </style>
+
   <defs>
-    <style>
-      .frame { fill: none; stroke: #f5821f; stroke-width: 2; }
-      .box { fill: none; stroke: #f5821f; stroke-width: 2; }
-      .arrow { stroke: #f5821f; stroke-width: 2; marker-end: url(#arrowhead); }
-      .label { fill: #f5821f; font-size: 16px; font-weight: 600; }
-      .text { fill: #f5821f; font-size: 14px; }
-    </style>
-    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="3" refY="4" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,8 L8,4 z" fill="#f5821f"/>
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 z" fill="#c45a08" />
     </marker>
   </defs>
 
   <!-- Title -->
-  <text x="460" y="34" text-anchor="middle" class="label" font-size="20" font-weight="700">
+  <text x="500" y="35" text-anchor="middle" class="text title">
     Hypervisor + Kube-OVN Integration Architecture (Multi-VPC, Text-Based)
   </text>
 
   <!-- Outer frame -->
-  <rect x="20" y="50" width="880" height="880" class="frame"/>
+  <rect x="40" y="50" width="920" height="780" class="box"/>
 
   <!-- Kube-OVN frame -->
-  <rect x="60" y="80" width="800" height="280" class="box"/>
-  <text x="460" y="108" text-anchor="middle" class="label">Kube-OVN (SDN Controller / IPAM)</text>
+  <rect x="70" y="80" width="860" height="320" class="box"/>
+  <text x="500" y="110" text-anchor="middle" class="text">Kube-OVN (SDN Controller / IPAM)</text>
 
   <!-- VPC 1 -->
-  <rect x="100" y="130" width="320" height="180" class="box"/>
-  <text x="260" y="155" text-anchor="middle" class="label">VPC: vpc-1</text>
-  <!-- VPC1 subnets -->
-  <g class="text" text-anchor="middle">
-    <rect x="120" y="180" width="90" height="60" class="box"/>
-    <text x="165" y="210">vswitch1</text><text x="165" y="230">subnet</text>
-    <rect x="220" y="180" width="90" height="60" class="box"/>
-    <text x="265" y="210">vswitch2</text><text x="265" y="230">subnet</text>
-    <rect x="320" y="180" width="90" height="60" class="box"/>
-    <text x="365" y="210">vswitch3</text><text x="365" y="230">subnet</text>
-  </g>
+  <rect x="110" y="140" width="350" height="220" class="box"/>
+  <text x="285" y="165" text-anchor="middle" class="text">VPC: vpc-1</text>
+
+  <rect x="150" y="195" width="90" height="60" class="box"/>
+  <text x="195" y="225" text-anchor="middle" class="text">vswitch1<tspan x="195" dy="18">subnet</tspan></text>
+
+  <rect x="255" y="195" width="90" height="60" class="box"/>
+  <text x="300" y="225" text-anchor="middle" class="text">vswitch2<tspan x="300" dy="18">subnet</tspan></text>
+
+  <rect x="360" y="195" width="90" height="60" class="box"/>
+  <text x="405" y="225" text-anchor="middle" class="text">vswitch3<tspan x="405" dy="18">subnet</tspan></text>
 
   <!-- VPC 2 -->
-  <rect x="500" y="130" width="320" height="180" class="box"/>
-  <text x="660" y="155" text-anchor="middle" class="label">VPC: vpc-2</text>
-  <!-- VPC2 subnets -->
-  <g class="text" text-anchor="middle">
-    <rect x="520" y="180" width="90" height="60" class="box"/>
-    <text x="565" y="210">vswitch4</text><text x="565" y="230">subnet</text>
-    <rect x="620" y="180" width="90" height="60" class="box"/>
-    <text x="665" y="210">vswitch5</text><text x="665" y="230">subnet</text>
-    <rect x="720" y="180" width="90" height="60" class="box"/>
-    <text x="765" y="210">vswitch6</text><text x="765" y="230">subnet</text>
-  </g>
+  <rect x="540" y="140" width="350" height="220" class="box"/>
+  <text x="715" y="165" text-anchor="middle" class="text">VPC: vpc-2</text>
 
-  <!-- Hypervisor overlay row -->
-  <rect x="60" y="380" width="800" height="240" class="box"/>
-  <text x="460" y="406" text-anchor="middle" class="label">Hypervisor Overlay</text>
+  <rect x="580" y="195" width="90" height="60" class="box"/>
+  <text x="625" y="225" text-anchor="middle" class="text">vswitch4<tspan x="625" dy="18">subnet</tspan></text>
 
-  <!-- Overlay switches -->
-  <g class="text" text-anchor="middle">
-    <!-- vswitch1 overlay -->
-    <rect x="120" y="430" width="90" height="60" class="box"/>
-    <text x="165" y="455">Hypervisor</text><text x="165" y="475">Overlay vswitch1</text>
-    <!-- vswitch2 overlay -->
-    <rect x="220" y="430" width="90" height="60" class="box"/>
-    <text x="265" y="455">Hypervisor</text><text x="265" y="475">Overlay vswitch2</text>
-    <!-- vswitch3 overlay -->
-    <rect x="320" y="430" width="90" height="60" class="box"/>
-    <text x="365" y="455">Hypervisor</text><text x="365" y="475">Overlay vswitch3</text>
-    <!-- vswitch4 overlay -->
-    <rect x="520" y="430" width="90" height="60" class="box"/>
-    <text x="565" y="455">Hypervisor</text><text x="565" y="475">Overlay vswitch4</text>
-    <!-- vswitch5 overlay -->
-    <rect x="620" y="430" width="90" height="60" class="box"/>
-    <text x="665" y="455">Hypervisor</text><text x="665" y="475">Overlay vswitch5</text>
-    <!-- vswitch6 overlay -->
-    <rect x="720" y="430" width="90" height="60" class="box"/>
-    <text x="765" y="455">Hypervisor</text><text x="765" y="475">Overlay vswitch6</text>
-  </g>
+  <rect x="685" y="195" width="90" height="60" class="box"/>
+  <text x="730" y="225" text-anchor="middle" class="text">vswitch5<tspan x="730" dy="18">subnet</tspan></text>
+
+  <rect x="790" y="195" width="90" height="60" class="box"/>
+  <text x="835" y="225" text-anchor="middle" class="text">vswitch6<tspan x="835" dy="18">subnet</tspan></text>
+
+  <!-- Hypervisor Overlay frame -->
+  <rect x="70" y="430" width="860" height="300" class="box"/>
+  <text x="500" y="455" text-anchor="middle" class="text">Hypervisor Overlay</text>
+
+  <!-- Overlay switches row -->
+  <rect x="150" y="500" width="90" height="60" class="box"/>
+  <text x="195" y="530" text-anchor="middle" class="text">Hypervisor<tspan x="195" dy="18">overlay vswitch1</tspan></text>
+
+  <rect x="255" y="500" width="90" height="60" class="box"/>
+  <text x="300" y="530" text-anchor="middle" class="text">Hypervisor<tspan x="300" dy="18">overlay vswitch2</tspan></text>
+
+  <rect x="360" y="500" width="90" height="60" class="box"/>
+  <text x="405" y="530" text-anchor="middle" class="text">Hypervisor<tspan x="405" dy="18">overlay vswitch3</tspan></text>
+
+  <rect x="580" y="500" width="90" height="60" class="box"/>
+  <text x="625" y="530" text-anchor="middle" class="text">Hypervisor<tspan x="625" dy="18">overlay vswitch4</tspan></text>
+
+  <rect x="685" y="500" width="90" height="60" class="box"/>
+  <text x="730" y="530" text-anchor="middle" class="text">Hypervisor<tspan x="730" dy="18">overlay vswitch5</tspan></text>
+
+  <rect x="790" y="500" width="90" height="60" class="box"/>
+  <text x="835" y="530" text-anchor="middle" class="text">Hypervisor<tspan x="835" dy="18">overlay vswitch6</tspan></text>
 
   <!-- VM row -->
-  <g class="text" text-anchor="middle">
-    <rect x="120" y="540" width="90" height="50" class="box"/><text x="165" y="570">VM1 vswitch1</text>
-    <rect x="220" y="540" width="90" height="50" class="box"/><text x="265" y="570">VM1 vswitch2</text>
-    <rect x="320" y="540" width="90" height="50" class="box"/><text x="365" y="570">VM1 vpcpeer1</text>
-    <rect x="520" y="540" width="90" height="50" class="box"/><text x="565" y="570">VM2 vswitch3</text>
-    <rect x="620" y="540" width="90" height="50" class="box"/><text x="665" y="570">VM external</text>
-    <rect x="720" y="540" width="90" height="50" class="box"/><text x="765" y="570">VM2 vpcpeer2</text>
-  </g>
+  <rect x="150" y="600" width="90" height="60" class="box"/>
+  <text x="195" y="630" text-anchor="middle" class="text">VM1 vswitch1</text>
 
-  <!-- Arrows from subnets to overlay -->
-  <line x1="165" y1="240" x2="165" y2="430" class="arrow"/>
-  <line x1="265" y1="240" x2="265" y2="430" class="arrow"/>
-  <line x1="365" y1="240" x2="365" y2="430" class="arrow"/>
-  <line x1="565" y1="240" x2="565" y2="430" class="arrow"/>
-  <line x1="665" y1="240" x2="665" y2="430" class="arrow"/>
-  <line x1="765" y1="240" x2="765" y2="430" class="arrow"/>
+  <rect x="255" y="600" width="90" height="60" class="box"/>
+  <text x="300" y="630" text-anchor="middle" class="text">VM1 vswitch2</text>
 
-  <!-- Arrows from overlay to VMs -->
-  <line x1="165" y1="490" x2="165" y2="540" class="arrow"/>
-  <line x1="265" y1="490" x2="265" y2="540" class="arrow"/>
-  <line x1="365" y1="490" x2="365" y2="540" class="arrow"/>
-  <line x1="565" y1="490" x2="565" y2="540" class="arrow"/>
-  <line x1="665" y1="490" x2="665" y2="540" class="arrow"/>
-  <line x1="765" y1="490" x2="765" y2="540" class="arrow"/>
+  <rect x="360" y="600" width="90" height="60" class="box"/>
+  <text x="405" y="630" text-anchor="middle" class="text">VM1 vpcpeer1</text>
 
-  <!-- Labels at bottom -->
-  <text x="460" y="620" text-anchor="middle" class="label">VM launched and managed by Hypervisor</text>
-  <text x="770" y="620" text-anchor="end" class="label">NatOutgoing: true</text>
-  <text x="460" y="660" text-anchor="middle" class="label">Connected (VPC peering)</text>
+  <rect x="580" y="600" width="90" height="60" class="box"/>
+  <text x="625" y="630" text-anchor="middle" class="text">VM2 vswitch3</text>
+
+  <rect x="685" y="600" width="90" height="60" class="box"/>
+  <text x="730" y="630" text-anchor="middle" class="text">VM external</text>
+
+  <rect x="790" y="600" width="90" height="60" class="box"/>
+  <text x="835" y="630" text-anchor="middle" class="text">VM2 vpcpeer2</text>
+
+  <!-- Arrows from subnets to overlay switches -->
+  <line x1="195" y1="255" x2="195" y2="500" class="arrow"/>
+  <line x1="300" y1="255" x2="300" y2="500" class="arrow"/>
+  <line x1="405" y1="255" x2="405" y2="500" class="arrow"/>
+
+  <line x1="625" y1="255" x2="625" y2="500" class="arrow"/>
+  <line x1="730" y1="255" x2="730" y2="500" class="arrow"/>
+  <line x1="835" y1="255" x2="835" y2="500" class="arrow"/>
+
+  <!-- Arrows from overlay switches to VMs -->
+  <line x1="195" y1="560" x2="195" y2="600" class="arrow"/>
+  <line x1="300" y1="560" x2="300" y2="600" class="arrow"/>
+  <line x1="405" y1="560" x2="405" y2="600" class="arrow"/>
+
+  <line x1="625" y1="560" x2="625" y2="600" class="arrow"/>
+  <line x1="730" y1="560" x2="730" y2="600" class="arrow"/>
+  <line x1="835" y1="560" x2="835" y2="600" class="arrow"/>
+
+  <!-- Footer text -->
+  <text x="500" y="690" text-anchor="middle" class="text">VM launched and managed by Hypervisor</text>
+  <text x="500" y="715" text-anchor="middle" class="text">Connected (VPC peering)</text>
+  <text x="500" y="740" text-anchor="middle" class="text">NatOutgoing: true</text>
 </svg>

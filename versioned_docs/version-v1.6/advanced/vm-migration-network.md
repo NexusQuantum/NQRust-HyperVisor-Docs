@@ -74,7 +74,7 @@ Once the VM migration network is disabled, KubeVirt starts using `mgmt` for VM m
 You can use the following command to configure the [`vm-migration-network`](./settings.md#vm-migration-network) setting.
 
 ```bash
-kubectl edit settings.harvesterhci.io vm-migration-network
+kubectl edit settings.hypervisorhci.io vm-migration-network
 ```
 
 The VM migration network is automatically enabled when the value field contains a valid JSON string.
@@ -82,7 +82,7 @@ The VM migration network is automatically enabled when the value field contains 
 Example:
 
   ```yaml
-  apiVersion: harvesterhci.io/v1beta1
+  apiVersion: hypervisorhci.io/v1beta1
   kind: Setting
   metadata:
     name: vm-migration-network
@@ -92,14 +92,14 @@ Example:
 The VM migration network is disabled when you remove the value field or set it to an empty string.
 
   ```yaml
-  apiVersion: harvesterhci.io/v1beta1
+  apiVersion: hypervisorhci.io/v1beta1
   kind: Setting
   metadata:
     name: vm-migration-network
   ```
 
   ```yaml
-  apiVersion: harvesterhci.io/v1beta1
+  apiVersion: hypervisorhci.io/v1beta1
   kind: Setting
   metadata:
     name: vm-migration-network
@@ -125,18 +125,18 @@ The following occur once the `vm-migration-network` setting is applied:
 1. Verify that the setting's status is `True` and the type is `configured` using the following command:
 
     ```bash
-    kubectl get settings.harvesterhci.io vm-migration-network -o yaml
+    kubectl get settings.hypervisorhci.io vm-migration-network -o yaml
     ```
 
     Example:
 
     ```yaml
-    apiVersion: harvesterhci.io/v1beta1
+    apiVersion: hypervisorhci.io/v1beta1
     kind: Setting
     metadata:
       annotations:
-        vm-migration-network.settings.harvesterhci.io/hash: ec8322fb6b741f94739cbb904fc73c3fda864d6d
-        vm-migration-network.settings.harvesterhci.io/net-attach-def: harvester-system/vm-migration-network-6flk7
+        vm-migration-network.settings.hypervisorhci.io/hash: ec8322fb6b741f94739cbb904fc73c3fda864d6d
+        vm-migration-network.settings.hypervisorhci.io/net-attach-def: hypervisor-system/vm-migration-network-6flk7
       creationTimestamp: "2025-06-13T06:36:39Z"
       generation: 51
       name: vm-migration--network
@@ -155,7 +155,7 @@ The following occur once the `vm-migration-network` setting is applied:
     You can inspect pod details using the following command:
 
     ```bash
-    kubectl -n harvester-system describe pod <pod-name>
+    kubectl -n hypervisor-system describe pod <pod-name>
     ```
 
 1. Check the `k8s.v1.cni.cncf.io/network-status` annotations and verify that an interface named `migration0` exists. The IP address of this interface must be within the designated IP range.
@@ -163,7 +163,7 @@ The following occur once the `vm-migration-network` setting is applied:
     You can retrieve a list of `virt-handler` pods using the following command:
 
     ```bash
-    kubectl get pods -n harvester-system -l kubevirt.io=virt-handler -o yaml
+    kubectl get pods -n hypervisor-system -l kubevirt.io=virt-handler -o yaml
     ```
 
     Example:
@@ -185,7 +185,7 @@ The following occur once the `vm-migration-network` setting is applied:
               "default": true,
               "dns": {}
           },{
-              "name": "harvester-system/vm-migration-network-6flk7",
+              "name": "hypervisor-system/vm-migration-network-6flk7",
               "interface": "migration0",
               "ips": [
                   "10.1.2.1"

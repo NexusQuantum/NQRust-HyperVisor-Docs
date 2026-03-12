@@ -18,7 +18,7 @@ keywords:
 ## Concepts
 
 ### Cluster Network
-_Available as of v1.1.0_
+<!-- _Available as of v1.1.0_ -->
 
 In Hypervisor v1.1.0, we introduced a new concept called cluster network for traffic isolation.
 
@@ -87,8 +87,9 @@ In Hypervisor v1.5.x and earlier versions, the entire VLAN ID range (2 to 4094) 
 For more information, see [issue #7650](https://github.com/harvester/harvester/issues/7650).
 
 :::
-
-As of v1.6.0,only the [primary VLAN ID](https://docs.harvesterhci.io/latest/install/harvester-configuration#installmanagement_interface) provided during installation is automatically added to the `mgmt-br` bridge and the `mgmt-bo` interface. You can [add secondary VLAN interfaces](#add-secondary-vlan-interfaces) after installation is completed.
+<!-- ori -->
+<!-- As of v1.6.0,only the [primary VLAN ID](https://docs.harvesterhci.io/latest/install/harvester-configuration#installmanagement_interface) provided during installation is automatically added to the `mgmt-br` bridge and the `mgmt-bo` interface. You can [add secondary VLAN interfaces](#add-secondary-vlan-interfaces) after installation is completed. -->
+The [primary VLAN ID](../install/harvester-configuration.md#installmanagement_interface) provided during installation is automatically added to the `mgmt-br` bridge and the `mgmt-bo` interface. You can [add secondary VLAN interfaces](#add-secondary-vlan-interfaces) after installation is completed.
 
 During installation of the first cluster node, you can configure the MTU value for `mgmt` using the [`install.management_interface`](../install/harvester-configuration.md#installmanagement_interface) setting. The default value of the `mtu` field is `1500`, which is what `mgmt` typically uses. However, if you specify an MTU value other than `0` or `1500`, you must [add a corresponding annotation](#annotate-a-non-default-mtu-value-to-mgmt-after-installation) after the cluster is deployed.
 
@@ -133,7 +134,7 @@ Example:
 
 ```
 
-$ kubectl annotate clusternetwork mgmt network.harvesterhci.io/uplink-mtu="9000"
+$ kubectl annotate clusternetwork mgmt network.hypervisorhci.io/uplink-mtu="9000"
 
 ```
 
@@ -208,7 +209,7 @@ Exercise extreme caution when editing `/oem/90_custom.yaml`. Do not change other
 
     ```
 
-    $ kubectl annotate clusternetwork mgmt network.harvesterhci.io/uplink-mtu="9000"
+    $ kubectl annotate clusternetwork mgmt network.hypervisorhci.io/uplink-mtu="9000"
 
     ```
 
@@ -431,17 +432,17 @@ If you must change the MTU, perform the following steps:
     kind: NetworkAttachmentDefinition
     metadata:
       annotations:
-        network.harvesterhci.io/route: '{"mode":"auto","serverIPAddr":"","cidr":"","gateway":""}'
+        network.hypervisorhci.io/route: '{"mode":"auto","serverIPAddr":"","cidr":"","gateway":""}'
       creationTimestamp: '2025-04-25T10:21:01Z'
       finalizers:
-        - wrangler.cattle.io/harvester-network-nad-controller
-        - wrangler.cattle.io/harvester-network-manager-nad-controller
+        - wrangler.cattle.io/hypervisor-network-nad-controller
+        - wrangler.cattle.io/hypervisor-network-manager-nad-controller
       generation: 1
       labels:
-        network.harvesterhci.io/clusternetwork: cn-data
-        network.harvesterhci.io/ready: 'true'
-        network.harvesterhci.io/type: L2VlanNetwork
-        network.harvesterhci.io/vlan-id: '100'
+        network.hypervisorhci.io/clusternetwork: cn-data
+        network.hypervisorhci.io/ready: 'true'
+        network.hypervisorhci.io/type: L2VlanNetwork
+        network.hypervisorhci.io/vlan-id: '100'
       name: vm100
       namespace: default
       resourceVersion: '1525839'
@@ -587,17 +588,17 @@ If you must change the MTU, perform the following steps:
     kind: NetworkAttachmentDefinition
     metadata:
       annotations:
-        network.harvesterhci.io/route: '{"mode":"auto","serverIPAddr":"","cidr":"","gateway":""}'
+        network.hypervisorhci.io/route: '{"mode":"auto","serverIPAddr":"","cidr":"","gateway":""}'
       creationTimestamp: '2025-04-25T10:21:01Z'
       finalizers:
-        - wrangler.cattle.io/harvester-network-nad-controller
-        - wrangler.cattle.io/harvester-network-manager-nad-controller
+        - wrangler.cattle.io/hypervisor-network-nad-controller
+        - wrangler.cattle.io/hypervisor-network-manager-nad-controller
       generation: 1
       labels:
-        network.harvesterhci.io/clusternetwork: cn-data
-        network.harvesterhci.io/ready: 'true'
-        network.harvesterhci.io/type: L2VlanNetwork
-        network.harvesterhci.io/vlan-id: '100'
+        network.hypervisorhci.io/clusternetwork: cn-data
+        network.hypervisorhci.io/ready: 'true'
+        network.hypervisorhci.io/type: L2VlanNetwork
+        network.hypervisorhci.io/vlan-id: '100'
       name: vm100
       namespace: default
       resourceVersion: '1525839'

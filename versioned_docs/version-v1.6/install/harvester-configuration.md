@@ -4,7 +4,7 @@ sidebar_label: Hypervisor Configuration
 title: "Hypervisor Configuration"
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Rancher
   - rancher
   - Hypervisor Configuration
@@ -78,10 +78,10 @@ install:
   cluster_dns: 10.53.0.10
   force_mbr: false
   addons:
-    harvester_vm_import_controller:
+    hypervisor_vm_import_controller:
       enabled: false
       values_content: ""
-    harvester_pcidevices_controller:
+    hypervisor_pcidevices_controller:
       enabled: false
       values_content: ""
     rancher_monitoring:
@@ -90,7 +90,7 @@ install:
     rancher_logging:
       enabled: false
       values_content: ""
-    harvester_seeder:
+    hypervisor_seeder:
       enabled: false
       values_content: ""
 system_settings:
@@ -451,11 +451,11 @@ os:
 **Definition**: Setting that defines the default addon status. Hypervisor addons are disabled by default.
 
 **Supported values**:
-- `vm-import-controller` (chartName: harvester-vm-import-controller)
-- `pcidevices-controller` (chartName: harvester-pcidevices-controller)
+- `vm-import-controller` (chartName: hypervisor-vm-import-controller)
+- `pcidevices-controller` (chartName: hypervisor-pcidevices-controller)
 - `rancher-monitoring`
 - `rancher-logging`
-- `harvester-seeder` (experimental)
+- `hypervisor-seeder` (experimental)
 
 **Example**:
 
@@ -472,7 +472,7 @@ install:
 
 **Definition**: Setting that forces the installer to skip the interactive steps in the installation process.
 
-When enabled, the configuration is either retrieved from the value of `harvester.install.config_url` or defined individually using kernel parameters.
+When enabled, the configuration is either retrieved from the value of `hypervisor.install.config_url` or defined individually using kernel parameters.
 
 ### `install.data_disk`
 
@@ -522,7 +522,7 @@ install:
   force_mbr: true
 ```
 
-### `install.harvester.longhorn.default_settings.guaranteedInstanceManagerCPU`
+### `install.hypervisor.longhorn.default_settings.guaranteedInstanceManagerCPU`
 
 **Versions**: v1.4.0 and later
 
@@ -539,17 +539,17 @@ For more information about how to set the correct value, see [Guaranteed Instanc
 **Example**:
 
 ```
-  harvester:
+  hypervisor:
     longhorn:
       default_settings:
         guaranteedInstanceManagerCPU: 6
 ```
 
-### `install.harvester.storage_class.replica_count`
+### `install.hypervisor.storage_class.replica_count`
 
 **Versions**: v1.1.2 and later
 
-**Definition**: Replica count of the default Hypervisor StorageClass `harvester-longhorn`.
+**Definition**: Replica count of the default Hypervisor StorageClass `hypervisor-longhorn`.
 
 Using the default value is recommended for high storage availability. When deploying single-node Hypervisor clusters, you must set the value to 1.
 
@@ -563,7 +563,7 @@ For more information, see [Default Replica Count](https://longhorn.io/docs/1.6.0
 
 ```yaml
 install:
-  harvester:
+  hypervisor:
     storage_class:
       replica_count: 1
 ```
@@ -653,7 +653,7 @@ install:
 
 ### `install.rawdiskimagepath`
 
-**Definition**: Setting that forces the installer to only install the Hypervisor hypervisor (without any configuration). You must enable `harvester.install.automatic` to use this setting.
+**Definition**: Setting that forces the installer to only install the Hypervisor hypervisor (without any configuration). You must enable `hypervisor.install.automatic` to use this setting.
 
 ### `install.role`
 
@@ -865,7 +865,7 @@ install:
 
 **Definition**: Setting that determines if images are pulled from the internet after installation.
 
-The value of this field is typically derived from the kernel parameter `harvester.install.with_net_images`. When the value is `true`, Hypervisor does not preload images packaged in the installation medium, and instead pulls images from the internet when necessary.
+The value of this field is typically derived from the kernel parameter `hypervisor.install.with_net_images`. When the value is `true`, Hypervisor does not preload images packaged in the installation medium, and instead pulls images from the internet when necessary.
 
 ---
 <p>&nbsp;</p>
@@ -948,7 +948,7 @@ Certificate:
                 keyid:02:33:86:86:97:C3:32:3C:16:E0:C6:66:19:59:0B:93:C9:A0:5B:B5
 
             X509v3 Subject Alternative Name:
-                DNS:kubernetes, DNS:kubernetes.default, DNS:kubernetes.default.svc, DNS:kubernetes.default.svc.cluster.local, DNS:example.com, DNS:localhost, DNS:harvester-node-0, IP Address:192.168.3.131, IP Address:127.0.0.1, IP Address:0:0:0:0:0:0:0:1, IP Address:192.168.3.30, IP Address:10.53.0.1
+                DNS:kubernetes, DNS:kubernetes.default, DNS:kubernetes.default.svc, DNS:kubernetes.default.svc.cluster.local, DNS:example.com, DNS:localhost, DNS:hypervisor-node-0, IP Address:192.168.3.131, IP Address:127.0.0.1, IP Address:0:0:0:0:0:0:0:1, IP Address:192.168.3.30, IP Address:10.53.0.1
     Signature Algorithm: ecdsa-with-SHA256
          30:46:02:21:00:af:b7:81:97:f4:d1:fe:bb:62:a1:46:48:30:
          ab:e8:02:ae:32:44:d8:cb:96:87:e5:85:33:ce:7c:83:cb:c7:

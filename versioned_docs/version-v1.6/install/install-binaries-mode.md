@@ -4,7 +4,7 @@ sidebar_label: Install Hypervisor Binaries Only
 title: "Install Hypervisor Binaries Only"
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Rancher
   - rancher
   - ISO Installation
@@ -15,7 +15,7 @@ description: To get the Hypervisor ISO, download it from the GitHub releases. Du
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/install/install-binaries-mode"/>
 </head>
 
-_Available as of v1.2.0_
+<!-- _Available as of v1.2.0_ -->
 
 The `Install Hypervisor binaries only` mode allows you to install and configure binaries only, making it ideal for cloud and edge use cases.
 
@@ -41,7 +41,7 @@ Hypervisor has published a raw image artifact for pre-installed Hypervisor. The 
 On `Equinix Metal`, you can use the following kernel arguments to use the streaming mode:
 
 ```
-ip=dhcp net.ifnames=1 rd.cos.disable rd.noverifyssl root=live:http://${artifactEndpoint}/harvester-v1.2.0-rootfs-amd64.squashfs harvester.install.automatic=true harvester.scheme_version=1 harvester.install.device=/dev/vda  harvester.os.password=password harvester.install.raw_disk_image_path=http://${artifactEndpoint}/harvester-v1.2.0-amd64.raw harvester.install.mode=install console=tty1 harvester.install.tty=tty1 harvester.install.config_url=https://metadata.platformequinix.com/userdata harvester.install.management_interface.interfaces="name:enp1s0" harvester.install.management_interface.method=dhcp harvester.install.management_interface.bond_options.mode=balance-tlb harvester.install.management_interface.bond_options.miimon=100
+ip=dhcp net.ifnames=1 rd.cos.disable rd.noverifyssl root=live:http://${artifactEndpoint}/hypervisor-v1.2.0-rootfs-amd64.squashfs hypervisor.install.automatic=true hypervisor.scheme_version=1 hypervisor.install.device=/dev/vda  hypervisor.os.password=password hypervisor.install.raw_disk_image_path=http://${artifactEndpoint}/hypervisor-v1.2.0-amd64.raw hypervisor.install.mode=install console=tty1 hypervisor.install.tty=tty1 hypervisor.install.config_url=https://metadata.platformequinix.com/userdata hypervisor.install.management_interface.interfaces="name:enp1s0" hypervisor.install.management_interface.method=dhcp hypervisor.install.management_interface.bond_options.mode=balance-tlb hypervisor.install.management_interface.bond_options.miimon=100
 ```
 
 :::note
