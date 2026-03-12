@@ -4,7 +4,7 @@ sidebar_label: Live Migration
 title: "Live Migration"
 keywords:
   - Harvester
-  - harvester
+  - hypervisor
   - Rancher
   - rancher
   - Live Migration
@@ -150,7 +150,8 @@ Do not use this UI feature if the migration process was created using [batch mig
 
 ## Automatically Triggered Batch Migration
 
-[Harvester upgrades](../upgrade/automatic.md#live-migratable-virtual-machines) and [node maintenance](../host/host.md#node-maintenance) both benefit from live migration. The underlying process, which is called *batch migration*, is slightly different from the one described in [Starting a Migration](#starting-a-migration). This process involves the following steps:
+<!-- [Harvester upgrades](../upgrade/automatic.md#live-migratable-virtual-machines) and  -->
+[node maintenance](../host/host.md#node-maintenance) both benefit from live migration. The underlying process, which is called *batch migration*, is slightly different from the one described in [Starting a Migration](#starting-a-migration). This process involves the following steps:
 
 1. The controller watches a dedicated taint on the node object.
 
@@ -191,7 +192,7 @@ Example:
 
 Migrating a VM with `host-model` is not possible because the values of `host-model-cpu.node.kubevirt.io` are not identical. However, both nodes support the `123` CPU model, so you can migrate any VM with the `123` CPU model using either of the following methods:
 
-- Cluster level: Run `kubectl edit kubevirts.kubevirt.io -n harvester-system` and add `spec.configuration.cpuModel: "123"`. This change also affects newly created VMs.
+- Cluster level: Run `kubectl edit kubevirts.kubevirt.io -n hypervisor-system` and add `spec.configuration.cpuModel: "123"`. This change also affects newly created VMs.
 - Individual VMs: Modify the VM configuration to include `spec.template.spec.domain.cpu.model: "123"`.
 
 Both methods require you to restart the VMs. If you are certain that all nodes in the cluster support a specific CPU model, you can define this at the cluster level before creating any VMs. In doing so, you eliminate the need to restart the VMs (to assign the CPU model) during live migration.

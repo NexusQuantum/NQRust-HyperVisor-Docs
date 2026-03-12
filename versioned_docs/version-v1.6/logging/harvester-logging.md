@@ -1,5 +1,5 @@
 ---
-id: harvester-logging
+id: hypervisor-logging
 sidebar_position: 1
 sidebar_label: Logging
 title: "Logging"
@@ -14,7 +14,7 @@ keywords:
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/logging/harvester-logging"/>
 </head>
 
-_Available as of v1.2.0_
+<!-- _Available as of v1.2.0_ -->
 
 It is important to know what is happening/has happened in the `Hypervisor Cluster`.
 
@@ -30,7 +30,7 @@ The logging feature is now implemented with an addon and is disabled by default 
 
 Users can enable/disable the `rancher-logging` [addon](../advanced/addons.md) from the Hypervisor UI after installation.
 
-Users can also enable/disable the `rancher-logging` addon in their Hypervisor installation by customizing the [harvester-configuration](../install/harvester-configuration.md#installaddons) file.
+Users can also enable/disable the `rancher-logging` addon in their Hypervisor installation by customizing the [hypervisor-configuration](../install/harvester-configuration.md#installaddons) file.
 
 For Hypervisor clusters upgraded from version v1.1.x, the logging feature is converted to an addon automatically and kept enabled as before.
 
@@ -84,12 +84,12 @@ The UI configuration is only visible when the **rancher-logging** addon is enabl
 
 #### From CLI
 
-You can use the following `kubectl` command to change resource configurations for the `rancher-logging` addon: `kubectl edit addons.harvesterhci.io -n cattle-logging-system rancher-logging`.
+You can use the following `kubectl` command to change resource configurations for the `rancher-logging` addon: `kubectl edit addons.hypervisorhci.io -n cattle-logging-system rancher-logging`.
 
 The resource path and default values are as follows.
 
 ```
-apiVersion: harvesterhci.io/v1beta1
+apiVersion: hypervisorhci.io/v1beta1
 kind: Addon
 metadata:
   name: rancher-logging
@@ -122,18 +122,18 @@ You can still make configuration adjustments when the addon is disabled. However
 
 #### Dangling Resources Check
 
-_Available as of v1.5.0_
+<!-- _Available as of v1.5.0_ -->
 
 When enabling the **rancher-logging** add-on, you may encounter the following error:
 
-![](/img/v1.5/logging/logging-dangling-resources-check.png)
+![](/img/v1.2/logging-hv/logging-dangling-resources-check.png)
 
 You may also observe that deployments related to the add-on are not fully rolled out.
 
 To prevent the error from occurring again, perform the following actions before enabling the add-on:
 
 - Update or delete the affected dangling resources.
-- Add the annotation `harvesterhci.io/skipRancherLoggingAddonWebhookCheck: "true"` to the add-on.
+- Add the annotation `hypervisorhci.io/skipRancherLoggingAddonWebhookCheck: "true"` to the add-on.
 
 ### Configuring Log Destinations
 
@@ -205,11 +205,11 @@ You can append labels and annotations to the created resource.
 
  5. Select target `Outputs` and `ClusterOutputs`.
 
-![](/img/v1.2/logging/create-flow-outputs.png)
+![](/img/v1.2/logging-hv/create-flow-outputs.png)
 
  6. Add any filters if desired.
 
-![](/img/v1.2/logging/create-flow-filters.png)
+![](/img/v1.2/logging-hv/create-flow-filters.png)
 
  7. Once done, click `Create` on the lower left.
 
@@ -400,7 +400,7 @@ $ curl localhost:9200/fluentd/_search
               "k8s.v1.cni.cncf.io/networks-status": "[{\n    \"name\": \"k8s-pod-network\",\n    \"ips\": [\n        \"10.52.0.15\"\n    ],\n    \"default\": true,\n    \"dns\": {}\n}]",
               "kubernetes.io/psp": "global-unrestricted-psp"
             },
-            "host": "harvester-node-0",
+            "host": "hypervisor-node-0",
             "container_name": "csi-attacher",
             "docker_id": "f10e4449492d4191376d3e84e39742bf077ff696acbb1e5f87c9cfbab434edae",
             "container_hash": "sha256:03e115718d258479ce19feeb9635215f98e5ad1475667b4395b79e68caf129a6",
@@ -419,7 +419,8 @@ $ curl localhost:9200/fluentd/_search
 </TabItem>
 <TabItem value="graylog" label="Graylog">
 
-You can follow the instructions [here](https://github.com/w13915984028/harvester-develop-summary/blob/main/integrate-harvester-logging-with-log-servers.md#integrate-harvester-logging-with-graylog) to deploy and view cluster logs via [Graylog](https://www.graylog.org/):
+<!-- You can follow the instructions [here](https://github.com/w13915984028/harvester-develop-summary/blob/main/integrate-harvester-logging-with-log-servers.md#integrate-harvester-logging-with-graylog)  -->
+to deploy and view cluster logs via [Graylog](https://www.graylog.org/):
 
 ```yaml
 apiVersion: logging.banzaicloud.io/v1beta1
@@ -452,14 +453,14 @@ You can follow the instructions [here](https://github.com/w13915984028/harvester
 apiVersion: logging.banzaicloud.io/v1beta1
 kind: ClusterOutput
 metadata:
-  name: harvester-logging-splunk
+  name: hypervisor-logging-splunk
   namespace: cattle-logging-system 
 spec:
  splunkHec:
     hec_host: 192.168.122.101
     hec_port: 8088
     insecure_ssl: true
-    index: harvester-log-index
+    index: hypervisor-log-index
     hec_token:
       valueFrom:
         secretKeyRef:
@@ -473,14 +474,14 @@ spec:
 apiVersion: logging.banzaicloud.io/v1beta1
 kind: ClusterFlow
 metadata:
-   name: harvester-logging-splunk
+   name: hypervisor-logging-splunk
    namespace: cattle-logging-system
 spec:
    filters:
       - tag_normaliser: {}
    match:
    globalOutputRefs:
-      - harvester-logging-splunk
+      - hypervisor-logging-splunk
 ```
 
 </TabItem>
@@ -492,24 +493,24 @@ You can follow the instructions in the [logging HEP](https://github.com/joshmera
 apiVersion: logging.banzaicloud.io/v1beta1
 kind: ClusterFlow
 metadata:
-  name: harvester-loki
+  name: hypervisor-loki
   namespace: cattle-logging-system
 spec:
   match:
     - select: {}
   globalOutputRefs:
-    - harvester-loki
+    - hypervisor-loki
 ---
 apiVersion: logging.banzaicloud.io/v1beta1
 kind: ClusterOutput
 metadata:
-  name: harvester-loki
+  name: hypervisor-loki
   namespace: cattle-logging-system
 spec:
   loki:
     url: http://loki-stack.cattle-logging-system.svc:3100
     extra_labels:
-      logOutput: harvester-loki
+      logOutput: hypervisor-loki
 ```
 
 </TabItem>
@@ -568,7 +569,7 @@ Hypervisor keeps the `audit` log unchanged before sending it to the log server.
 
 ### Audit Log Output/ClusterOutput
 
-To output audit related log, the `Output`/`ClusterOutput` requires the value of `loggingRef` to be `harvester-kube-audit-log-ref`.
+To output audit related log, the `Output`/`ClusterOutput` requires the value of `loggingRef` to be `hypervisor-kube-audit-log-ref`.
 
 When you configure from the Hypervisor dashboard, the field is added automatically.
 
@@ -584,7 +585,7 @@ Example:
 apiVersion: logging.banzaicloud.io/v1beta1
 kind: ClusterOutput
 metadata:
-  name: "harvester-audit-webhook"
+  name: "hypervisor-audit-webhook"
   namespace: "cattle-logging-system"
 spec:
   http:
@@ -596,12 +597,12 @@ spec:
       chunk_limit_size: 3MB
       timekey: 2m
       timekey_wait: 1m
-  loggingRef: harvester-kube-audit-log-ref   # this reference is fixed and must be here
+  loggingRef: hypervisor-kube-audit-log-ref   # this reference is fixed and must be here
 ```
 
 ### Audit Log Flow/ClusterFlow
 
-To route audit related logs, the `Flow`/`ClusterFlow` requires the value of `loggingRef` to be `harvester-kube-audit-log-ref`.
+To route audit related logs, the `Flow`/`ClusterFlow` requires the value of `loggingRef` to be `hypervisor-kube-audit-log-ref`.
 
 When you configure from the Hypervisor dashboard, the field is added automatically.
 
@@ -617,12 +618,12 @@ Example:
 apiVersion: logging.banzaicloud.io/v1beta1
 kind: ClusterFlow
 metadata:
-  name: "harvester-audit-webhook"
+  name: "hypervisor-audit-webhook"
   namespace: "cattle-logging-system"
 spec:
   globalOutputRefs:
-    - "harvester-audit-webhook"
-  loggingRef: harvester-kube-audit-log-ref  # this reference is fixed and must be here
+    - "hypervisor-audit-webhook"
+  loggingRef: hypervisor-kube-audit-log-ref  # this reference is fixed and must be here
 ```
 
 ### Hypervisor
@@ -696,7 +697,7 @@ Each `event log` has the format of: `{"stream":"","logtag":"F","message":"","kub
 \\"event\\":{\\"metadata\\":{\\"name\\":\\"vm-ide-1.170e446c3f890433\\",\\"namespace\\":\\"default\\",\\"uid\\":\\"0b44b6c7-b415-4034-95e5-a476fcec547f\\",\\"resourceVersion\\":\\"612482\\",\\"creationTimestamp\\":\\"2022-08-24T11:29:04Z\\",\\"managedFields\\":[{\\"manager\\":\\"virt-controller\\",\\"operation\\":\\"Update\\",\\"apiVersion\\":\\"v1\\",\\"time\\":\\"2022-08-24T11:29:04Z\\"}]},\\"involvedObject\\":{\\"kind\\":\\"VirtualMachineInstance\\",\\"namespace\\":\\"default\\",\\"name\\":\\"vm-ide-1\\",\\"uid\\":\\"1bd4133f-5aa3-4eda-bd26-3193b255b480\\",\\"apiVersion\\":\\"kubevirt.io/v1\\",\\"resourceVersion\\":\\"612477\\"},\\"reason\\":\\"SuccessfulDelete\\",\\"message\\":\\"Deleted PodDisruptionBudget kubevirt-disruption-budget-hmmgd\\",\\"source\\":{\\"component\\":\\"disruptionbudget-controller\\"},\\"firstTimestamp\\":\\"2022-08-24T11:29:04Z\\",\\"lastTimestamp\\":\\"2022-08-24T11:29:04Z\\",\\"count\\":1,\\"type\\":\\"Normal\\",\\"eventTime\\":null,\\"reportingComponent\\":\\"\\",\\"reportingInstance\\":\\"\\"}
 }",
 
-"kubernetes":{"pod_name":"harvester-default-event-tailer-0","namespace_name":"cattle-logging-system","pod_id":"d3453153-58c9-456e-b3c3-d91242580df3","labels":{"app.kubernetes.io/instance":"harvester-default-event-tailer","app.kubernetes.io/name":"event-tailer","controller-revision-hash":"harvester-default-event-tailer-747b9d4489","statefulset.kubernetes.io/pod-name":"harvester-default-event-tailer-0"},"annotations":{"cni.projectcalico.org/containerID":"aa72487922ceb4420ebdefb14a81f0d53029b3aec46ed71a8875ef288cde4103","cni.projectcalico.org/podIP":"10.52.0.178/32","cni.projectcalico.org/podIPs":"10.52.0.178/32","k8s.v1.cni.cncf.io/network-status":"[{\\n    \\"name\\": \\"k8s-pod-network\\",\\n    \\"ips\\": [\\n        \\"10.52.0.178\\"\\n    ],\\n    \\"default\\": true,\\n    \\"dns\\": {}\\n}]","k8s.v1.cni.cncf.io/networks-status":"[{\\n    \\"name\\": \\"k8s-pod-network\\",\\n    \\"ips\\": [\\n        \\"10.52.0.178\\"\\n    ],\\n    \\"default\\": true,\\n    \\"dns\\": {}\\n}]","kubernetes.io/psp":"global-unrestricted-psp"},"host":"harv1","container_name":"harvester-default-event-tailer-0","docker_id":"455064de50cc4f66e3dd46c074a1e4e6cfd9139cb74d40f5ba00b4e3e2a7ab2d","container_hash":"docker.io/banzaicloud/eventrouter@sha256:6353d3f961a368d95583758fa05e8f4c0801881c39ed695bd4e8283d373a4262","container_image":"docker.io/banzaicloud/eventrouter:v0.1.0"}
+"kubernetes":{"pod_name":"hypervisor-default-event-tailer-0","namespace_name":"cattle-logging-system","pod_id":"d3453153-58c9-456e-b3c3-d91242580df3","labels":{"app.kubernetes.io/instance":"hypervisor-default-event-tailer","app.kubernetes.io/name":"event-tailer","controller-revision-hash":"hypervisor-default-event-tailer-747b9d4489","statefulset.kubernetes.io/pod-name":"hypervisor-default-event-tailer-0"},"annotations":{"cni.projectcalico.org/containerID":"aa72487922ceb4420ebdefb14a81f0d53029b3aec46ed71a8875ef288cde4103","cni.projectcalico.org/podIP":"10.52.0.178/32","cni.projectcalico.org/podIPs":"10.52.0.178/32","k8s.v1.cni.cncf.io/network-status":"[{\\n    \\"name\\": \\"k8s-pod-network\\",\\n    \\"ips\\": [\\n        \\"10.52.0.178\\"\\n    ],\\n    \\"default\\": true,\\n    \\"dns\\": {}\\n}]","k8s.v1.cni.cncf.io/networks-status":"[{\\n    \\"name\\": \\"k8s-pod-network\\",\\n    \\"ips\\": [\\n        \\"10.52.0.178\\"\\n    ],\\n    \\"default\\": true,\\n    \\"dns\\": {}\\n}]","kubernetes.io/psp":"global-unrestricted-psp"},"host":"harv1","container_name":"hypervisor-default-event-tailer-0","docker_id":"455064de50cc4f66e3dd46c074a1e4e6cfd9139cb74d40f5ba00b4e3e2a7ab2d","container_hash":"docker.io/banzaicloud/eventrouter@sha256:6353d3f961a368d95583758fa05e8f4c0801881c39ed695bd4e8283d373a4262","container_image":"docker.io/banzaicloud/eventrouter:v0.1.0"}
 
 }
 
@@ -728,7 +729,7 @@ Example:
 apiVersion: logging.banzaicloud.io/v1beta1
 kind: ClusterFlow
 metadata:
-  name: harvester-event-webhook
+  name: hypervisor-event-webhook
   namespace: cattle-logging-system
 spec:
   filters:
@@ -738,5 +739,5 @@ spec:
       labels:
         app.kubernetes.io/name: event-tailer
   globalOutputRefs:
-    - harvester-event-webhook
+    - hypervisor-event-webhook
 ```

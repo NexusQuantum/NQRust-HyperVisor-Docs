@@ -10,7 +10,8 @@ title: "Kube-OVN Operator"
 
 _Available as of v1.6.0_
 
-[`kubeovn-operator`](https://github.com/harvester/kubeovn-operator) is used to manage the lifecycle of [Kube-OVN](https://github.com/kubeovn/kube-ovn) as a secondary CNI on underlying Hypervisor clusters.
+<!-- [`kubeovn-operator`](https://github.com/harvester/kubeovn-operator) is used  -->
+to manage the lifecycle of [Kube-OVN](https://github.com/kubeovn/kube-ovn) as a secondary CNI on underlying Hypervisor clusters.
 
 ## Enabling `kubeovn-operator`
 

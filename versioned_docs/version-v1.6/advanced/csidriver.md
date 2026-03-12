@@ -8,14 +8,14 @@ title: "Third-Party Storage Support"
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/csidriver"/>
 </head>
 
-_Available as of v1.5.0_
+<!-- _Available as of v1.5.0_ -->
 
-Harvester now supports provisioning of root volumes and data volumes using external [Container Storage Interface (CSI)](https://kubernetes-csi.github.io/docs/introduction.html) drivers. This enhancement allows you to select drivers that meet specific requirements, such as performance optimization or seamless integration with existing internal storage solutions.
+Hypervisor now supports provisioning of root volumes and data volumes using external [Container Storage Interface (CSI)](https://kubernetes-csi.github.io/docs/introduction.html) drivers. This enhancement allows you to select drivers that meet specific requirements, such as performance optimization or seamless integration with existing internal storage solutions.
 
-The Harvester engineering team has validated the following CSI drivers:
+The Hypervisor engineering team has validated the following CSI drivers:
 
 - Longhorn V2 Data Engine: `driver.longhorn.io`
-- LVM: `lvm.driver.harvesterhci.io`
+- LVM: `lvm.driver.ypervisorrhci.io`
 - NFS: `nfs.csi.k8s.io`
 - Rook (RADOS Block Device): `rook-ceph.rbd.csi.ceph.com`
 
@@ -30,23 +30,23 @@ These validated CSI drivers have the following capabilities:
 
 :::note
 
-Support for third-party storage equates to support for provisioning of root volumes and data volumes using external container storage interface (CSI) drivers. This means that storage vendors can validate their storage appliances with Harvester to ensure greater interoperability. 
+Support for third-party storage equates to support for provisioning of root volumes and data volumes using external container storage interface (CSI) drivers. This means that storage vendors can validate their storage appliances with Hypervisor to ensure greater interoperability. 
 
-The Harvester engineering team exclusively validates internally developed storage solutions and select open-source projects. You can find information about enterprise-grade storage solutions that are certified to be compatible with Harvester in the SUSE Rancher Prime documentation, which is accessible through the [SUSE Customer Center](https://scc.suse.com/home).
+The Hypervisor engineering team exclusively validates internally developed storage solutions and select open-source projects. You can find information about enterprise-grade storage solutions that are certified to be compatible with Hypervisor in the SUSE Rancher Prime documentation, which is accessible through the [SUSE Customer Center](https://scc.suse.com/home).
 
 :::
 
 ## Prerequisites
 
-To enable Harvester to function well, use CSI drivers that support the following capabilities:
+To enable Hypervisor to function well, use CSI drivers that support the following capabilities:
 - Volume expansion (online resizing)
 - Snapshot creation (volume and virtual machine snapshots)
 - Cloning (volume and virtual machine clones)
 - Usage of Read-Write-Many (RWX) volumes for [Live Migration](../vm/live-migration.md)
 
-## Create Harvester cluster
+## Create Hypervisor cluster
 
-Harvester's operating system follows an immutable design, meaning that most OS files revert to their pre-configured state after a reboot. Therefore, you might need to perform additional configurations before installing the Harvester cluster for third-party CSI drivers.
+Hypervisor's operating system follows an immutable design, meaning that most OS files revert to their pre-configured state after a reboot. Therefore, you might need to perform additional configurations before installing the Hypervisor cluster for third-party CSI drivers.
 
 Some CSI drivers require additional persistent paths on the host. You can add these paths to [`os.persistent_state_paths`](../install/harvester-configuration.md#ospersistent_state_paths).
 
@@ -54,19 +54,19 @@ Some CSI drivers require additional software packages on the host. You can insta
 
 :::note
 
-Upgrading Harvester causes the changes to the OS in the `after-install-chroot` stage to be lost. You must also configure the `after-upgrade-chroot` to make your changes persistent across an upgrade. Refer to [Runtime persistent changes](https://rancher.github.io/elemental-toolkit/docs/customizing/runtime_persistent_changes/) before upgrading Harvester.
+Upgrading Hypervisor causes the changes to the OS in the `after-install-chroot` stage to be lost. You must also configure the `after-upgrade-chroot` to make your changes persistent across an upgrade. Refer to [Runtime persistent changes](https://rancher.github.io/elemental-toolkit/docs/customizing/runtime_persistent_changes/) before upgrading Hypervisor.
 
 :::
 
 ## Install the CSI driver
 
-After installing the Harvester cluster is complete, refer to [How can I access the kubeconfig file of the Harvester cluster?](../faq.md#how-can-i-access-the-kubeconfig-file-of-the-harvester-cluster) to get the kubeconfig of the cluster.
+After installing the Hypervisor cluster is complete, refer to [How can I access the kubeconfig file of the Hypervisor cluster?](../faq.md#how-can-i-access-the-kubeconfig-file-of-the-harvester-cluster) to get the kubeconfig of the cluster.
 
-With the kubeconfig of the Harvester cluster, you can install the third-party CSI drivers into the cluster by following the installation instructions for each CSI driver. You must also refer to the CSI driver documentation to create the `StorageClass` and `VolumeSnapshotClass` in the Harvester cluster.
+With the kubeconfig of the Hypervisor cluster, you can install the third-party CSI drivers into the cluster by following the installation instructions for each CSI driver. You must also refer to the CSI driver documentation to create the `StorageClass` and `VolumeSnapshotClass` in the Hypervisor cluster.
 
-## Configure Harvester Cluster
+## Configure Hypervisor Cluster
 
-Before you can make use of Harvester's **Backup & Snapshot** features, you need to set up some essential configurations through the Harvester [csi-driver-config](../advanced/settings.md#csi-driver-config) setting. Follow these steps to make these configurations:
+Before you can make use of Hypervisor's **Backup & Snapshot** features, you need to set up some essential configurations through the Hypervisor [csi-driver-config](../advanced/settings.md#csi-driver-config) setting. Follow these steps to make these configurations:
 
 :::note
 
@@ -78,13 +78,13 @@ For more information, see [VM Backup Compatibility](https://docs.harvesterhci.io
 
 :::note
 
-If the StorageClass provisioner is not in the CDI's list of [provisioners with default access and volume modes](https://github.com/kubevirt/containerized-data-importer/blob/v1.61.1/pkg/storagecapabilities/storagecapabilities.go#L35-L127), you must annotate the StorageClass with `cdi.harvesterhci.io/storageProfileVolumeModeAccessModes`. Without this annotation, the Helm installation may fail. Check the CSI driver's Helm chart documentation for instructions on how to annotate the StorageClass.
+If the StorageClass provisioner is not in the CDI's list of [provisioners with default access and volume modes](https://github.com/kubevirt/containerized-data-importer/blob/v1.61.1/pkg/storagecapabilities/storagecapabilities.go#L35-L127), you must annotate the StorageClass with `cdi.hypervisorhci.io/storageProfileVolumeModeAccessModes`. Without this annotation, the Helm installation may fail. Check the CSI driver's Helm chart documentation for instructions on how to annotate the StorageClass.
 
 For more information, see [Containerized Data Importer (CDI) Settings](./storageclass.md#containerized-data-importer-cdi-settings)
 
 :::
 
-1. Login to the Harvester UI, then navigate to **Advanced** > **Settings**.
+1. Login to the Hypervisor UI, then navigate to **Advanced** > **Settings**.
 1. Find and select **csi-driver-config**, and then select **⋮** > **Edit Setting** to access the configuration options.
 1. Set the **Provisioner** to the third-party CSI driver in the settings.
 1. Next, Configure the **Volume Snapshot Class Name**. This setting points to the name of the `VolumeSnapshotClass` used for creating volume snapshots or VM snapshots.
@@ -93,30 +93,30 @@ For more information, see [Containerized Data Importer (CDI) Settings](./storage
 
 ## Use the CSI Driver
 
-Once the CSI driver is installed and the Harvester cluster is configured, an external storage solution can be used in tasks that involve storage management.
+Once the CSI driver is installed and the Hypervisor cluster is configured, an external storage solution can be used in tasks that involve storage management.
 
 ### Virtual Machine Image Creation
 
 You can use an external storage solution to store and manage virtual machine images.
 
-When [uploading a virtual machine image](../image/upload-image.md) using the Harvester UI (**Image > Create**), you must select the StorageClass for the external storage solution on the **Storage** tab. In the following example, the StorageClass is **nfs-csi**.
+When [uploading a virtual machine image](../image/upload-image.md) using the Hypervisor UI (**Image > Create**), you must select the StorageClass for the external storage solution on the **Storage** tab. In the following example, the StorageClass is **nfs-csi**.
 
 ![create-image-with-nfs-csi](/img/v1.5/advanced-hv/create-image-with-nfs-csi.png)
 
-Harvester stores the created image in the external storage solution.
+Hypervisor stores the created image in the external storage solution.
 
-![created-image-with-nfs-csi](/img/v1.5/advanced/created-image-with-nfs-csi.png) 
+![created-image-with-nfs-csi](/img/v1.5/advanced-hv/created-image-with-nfs-csi.png) 
 
 ### Virtual Machine Creation
 
 Your virtual machines can use root and data volumes in external storage.
 
-When [creating a virtual machine](../vm/create-vm.md) using the Harvester UI (**Virtual Machine > Create**), you must perform the following actions on the **Volumes** tab:
+When [creating a virtual machine](../vm/create-vm.md) using the Hypervisor UI (**Virtual Machine > Create**), you must perform the following actions on the **Volumes** tab:
 
 - Select a virtual machine image stored in the external storage solution, and then configure the required settings.
 - Add a data volume.
 
-![various-volumes-for-vm-creating](/img/v1.5/advanced/various-volumes-for-vm-creating.png)
+![various-volumes-for-vm-creating](/img/v1.5/advanced-hv/various-volumes-for-vm-creating.png)
 
 In the following example, the root volume is created using NFS, and the data volume is created using the Longhorn V2 Data Engine.
 
@@ -126,12 +126,12 @@ In the following example, the root volume is created using NFS, and the data vol
 
 You can create volumes in your external storage solution.
 
-When [creating a volume](../volume/create-volume.md) using the Harvester UI (**Volumes > Create**), you must perform the following actions:
+When [creating a volume](../volume/create-volume.md) using the Hypervisor UI (**Volumes > Create**), you must perform the following actions:
 
 - **Storage Class**: Select the target StorageClass, e.g. **nfs-csi**.
 - **Volume Mode**: Select the corresponding volume mode, e.g. **Filesystem** for **nfs-csi**.
 
-![create-fs-volume](/img/v1.5/advanced/create-fs-volume.png)
+![create-fs-volume](/img/v1.5/advanced-hv/create-fs-volume.png)
 
 ## Advanced Topics
 
@@ -158,7 +158,7 @@ status:
     volumeMode: Block
   cloneStrategy: snapshot
   dataImportCronSourceFormat: pvc
-  provisioner: lvm.driver.harvesterhci.io
+  provisioner: lvm.driver.hypervisorhci.io
   snapshotClass: lvm-snapshot
   storageClass: lvm-node-1-striped
 ```
@@ -169,17 +169,17 @@ You can define the above fields to override the default configuration showing on
 
 :::caution
 
-Avoid changing the storage profile or CDI directly. Instead, allow the Harvester controller to synchronize and persist the storage profile configuration through the use of [CDI annotations](../advanced/storageclass.md##containerized-data-importer-cdi-settings).
+Avoid changing the storage profile or CDI directly. Instead, allow the Hypervisor controller to synchronize and persist the storage profile configuration through the use of [CDI annotations](../advanced/storageclass.md##containerized-data-importer-cdi-settings).
 
 :::
 
 ### Limitations
 
-- Backup support is currently limited to Longhorn V1 Data Engine volumes. Harvester is unable to create backups of volumes in external storage. 
+- Backup support is currently limited to Longhorn V1 Data Engine volumes. Hypervisor is unable to create backups of volumes in external storage. 
 
-- There is a limitation in the CDI which prevents Harvester from converting attached PVCs to virtual machine images. Before exporting a volume in external storage, ensure that the PVC is not attached to workloads. This prevents the resulting image from getting stuck in the *Exporting* state.
+- There is a limitation in the CDI which prevents Hypervisor from converting attached PVCs to virtual machine images. Before exporting a volume in external storage, ensure that the PVC is not attached to workloads. This prevents the resulting image from getting stuck in the *Exporting* state.
 
-![convert-pvc-to-image-stuck](/img/v1.5/advanced/convert-pvc-to-image-stuck.png)
+![convert-pvc-to-image-stuck](/img/v1.5/advanced-hv/convert-pvc-to-image-stuck.png)
 
 ### How to deploy the NFS CSI driver
 
@@ -223,9 +223,9 @@ If the server is already running, check the `squash` option. You must disable sq
 
 ## References
 
-- [Use Rook Ceph External Storage with Harvester](https://harvesterhci.io/kb/use_rook_ceph_external_storage)
-- [Using NetApp Storage on Harvester](https://harvesterhci.io/kb/install_netapp_trident_csi)
-- [Third Party Storage Support](https://github.com/harvester/harvester/blob/master/enhancements/20250203-third-party-storage-support.md) 
+- [Use Rook Ceph External Storage with Hypervisor](https://harvesterhci.io/kb/use_rook_ceph_external_storage)
+- [Using NetApp Storage on Hypervisor](https://harvesterhci.io/kb/install_netapp_trident_csi)
+<!-- - [Third Party Storage Support](https://github.com/harvester/harvester/blob/master/enhancements/20250203-third-party-storage-support.md)  -->
 
 ## Known Issues
 
@@ -270,14 +270,14 @@ Increasing the overhead value does not affect the image PVC size. The scratch vo
 
 :::
 
-Related issue: [#7993](https://github.com/harvester/harvester/issues/7993) (See this [comment](https://github.com/harvester/harvester/issues/7993#issuecomment-2790260841).)
+<!-- Related issue: [#7993](https://github.com/harvester/harvester/issues/7993) (See this [comment](https://github.com/harvester/harvester/issues/7993#issuecomment-2790260841).) -->
 
 ### 2. Multipath support
-_Available as of v1.4.3_
+<!-- _Available as of v1.4.3_ -->
 
 Certain 3rd party CSI may need multipath to be enabled.
 
-By default `multipathd` is disabled in Harvester. Users can enable this post installation by simply logging into the individual nodes and running the following commands:
+By default `multipathd` is disabled in Hypervisor. Users can enable this post installation by simply logging into the individual nodes and running the following commands:
 
 ```
 systemctl enable multipathd
@@ -300,13 +300,13 @@ stages:
 Users wishing to automate this further can leverage the `CloudInit CRD` to apply the same instructions to a set of hosts
 
 ```
-apiVersion: node.harvesterhci.io/v1beta1
+apiVersion: node.hypervisorhci.io/v1beta1
 kind: CloudInit
 metadata:
   name: start-mutlitpathd
 spec:
   matchSelector:
-    harvesterhci.io/managed: "true"
+    hypervisorhci.io/managed: "true"
   filename: 99-start-mutlitpathd
   contents: |
     stages:

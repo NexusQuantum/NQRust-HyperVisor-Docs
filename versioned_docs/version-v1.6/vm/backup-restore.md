@@ -4,7 +4,7 @@ sidebar_label: VM Backup, Snapshot & Restore
 title: "VM Backup, Snapshot & Restore"
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Rancher
   - rancher
   - VM Backup, Snapshot & Restore
@@ -160,7 +160,7 @@ Users can now restore a new VM on another cluster by leveraging the VM metadata 
   $ kubectl get vmimages -A
   NAMESPACE   NAME                               DISPLAY-NAME                              SIZE         AGE
   default     image-79hdq                        focal-server-cloudimg-amd64.img           566886400    5h36m
-  default     image-l7924                        harvester-v1.0.0-rc2-amd64.iso            3964551168   137m
+  default     image-l7924                        hypervisor-v1.0.0-rc2-amd64.iso            3964551168   137m
   default     image-lvqxn                        opensuse-leap-15.3.x86_64-nocloud.qcow2   568524800    5h35m
   ```
 
@@ -169,7 +169,7 @@ Users can now restore a new VM on another cluster by leveraging the VM metadata 
   Example:
   ```
   $ cat <<EOF | kubectl apply -f -
-  apiVersion: harvesterhci.io/v1beta1
+  apiVersion: hypervisorhci.io/v1beta1
   kind: VirtualMachineImage
   metadata:
     name: image-79hdq

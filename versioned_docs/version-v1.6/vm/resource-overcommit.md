@@ -51,21 +51,22 @@ In situations where you require specific configurations for individual virtual m
 
 By default, the Hypervisor reserves a certain amount of system management overhead memory from the memory allocated for the virtual machine. In most cases, this will not cause any problems. However, some operating systems, such as Windows 2022, will request more memory than is reserved.
 
-To address the issue, Hypervisor provides an annotation `harvesterhci.io/reservedMemory` on VirtualMachine custom resource to let you specify the amount of memory to reserve. For instance, add `harvesterhci.io/reservedMemory: 200Mi` if you decide to reserve 200 MiB for the system overhead of the VM.
+To address the issue, Hypervisor provides an annotation `hypervisorhci.io/reservedMemory` on VirtualMachine custom resource to let you specify the amount of memory to reserve. For instance, add `hypervisorhci.io/reservedMemory: 200Mi` if you decide to reserve 200 MiB for the system overhead of the VM.
 
 ```diff
  apiVersion: kubevirt.io/v1
  kind: VirtualMachine
  metadata:
    annotations:
-+    harvesterhci.io/reservedMemory: 200Mi
++    hypervisorhci.io/reservedMemory: 200Mi
      kubevirt.io/latest-observed-api-version: v1
      kubevirt.io/storage-observed-api-version: v1alpha3
-     network.harvesterhci.io/ips: '[]'
+     network.hypervisorhci.io/ips: '[]'
    ...
    ...
 ```
 
 ## Why my virtual machines are scheduled unevenly?
 
-The scheduling of virtual machines depends on the underlying behavior of the kube-scheduler. We have a dedicated article explaining the details. If you would like to learn more, check out:  [Hypervisor Knowledge Base: VM Scheduling](https://harvesterhci.io/kb/vm-scheduling/).
+The scheduling of virtual machines depends on the underlying behavior of the kube-scheduler. We have a dedicated article explaining the details. If you would like to learn more, 
+<!-- check out:  [Hypervisor Knowledge Base: VM Scheduling](https://harvesterhci.io/kb/vm-scheduling/). -->

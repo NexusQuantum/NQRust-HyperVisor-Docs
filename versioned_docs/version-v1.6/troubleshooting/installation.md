@@ -84,7 +84,7 @@ stages:
         rancherVersion: v2.7.5
         rancherInstallerImage: rancher/system-agent-installer-rancher:v2.7.5
         labels:
-         - harvesterhci.io/managed=true
+         - hypervisorhci.io/managed=true
         extraConfig:
           disable:
           - rke2-snapshot-controller
@@ -117,7 +117,7 @@ After you obtain a copy of the kubeconfig file, run the following script against
   #!/bin/bash
 
   cluster_ready() {
-    namespaces=("cattle-system" "kube-system" "harvester-system" "longhorn-system")
+    namespaces=("cattle-system" "kube-system" "hypervisor-system" "longhorn-system")
     for ns in "${namespaces[@]}"; do
       pod_statuses=($(kubectl -n "${ns}" get pods \
         --field-selector=status.phase!=Succeeded \
@@ -184,18 +184,18 @@ After a successful installation, the Hypervisor console persistently shows `Sett
 
 ![](/img/v1.2/troubleshooting-hv/setting-up-harvester-after-day-0.png)
 
-The following information is displayed after you run the command `kubectl get managedchart -n fleet-local harvester -oyaml`:
+The following information is displayed after you run the command `kubectl get managedchart -n fleet-local hypervisor -oyaml`:
 
 ```yaml
 ...
 status:
   conditions:
   - lastUpdateTime: "2025-10-22T08:01:18Z"
-    message: 'NotReady(1) [Cluster fleet-local/local]; daemonset.apps harvester-system/harvester-network-controller
-      modified {"spec":{"template":{"spec":{"containers":[{"args":["agent"],"command":["harvester-network-controller"],
+    message: 'NotReady(1) [Cluster fleet-local/local]; daemonset.apps hypervisor-system/hypervisor-network-controller
+      modified {"spec":{"template":{"spec":{"containers":[{"args":["agent"],"command":["hypervisor-network-controller"],
       "env":[{"name":"NODENAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"spec.nodeName"}}},
       {"name":"NAMESPACE","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.namespace"}}}],
-      "image":"rancher/harvester-network-controller:master-head","imagePullPolicy":"IfNotPresent","name":"harvester-network",
+      "image":"rancher/hypervisor-network-controller:master-head","imagePullPolicy":"IfNotPresent","name":"hypervisor-network",
       "resources":{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"10m","memory":"64Mi"}},
       "securityContext":{"privileged":true},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File",
       "volumeMounts":[{"mountPath":"/dev","name":"dev"},{"mountPath":"/lib/modules","name":"modules"}]}]}}}};'
@@ -205,28 +205,28 @@ status:
 
 ### Root Cause
 
-The Hypervisor console runs the following command to determine if the status of the `harvester` ManagedChart (in the `fleet-local` namespace) is `Ready`.
+The Hypervisor console runs the following command to determine if the status of the `hypervisor` ManagedChart (in the `fleet-local` namespace) is `Ready`.
 
 ```
-cmd := exec.Command("/bin/sh", "-c", kubectl -n fleet-local get ManagedChart harvester -o jsonpath='{.status.conditions}' | 
+cmd := exec.Command("/bin/sh", "-c", kubectl -n fleet-local get ManagedChart hypervisor -o jsonpath='{.status.conditions}' | 
 jq 'map(select(.type == "Ready" and .status == "True")) | length')
 ```
 
-The `ManagedChart` CRD is used by [Fleet](https://fleet.rancher.io/) to manage resources via GitOps. If any of those resources are directly modified, `ManagedChart` records and flags the deviations. In the above example, the error occurred because a custom image tag was directly applied to the `harvester-system/harvester-network-controller` DaemonSet.
+The `ManagedChart` CRD is used by [Fleet](https://fleet.rancher.io/) to manage resources via GitOps. If any of those resources are directly modified, `ManagedChart` records and flags the deviations. In the above example, the error occurred because a custom image tag was directly applied to the `hypervisor-system/hypervisor-network-controller` DaemonSet.
 
-To retrieve the full list of `ManagedChart` resources, run the command `kubectl get bundle -n fleet-local mcc-harvester -oyaml`.
+To retrieve the full list of `ManagedChart` resources, run the command `kubectl get bundle -n fleet-local mcc-hypervisor -oyaml`.
 
 ```yaml
 apiVersion: fleet.cattle.io/v1alpha1
 kind: Bundle
 metadata:
-  name: mcc-harvester
+  name: mcc-hypervisor
   namespace: fleet-local
 spec:
   resources:
   - content: H4s...===
     encoding: base64+gz
-    charts/harvester-network-controller/templates/daemonset.yaml
+    charts/hypervisor-network-controller/templates/daemonset.yaml
   - content: ...
 ```
 
@@ -236,7 +236,7 @@ You can perform either of the following actions:
 
 - Revert the direct changes made to the affected resources.
 
-- Update the `ManagedChart` CRD with the desired custom configuration using `kubectl edit managedchart -n fleet-local harvester`.
+- Update the `ManagedChart` CRD with the desired custom configuration using `kubectl edit managedchart -n fleet-local hypervisor`.
 
 ### Related Issue
 

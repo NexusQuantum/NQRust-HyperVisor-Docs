@@ -16,7 +16,9 @@ description: Hypervisor is an open source hyper-converged infrastructure (HCI) s
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6"/>
 </head>
 
-[Hypervisor](https://harvesterhci.io/) is a modern, open, interoperable, [hyperconverged infrastructure (HCI)](https://en.wikipedia.org/wiki/Hyper-converged_infrastructure) solution built on Kubernetes. It is an open-source alternative designed for operators seeking a [cloud-native](https://about.gitlab.com/topics/cloud-native/) HCI solution. Hypervisor runs on bare metal servers and provides integrated virtualization and distributed storage capabilities. In addition to traditional virtual machines (VMs), Hypervisor supports containerized environments automatically through integration with [Rancher](https://ranchermanager.docs.rancher.com/integrations-in-rancher/harvester). It offers a solution that unifies legacy virtualized infrastructure while enabling the adoption of containers from core to edge locations.
+<!-- ori -->
+<!-- [Hypervisor](https://harvesterhci.io/) is a modern, open, interoperable, [hyperconverged infrastructure (HCI)](https://en.wikipedia.org/wiki/Hyper-converged_infrastructure) solution built on Kubernetes. It is an open-source alternative designed for operators seeking a [cloud-native](https://about.gitlab.com/topics/cloud-native/) HCI solution. Hypervisor runs on bare metal servers and provides integrated virtualization and distributed storage capabilities. In addition to traditional virtual machines (VMs), Hypervisor supports containerized environments automatically through integration with [Rancher](https://ranchermanager.docs.rancher.com/integrations-in-rancher/harvester). It offers a solution that unifies legacy virtualized infrastructure while enabling the adoption of containers from core to edge locations. -->
+Hypervisor is a modern, open, interoperable, [hyperconverged infrastructure (HCI)](https://en.wikipedia.org/wiki/Hyper-converged_infrastructure) solution built on Kubernetes. It is an open-source alternative designed for operators seeking a [cloud-native](https://about.gitlab.com/topics/cloud-native/) HCI solution. Hypervisor runs on bare metal servers and provides integrated virtualization and distributed storage capabilities. In addition to traditional virtual machines (VMs), Hypervisor supports containerized environments automatically through integration with [Rancher](https://ranchermanager.docs.rancher.com/integrations-in-rancher/harvester). It offers a solution that unifies legacy virtualized infrastructure while enabling the adoption of containers from core to edge locations.
 
 ## Hypervisor Architecture
 
@@ -32,7 +34,9 @@ The Hypervisor architecture consists of cutting-edge open-source technologies:
 ## Hypervisor Features
 
 Hypervisor is an enterprise-ready, easy-to-use infrastructure platform that leverages local, direct attached storage instead of complex external SANs. It utilizes Kubernetes API as a unified automation language across container and VM workloads. Some key features of Hypervisor include:
-- **Easy to get started.** Since Hypervisor ships as a bootable appliance image, you can install it directly on a bare metal server with the [ISO image](https://github.com/harvester/harvester/releases) or automatically install it using [iPXE](./install/pxe-boot-install.md) scripts.
+<!-- ori -->
+<!-- - **Easy to get started.** Since Hypervisor ships as a bootable appliance image, you can install it directly on a bare metal server with the [ISO image](https://github.com/harvester/harvester/releases) or automatically install it using [iPXE](./install/pxe-boot-install.md) scripts. -->
+- **Easy to get started.** Since Hypervisor ships as a bootable appliance image, you can install it directly on a bare metal server with the ISO image or automatically install it using [iPXE](./install/pxe-boot-install.md) scripts.
 - **VM lifecycle management.** Easily create, edit, clone, and delete VMs, including SSH-Key injection, cloud-init, and graphic and serial port console.
 - **VM live migration.** Move a VM to a different host or node with zero downtime.
 - **VM backup, snapshot, and restore.** Back up your VMs from NFS, S3 servers, or NAS devices. Use your backup to restore a failed VM or create a new VM on a different cluster.

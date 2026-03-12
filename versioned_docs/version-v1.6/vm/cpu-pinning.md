@@ -4,7 +4,7 @@ sidebar_label: CPU Pinning
 title: "CPU Pinning"
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Virtual Machine
   - virtual machine
   - CPU

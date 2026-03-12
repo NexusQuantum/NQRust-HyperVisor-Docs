@@ -2,6 +2,7 @@
 sidebar_position: 9
 sidebar_label: vGPU Support
 title: "vGPU Support"
+draft: true
 ---
 
 <head>
@@ -21,7 +22,7 @@ You must enable the [**nvidia-driver-toolkit** add-on](./addons/nvidiadrivertool
 1. On the Harvester UI, go to **Advanced** > **SR-IOV GPU Devices** and verify the following:
 
   - GPU devices have been scanned. 
-  - An associated `sriovgpudevices.devices.harvesterhci.io` object has been created. 
+  - An associated `sriovgpudevices.devices.hypervisorhci.io` object has been created. 
 
   ![](/img/v1.3/advanced/sriovgpudevices-disabled.png)
 
@@ -29,7 +30,7 @@ You must enable the [**nvidia-driver-toolkit** add-on](./addons/nvidiadrivertool
 
   ![](/img/v1.3/advanced/sriovgpudevices-enabled.png)
 
-1. Go to the **vGPU Devices** screen and check the associated `vgpudevices.devices.harvesterhci.io` objects.
+1. Go to the **vGPU Devices** screen and check the associated `vgpudevices.devices.hypervisorhci.io` objects.
 
   Allow some time for the pcidevices-controller to scan the vGPU devices and for the Harvester UI to display the device information.
 
@@ -87,7 +88,7 @@ virtualGPUOptions:
      ramFB:
        enabled: false 
 ```
-Related issue: https://github.com/harvester/harvester/issues/5289
+<!-- Related issue: https://github.com/harvester/harvester/issues/5289 -->
 
 
 #### Cap on Usable vGPUs
@@ -106,46 +107,46 @@ If you select the `NVIDIA A2-4Q` profile, you can only configure 4 vGPU devices.
 
 pcidevices-controller introduces the following CRDs:
 
-- sriovgpudevices.devices.harvesterhci.io  
-- vgpudevices.devices.harvesterhci.io  
+- sriovgpudevices.devices.hypervisorhci.io  
+- vgpudevices.devices.hypervisorhci.io  
 
 On boot, pcidevices-controller scans the host for NVIDIA GPUs that support SR-IOV vGPU devices. When such devices are found, they are represented as a CRD.
 
 Example:
 
 ```
-apiVersion: devices.harvesterhci.io/v1beta1
+apiVersion: devices.hypervisorhci.io/v1beta1
 kind: SRIOVGPUDevice
 metadata:
   creationTimestamp: "2024-02-21T05:57:37Z"
   generation: 2
   labels:
-    nodename: harvester-kgd9c
-  name: harvester-kgd9c-000008000
+    nodename: hypervisor-kgd9c
+  name: hypervisor-kgd9c-000008000
   resourceVersion: "6641619"
   uid: e3a97ee4-046a-48d7-820d-8c6b45cd07da
 spec:
   address: "0000:08:00.0"
   enabled: true
-  nodeName: harvester-kgd9c
+  nodeName: hypervisor-kgd9c
 status:
   vGPUDevices:
-  - harvester-kgd9c-000008004
-  - harvester-kgd9c-000008005
-  - harvester-kgd9c-000008016
-  - harvester-kgd9c-000008017
-  - harvester-kgd9c-000008020
-  - harvester-kgd9c-000008021
-  - harvester-kgd9c-000008022
-  - harvester-kgd9c-000008023
-  - harvester-kgd9c-000008006
-  - harvester-kgd9c-000008007
-  - harvester-kgd9c-000008010
-  - harvester-kgd9c-000008011
-  - harvester-kgd9c-000008012
-  - harvester-kgd9c-000008013
-  - harvester-kgd9c-000008014
-  - harvester-kgd9c-000008015
+  - hypervisor-kgd9c-000008004
+  - hypervisor-kgd9c-000008005
+  - hypervisor-kgd9c-000008016
+  - hypervisor-kgd9c-000008017
+  - hypervisor-kgd9c-000008020
+  - hypervisor-kgd9c-000008021
+  - hypervisor-kgd9c-000008022
+  - hypervisor-kgd9c-000008023
+  - hypervisor-kgd9c-000008006
+  - hypervisor-kgd9c-000008007
+  - hypervisor-kgd9c-000008010
+  - hypervisor-kgd9c-000008011
+  - hypervisor-kgd9c-000008012
+  - hypervisor-kgd9c-000008013
+  - hypervisor-kgd9c-000008014
+  - hypervisor-kgd9c-000008015
   vfAddresses:
   - "0000:08:00.4"
   - "0000:08:00.5"
@@ -171,42 +172,42 @@ On subsequent scan of the /sys tree by the pcidevices, the vGPU devices are scan
 
 ```
 NAME                        ADDRESS        NODE NAME         ENABLED   UUID                                   VGPUTYPE       PARENTGPUDEVICE
-harvester-kgd9c-000008004   0000:08:00.4   harvester-kgd9c   true      dd6772a8-7db8-4e96-9a73-f94c389d9bc3   NVIDIA A2-4A   0000:08:00.0
-harvester-kgd9c-000008005   0000:08:00.5   harvester-kgd9c   true      9534e04b-4687-412b-833e-3ae95b97d4d1   NVIDIA A2-4Q   0000:08:00.0
-harvester-kgd9c-000008006   0000:08:00.6   harvester-kgd9c   true      a16e5966-9f7a-48a9-bda8-0d1670e740f8   NVIDIA A2-4A   0000:08:00.0
-harvester-kgd9c-000008007   0000:08:00.7   harvester-kgd9c   true      041ee3ce-f95c-451e-a381-1c9fe71918b2   NVIDIA A2-4Q   0000:08:00.0
-harvester-kgd9c-000008010   0000:08:01.0   harvester-kgd9c   false                                                           0000:08:00.0
-harvester-kgd9c-000008011   0000:08:01.1   harvester-kgd9c   false                                                           0000:08:00.0
-harvester-kgd9c-000008012   0000:08:01.2   harvester-kgd9c   false                                                           0000:08:00.0
-harvester-kgd9c-000008013   0000:08:01.3   harvester-kgd9c   false                                                           0000:08:00.0
-harvester-kgd9c-000008014   0000:08:01.4   harvester-kgd9c   false                                                           0000:08:00.0
-harvester-kgd9c-000008015   0000:08:01.5   harvester-kgd9c   false                                                           0000:08:00.0
-harvester-kgd9c-000008016   0000:08:01.6   harvester-kgd9c   false                                                           0000:08:00.0
-harvester-kgd9c-000008017   0000:08:01.7   harvester-kgd9c   false                                                           0000:08:00.0
-harvester-kgd9c-000008020   0000:08:02.0   harvester-kgd9c   false                                                           0000:08:00.0
-harvester-kgd9c-000008021   0000:08:02.1   harvester-kgd9c   false                                                           0000:08:00.0
-harvester-kgd9c-000008022   0000:08:02.2   harvester-kgd9c   false                                                           0000:08:00.0
-harvester-kgd9c-000008023   0000:08:02.3   harvester-kgd9c   false                                                           0000:08:00.0
+hypervisor-kgd9c-000008004   0000:08:00.4   hypervisor-kgd9c   true      dd6772a8-7db8-4e96-9a73-f94c389d9bc3   NVIDIA A2-4A   0000:08:00.0
+hypervisor-kgd9c-000008005   0000:08:00.5   hypervisor-kgd9c   true      9534e04b-4687-412b-833e-3ae95b97d4d1   NVIDIA A2-4Q   0000:08:00.0
+hypervisor-kgd9c-000008006   0000:08:00.6   hypervisor-kgd9c   true      a16e5966-9f7a-48a9-bda8-0d1670e740f8   NVIDIA A2-4A   0000:08:00.0
+hypervisor-kgd9c-000008007   0000:08:00.7   hypervisor-kgd9c   true      041ee3ce-f95c-451e-a381-1c9fe71918b2   NVIDIA A2-4Q   0000:08:00.0
+hypervisor-kgd9c-000008010   0000:08:01.0   hypervisor-kgd9c   false                                                           0000:08:00.0
+hypervisor-kgd9c-000008011   0000:08:01.1   hypervisor-kgd9c   false                                                           0000:08:00.0
+hypervisor-kgd9c-000008012   0000:08:01.2   hypervisor-kgd9c   false                                                           0000:08:00.0
+hypervisor-kgd9c-000008013   0000:08:01.3   hypervisor-kgd9c   false                                                           0000:08:00.0
+hypervisor-kgd9c-000008014   0000:08:01.4   hypervisor-kgd9c   false                                                           0000:08:00.0
+hypervisor-kgd9c-000008015   0000:08:01.5   hypervisor-kgd9c   false                                                           0000:08:00.0
+hypervisor-kgd9c-000008016   0000:08:01.6   hypervisor-kgd9c   false                                                           0000:08:00.0
+hypervisor-kgd9c-000008017   0000:08:01.7   hypervisor-kgd9c   false                                                           0000:08:00.0
+hypervisor-kgd9c-000008020   0000:08:02.0   hypervisor-kgd9c   false                                                           0000:08:00.0
+hypervisor-kgd9c-000008021   0000:08:02.1   hypervisor-kgd9c   false                                                           0000:08:00.0
+hypervisor-kgd9c-000008022   0000:08:02.2   hypervisor-kgd9c   false                                                           0000:08:00.0
+hypervisor-kgd9c-000008023   0000:08:02.3   hypervisor-kgd9c   false                                                           0000:08:00.0
 ```
 
 When a user enables and selects a profile for the `VGPUDevice` the pcidevices controller sets up the device and sets up the correct profile on the said device.
 
 ```
-apiVersion: devices.harvesterhci.io/v1beta1
+apiVersion: devices.hypervisorhci.io/v1beta1
 kind: VGPUDevice
 metadata:
   creationTimestamp: "2024-02-26T03:04:47Z"
   generation: 8
   labels:
-    harvesterhci.io/parentSRIOVGPUDevice: harvester-kgd9c-000008000
-    nodename: harvester-kgd9c
-  name: harvester-kgd9c-000008004
+    hypervisorhci.io/parentSRIOVGPUDevice: hypervisor-kgd9c-000008000
+    nodename: hypervisor-kgd9c
+  name: hypervisor-kgd9c-000008004
   resourceVersion: "21051017"
   uid: b9c7af64-1e47-467f-bf3d-87b7bc3a8911
 spec:
   address: "0000:08:00.4"
   enabled: true
-  nodeName: harvester-kgd9c
+  nodeName: hypervisor-kgd9c
   parentGPUDeviceAddress: "0000:08:00.0"
   vGPUTypeName: NVIDIA A2-4A
 status:
@@ -218,7 +219,7 @@ status:
 The pcidevices controller also runs a vGPU device plugin, which advertises the details of the various vGPU profiles to the kubelet. This is then used by the k8s scheduler to place the VM's requesting vGPU's to the correct nodes.
 
 ```
-(⎈|local:harvester-system)➜  ~ k get nodes harvester-kgd9c -o yaml | yq .status.allocatable
+(⎈|local:hypervisor-system)➜  ~ k get nodes hypervisor-kgd9c -o yaml | yq .status.allocatable
 cpu: "24"
 devices.kubevirt.io/kvm: 1k
 devices.kubevirt.io/tun: 1k

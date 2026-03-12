@@ -60,7 +60,7 @@ kubectl -n kube-system get svc ingress-expose -o jsonpath='{.metadata.annotation
 
 Example output:
 ```console
-harvester-xzj76
+hypervisor-xzj76
 ```
 
 Alternatively, you can use SSH to connect to each Hypervisor management node and then run the command `ip address show mgmt-br`.
@@ -68,7 +68,7 @@ Alternatively, you can use SSH to connect to each Hypervisor management node and
 Example:
 
 ```console
-harvester-xzj76:~ # ip address show mgmt-br
+hypervisor-xzj76:~ # ip address show mgmt-br
 4: mgmt-br: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
     link/ether 8c:dc:d4:b5:f0:fd brd ff:ff:ff:ff:ff:ff
     inet 172.19.108.45/21 brd 172.19.111.255 scope global mgmt-br

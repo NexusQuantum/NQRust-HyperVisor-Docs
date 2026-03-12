@@ -4,7 +4,7 @@ sidebar_label: Clone VM
 title: "Clone VM"
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Rancher
   - rancher
   - Clone VM

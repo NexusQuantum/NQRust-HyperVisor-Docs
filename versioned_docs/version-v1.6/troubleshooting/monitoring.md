@@ -228,7 +228,7 @@ You may encounter this when you install the Hypervisor v1.3.0 or higher version 
 
     $ kubectl get pvc -A
     NAMESPACE                  NAME                                                                                             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS           AGE
-    cattle-monitoring-system   prometheus-rancher-monitoring-prometheus-db-prometheus-rancher-monitoring-prometheus-0           Bound    pvc-bbe8760d-926c-484a-851c-b8ec29ae05c0   50Gi       RWO            harvester-longhorn     7m12s
+    cattle-monitoring-system   prometheus-rancher-monitoring-prometheus-db-prometheus-rancher-monitoring-prometheus-0           Bound    pvc-bbe8760d-926c-484a-851c-b8ec29ae05c0   50Gi       RWO            hypervisor-longhorn     7m12s
 
     $ kubectl get volume -A
     NAMESPACE         NAME                                       DATA ENGINE   STATE      ROBUSTNESS   SCHEDULED   SIZE          NODE     AGE
@@ -261,8 +261,8 @@ You may encounter this when you install the Hypervisor v1.3.0 or higher version 
 
     $ kubectl get pvc -n cattle-monitoring-system
     NAME                                                                                             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS         AGE
-    alertmanager-rancher-monitoring-alertmanager-db-alertmanager-rancher-monitoring-alertmanager-0   Bound    pvc-cea6316e-f74f-4771-870b-49edb5442819   5Gi        RWO            harvester-longhorn   14m
-    prometheus-rancher-monitoring-prometheus-db-prometheus-rancher-monitoring-prometheus-0           Bound    pvc-bbe8760d-926c-484a-851c-b8ec29ae05c0   50Gi       RWO            harvester-longhorn   14m
+    alertmanager-rancher-monitoring-alertmanager-db-alertmanager-rancher-monitoring-alertmanager-0   Bound    pvc-cea6316e-f74f-4771-870b-49edb5442819   5Gi        RWO            hypervisor-longhorn   14m
+    prometheus-rancher-monitoring-prometheus-db-prometheus-rancher-monitoring-prometheus-0           Bound    pvc-bbe8760d-926c-484a-851c-b8ec29ae05c0   50Gi       RWO            hypervisor-longhorn   14m
     ```
 
 1. Delete the PVC named `prometheus`, but retain the PVC named `alertmanager`.
@@ -273,7 +273,7 @@ You may encounter this when you install the Hypervisor v1.3.0 or higher version 
 
     $ kubectl get pvc -n cattle-monitoring-system
     NAME                                                                                             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS         AGE
-    alertmanager-rancher-monitoring-alertmanager-db-alertmanager-rancher-monitoring-alertmanager-0   Bound    pvc-cea6316e-f74f-4771-870b-49edb5442819   5Gi        RWO            harvester-longhorn   16m
+    alertmanager-rancher-monitoring-alertmanager-db-alertmanager-rancher-monitoring-alertmanager-0   Bound    pvc-cea6316e-f74f-4771-870b-49edb5442819   5Gi        RWO            hypervisor-longhorn   16m
     ```
 
 1. On the **Addons** screen of the Hypervisor UI, select **⋮** (menu icon) and then select **Edit YAML**.
@@ -286,7 +286,7 @@ You may encounter this when you install the Hypervisor v1.3.0 or higher version 
 
     Alternatively, you can use `kubectl` to edit the object.
 
-    `kubectl edit addons.harvesterhci.io -n cattle-monitoring-system rancher-monitoring`
+    `kubectl edit addons.hypervisorhci.io -n cattle-monitoring-system rancher-monitoring`
 
     ```
             retentionSize: 50GiB // Change 50 to 30
@@ -298,7 +298,7 @@ You may encounter this when you install the Hypervisor v1.3.0 or higher version 
                   resources:
                     requests:
                       storage: 50Gi // Change 50 to 30
-                  storageClassName: harvester-longhorn
+                  storageClassName: hypervisor-longhorn
     ```
 
 1. Enable the `rancher-monitoring` addon and wait for a few minutes..
@@ -336,7 +336,7 @@ spec:
   defaultNamespace: cattle-monitoring-system
   paused: false
   releaseName: rancher-monitoring-crd
-  repoName: harvester-charts
+  repoName: hypervisor-charts
   targets:
   - clusterName: local
     clusterSelector:
@@ -376,14 +376,14 @@ $ kubectl get bundles -A
 NAMESPACE     NAME                                          BUNDLEDEPLOYMENTS-READY   STATUS
 fleet-local   fleet-agent-local                             1/1
 fleet-local   local-managed-system-agent                    1/1
-fleet-local   mcc-harvester                                 1/1
-fleet-local   mcc-harvester-crd                             1/1
+fleet-local   mcc-hypervisor                                 1/1
+fleet-local   mcc-hypervisor-crd                             1/1
 fleet-local   mcc-local-managed-system-upgrade-controller   1/1
 fleet-local   mcc-rancher-logging-crd                       1/1
 fleet-local   mcc-rancher-monitoring-crd                    0/1                       Modified(1) [Cluster fleet-local/local]; clusterrole.rbac.authorization.k8s.io rancher-monitoring-crd-manager missing; clusterrolebinding.rbac.authorization.k8s.io rancher-monitoring-crd-manager missing; configmap.v1 cattle-monitoring-system/rancher-monitoring-crd-manifest missing; serviceaccount.v1 cattle-monitoring-system/rancher-monitoring-crd-manager missing
 ```
 
-When the issue exists and you [start an upgrade](../upgrade/automatic.md#start-an-upgrade), Hypervisor may return the following error message: `admission webhook "validator.harvesterhci.io" denied the request: managed chart rancher-monitoring-crd is not ready, please wait for it to be ready`.
+When the issue exists and you [start an upgrade](../upgrade/automatic.md#start-an-upgrade), Hypervisor may return the following error message: `admission webhook "validator.hypervisorhci.io" denied the request: managed chart rancher-monitoring-crd is not ready, please wait for it to be ready`.
 
 Also, when you search for the objects marked as `missing`, you will find that they exist in the cluster.
 
@@ -578,8 +578,8 @@ rules:
     NAMESPACE     NAME                                          BUNDLEDEPLOYMENTS-READY   STATUS
     fleet-local   fleet-agent-local                             1/1
     fleet-local   local-managed-system-agent                    1/1
-    fleet-local   mcc-harvester                                 1/1
-    fleet-local   mcc-harvester-crd                             1/1
+    fleet-local   mcc-hypervisor                                 1/1
+    fleet-local   mcc-hypervisor-crd                             1/1
     fleet-local   mcc-local-managed-system-upgrade-controller   1/1
     fleet-local   mcc-rancher-logging-crd                       1/1
     fleet-local   mcc-rancher-monitoring-crd                    1/1
@@ -626,7 +626,7 @@ ts=2025-05-20T05:41:50.044Z caller=main.go:892 level=info msg="Stopping notify d
 
 ```
 
-The `prometheus` CRD object includes the `storage-network.settings.harvesterhci.io/replica: "1" ` annotation.
+The `prometheus` CRD object includes the `storage-network.settings.hypervisorhci.io/replica: "1" ` annotation.
 
 ```
 - apiVersion: monitoring.coreos.com/v1
@@ -635,11 +635,11 @@ The `prometheus` CRD object includes the `storage-network.settings.harvesterhci.
     annotations:
       meta.helm.sh/release-name: rancher-monitoring
       meta.helm.sh/release-namespace: cattle-monitoring-system
-      storage-network.settings.harvesterhci.io/replica: "1"
+      storage-network.settings.hypervisorhci.io/replica: "1"
     creationTimestamp: "2025-05-20T06:40:25Z"
 ```
 
-The Hypervisor pod logs ('harvester-system/harvester' deployment) indicate that the attempt to change the `storage-network` setting was blocked.
+The Hypervisor pod logs ('hypervisor-system/hypervisor' deployment) indicate that the attempt to change the `storage-network` setting was blocked.
 
 ```
 ...
@@ -647,7 +647,7 @@ The Hypervisor pod logs ('harvester-system/harvester' deployment) indicate that 
 2025-05-20T08:13:49.842476305Z time="2025-05-20T08:13:49Z" level=info msg="rancher monitoring not found. skip"
 2025-05-20T08:13:49.842479072Z time="2025-05-20T08:13:49Z" level=info msg="current Grafana replicas: 0"
 2025-05-20T08:13:49.842480501Z time="2025-05-20T08:13:49Z" level=info msg="VM import controller no found. skip"
-2025-05-20T08:13:49.851381877Z time="2025-05-20T08:13:49Z" level=error msg="error syncing 'storage-network': handler harvester-storage-network-controller: Waiting for all volumes detached: pvc-6f66d234-f9c2-453e-8c17-383d9b489956,pvc-07c626f5-5135-4783-952d-cc20b1607cb5,pvc-1cfd6efe-c928-42e5-a834-8c27ed0e4897,pvc-5ce98d0a-5da1-4f30-af14-a8de29233380,pvc-1c9b7c9a-4943-4462-9082-217f9988cfc5,pvc-e9d92bfd-63c7-4ae3-ba00-1ce209f12caa,pvc-205ba31d-35fb-44f6-a3c4-c53001ec0dd6,pvc-6b5a7d11-7578-4397-9e13-ab475fe91463,pvc-669c69dd-93ad-4304-a340-484f7108362b,pvc-7668c486-b688-4524-b359-0cf9ec21cbc0,pvc-7d294996-821f-4434-ae4f-55a6de67f28c,pvc-216333c6-73f9-4e68-ac8b-53ab95a1f138,pvc-f72ca889-70c9-4dd9-bcec-a17ab65a1df4,pvc-01895fab-12f8-452a-9161-7d3c01e22726,pvc-330caa2d-5fdc-42f2-8c53-c5f80044760f,pvc-9506b7d0-c2d5-41f2-a08b-d7bc22dddb88,pvc-3e2b46d4-c471-44a9-9765-64babdb6ceed,pvc-25fe3372-1802-46d5-abf1-039099c567e2,pvc-b16fb262-cb38-4438-b074-84c7ad080a15,pvc-757c0f22-4ed6-4669-844d-cd7a87ceb26e,pvc-e0d99d8f-581f-4be6-baa3-d345308c9330,pvc-f5e1e19d-3dfb-4be1-9354-c092d7f03009,pvc-383ec26a-51f6-4f9d-8d8a-179651846d92,pvc-0d8f5737-c6e4-4f55-8d19-cf7a785552fc,pvc-5091892e-faf2-47b1-b987-bbde1ab2c13a,pvc-6f0c97ae-dfda-4799-bf26-e85feace5414,pvc-b0f717af-8a79-4c4e-b82e-90dedeae7697,pvc-ffe982d5-5ff1-40aa-a0db-cc10360d2d89,pvc-370757e2-4bce-41e7-b6f7-95aa8a5e8cf1,pvc-5a77d3e3-d555-476c-840f-7b9dadeb7478,pvc-43987c88-99b1-4889-9a47-5261717fe265,pvc-9f675704-9c52-46c2-96bf-2ff83d805383,pvc-d0b4e1d0-9bcd-4a8a-b52c-e1d8062a8099,pvc-a29be31f-531f-409a-bf5a-d267a54e2edb, requeuing"
+2025-05-20T08:13:49.851381877Z time="2025-05-20T08:13:49Z" level=error msg="error syncing 'storage-network': handler hypervisor-storage-network-controller: Waiting for all volumes detached: pvc-6f66d234-f9c2-453e-8c17-383d9b489956,pvc-07c626f5-5135-4783-952d-cc20b1607cb5,pvc-1cfd6efe-c928-42e5-a834-8c27ed0e4897,pvc-5ce98d0a-5da1-4f30-af14-a8de29233380,pvc-1c9b7c9a-4943-4462-9082-217f9988cfc5,pvc-e9d92bfd-63c7-4ae3-ba00-1ce209f12caa,pvc-205ba31d-35fb-44f6-a3c4-c53001ec0dd6,pvc-6b5a7d11-7578-4397-9e13-ab475fe91463,pvc-669c69dd-93ad-4304-a340-484f7108362b,pvc-7668c486-b688-4524-b359-0cf9ec21cbc0,pvc-7d294996-821f-4434-ae4f-55a6de67f28c,pvc-216333c6-73f9-4e68-ac8b-53ab95a1f138,pvc-f72ca889-70c9-4dd9-bcec-a17ab65a1df4,pvc-01895fab-12f8-452a-9161-7d3c01e22726,pvc-330caa2d-5fdc-42f2-8c53-c5f80044760f,pvc-9506b7d0-c2d5-41f2-a08b-d7bc22dddb88,pvc-3e2b46d4-c471-44a9-9765-64babdb6ceed,pvc-25fe3372-1802-46d5-abf1-039099c567e2,pvc-b16fb262-cb38-4438-b074-84c7ad080a15,pvc-757c0f22-4ed6-4669-844d-cd7a87ceb26e,pvc-e0d99d8f-581f-4be6-baa3-d345308c9330,pvc-f5e1e19d-3dfb-4be1-9354-c092d7f03009,pvc-383ec26a-51f6-4f9d-8d8a-179651846d92,pvc-0d8f5737-c6e4-4f55-8d19-cf7a785552fc,pvc-5091892e-faf2-47b1-b987-bbde1ab2c13a,pvc-6f0c97ae-dfda-4799-bf26-e85feace5414,pvc-b0f717af-8a79-4c4e-b82e-90dedeae7697,pvc-ffe982d5-5ff1-40aa-a0db-cc10360d2d89,pvc-370757e2-4bce-41e7-b6f7-95aa8a5e8cf1,pvc-5a77d3e3-d555-476c-840f-7b9dadeb7478,pvc-43987c88-99b1-4889-9a47-5261717fe265,pvc-9f675704-9c52-46c2-96bf-2ff83d805383,pvc-d0b4e1d0-9bcd-4a8a-b52c-e1d8062a8099,pvc-a29be31f-531f-409a-bf5a-d267a54e2edb, requeuing"
 ...
 ```
 

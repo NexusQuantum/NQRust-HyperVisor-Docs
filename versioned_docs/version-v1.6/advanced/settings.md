@@ -9,7 +9,7 @@ title: "Settings"
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/index"/>
 </head>
 
-The following is a list of advanced settings that you can use in Hypervisor. You can modify the `settings.harvesterhci.io` custom resource using both the Hypervisor UI and the `kubectl` command.
+The following is a list of advanced settings that you can use in Hypervisor. You can modify the `settings.hypervisorhci.io` custom resource using both the Hypervisor UI and the `kubectl` command.
 
 ---
 <p>&nbsp;</p>
@@ -228,7 +228,7 @@ You must specify key information in the `noProxy` field if you configured the fo
 | `httpProxy` and `httpsProxy` | Hypervisor node's CIDR | Not specifying the node's CIDR can break the Hypervisor cluster. |
 | `cluster-registration-url` | Host of `cluster-registration-url` | The host information allows you to access the Hypervisor cluster from Rancher. |
 
-ypervisorr appends necessary addresses to user-specified `noProxy` values (for example,`localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,longhorn-system,cattle-system,cattle-system.svc,harvester-system,.svc,.cluster.local`). This ensures that internal traffic flows as expected.
+ypervisorr appends necessary addresses to user-specified `noProxy` values (for example,`localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,longhorn-system,cattle-system,cattle-system.svc,hypervisor-system,.svc,.cluster.local`). This ensures that internal traffic flows as expected.
 
 **Example**:
 
@@ -363,7 +363,7 @@ A VM that is configured to have `1 CPU, 64 Gi Memory, 1 Volume and 1 NIC` will g
 The yaml output of this setting on a new cluster:
 
 ```
-apiVersion: harvesterhci.io/v1beta1
+apypervisor: harvesterhci.io/v1beta1
 default: "1.5"
 kind: Setting
 metadata:
@@ -477,11 +477,11 @@ Hypervisor retrieves the ISO URL and checksum value from the `${URL}/${VERSION}/
 **Example (version.yaml)**:
 
 ```
-apiVersion: harvesterhci.io/v1beta1
+apiVersion: hypervisorhci.io/v1beta1
 kind: Version
 metadata:
   name: ${VERSION}
-  namespace: harvester-system
+  namespace: hypervisor-system
 spec:
   isoChecksum: ${ISO_CHECKSUM}
   isoURL: ${ISO_URL}
@@ -608,7 +608,7 @@ The value is a JSON object literal that contains the following key-value pairs:
 The CLI shows the following `support-bundle-image` setting object:
 
 ```
-apiVersion: harvesterhci.io/v1beta1
+apiVersion: hypervisorhci.io/v1beta1
 default: '{"repository":"rancher/support-bundle-kit","tag":"v0.0.25","imagePullPolicy":"IfNotPresent"}'  // default value, automatically set
 kind: Setting
 metadata:
@@ -622,7 +622,7 @@ After some time, a newer image tag (`v0.0.36`) is specified in the `value` field
 ![](/img/v1.2/advanced-hv/support-bundle-image-set-customized-value.png)
 
 ```
-apiVersion: harvesterhci.io/v1beta1
+apiVersion: hypervisorhci.io/v1beta1
 default: '{"repository":"rancher/support-bundle-kit","tag":"v0.0.25","imagePullPolicy":"IfNotPresent"}'
 kind: Setting
 metadata:
@@ -635,7 +635,7 @@ value: '{"repository":"rancher/support-bundle-kit","tag":"v0.0.36","imagePullPol
 Eventually, this cluster is upgraded and the object changes again.
 
 ```
-apiVersion: harvesterhci.io/v1beta1
+apiVersion: hypervisorhci.io/v1beta1
 default: '{"repository":"rancher/support-bundle-kit","tag":"v0.0.38","imagePullPolicy":"IfNotPresent"}'  // default value, automatically updated after upgrade
 kind: Setting
 metadata:
@@ -650,13 +650,13 @@ The value of `tag` in the `value` field is `v0.0.36`, while the value of `tag` i
 To clear the outdated setting and use the default image tag, run the following command, remove the `value` field, and save the changes.
 
 ```
-$ kubectl edit settings.harvesterhci.io support-bundle-image
+$ kubectl edit settings.hypervisorhci.io support-bundle-image
 ```
 
 The object appears as follows after the `value` field is removed.
 
 ```
-apiVersion: harvesterhci.io/v1beta1
+apiVersion: hypervisorhci.io/v1beta1
 default: '{"repository":"rancher/support-bundle-kit","tag":"v0.0.38","imagePullPolicy":"IfNotPresent"}'
 kind: Setting
 metadata:
@@ -672,7 +672,7 @@ The **Use the default value** button on the Hypervisor UI can be used to copy th
 The object appears as follows after the changes are saved.
 
 ```
-apiVersion: harvesterhci.io/v1beta1
+apiVersion: hypervisorhci.io/v1beta1
 default: '{"repository":"rancher/support-bundle-kit","tag":"v0.0.38","imagePullPolicy":"IfNotPresent"}'  // default
 kind: Setting
 metadata:
@@ -692,7 +692,7 @@ When the cluster is upgraded in the future, the contents of the `value` field ma
 
 - Configuring this setting is not required. If you decide to specify a different image tag in the `value` field, remember that this tag may become outdated when the cluster is upgraded.
 
-- Use the command `$ kubectl edit settings.harvesterhci.io support-bundle-image` to clear the `value` field.
+- Use the command `$ kubectl edit settings.hypervisorhci.io support-bundle-image` to clear the `value` field.
 
 - The **Use the default value** button on the Hypervisor UI only copies the contents of the `default` field to the `value` field. You may use this to replace an outdated image tag, but the copied tag will eventually become outdated as well (when the cluster is upgraded and the `default` field is updated).
 
@@ -714,7 +714,7 @@ By default, the support bundle only collects resources from the following predef
 - cattle-fleet-clusters-system
 - cattle-monitoring-system
 - fleet-local
-- harvester-system
+- hypervisor-system
 - local
 - longhorn-system
 - cattle-logging-system

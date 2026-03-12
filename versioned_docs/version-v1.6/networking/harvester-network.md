@@ -49,8 +49,9 @@ If any of your workloads involve transmission of network traffic, you must speci
 :::
 
 ## VLAN Network
-
-The [Hypervisor network-controller](https://github.com/harvester/harvester-network-controller) leverages the [multus](https://github.com/k8snetworkplumbingwg/multus-cni) and [bridge](https://www.cni.dev/plugins/current/main/bridge/) CNI plugins to implement its customized L2 bridge VLAN network. It helps to connect your VMs to the host network interface and can be accessed from internal and external networks using the physical switch.
+<!-- ori -->
+<!-- The [Hypervisor network-controller](https://github.com/harvester/harvester-network-controller) leverages the [multus](https://github.com/k8snetworkplumbingwg/multus-cni) and [bridge](https://www.cni.dev/plugins/current/main/bridge/) CNI plugins to implement its customized L2 bridge VLAN network. It helps to connect your VMs to the host network interface and can be accessed from internal and external networks using the physical switch. -->
+The Hypervisor network-controller leverages the [multus](https://github.com/k8snetworkplumbingwg/multus-cni) and [bridge](https://www.cni.dev/plugins/current/main/bridge/) CNI plugins to implement its customized L2 bridge VLAN network. It helps to connect your VMs to the host network interface and can be accessed from internal and external networks using the physical switch.
 
 ### Create a VM Network
 
@@ -122,13 +123,14 @@ Starting from Hypervisor v1.1.2, Hypervisor supports updating and deleting VM ne
 
 ##  Overlay Network (Experimental)
 
-_Available as of v1.6.0_
-
-The [Hypervisor network-controller](https://github.com/harvester/harvester-network-controller) leverages [Kube-OVN](https://github.com/kubeovn/kube-ovn) to create an OVN-based virtualized network that supports advanced SDN capabilities such as [virtual private clouds (VPCs) and subnets](./kubeovn-vpc.md) for virtual machine workloads.
+<!-- _Available as of v1.6.0_ -->
+<!-- ori -->
+<!-- The [Hypervisor network-controller](https://github.com/harvester/harvester-network-controller) leverages [Kube-OVN](https://github.com/kubeovn/kube-ovn) to create an OVN-based virtualized network that supports advanced SDN capabilities such as [virtual private clouds (VPCs) and subnets](./kubeovn-vpc.md) for virtual machine workloads. -->
+The Hypervisor network-controller leverages [Kube-OVN](https://github.com/kubeovn/kube-ovn) to create an OVN-based virtualized network that supports advanced SDN capabilities such as [virtual private clouds (VPCs) and subnets](./kubeovn-vpc.md) for virtual machine workloads.
 
 An overlay network represents a virtual layer 2 switch that encapsulates and forwards traffic between virtual machines. This network can be linked to the subnet created in the VPC so that virtual machines can access the internal virtualized network and also reach the external network. However, the same virtual machines cannot be accessed by external networks such as VLANs and untagged networks because of current VPC limitations.
 
-![](/img/v1.2/networking-hv/kubeovn-harvester-topology.svg)
+![](/img/v1.2/networking-hv/kubeovn-hypervisor-topology-v2.svg)
 
 ### Create an Overlay Network
 

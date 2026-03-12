@@ -49,4 +49,5 @@ Each node that joins a Hypervisor cluster must be assigned a [role](../host/host
 
 ## **Hypervisor Node Driver**
 
-[Driver](../rancher/node/node-driver.md) that Rancher uses to provision VMs in a Hypervisor cluster, and to launch and manage guest Kubernetes clusters on top of those VMs.
+<!-- [Driver](../rancher/node/node-driver.md) that  -->
+Rancher uses to provision VMs in a Hypervisor cluster, and to launch and manage guest Kubernetes clusters on top of those VMs.

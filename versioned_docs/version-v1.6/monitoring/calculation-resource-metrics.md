@@ -10,7 +10,7 @@ keywords:
 ---
 
 <head>
-  <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/monitoring/calculation-resource-metrics"/>
+  <link rel="canonical" href="https:tpervisorhci.io/v1.6/monitoring/calculation-resource-metrics"/>
 </head>
 
 Hypervisor calculates resource metrics using data that is dynamically collected from the system. Host-level resource metrics are calculated and then aggregated to obtain the cluster-level metrics.
@@ -161,7 +161,7 @@ items:
         allowScheduling: true
         diskType: filesystem
         evictionRequested: false
-        path: /var/lib/harvester/defaultdisk
+        path: /var/lib/hypervisor/defaultdisk
         storageReserved: 24220101427
         tags: []
 ..
