@@ -10,7 +10,7 @@ keywords:
 - subnet
 - virtual private cloud
 - VPC
-draft: true
+# draft: true
 ---
 
 <head>
@@ -93,7 +93,7 @@ In Hypervisor, a virtual private cloud (VPC) is a logical network container that
 
 Hypervisor provides a default VPC named `ovn-cluster`, and two associated subnets named `ovn-default` and `join` for internal Kube-OVN operations. You can create additional VPCs by clicking **Create** on the **Virtual Private Cloud** screen.
 
-![](/img/default_vpc_and_subnet.png)
+![](/img/v1.2/networking-hv/default_vpc_and_subnet.png)
 
 When creating custom VPCs, you must configure settings related to the routes defined for directing traffic and connections that enable communication between the local and remote VPCs. The following table outlines the settings on the **Virtual Private Cloud** details screen:
 
@@ -106,7 +106,7 @@ When creating custom VPCs, you must configure settings related to the routes def
 | **VPC Peerings** tab | **Local Connect IP** | IP address on the local VPC to be used for the peering connection |
 | **VPC Peerings** tab | **Remote VPC** | Target remote VPC that is peered with the local VPC |
 
-![](/img/create_vpc.png)
+![](/img/v1.2/networking-hv/create_vpc.png)
 
 ### Subnet Settings
 
@@ -127,11 +127,11 @@ When creating subnets, you must configure settings that are relevant to your use
 | **Basic** tab | **Allow Subnets** | CIDRs that are allowed to access the subnet when **Private Subnet** is enabled |
 | **Basic** tab | **Exclude IPs** | List of IP addresses that should not be automatically assigned to virtual machines |
 
-![](/img/create_subnet.png)
+![](/img/v1.2/networking-hv/create_subnet.png)
 
 Each created subnet has a setting called [`natOutgoing`](#natoutgoing-setting), which enables network address translation (NAT) for traffic leaving the subnet and going to destinations outside the VPC. This setting is disabled by default. To enable it, you must edit the subnet's YAML configuration and set the value to `natOutgoing: true`.
 
-![](/img/customize_nat_outgoing.png)
+![](/img/v1.2/networking-hv/customize_nat_outgoing.png)
 
 By default, subnets in different VPCs are unable to communicate directly. To enable secure and controlled communication between them, you must establish a [VPC peering](#vpc-peering) connection. Without it, subnet traffic in each VPC remains completely isolated.
 
@@ -141,7 +141,7 @@ VPC peering connections can only be established between custom VPCs.
 
 :::
 
-![](/img/vpcpeer.png)
+![](/img/v1.2/networking-hv/vpcpeer.png)
 
 ### Create a VPC
 
@@ -151,7 +151,7 @@ Perform the following steps to create and configure a VPC.
 
     The kubeovn-operator add-on deploys Kube-OVN to the Hypervisor cluster.
 
-    ![](/img/kubeovn-operator.png)
+    ![](/img/v1.2/networking-hv/kubeovn-operator.png)
 
 1. [Create overlay networks](./harvester-network.md#create-an-overlay-network).
 
@@ -584,3 +584,4 @@ For more information about VPC peering prerequisites and configuration, see [VPC
 #### VPC Peering Limitation
 
 Peering only works between custom VPCs. Any attempt to establish a peering connection between the default VPC (`ovn-cluster`) and a custom VPC will fail.
+
