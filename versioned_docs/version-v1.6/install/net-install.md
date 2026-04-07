@@ -1,7 +1,8 @@
-ypervisor---
+---
 sidebar_position: 9
 sidebar_label: Net Install ISO
 title: "Net Install ISO"
+pagination_next: null
 keywords:
   - Hypervisor
   - Net ISO Installation
@@ -17,7 +18,8 @@ description: Hypervisor Net Install ISO is a minimal ISO that contains only the 
 The Hypervisor net install ISO is a minimal installation image that contains only the core OS components, allowing the installer to boot and then install the Hypervisor OS on a disk. After installation is completed, the Hypervisor OS pulls all required container images from the internet (mostly from Docker Hub).
 
 You can use the net install ISO in the following situations:
-- The virtual media implementation on a server is buggy or slow. Community users have reported that ISO redirection is too slow to preload all images onto a system. For more information, see [Issue 2651](https://github.com/harvester/harvester/issues/2651).
+- The virtual media implementation on a server is buggy or slow. Community users have reported that ISO redirection is too slow to preload all images onto a system. 
+<!-- For more information, see [Issue 2651](https://github.com/harvester/harvester/issues/2651). -->
 - You have a private registry that contains all Hypervisor images, as well as the knowledge and experience required to configure image mirrors for containerd.
 
 :::caution
@@ -29,12 +31,12 @@ You can use the net install ISO in the following situations:
 
 <!-- Download the net install ISO from the GitHub [Releases](https://github.com/harvester/harvester/releases) page, and then boot the ISO to install Hypervisor. Net install ISO file names have the suffix `net-install` (for example, https://releases.rancher.com/harvester/v1.3.0/harvester-v1.3.0-amd64-net-install.iso). -->
 
-## PXE Installation
+<!-- ## PXE Installation
 
 If you decide to use the net install ISO as the PXE installation source, add the following parameter when booting the kernel:
 
 ```
-harvester.install.with_net_images=true
+hypervisor.install.with_net_images=true
 ```
 
-Please check [PXE Boot Installation](./pxe-boot-install.md) for more information.
+Please check [PXE Boot Installation](./pxe-boot-install.md) for more information. -->

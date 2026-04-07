@@ -69,9 +69,9 @@ To resolve this issue, perform the following steps:
 
 <!-- The issue will be addressed in Longhorn v1.8.2, which will likely be included in Harvester v1.0. -->
 
-Related issues:
-<!-- - Harvester: [Issue #8096](https://github.com/harvester/harvester/issues/8096) -->
-- Longhorn: [Issue #10741](https://github.com/longhorn/longhorn/issues/10741)
+<!-- Related issues:
+- Harvester: [Issue #8096](https://github.com/harvester/harvester/issues/8096)
+- Longhorn: [Issue #10741](https://github.com/longhorn/longhorn/issues/10741) -->
 
 </TabItem>
 <TabItem value="api" label="API">

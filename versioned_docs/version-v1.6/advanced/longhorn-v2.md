@@ -97,7 +97,8 @@ Starting with Hypervisor v1.5.0 and Longhorn v1.8.1, these limitations are remov
 
 :::info important
 
-- If you are using the SPDK AIO bdev driver (i.e. if your disks were added using `/dev/sd*` device paths), _V2 volumes created before the upgrade will be unusable after upgrading, and cannot be recovered_.  For more details see https://github.com/longhorn/longhorn/issues/10461.
+- If you are using the SPDK AIO bdev driver (i.e. if your disks were added using `/dev/sd*` device paths), _V2 volumes created before the upgrade will be unusable after upgrading, and cannot be recovered_.  
+<!-- For more details see https://github.com/longhorn/longhorn/issues/10461. -->
 
 - If you are using the SPDK NVMe bdev driver (i.e. your disks were added using `/dev/nvme*` device paths), V2 volumes created before the upgrade will function after the upgrade, but will continue to use the Longhorn v1.7.x engine.  As mentioned above, these volumes will remain non-migratable, but it is possible to export the data and create new migratable volumes (see below for details).
 

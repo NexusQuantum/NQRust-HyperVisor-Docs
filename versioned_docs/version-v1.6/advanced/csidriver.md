@@ -120,7 +120,7 @@ When [creating a virtual machine](../vm/create-vm.md) using the Hypervisor UI (*
 
 In the following example, the root volume is created using NFS, and the data volume is created using the Longhorn V2 Data Engine.
 
-![various-volumes-for-vm-created](/img/v1.5/advanced/various-volumes-for-vm-created.png)
+![various-volumes-for-vm-created](/img/v1.5/advanced-hv/various-volumes-for-vm-created.png)
 
 ### Volume Creation
 
@@ -221,10 +221,10 @@ If the server is already running, check the `squash` option. You must disable sq
 
   Once created, you can use the StorageClass to create virtual machine images, root volumes, and data volumes.
 
-## References
+<!-- ## References
 
 - [Use Rook Ceph External Storage with Hypervisor](https://harvesterhci.io/kb/use_rook_ceph_external_storage)
-- [Using NetApp Storage on Hypervisor](https://harvesterhci.io/kb/install_netapp_trident_csi)
+- [Using NetApp Storage on Hypervisor](https://harvesterhci.io/kb/install_netapp_trident_csi) -->
 <!-- - [Third Party Storage Support](https://github.com/harvester/harvester/blob/master/enhancements/20250203-third-party-storage-support.md)  -->
 
 ## Known Issues
@@ -270,7 +270,7 @@ Increasing the overhead value does not affect the image PVC size. The scratch vo
 
 :::
 
-<!-- Related issue: [#7993](https://github.com/harvester/harvester/issues/7993) (See this [comment](https://github.com/harvester/harvester/issues/7993#issuecomment-2790260841).) -->
+<!-- Related issue: [#7993](https://github.com/harvester/harvester/issues/7993) (See this??[comment](https://github.com/harvester/harvester/issues/7993#issuecomment-2790260841).) -->
 
 ### 2. Multipath support
 <!-- _Available as of v1.4.3_ -->
@@ -319,3 +319,4 @@ spec:
               - multipathd
   paused: false
 ```
+

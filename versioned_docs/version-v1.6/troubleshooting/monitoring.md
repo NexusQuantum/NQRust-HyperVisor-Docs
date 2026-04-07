@@ -2,7 +2,6 @@
 sidebar_position: 4
 sidebar_label: Monitoring
 title: "Monitoring"
-draft: true
 ---
 
 <head>
@@ -383,9 +382,10 @@ fleet-local   mcc-rancher-logging-crd                       1/1
 fleet-local   mcc-rancher-monitoring-crd                    0/1                       Modified(1) [Cluster fleet-local/local]; clusterrole.rbac.authorization.k8s.io rancher-monitoring-crd-manager missing; clusterrolebinding.rbac.authorization.k8s.io rancher-monitoring-crd-manager missing; configmap.v1 cattle-monitoring-system/rancher-monitoring-crd-manifest missing; serviceaccount.v1 cattle-monitoring-system/rancher-monitoring-crd-manager missing
 ```
 
-When the issue exists and you [start an upgrade](../upgrade/automatic.md#start-an-upgrade), Hypervisor may return the following error message: `admission webhook "validator.hypervisorhci.io" denied the request: managed chart rancher-monitoring-crd is not ready, please wait for it to be ready`.
+<!-- When the issue exists and you [start an upgrade](../upgrade/automatic.md#start-an-upgrade), Hypervisor may return the following error message: `admission webhook "validator.hypervisorhci.io" denied the request: managed chart rancher-monitoring-crd is not ready, please wait for it to be ready`. -->
 
-Also, when you search for the objects marked as `missing`, you will find that they exist in the cluster.
+<!-- Also,  -->
+when you search for the objects marked as `missing`, you will find that they exist in the cluster.
 
 Example:
 
@@ -588,9 +588,9 @@ rules:
 
 1. (Optional) Retry the upgrade (if previously unsuccessful because of this issue).
 
-### Related Issue
+<!-- ### Related Issue
 
-https://github.com/harvester/harvester/issues/5505
+https://github.com/harvester/harvester/issues/5505 -->
 
 ## Some `rancher-monitoring` Add-On Pods Are Abruptly Terminated
 
@@ -671,6 +671,6 @@ This process usually takes a short time to complete, but can be disrupted when t
 
 1. Enable the `rancher-monitoring` add-on.
 
-### Related Issue
+<!-- ### Related Issue
 
-https://github.com/harvester/harvester/issues/8565
+https://github.com/harvester/harvester/issues/8565 -->

@@ -51,13 +51,15 @@ When the nodes in the cluster do not use a proxy to communicate with each other,
 
 All necessary images to install and run Hypervisor are conveniently packaged into the ISO, eliminating the need to pre-load images on bare-metal nodes. A Hypervisor cluster manages them independently and effectively behind the scenes.
 
-However, it's essential to understand a guest K8s cluster (e.g., RKE2 cluster) created by the [Hypervisor node driver](./rancher/node/node-driver.md) is a distinct entity from a Hypervisor cluster. A guest cluster operates within VMs and requires pulling images either from the internet or a [private registry](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/global-default-private-registry#configure-a-private-registry-with-credentials-when-creating-a-cluster).
+<!-- However, it's essential to understand a guest K8s cluster (e.g., RKE2 cluster) created by the [Hypervisor node driver](./rancher/node/node-driver.md) is a distinct entity from a Hypervisor cluster. A guest cluster operates within VMs and requires pulling images either from the internet or a [private registry](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/global-default-private-registry#configure-a-private-registry-with-credentials-when-creating-a-cluster). -->
+However, it's essential to understand a guest K8s cluster (e.g., RKE2 cluster) created by the Hypervisor node driver is a distinct entity from a Hypervisor cluster. A guest cluster operates within VMs and requires pulling images either from the internet or a [private registry](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/global-default-private-registry#configure-a-private-registry-with-credentials-when-creating-a-cluster).
 
 If the **Cloud Provider** option is configured to **Hypervisor** in a guest K8s cluster, it deploys the Hypervisor cloud provider and Container Storage Interface (CSI) driver.
 
 <!-- ![cluster-registry](/img/v1.2/cluster-registry.png) -->
 
-As a result, we recommend monitoring each [RKE2 release](https://github.com/rancher/rke2/releases) in your air gapped environment and pulling the required images into your private registry. Please refer to the **Hypervisor CCM & CSI Driver** with RKE2 Releases section on the [Hypervisor support matrix page](https://www.suse.com/suse-harvester/support-matrix/all-supported-versions/harvester-v1-1-2/) for the best Hypervisor cloud provider and CSI driver capability support.
+As a result, we recommend monitoring each [RKE2 release](https://github.com/rancher/rke2/releases) in your air gapped environment and pulling the required images into your private registry.
+<!-- Please refer to the **Hypervisor CCM & CSI Driver** with RKE2 Releases section on the [Hypervisor support matrix page](https://www.suse.com/suse-harvester/support-matrix/all-supported-versions/harvester-v1-1-2/) for the best Hypervisor cloud provider and CSI driver capability support. -->
 
 <!-- ## Integrate with an External Rancher
 

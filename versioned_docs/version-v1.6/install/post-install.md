@@ -20,7 +20,9 @@ You can enhance the security and performance of your Hypervisor cluster by perfo
 
 By default during installation, SSH password authentication is enabled on the Hypervisor nodes. This allows administrator to access the nodes for installation diagnosis. 
 
-Once installation is completed, however, disabling SSH password authentication is recommended. You can run the following command, which uses `kubectl` to apply a [`CloudInit`](https://docs.harvesterhci.io/v1.6/advanced/cloudinitcrd/) configuration, to disable SSH password authentication on all Hypervisor nodes:
+Once installation is completed, however, disabling SSH password authentication is recommended. You can run the following command, which uses `kubectl` to apply a `CloudInit` configuration, to disable SSH password authentication on all Hypervisor nodes:
+<!-- ori -->
+<!-- Once installation is completed, however, disabling SSH password authentication is recommended. You can run the following command, which uses `kubectl` to apply a [`CloudInit`](https://docs.harvesterhci.io/v1.6/advanced/cloudinitcrd/) configuration, to disable SSH password authentication on all Hypervisor nodes: -->
 
 ```sh
 cat <<EOF | kubectl apply -f -

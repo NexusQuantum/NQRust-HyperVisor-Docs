@@ -87,7 +87,8 @@ If you selected **Enabled** in the **Event** section of the **Out-of-Band Access
 
 ## Troubleshooting
 
-The **Out-of-Band Access** settings screen may become unresponsive and display the message `Waiting for "inventories.metal.hypervisorhci.io" to be ready`. You must refresh the page whenever this occurs. For more information, see [Issue #4412](https://github.com/harvester/harvester/issues/4412).
+The **Out-of-Band Access** settings screen may become unresponsive and display the message `Waiting for "inventories.metal.hypervisorhci.io" to be ready`. You must refresh the page whenever this occurs. 
+<!-- For more information, see [Issue #4412](https://github.com/harvester/harvester/issues/4412). -->
 
 If you encounter persistent issues while using **hypervisor-seeder**, submit the following to SUSE Support:
 

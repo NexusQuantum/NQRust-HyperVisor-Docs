@@ -668,7 +668,7 @@ install:
 
 > Definition: Reserved
 
-### `install.skipchecks`
+<!-- ### `install.skipchecks`
 
 **Definition**: Setting that allows installation to proceed even if minimum requirements for production use are not met
 
@@ -683,7 +683,7 @@ To override this behavior, set `install.skipchecks=true`. When set to `true`, wa
 ```yaml
 install:
   skipchecks: true
-```
+``` -->
 
 ### `install.tty`
 

@@ -94,7 +94,8 @@ $ rm hypervior.tar
 
 - Find the missing images on that node from the other nodes, then export the images from the node where the images still exist and import them on the missing node.
 
-To prevent this from happening, we recommend cleaning up unused container images from the previous version after each successful Hypervisor upgrade if the image store disk space is stressed. We provided a [harv-purge-images script](https://github.com/harvester/upgrade-helpers/blob/main/bin/harv-purge-images.sh) that makes cleaning up disk space easy, especially for container image storage. The script has to be executed on each Hypervisor node. For example, if the cluster was originally in v1.1.2, and now it gets upgraded to v1.2.0, you can do the following to discard the container images that are only used in v1.1.2 but no longer needed in v1.2.0:
+<!-- ori -->
+<!-- To prevent this from happening, we recommend cleaning up unused container images from the previous version after each successful Hypervisor upgrade if the image store disk space is stressed. We provided a [harv-purge-images script](https://github.com/harvester/upgrade-helpers/blob/main/bin/harv-purge-images.sh) that makes cleaning up disk space easy, especially for container image storage. The script has to be executed on each Hypervisor node. For example, if the cluster was originally in v1.1.2, and now it gets upgraded to v1.2.0, you can do the following to discard the container images that are only used in v1.1.2 but no longer needed in v1.2.0: -->
 
 ```shell
 # on each node

@@ -36,7 +36,7 @@ Please refer to [this page](./create-windows-vm.md) for creating Windows virtual
 1. The VM Name is a required field.
 1. (Optional) VM template is optional, you can choose `iso-image`, `raw-image` or `windows-iso-image` template to speed up your VM instance creation.
 1. On the **Basics** tab, configure the following settings:
-    - **CPU** and **Memory**: You can allocate a maximum of **254** vCPUs. If virtual machines are not expected to fully consume the allocated resources most of the time, you can use the [`overcommit-config`](../advanced/settings.md#overcommit-config) setting to optimize physical resource allocation. As a best practice, the number of virtual CPUs (vCPUs) allocated per virtual machine should not exceed the physical processor threads available on the host.
+    - **CPU** and **Memory**: You can allocate a maximum of **254** vCPUs. If virtual machines are not expected to fully consume the allocated resources most of the time, you can use the [`overcommit-config`](/v1.6/advanced/settings#overcommit-config) setting to optimize physical resource allocation. As a best practice, the number of virtual CPUs (vCPUs) allocated per virtual machine should not exceed the physical processor threads available on the host.
     - **SSHKey**: Select SSH keys or upload new keys.
 1. Select a custom VM image on the **Volumes** tab. The default disk will be the root disk. You can add more disks to the VM.
 1. To configure networks, go to the **Networks** tab.
@@ -91,6 +91,7 @@ spec:
 For more information, see the [API reference](../api/create-namespaced-virtual-machine).
 
 </TabItem>
+{/*
 <TabItem value="terraform" label="Terraform">
 
 To create a virtual machine using the [Hypervisor Terraform Provider](https://registry.terraform.io/providers/harvester/harvester/latest),
@@ -139,6 +140,7 @@ resource "hypervisor_virtualmachine" "opensuse154" {
 
 ```
 </TabItem>
+*/}
 </Tabs>
 
 ## Volumes
@@ -235,7 +237,7 @@ You can choose to run virtual machines on the following:
 
 - Nodes that match scheduling rules
 
-  You gain greater flexibility by scheduling a virtual machine on a group of nodes. In the following example, the virtual machine can be scheduled on nodes with a specific label. The key is `harvesterhci.io/group` and the value can be either `engineering` or `qa`.
+  You gain greater flexibility by scheduling a virtual machine on a group of nodes. In the following example, the virtual machine can be scheduled on nodes with a specific label. The key is `hypervisorhci.io/group` and the value can be either `engineering` or `qa`.
 
   ```
       spec:
@@ -244,7 +246,7 @@ You can choose to run virtual machines on the following:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
                 - matchExpressions:
-                    - key: harvesterhci.io/group
+                    - key: hypervisorhci.io/group
                       operator: In
                       values:
                         - engineering
@@ -303,9 +305,9 @@ Hypervisor ensures the following:
 ...
 metadata:
   labels:
-    network.harvesterhci.io/cn2: "true"
-    network.harvesterhci.io/mgmt: "true"
-    network.harvesterhci.io/vlanconfig: cn2-vc1
+    network.hypervisorhci.io/cn2: "true"
+    network.hypervisorhci.io/mgmt: "true"
+    network.hypervisorhci.io/vlanconfig: cn2-vc1
 ...
 ```
 
@@ -320,7 +322,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                  - key: network.harvesterhci.io/cn2
+                  - key: network.hypervisorhci.io/cn2
                     operator: In
                     values:
                       - 'true'
@@ -381,7 +383,7 @@ The virtual machine is [non-migratable](./live-migration.md#non-migratable-virtu
 
 Hypervisor allows you to attach custom metadata to virtual machines using annotations. These key-value pairs enable extended features or behaviors without requiring changes to the core virtual machine configuration.
 
-You can use the `harvesterhci.io/custom-ip` annotation to set an IP address on the Hypervisor UI *for display purposes*. This is useful when the virtual machine is unable to report its IP address because of a missing `qemu-guest-agent` or other reasons.
+<!-- You can use the `hypervisorhci.io/custom-ip` annotation to set an IP address on the Hypervisor UI *for display purposes*. This is useful when the virtual machine is unable to report its IP address because of a missing `qemu-guest-agent` or other reasons. -->
 
 ## Advanced Options
 
@@ -410,7 +412,7 @@ Hypervisor adds a `Reserved Memory` field and a setting `additional-guest-memory
 
 The `Total Memory Overhead` = automatically computed `Memory Overhead` + Hypervisor `Reserved Memory`.
 
-All the details are described in the setting [additional-guest-memory-overhead-ratio](../advanced/settings.md#additional-guest-memory-overhead-ratio).
+All the details are described in the setting [additional-guest-memory-overhead-ratio](/v1.6/advanced/settings#additional-guest-memory-overhead-ratio).
 
 :::important
 

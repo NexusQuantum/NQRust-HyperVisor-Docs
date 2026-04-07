@@ -1,6 +1,7 @@
 ---
 id: customsuseimages
 sidebar_position: 8
+sidebar_class_name: hide-sidebar-item
 sidebar_label: Custom SUSE VM Images
 title: "Custom SUSE VM Images"
 draft: true

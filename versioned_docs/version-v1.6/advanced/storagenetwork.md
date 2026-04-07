@@ -40,25 +40,27 @@ Before you begin configuring the storage network, ensure that the following requ
     
     Example: If a cluster has five nodes with two disks each, and ten images are to be uploaded simultaneously, the IP range should be greater than or equal to `/26` (calculation: (5 x 2) + (5 x 2) + 10 = 30).
 
-  - Excludes IP addresses that Longhorn pods and the storage network must not use, such as addresses reserved for [RWX volumes](../rancher/csi-driver.md#rwx-volumes-support), the gateway, and other components.
+  <!-- - Excludes IP addresses that Longhorn pods and the storage network must not use, such as addresses reserved for [RWX volumes](../rancher/csi-driver.md#rwx-volumes-support), the gateway, and other components. -->
 
 - The Whereabouts CNI is installed correctly.
 
   You can check if the `ippools.whereabouts.cni.cncf.io` CRD exists in the cluster using the command `kubectl get crd ippools.whereabouts.cni.cncf.io`.
 
-  If an empty string is returned, add the CRDs in [this directory](https://github.com/harvester/harvester/tree/v1.1.0/deploy/charts/harvester/dependency_charts/whereabouts/crds) using the following commands:
+<!-- If an empty string is returned, add the CRDs using the following commands: -->
+<!-- ori (tab sekali) -->
+<!-- If an empty string is returned, add the CRDs in [this directory](https://github.com/harvester/harvester/tree/v1.1.0/deploy/charts/harvester/dependency_charts/whereabouts/crds) using the following commands: -->
 
-  ```
-  kubectl apply -f https://raw.githubusercontent.com/harvester/harvester/v1.1.0/deploy/charts/harvester/dependency_charts/whereabouts/crds/whereabouts.cni.cncf.io_ippools.yaml
+<!-- ```
+kubectl apply -f https://raw.githubusercontent.com/hypervisor/hypervisor/v1.1.0/deploy/charts/hypervisor/dependency_charts/whereabouts/crds/whereabouts.cni.cncf.io_ippools.yaml
 
-  kubectl apply -f https://raw.githubusercontent.com/harvester/harvester/v1.1.0/deploy/charts/harvester/dependency_charts/whereabouts/crds/whereabouts.cni.cncf.io_overlappingrangeipreservations.yaml
-  ```
-
+kubectl apply -f https://raw.githubusercontent.com/hypervisor/hypervisor/v1.1.0/deploy/charts/hypervisor/dependency_charts/whereabouts/crds/whereabouts.cni.cncf.io_overlappingrangeipreservations.yaml
+```  -->
+<!-- 
   :::note
 
   The Whereabouts CNI is not installed correctly in certain [upgrade scenarios](https://github.com/harvester/harvester/issues/3168).
 
-  :::
+  ::: -->
 
 - All virtual machines are stopped.
 
@@ -151,7 +153,7 @@ Once the storage network is disabled, Longhorn starts using the pod network for 
 You can use the following command to configure the [`storage-network`](./settings.md#storage-network) setting.
 
 ```bash
-kubectl edit settings.harvesterhci.io storage-network
+kubectl edit settings.hypervisorhci.io storage-network
 ```
 
 The storage network is automatically enabled in the following situations:
@@ -161,7 +163,7 @@ The storage network is automatically enabled in the following situations:
   Example:
 
   ```yaml
-  apiVersion: harvesterhci.io/v1beta1
+  apiVersion: hypervisorhci.io/v1beta1
   kind: Setting
   metadata:
     name: storage-network
@@ -171,7 +173,7 @@ The storage network is automatically enabled in the following situations:
 - The value field is empty.
 
   ```yaml
-  apiVersion: harvesterhci.io/v1beta1
+  apiVersion: hypervisorhci.io/v1beta1
   kind: Setting
   metadata:
     name: storage-network
@@ -181,7 +183,7 @@ The storage network is automatically enabled in the following situations:
 The storage network is disabled when you remove the value field.
 
   ```yaml
-  apiVersion: harvesterhci.io/v1beta1
+  apiVersion: hypervisorhci.io/v1beta1
   kind: Setting
   metadata:
     name: storage-network
@@ -211,19 +213,19 @@ Hypervisor does not start virtual machines automatically. You must ensure that t
 1. Verify that the `storage-network` setting's status is `True` and the type is `configured` using the following command:
 
     ```bash
-    kubectl get settings.harvesterhci.io storage-network -o yaml
+    kubectl get settings.hypervisorhci.io storage-network -o yaml
     ```
 
     Example:
 
     ```yaml
-    apiVersion: harvesterhci.io/v1beta1
+    apiVersion: hypervisorhci.io/v1beta1
     kind: Setting
     metadata:
       annotations:
-        storage-network.settings.harvesterhci.io/hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
-        storage-network.settings.harvesterhci.io/net-attach-def: ""
-        storage-network.settings.harvesterhci.io/old-net-attach-def: ""
+        storage-network.settings.hypervisorhci.io/hash: da39a3ee5e6b4b0d3255bfef95601890afd80709
+        storage-network.settings.hypervisorhci.io/net-attach-def: ""
+        storage-network.settings.hypervisorhci.io/old-net-attach-def: ""
       creationTimestamp: "2022-10-13T06:36:39Z"
       generation: 51
       name: storage-network
@@ -291,7 +293,7 @@ Hypervisor does not start virtual machines automatically. You must ensure that t
               "default": true,
               "dns": {}
           },{
-              "name": "harvester-system/storagenetwork-95bj4",
+              "name": "hypervisor-system/storagenetwork-95bj4",
               "interface": "lhnet1",
               "ips": [
                   "192.168.0.3"
@@ -299,7 +301,7 @@ Hypervisor does not start virtual machines automatically. You must ensure that t
               "mac": "2e:51:e6:31:96:40",
               "dns": {}
           }]
-        k8s.v1.cni.cncf.io/networks: '[{"namespace": "harvester-system", "name": "storagenetwork-95bj4",
+        k8s.v1.cni.cncf.io/networks: '[{"namespace": "hypervisor-system", "name": "storagenetwork-95bj4",
           "interface": "lhnet1"}]'
         kubernetes.io/psp: global-unrestricted-psp
         longhorn.io/last-applied-tolerations: '[{"key":"kubevirt.io/drain","operator":"Exists","effect":"NoSchedule"}]'
@@ -318,7 +320,7 @@ Hypervisor does not start virtual machines automatically. You must ensure that t
       Example:
 
       ```
-      longhorn-manager-j6dhh/longhorn-manager.log:2024-03-20T16:25:24.662251001Z time="2024-03-20T16:25:24Z" level=error msg="Failed rebuilding of replica 10.0.16.26:10000" controller=longhorn-engine engine=pvc-0a151c59-ffa9-4938-9c86-59ebb296bc88-e-c2a7fe77 error="proxyServer=10.52.6.33:8501 destination=10.0.16.23:10000: failed to add replica tcp://10.0.16.26:10000 for volume: rpc error: code = Unknown desc = failed to get replica 10.0.16.26:10000: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = \"transport: Error while dialing dial tcp 10.0.16.26:10000: connect: no route to host\"" node=oml-harvester-9 volume=pvc-0a151c59-ffa9-4938-9c86-59ebb296bc88
+      longhorn-manager-j6dhh/longhorn-manager.log:2024-03-20T16:25:24.662251001Z time="2024-03-20T16:25:24Z" level=error msg="Failed rebuilding of replica 10.0.16.26:10000" controller=longhorn-engine engine=pvc-0a151c59-ffa9-4938-9c86-59ebb296bc88-e-c2a7fe77 error="proxyServer=10.52.6.33:8501 destination=10.0.16.23:10000: failed to add replica tcp://10.0.16.26:10000 for volume: rpc error: code = Unknown desc = failed to get replica 10.0.16.26:10000: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = \"transport: Error while dialing dial tcp 10.0.16.26:10000: connect: no route to host\"" node=oml-hypervisor-9 volume=pvc-0a151c59-ffa9-4938-9c86-59ebb296bc88
       ```
 
     To test the communication between Longhorn pods, perform the following steps:

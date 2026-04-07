@@ -12,11 +12,11 @@ Hypervisor uses StorageClasses to describe how Longhorn must provision volumes. 
 
 :::note
 
-The default StorageClass `harvester-longhorn` has a replica count value of `3` for high availability. If you use `harvester-longhorn` in a single-node cluster, Longhorn is unable to create the default number of replicas, and volumes are marked as *Degraded* on the Hypervisor UI. 
+The default StorageClass `hypervisor-longhorn` has a replica count value of `3` for high availability. If you use `hypervisor-longhorn` in a single-node cluster, Longhorn is unable to create the default number of replicas, and volumes are marked as *Degraded* on the Hypervisor UI. 
 
 To avoid this issue, you can perform either of the following actions: 
 
-- Change the [replica count](../install/harvester-configuration/#installharvesterstorage_classreplica_count) of `harvester-longhorn` to `1` using a [Hypervisor configuration](../install/harvester-configuration.md) file. 
+- Change the [replica count](../install/harvester-configuration/#installharvesterstorage_classreplica_count) of `hypervisor-longhorn` to `1` using a [Hypervisor configuration](../install/harvester-configuration.md) file. 
 
 - [Create a new StorageClass](../advanced/storageclass.md#creating-a-storageclass) with the **Number of Replicas** parameter set to `1`. Once created, locate the new StorageClass in the list and then select **⋮ > Set as Default**.
 
@@ -101,10 +101,11 @@ allowVolumeExpansion: true
 ```
 
 </TabItem>
+{/*
 <TabItem value="terraform" label="Terraform">
 
 ```hcl
-resource "harvester_storageclass" "single-replica" {
+resource "hypervisor_storageclass" "single-replica" {
   name = "single-replica"
 
   is_default = "true"
@@ -121,6 +122,7 @@ resource "harvester_storageclass" "single-replica" {
 ```
 
 </TabItem>
+*/}
 </Tabs>
 
 ## Data Locality Settings
@@ -174,10 +176,10 @@ Each field on the **CDI Settings** screen corresponds to an annotation in the St
 
 | UI Field | Annotation | Description | Supported Values | Example |
 | --- | --- | --- | --- | --- |
-| **Volume Mode / Access Modes** | `cdi.harvesterhci.io/storageProfileVolumeModeAccessModes` | Default PVC volume mode and access modes | JSON object with volume modes and access modes | `'{"Block":["ReadWriteOnce"]}'` |
-| **Volume Snapshot Class** | `cdi.harvesterhci.io/storageProfileVolumeSnapshotClass` | VolumeSnapshotClass name to be used when taking snapshots of virtual machine images under this StorageClass. This setting applies only when you are using the `snapshot` clone strategy. If you have already configured the `volumeSnapshotClassName` in the `csi-driver-config` setting for the corresponding provisioner, that value will be used as the default. | Valid VolumeSnapshotClass name | `lvm-snapshot`, `longhorn-snapshot` |
-| **Clone Strategy** | `cdi.harvesterhci.io/storageProfileCloneStrategy` | Clone strategy to be used for volumes created with VM images that use this StorageClass. | `copy`: Copies blocks of data over the network<br/>`snapshot`: Clones the volume by creating a temporary VolumeSnapshot and restoring it to a new PVC<br/>`csi-clone`: Clones the volume using a CSI clone operation | `snapshot` |
-| **File System Overhead** | `cdi.harvesterhci.io/filesystemOverhead` | Percentage of filesystem overhead to be considered when calculating the PVC size. | Decimal value between 0 and 1 with a maximum of 3 digits | `0.05` |
+| **Volume Mode / Access Modes** | `cdi.hypervisorhci.io/storageProfileVolumeModeAccessModes` | Default PVC volume mode and access modes | JSON object with volume modes and access modes | `'{"Block":["ReadWriteOnce"]}'` |
+| **Volume Snapshot Class** | `cdi.hypervisorhci.io/storageProfileVolumeSnapshotClass` | VolumeSnapshotClass name to be used when taking snapshots of virtual machine images under this StorageClass. This setting applies only when you are using the `snapshot` clone strategy. If you have already configured the `volumeSnapshotClassName` in the `csi-driver-config` setting for the corresponding provisioner, that value will be used as the default. | Valid VolumeSnapshotClass name | `lvm-snapshot`, `longhorn-snapshot` |
+| **Clone Strategy** | `cdi.hypervisorhci.io/storageProfileCloneStrategy` | Clone strategy to be used for volumes created with VM images that use this StorageClass. | `copy`: Copies blocks of data over the network<br/>`snapshot`: Clones the volume by creating a temporary VolumeSnapshot and restoring it to a new PVC<br/>`csi-clone`: Clones the volume using a CSI clone operation | `snapshot` |
+| **File System Overhead** | `cdi.hypervisorhci.io/filesystemOverhead` | Percentage of filesystem overhead to be considered when calculating the PVC size. | Decimal value between 0 and 1 with a maximum of 3 digits | `0.05` |
 
 Here is an example of a StorageClass YAML configuration:
 
@@ -187,10 +189,10 @@ kind: StorageClass
 metadata:
   name: lvm
   annotations:
-    cdi.harvesterhci.io/storageProfileCloneStrategy: snapshot
-    cdi.harvesterhci.io/storageProfileVolumeModeAccessModes: '{"Block":["ReadWriteOnce"]}'
-    cdi.harvesterhci.io/storageProfileVolumeSnapshotClass: lvm-snapshot
-    cdi.harvesterhci.io/filesystemOverhead: '0.05'
+    cdi.hypervisorhci.io/storageProfileCloneStrategy: snapshot
+    cdi.hypervisorhci.io/storageProfileVolumeModeAccessModes: '{"Block":["ReadWriteOnce"]}'
+    cdi.hypervisorhci.io/storageProfileVolumeSnapshotClass: lvm-snapshot
+    cdi.hypervisorhci.io/filesystemOverhead: '0.05'
 ```
 
 :::caution
@@ -202,15 +204,15 @@ Avoid changing the storage profile or CDI directly. Instead, allow the Hyperviso
 The following are the default values for the supported StorageClasses:
 
 - Longhorn V2 Data Engine
-    - `cdi.harvesterhci.io/storageProfileCloneStrategy`: `"copy"`
-    - `cdi.harvesterhci.io/storageProfileVolumeSnapshotClass`: `"longhorn-snapshot"`
+    - `cdi.hypervisorhci.io/storageProfileCloneStrategy`: `"copy"`
+    - `cdi.hypervisorhci.io/storageProfileVolumeSnapshotClass`: `"longhorn-snapshot"`
 
 - LVM
-    - `cdi.harvesterhci.io/storageProfileVolumeModeAccessModes`: `'{"Block":["ReadWriteOnce"]}'`
-    - `cdi.harvesterhci.io/storageProfileCloneStrategy`: `"snapshot"`
-    - `cdi.harvesterhci.io/storageProfileVolumeSnapshotClass`: `"lvm-snapshot"`
+    - `cdi.hypervisorhci.io/storageProfileVolumeModeAccessModes`: `'{"Block":["ReadWriteOnce"]}'`
+    - `cdi.hypervisorhci.io/storageProfileCloneStrategy`: `"snapshot"`
+    - `cdi.hypervisorhci.io/storageProfileVolumeSnapshotClass`: `"lvm-snapshot"`
 
-- Third-party storage: See [`storagecapabilities.go`](https://github.com/kubevirt/containerized-data-importer/blob/v1.61.1/pkg/storagecapabilities/storagecapabilities.go#L35-L127) in the CDI repository. If the provisioner is not listed, you must specify the `cdi.harvesterhci.io/storageProfileVolumeModeAccessModes` annotation.
+- Third-party storage: See [`storagecapabilities.go`](https://github.com/kubevirt/containerized-data-importer/blob/v1.61.1/pkg/storagecapabilities/storagecapabilities.go#L35-L127) in the CDI repository. If the provisioner is not listed, you must specify the `cdi.hypervisorhci.io/storageProfileVolumeModeAccessModes` annotation.
 
 ## Use Cases
 

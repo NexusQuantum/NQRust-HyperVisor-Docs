@@ -27,7 +27,7 @@ node1:~ # blkid
 
 The OS file system, like a container image, is image-based and immutable except in some directories.
 
-We recommend using a **toolbox container** to run programs not packaged in the Hypervisor OS for debugging purposes. Please see [this article](https://harvesterhci.io/kb/package_your_own_toolbox_image/) to learn how to build and run a toolbox container.
+We recommend using a **toolbox container** to run programs not packaged in the Hypervisor OS for debugging purposes.
 
 The Hypervisor OS also provides a way to enable the read-write mode temporarily. Please follow the following steps:
 
@@ -37,7 +37,7 @@ Enabling read-write mode might break your system if files are modified. Please u
 
 :::
 
-- For version `v0.3.0`, we need to apply a workaround first to [make some directories non-overlaid](https://github.com/harvester/harvester/issues/1388) after enabling read-write mode. On a running Hypervisor node, run the following command as root:
+<!-- - For version `v0.3.0`, we need to apply a workaround first to [make some directories non-overlaid](https://github.com/harvester/harvester/issues/1388) after enabling read-write mode. On a running Hypervisor node, run the following command as root:
 
     ```
     cat > /oem/91_hack.yaml <<'EOF'
@@ -49,7 +49,7 @@ Enabling read-write mode might break your system if files are modified. Please u
           environment_file: /run/cos/cos-layout.env
           environment:
             RW_PATHS: " "
-    EOF
+    EOF -->
     ```
 
 - Reboot the system to GRUB menu. Press ESC to stay on the menu.

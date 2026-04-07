@@ -447,7 +447,9 @@ spec:
 </TabItem>
 <TabItem value="splunk" label="Splunk">
 
-You can follow the instructions [here](https://github.com/w13915984028/harvester-develop-summary/blob/main/test-log-event-audit-with-splunk.md) to deploy and view cluster logs via [Splunk](https://www.splunk.com/).
+You can follow the instructions to deploy and view cluster logs via [Splunk](https://www.splunk.com/).
+<!-- ori -->
+<!-- You can follow the instructions [here](https://github.com/w13915984028/harvester-develop-summary/blob/main/test-log-event-audit-with-splunk.md) to deploy and view cluster logs via [Splunk](https://www.splunk.com/). -->
 
 ```yaml
 apiVersion: logging.banzaicloud.io/v1beta1
@@ -487,7 +489,9 @@ spec:
 </TabItem>
 <TabItem value="loki" label="Loki">
 
-You can follow the instructions in the [logging HEP](https://github.com/joshmeranda/harvester/blob/logging/enhancements/20220525-system-logging.md) on deploying and viewing cluster logs via [Grafana Loki](https://grafana.com/oss/loki/).
+You can follow the instructions in the logging HEP on deploying and viewing cluster logs via [Grafana Loki](https://grafana.com/oss/loki/).
+<!-- ori -->
+<!-- You can follow the instructions in the [logging HEP](https://github.com/joshmeranda/harvester/blob/logging/enhancements/20220525-system-logging.md) on deploying and viewing cluster logs via [Grafana Loki](https://grafana.com/oss/loki/). -->
 
 ```yaml
 apiVersion: logging.banzaicloud.io/v1beta1
@@ -520,7 +524,7 @@ spec:
 
 Hypervisor collects Kubernetes `audit` and is able to send the `audit` to various types of log servers.
 
-The policy file to guide `kube-apiserver` is [here](https://github.com/harvester/harvester-installer/blob/5991dcf6307aa5da79c5d6926566541f48105778/pkg/config/templates/rke2-92-harvester-kube-audit-policy.yaml).
+<!-- The policy file to guide `kube-apiserver` is [here](https://github.com/harvester/harvester-installer/blob/5991dcf6307aa5da79c5d6926566541f48105778/pkg/config/templates/rke2-92-harvester-kube-audit-policy.yaml). -->
 
 ### Audit Definition
 

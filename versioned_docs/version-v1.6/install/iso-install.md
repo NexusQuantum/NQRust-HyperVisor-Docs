@@ -1,4 +1,4 @@
----
+﻿---
 id: index
 sidebar_position: 2
 sidebar_label: ISO Installation
@@ -16,8 +16,10 @@ description: To get the Hypervisor ISO, download it from the Github releases. Du
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.7/install/index"/>
 </head>
 
-Hypervisor ships as a bootable appliance image, you can install it directly on a bare metal server with the ISO image. 
-<!-- To get the ISO image, download **💿 harvester-v1.x.x-amd64.iso** from the [Hypervisor releases](https://github.com/harvester/harvester/releases) page. -->
+<!-- Hypervisor ships as a bootable appliance image, you can install it directly on a bare metal server with the ISO image. 
+To get the ISO image, download **ðŸ’¿ harvester-v1.x.x-amd64.iso** from the [Hypervisor releases](https://github.com/harvester/harvester/releases) page. -->
+NQRust-HV is distributed as a bootable appliance image that can be installed directly on a bare-metal server. To obtain the ISO image, please contact the Nexus Quantum Technologies team at contact@nexusquantum.id our administrator will provide you with the appropriate version for your deployment environment.
+
 
 During the installation, you can either choose to **create a new Hypervisor cluster** or **join the node to an existing Hypervisor cluster**.
 
@@ -31,15 +33,15 @@ During the installation, you can either choose to **create a new Hypervisor clus
 
 1. Mount the Hypervisor ISO file and boot the server by selecting the `Hypervisor Installer` option.
 
-   ![iso-installation.png](/img/v1.0/install-hv/iso-installation.png)
+   ![iso-installation.png](/img/v1.2/install-hv/iso-installation.png)
 
    The installer automatically checks the hardware and displays warning messages if the minimum requirements are not met. The **Hardware Checks** screen is not displayed if all checks are passed.
 
-   ![hardware-checks.png](/img/v1.0/install-hv/hardware-checks.png)
+   ![hardware-checks.png](/img/v1.2/install-hv/hardware-checks.png)
 
 2. Use the arrow keys to choose an installation mode. By default, the first node will be the management node of the cluster.
 
-   ![choose-installation-mode.png](/img/v1.0/install-hv/choose-installation-mode.png)
+   ![choose-installation-mode.png](/img/v1.2/install-hv/choose-installation-mode.png)
 
 	- `Create a new Hypervisor cluster`: creates an entirely new Hypervisor cluster.
 
@@ -53,7 +55,7 @@ During the installation, you can either choose to **create a new Hypervisor clus
 
 3. Choose a role for the node. You are required to perform this step if you selected the installation mode `Join an existing Hypervisor cluster`.
 
-   ![choose-node-role.png](/img/v1.0/install-hv/select-role.png)
+   ![choose-node-role.png](/img/v1.2/install-hv/select-role.png)
 
 	- `Default Role`: Allows a node to function as a management node or a worker node. This role does not have any specific privileges or restrictions.
 	- `Management Role`: Allows a node to be prioritized when Hypervisor promotes nodes to management nodes.
@@ -62,7 +64,7 @@ During the installation, you can either choose to **create a new Hypervisor clus
 
 4. Configure and confirm a `Password` to access the node. The default SSH user is `rancher`.
 
-	![config-password.png](/img/v1.0/install-hv/config-password.png)
+	![config-password.png](/img/v1.2/install-hv/config-password.png)
 
 5. Choose the installation disk you want to install the Hypervisor cluster on and the data disk you want to store VM data on. By default, Hypervisor uses [GUID Partition Table (GPT)](https://en.wikipedia.org/wiki/GUID_Partition_Table) partitioning schema for both UEFI and BIOS. If you use the BIOS boot, then you will have the option to select [Master boot record (MBR)](https://en.wikipedia.org/wiki/Master_boot_record).
 
@@ -70,7 +72,7 @@ During the installation, you can either choose to **create a new Hypervisor clus
 	Support for legacy BIOS booting is deprecated in v1.7.0 and will be removed in a later release. Existing Hypervisor clusters that use this boot mode will continue to function, but upgrading to later versions may require re-installation in UEFI mode. To avoid issues and disruptions, use UEFI in new installations.
 	:::
 
-   ![choose-installation-target-data-disk.png](/img/v1.0/install-hv/choose-installation-target-data-disk.png)
+   ![choose-installation-target-data-disk.png](/img/v1.2/install-hv/choose-installation-target-data-disk.png)
 
 	- `Installation disk`: The disk to install the Hypervisor cluster on.
 	- `Data disk`: The disk to store VM data on. Choosing a separate disk to store VM data is recommended. Not applicable for witness nodes.
@@ -78,11 +80,11 @@ During the installation, you can either choose to **create a new Hypervisor clus
 
 6. Configure the `HostName` of the node.
 
-   ![config-hostname.png](/img/v1.0/install-hv/config-hostname.png)
+   ![config-hostname.png](/img/v1.2/install-hv/config-hostname.png)
 
 7. Configure network interface(s) for the management network. By default, Hypervisor creates a [bonded NIC](./requirements.md#hardware-requirements) named `mgmt-bo` for the [built-in management cluster network](../networking/clusternetwork.md#built-in-cluster-network), and the IP address can be configured via DHCP or statically assigned.
 
-   ![config-network.png](/img/v1.0/install-hv/config-network.png)
+   ![config-network.png](/img/v1.2/install-hv/config-network.png)
 
 	:::note
 
@@ -105,7 +107,7 @@ During the installation, you can either choose to **create a new Hypervisor clus
 
     If you want to use the default values, leave the fields blank.
 
-   ![config-cluster-cidrs.png](/img/v1.0/install-hv/config-cluster-cidrs.png)
+   ![config-cluster-cidrs.png](/img/v1.2/install-hv/config-cluster-cidrs.png)
 
     :::info important
 
@@ -123,7 +125,7 @@ During the installation, you can either choose to **create a new Hypervisor clus
 
 9. (Optional) Configure the `DNS Servers`. Use commas as a delimiter to add more DNS servers. Leave it blank to use the default DNS server.
 
-	![config-dns-server.png](/img/v1.0/install-hv/config-dns-server.png)
+	![config-dns-server.png](/img/v1.2/install-hv/config-dns-server.png)
 
 10. Configure the virtual IP (VIP) by selecting a `VIP Mode`. This VIP is used to access the cluster or for other nodes to join the cluster.
 
@@ -131,15 +133,15 @@ During the installation, you can either choose to **create a new Hypervisor clus
 	For DHCP setup with static MAC-to-IP address mappings configured, enter the MAC address in the provided field to fetch the unique persistent virtual IP (VIP). Otherwise, leave it blank.
 	:::
 
-   ![config-virtual-ip.png](/img/v1.0/install-hv/config-virtual-ip.png)
+   ![config-virtual-ip.png](/img/v1.2/install-hv/config-virtual-ip.png)
 
 11. Configure the `Cluster token`. This token is used for adding other nodes to the cluster.
 
-	![config-cluster-token.png](/img/v1.0/install-hv/config-cluster-token.png)
+	![config-cluster-token.png](/img/v1.2/install-hv/config-cluster-token.png)
 
 12. Configure `NTP servers` to make sure all nodes' times are synchronized. This defaults to `0.suse.pool.ntp.org`. Use commas as a delimiter to add more NTP servers.
 
-	![config-ntp-server.png](/img/v1.0/install-hv/config-ntp-server.png)
+	![config-ntp-server.png](/img/v1.2/install-hv/config-ntp-server.png)
 
 	:::note
 	Using multiple NTP servers provides redundancy, better accuracy, fault tolerance, and improved performance. It ensures that time synchronization continues even if one server fails or gives incorrect data, and it helps distribute the load across different servers.
@@ -147,19 +149,19 @@ During the installation, you can either choose to **create a new Hypervisor clus
 
 13. (Optional) If you need to use an HTTP proxy to access the outside world, enter the `Proxy address`. Otherwise, leave this blank.
 
-	![config-proxy.png](/img/v1.0/install-hv/config-proxy.png)
+	![config-proxy.png](/img/v1.2/install-hv/config-proxy.png)
 
 14. (Optional) You can choose to import SSH keys by providing `HTTP URL`. For example, your GitHub public keys `https://github.com/<username>.keys` can be used.
 
-	![import-ssh-keys.png](/img/v1.0/install-hv/import-ssh-keys.png)
+	![import-ssh-keys.png](/img/v1.2/install-hv/import-ssh-keys.png)
 
 15. (Optional) If you need to customize the host with a [Hypervisor configuration](./harvester-configuration.md) file, enter the `HTTP URL` here.
 
-	![remote-config.png](/img/v1.0/install-hv/remote-config.png)
+	![remote-config.png](/img/v1.2/install-hv/remote-config.png)
 
 16. Review and confirm your installation options. After confirming the installation options, Hypervisor will be installed to your host. The installation may take a few minutes to be complete.
 
-   ![confirm-install.png](/img/v1.0/install-hv/confirm-install.png)
+   ![confirm-install.png](/img/v1.2/install-hv/confirm-install.png)
 
 17. Once the installation is complete, your node restarts. After the restart, the Hypervisor console displays the management URL and status. The default URL of the web interface is `https://your-virtual-ip`. You can use `F12` to switch from the Hypervisor console to the Shell and type `exit` to go back to the Hypervisor console.
 
@@ -167,15 +169,44 @@ During the installation, you can either choose to **create a new Hypervisor clus
 	Choosing `Install Hypervisor binaries only` on the first page requires additional setup after the first bootup.
 	:::
 
-   ![iso-installed.png](/img/v1.0/install-hv/iso-installed.png)
+   ![iso-installed.png](/img/v1.2/install-hv/iso-installed.png)
 
-18. You will be prompted to set the password for the default `admin` user when logging in for the first time.
+<!-- 18. You will be prompted to set the password for the default `admin` user when logging in for the first time.
 
-   ![first-login.png](/img/v1.0/install-hv/first-time-login.png)
+   ![first-login.png](/img/v1.0/install-hv/first-time-login.png) -->
 
 <!-- :::note
 In some cases, if you are using an older VGA connector, you may encounter an `panic: invalid dimensions` error with ISO installation. See issue [#2937](https://github.com/harvester/harvester/issues/2937#issuecomment-1278545927) for a workaround.
 ::: -->
+
+## License
+
+1. After the Hypervisor installation is completed successfully, you will be prompted to create a new password.
+
+   ![setup-page](/img/v1.2/install-hv/setup-page.jpeg)
+
+2. Once the password has been set, the system will display the License Agreement (EULA) page. Select the language (EN/ID) if needed, review the terms, tick "I have read and agree to the End User License Agreement," then click Agree & Continue to proceed.
+
+   ![eula-license](/img/v1.2/install-hv/eula.jpeg)
+
+   After accepting the EULA, you will be redirected to the License Activation page. Activate the product using one of the following methods:
+
+   - Option 1: Enter a License Key. Stay on the License Key tab, paste your license key in the input field (format: `XXXX-XXXX-XXXX-XXXX`), then click Activate License. If you do not have the license code yet, contact Nexus Quantum Tech at `contact@nexusquantum.id`.
+   - Option 2: Upload an Offline License File (`.lic`). Switch to the Offline File (`.lic`) tab, upload the `.lic` file you received, then proceed with activation. If you do not have the offline license file yet, contact Nexus Quantum Tech at `contact@nexusquantum.id`.
+
+   Once the license is successfully activated, the system will continue to the next setup step automatically.
+
+   ![config-license](/img/v1.2/install-hv/config-license.jpeg)
+
+3. Once the license has been successfully activated, you will see the "License Activated" confirmation page. Verify that:
+
+   - Status shows `Active`
+   - Product displays `NQRust-HyperVisor`
+   - Valid Until shows the correct expiry date
+
+   Click Continue to Login Page to proceed. If you do not click it, the system will automatically redirect you to the login page after a few seconds.
+
+   ![confirm-license](/img/v1.2/install-hv/confirm-license.jpeg)
 
 ## Known Issue
 
@@ -187,16 +218,19 @@ In some cases, if you are using an older VGA connector, you may encounter an `pa
 
 We are working on this known issue and planning a fix for a future release. You can try to use another GRUB entry to force it to use the resolution of `1024x768` when booting up.
 
-![force-resolution.png](/img/v1.2/install/force-resolution.png)
+![force-resolution.png](/img/v1.2/install-hv/force-resolution.png)
 
-If you are using a version earlier than v1.1.1, please try the following workaround:
+following workaround:
+<!-- If you are using a version earlier than v1.1.1, please try the following workaround: -->
 
 1. Boot up with the ISO, and press `E` to edit the first menu entry:
 
-   ![grub-menu.png](/img/v1.0/install-hv/grub-menu.png)
+   ![grub-menu.png](/img/v1.2/install-hv/grub-menu.png)
 
 2. Append `vga=792` to the line started with `$linux`:
 
-   ![edit-menu-entry.png](/img/v1.0/install-hv/edit-menu-entry.png)
+   ![edit-menu-entry.png](/img/v1.2/install-hv/edit-menu-entry.png)
 
 3. Press `Ctrl+X` or `F10` to boot up.
+
+

@@ -18,10 +18,11 @@ description: With ISO installation mode, user will be prompted to set the passwo
 
 After installation, user will be prompted to set the password for the default `admin` user on the first-time login.
 
-![auth](\img\v1.0\install-hv\first-time-login.png)
+![auth](\img\v1.0\install-hv\first-time-login.jpeg)
 
 :::note
 
-In the single cluster mode, only one default `admin` user is provided. Check out the [Rancher Integration](./rancher/rancher-integration.md) for multi-tenant management.
+In the single cluster mode, only one default `admin` user is provided. 
+<!-- Check out the [Rancher Integration](./rancher/rancher-integration.md) for multi-tenant management. -->
 
 :::

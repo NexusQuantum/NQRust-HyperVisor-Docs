@@ -8,11 +8,11 @@ title: "Local Storage Support (Experimental)"
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/addons/lvm-local-storage"/>
 </head>
 
-:::note
+<!-- :::note
 
 **hypervisor-csi-driver-lvm** is an *experimental* add-on. It is not included in the Hypervisor ISO, but you can download it from the [experimental-addons repository](https://github.com/harvester/experimental-addons). For more information about experimental features, see [Feature Labels](../../getting-started/document-conventions.md#feature-labels).
 
-:::
+::: -->
 
 Hypervisor allows you to use local storage on the host to create persistent volumes for your workloads with better performance and latency. This functionality is made possible by LVM, which provides logical volume management facilities on Linux.
 
@@ -22,11 +22,11 @@ The **hypervisor-csi-driver-lvm** add-on is a CSI driver that supports local pat
 
 If you are using the Hypervisor kubeconfig file, you can install the add-on by performing the following steps:
 
-1. Install the add-on by running the following command:
+<!-- 1. Install the add-on by running the following command:
 
     ```
     # kubectl apply -f https://raw.githubusercontent.com/harvester/experimental-addons/main/harvester-csi-driver-lvm/harvester-csi-driver-lvm.yaml
-    ```
+    ``` -->
 
 1. On the Hypervisor UI, go to **Advanced** > **Add-ons**.
 

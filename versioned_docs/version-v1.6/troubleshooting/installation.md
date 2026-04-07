@@ -180,7 +180,8 @@ Please include the following information in a bug report when reporting a failed
 
 ### Issue Description
 
-After a successful installation, the Hypervisor console persistently shows `Setting up Hypervisor`. While most UI and CLI operations remain unaffected, attempts to [start an upgrade](../upgrade/automatic.md#start-an-upgrade) are blocked.
+After a successful installation, the Hypervisor console persistently shows `Setting up Hypervisor`. 
+<!-- While most UI and CLI operations remain unaffected, attempts to [start an upgrade](../upgrade/automatic.md#start-an-upgrade) are blocked. -->
 
 ![](/img/v1.2/troubleshooting-hv/setting-up-harvester-after-day-0.png)
 
@@ -238,6 +239,6 @@ You can perform either of the following actions:
 
 - Update the `ManagedChart` CRD with the desired custom configuration using `kubectl edit managedchart -n fleet-local hypervisor`.
 
-### Related Issue
+<!-- ### Related Issue
 
-[#8655](https://github.com/harvester/harvester/issues/8655)
+[#8655](https://github.com/harvester/harvester/issues/8655) -->

@@ -89,7 +89,7 @@ In summary, you must use a StorageClass that matches the cluster configuration.
 
 You must repeat this procedure for every non-witness node in the cluster. The same uplink settings can be used across nodes.
 
-  Related issue: [[BUG] Unable to select NIC to create network config when cluster contains witness node](https://github.com/harvester/harvester/issues/5325)
+<!-- Related issue: [[BUG] Unable to select NIC to create network config when cluster contains witness node](https://github.com/harvester/harvester/issues/5325) -->
 
 ### 2. When selecting a target node for VM migration, the target list includes the witness node.
 
@@ -97,4 +97,4 @@ You must repeat this procedure for every non-witness node in the cluster. The sa
 
 Do not select the witness node as the migration target. If you do, VM migration will fail.
 
-  Related issue: [[BUG] The witness node should not be selected as a migration target](https://github.com/harvester/harvester/issues/5338)
+<!-- Related issue: [[BUG] The witness node should not be selected as a migration target](https://github.com/harvester/harvester/issues/5338) -->
