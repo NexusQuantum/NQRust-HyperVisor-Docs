@@ -203,7 +203,7 @@ A critical difference is that the `Stop` and `Start` actions appear in the `stat
     - action: Start
 ```
 
-#### Root Cause
+<!-- #### Root Cause
 
 The root cause of this issue is under investigation.
 
@@ -232,7 +232,7 @@ func (vf *vmformatter) isVMStarting(vm *kubevirtv1.VirtualMachine) bool {
   }
   return false
 }
-```
+``` -->
 
 ### Workaround
 
@@ -240,9 +240,9 @@ To address the issue, you can force delete the pod using the command `kubectl de
 
 After the pod is successfully deleted, the `Start` button becomes visible again on the Hypervisor UI.
 
-### Related Issue
+<!-- ### Related Issue
 
-https://github.com/harvester/harvester/issues/4659
+https://github.com/harvester/harvester/issues/4659 -->
 
 ## VM Stuck in Starting State with Error Messsage `not a device node`
 
@@ -409,11 +409,11 @@ Node level operation, node by node:
     brw-rw---- 1 root root 8, 64 Mar  6 11:47 7beb531d-a781-4775-ba5e-8773773d77f1
     ```
 
-### Related Issue
+<!-- ### Related Issue
 
 https://github.com/harvester/harvester/issues/5109
 
-https://github.com/longhorn/longhorn/issues/8009
+https://github.com/longhorn/longhorn/issues/8009 -->
 
 ## Virtual Machine IP Address Not Displayed
 
@@ -453,9 +453,9 @@ $ sudo rm -rf /var/lib/cloud/*
 
 After deleting the directory, you must restart the virtual machine so that cloud-init is run again and the `qemu-guest-agent` package is installed.
 
-#### Related Issue
+<!-- #### Related Issue
 
-https://github.com/harvester/harvester/issues/6644
+https://github.com/harvester/harvester/issues/6644 -->
 
 ### IPv6 Race Condition Between virt-launcher Pod and Guest Operating System
 
@@ -501,9 +501,11 @@ The workaround is to disable IPv6 in the [kernel parameters](./os.md#how-to-perm
 
 In the above example, you must add `ipv6.disable=1` and reboot the nodes to prevent virtual machine pod interfaces from acquiring an IPv6 link-local address.
 
-#### Related Issues
+<!-- #### Related Issues
 
-[#6955](https://github.com/harvester/harvester/issues/6955) and [#12697](https://github.com/kubevirt/kubevirt/issues/12697)
+[#12697](https://github.com/kubevirt/kubevirt/issues/12697) -->
+<!-- ori -->
+<!-- [#6955](https://github.com/harvester/harvester/issues/6955) and [#12697](https://github.com/kubevirt/kubevirt/issues/12697) -->
 
 ### Virtual Machine IP Address Intermittently Not Displayed
 
@@ -537,9 +539,9 @@ This issue generally does not affect the virtual machine's operations and uptime
 
 While no direct workaround is available for this issue, an [upstream fix](https://github.com/kubevirt/kubevirt/pull/13624) has optimized the code to reduce unnecessary updates from the QEMU guest agent. This enhancement may prevent the issue from occurring.
 
-#### Related Issues
+<!-- #### Related Issues
 
-[#3990](https://github.com/harvester/harvester/issues/3990) and [#12698](https://github.com/kubevirt/kubevirt/issues/12698)
+[#3990](https://github.com/harvester/harvester/issues/3990) and [#12698](https://github.com/kubevirt/kubevirt/issues/12698) -->
 
 ## Unschedulable Virtual Machine
 
@@ -671,4 +673,4 @@ To mitigate the issue, perform the following steps:
 Once the Cloud Config is backed by a unique secret, you can use the Hypervisor UI's YAML editor to edit the virtual machine configuration without affecting the source template.
 
 
-Related issue: [#9207](https://github.com/harvester/harvester/issues/9207)
+<!-- Related issue: [#9207](https://github.com/harvester/harvester/issues/9207) -->

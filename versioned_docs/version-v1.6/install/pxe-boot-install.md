@@ -1,7 +1,10 @@
 ---
+# Hide from sidebar; remove `unlisted: true` to show again.
 sidebar_position: 4
 sidebar_label: PXE Boot Installation
+sidebar_class_name: hide-sidebar-item
 title: "PXE Boot Installation"
+unlisted: true
 keywords:
   - Hypervisor
   - hypervisor
@@ -29,7 +32,7 @@ To see sample iPXE scripts, please visit [Hypervisor iPXE Examples](https://gith
 Nodes need to have at least **8 GiB** of RAM because the installer loads the full ISO file into tmpfs.
 
 :::info
-The installer automatically checks if the hardware meets the [minimum requirements](./requirements/#hardware-requirements) for production use. If any of the checks fail, installation will be stopped. To override this behavior, set either the [configuration file option](./harvester-configuration/#installskipchecks) `install.skipchecks=true` or the [kernel parameter](#harvesterinstallskipcheckstrue) `harvester.install.skipchecks=true`.
+The installer automatically checks if the hardware meets the [minimum requirements](./requirements/#hardware-requirements) for production use. If any of the checks fail, installation will be stopped. To override this behavior, set either the [configuration file option](./harvester-configuration/#installskipchecks) `install.skipchecks=true` or the [kernel parameter](#harvesterinstallskipcheckstrue) `hypervisor.install.skipchecks=true`.
 :::
 
 ## Preparing HTTP Servers

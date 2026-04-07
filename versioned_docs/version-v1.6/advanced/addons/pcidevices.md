@@ -67,29 +67,29 @@ This is just like installing drivers in the host. The PCI passthrough feature wi
 
 ## Known Issues
 
-* [Issue #6648](https://github.com/harvester/harvester/issues/6648): A virtual machine can be scheduled on an incorrect node if the cluster has multiple instances of the same PCI device. 
+<!-- * [Issue #6648](https://github.com/harvester/harvester/issues/6648): A virtual machine can be scheduled on an incorrect node if the cluster has multiple instances of the same PCI device.  -->
 
 The pcidevices-controller add-on currently uses unique resource descriptors to publish devices to the kubelet. If multiple `PCIDeviceClaims` of the same device type exist within the cluster, the same unique resource descriptor is used for these `PCIDeviceClaims`, and so the virtual machine may be scheduled on an incorrect node. To ensure that the correct device and node are used, select **Run VM on specific node** when configuring **Node Scheduling** settings.
 
 ![](/img/v1.4/vm-hv/vm-scheduling.png)
 
 ## SRIOV Network Devices
-_Available as of v1.2.0_
+<!-- _Available as of v1.2.0_ -->
 
 ![](/img/v1.2/pcidevices/SriovNetworkDevicesLink.png)
 
 The `pcidevices-controller` addon can now scan network interfaces on the underlying hosts and check if they support SRIOV Virtual Functions (VFs). If a valid device is found, `pcidevices-controller` will generate a new `SRIOVNetworkDevice` object.
 
-![](/img/v1.2/pcidevices/SriovNetworkDevicesList.png)
+<!-- ![](/img/v1.2/pcidevices/SriovNetworkDevicesList.png) -->
 
 To create VFs on a SriovNetworkDevice, you can click **⋮ > Enable** and then define the **Number of Virtual Functions**.
-![](/img/v1.2/pcidevices/SriovNetworkDeviceEnable.png)
+<!-- ![](/img/v1.2/pcidevices/SriovNetworkDeviceEnable.png) -->
 
-![](/img/v1.2/pcidevices/SriovNetworkVFDefinition.png)
+<!-- ![](/img/v1.2/pcidevices/SriovNetworkVFDefinition.png) -->
 
 The `pcidevices-controller` will define the VFs on the network interface and report the new PCI device status for the newly created VFs.
 
-![](/img/v1.2/pcidevices/SriovNetworkDevicesVFStatus.png)
+<!-- ![](/img/v1.2/pcidevices/SriovNetworkDevicesVFStatus.png) -->
 
 On the next re-scan, the `pcidevices-controller` will create the PCIDevices for VFs. This can take up to 1 minute.
 
@@ -97,14 +97,14 @@ You can now navigate to the **PCI Devices** page to view the new devices.
 
 We have also introduced a new filter to help you filter PCI devices by the underlying network interface.
 
-![](/img/v1.2/pcidevices/SriovNetworkDevicesFilter.png)
+<!-- ![](/img/v1.2/pcidevices/SriovNetworkDevicesFilter.png) -->
 
 The newly created PCI device can be passed through to virtual machines like any other PCI device.
-![](/img/v1.2/pcidevices/SriovNetworkDevicesFilterResult.png)
+<!-- ![](/img/v1.2/pcidevices/SriovNetworkDevicesFilterResult.png) -->
 
 ## USB Devices
 
-_Available as of v1.4.0_
+<!-- _Available as of v1.4.0_ -->
 
 A `USBDevice` resource in Hypervisor represents a USB device on the node. USB devices can be "passed through" by the hypervisor to allow direct access from VMs. This is accomplished through the `pcidevices-controller` add-on. To use USB passthrough, you can either create a `USBDeviceClaim` resource or enable the feature on the Hypervisor UI. 
 

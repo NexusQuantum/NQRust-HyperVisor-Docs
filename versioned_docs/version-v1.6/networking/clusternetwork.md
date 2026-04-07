@@ -84,7 +84,7 @@ When a Hypervisor cluster is deployed, a cluster network named `mgmt` is automat
 
 In Hypervisor v1.5.x and earlier versions, the entire VLAN ID range (2 to 4094) was assigned to the `mgmt` interfaces. However, this exceeded the upper limit of supported VLANs on certain network cards, so hardware VLAN offloading stopped working correctly.
 
-For more information, see [issue #7650](https://github.com/harvester/harvester/issues/7650).
+<!-- For more information, see [issue #7650](https://github.com/harvester/harvester/issues/7650). -->
 
 :::
 <!-- ori -->
@@ -259,7 +259,7 @@ To simplify cluster maintenance, create one network configuration for each node 
 
 1. On the **Node Selector** tab, select the method for defining the scope of this specific network configuration.
 
-    ![](/img/v1.2/networking/select-nodes.png)
+    ![](/img/v1.2/networking-hv/select-nodes.png)
 
     :::note
 

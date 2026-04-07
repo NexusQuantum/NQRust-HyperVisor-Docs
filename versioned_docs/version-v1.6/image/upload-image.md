@@ -63,9 +63,10 @@ spec:
   checksum: 80c27afb7cd791ac86ee1b0b0c572a242f6142579db5beac841e71151d370cd6
 ```
 
-For more information, see the [API reference](/v1.6/api/create-namespaced-virtual-machine-image).
+<!-- For more information, see the [API reference](/v1.6/api/create-namespaced-virtual-machine-image). -->
 
 </TabItem>
+{/*
 <TabItem value="terraform" label="Terraform">
 
 ```hcl
@@ -80,6 +81,7 @@ resource "hypervisor_image" "opensuse154" {
 ```
 
 </TabItem>
+*/}
 </Tabs>
 
 ### Upload Images via Local File
@@ -95,9 +97,9 @@ Currently, qcow2, raw, and ISO images are supported.
 ![](/img/v1.3/image-hv/upload-image-local.png)
 
 
-#### HTTP 413 Error in Rancher Multi-Cluster Management
+<!-- #### HTTP 413 Error in Rancher Multi-Cluster Management
 
-You can upload images from the [**Multi-Cluster Management**](../rancher/virtualization-management.md#importing-harvester-cluster) screen on the **Rancher UI**. When the status of an image is *Uploading* but the progress indicator displays *0%* for an extended period, check the HTTP response status code. *413* indicates that the size of the request body exceeds the limit.
+You can upload images from the [**Multi-Cluster Management**](../rancher/virtualization-management.md#importing-harvester-cluster) screen on the **Rancher UI**. When the status of an image is *Uploading* but the progress indicator displays *0%* for an extended period, check the HTTP response status code. *413* indicates that the size of the request body exceeds the limit. -->
 
 <!-- ![](/img/v1.3/image-hv/img-413-code.png) -->
 
@@ -143,11 +145,11 @@ If Rancher is deployed on an RKE2 cluster, perform the following steps:
 
 3. Delete the stuck image, and then restart the upload process.
 
-#### Uploading Images Previously Downloaded from Hypervisor
+<!-- #### Uploading Images Previously Downloaded from Hypervisor
 
 Starting with **v1.5.5**, Longhorn [compresses backing images for downloading](https://github.com/longhorn/backing-image-manager/pull/153). If you attempt to upload a compressed backing image, Hypervisor rejects the attempt and displays the message **Upload failed: the uploaded file size xxxx should be a multiple of 512 bytes since Longhorn uses directIO by default** because the compressed data violates Longhorn's data alignment.
 
-Before uploading, decompress backing images using the command `$ gzip -d <file name>`.
+Before uploading, decompress backing images using the command `$ gzip -d <file name>`. -->
 
 ### Create Images via Volumes
 

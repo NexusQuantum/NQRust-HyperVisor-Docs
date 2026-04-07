@@ -44,7 +44,7 @@ For example, your cluster assigns IPs from CIDR `172.26.50.128/27` to nodes via 
 
 After setting this, you can continue to add new nodes to the cluster.
 
-For more details, please refer to [Hypervisor issue 3091](https://github.com/harvester/harvester/issues/3091).
+<!-- For more details, please refer to [Hypervisor issue 3091](https://github.com/harvester/harvester/issues/3091). -->
 
 ### ISO Installation With a Hypervisor Configuration File
 
@@ -77,11 +77,11 @@ If you intend to use a non-default container image, you can configure the [suppo
 
 :::
 
-:::note
+<!-- :::note
 
 For information about collecting guest cluster logs and configuration files, see [Guest Cluster Log Collection](./rancher.md#guest-cluster-log-collection).
 
-:::
+::: -->
 
 ### Manually Download and Retain a Support Bundle File
 
@@ -197,9 +197,9 @@ You can delete the related resources using the following methods:
     ```
 - Automatic: Hypervisor deletes the related resources based on how the following settings are configured:
 
-    - [support-bundle-expiration](../advanced/index#support-bundle-expiration): Defines the time allowed for retaining a support bundle file
+    - [support-bundle-expiration](/v1.6/advanced/settings#support-bundle-expiration): Defines the time allowed for retaining a support bundle file
 
-    - [support-bundle-timeout](../advanced/index#support-bundle-timeout): Defines the time allowed for generating a support bundle file
+    - [support-bundle-timeout](/v1.6/advanced/settings#support-bundle-timeout): Defines the time allowed for generating a support bundle file
 
 ### Manually Copy the Support Bundle File
 
@@ -317,7 +317,7 @@ Hypervisor is unable to collect data and generate a support bundle when the node
 
    Retained support bundle files are backed by pods in the `hypervisor-system` namespace. These pods are replaced during system and node rebooting, node draining, and system upgrades, consuming CPU and memory resources. Moreover, the regenerated files are very similar in content to the retained files, which means that storage resources are also unnecessarily consumed.
 
-For more information, see [Issue 3383](https://github.com/harvester/harvester/issues/3383).
+<!-- For more information, see [Issue 3383](https://github.com/harvester/harvester/issues/3383). -->
 
 <!-- ## Access Embedded Rancher and Longhorn Dashboards
 

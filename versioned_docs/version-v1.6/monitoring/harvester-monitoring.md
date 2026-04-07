@@ -327,7 +327,7 @@ Different receivers may present the alerts in different formats. For details, pl
 
 The `AlertmanagerConfig` is enforced by the `namespace`. Gloabl-level `AlertmanagerConfig` without a namespace is not supported.
 
-We have already created a [GithHb issue](https://github.com/harvester/harvester/issues/2760) to track upstream changes. Once the feature is available, `Hypervisor` will adopt it.
+<!-- We have already created a [GithHb issue](https://github.com/harvester/harvester/issues/2760) to track upstream changes. Once the feature is available, `Hypervisor` will adopt it. -->
 
 <!-- ### View and Manage Alerts
 

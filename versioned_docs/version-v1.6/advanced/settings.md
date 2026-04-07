@@ -1,12 +1,13 @@
 ---
 id: index
+slug: /advanced/settings
 sidebar_position: 1
 sidebar_label: Settings
 title: "Settings"
 ---
 
 <head>
-  <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/index"/>
+  <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/settings"/>
 </head>
 
 The following is a list of advanced settings that you can use in Hypervisor. You can modify the `settings.hypervisorhci.io` custom resource using both the Hypervisor UI and the `kubectl` command.
@@ -373,7 +374,7 @@ value: ""
 
 When the `value` field is `""`, the `default` field is used.
 
-When the `value` field is `"0"`, the `additional-guest-memory-overhead-ratio` setting is not used, Hypervisor will fallback to the legacy [Reserved Memory](https://docs.harvesterhci.io/v1.3/vm/index#reserved-memory) which is used in Hypervisor v1.3.x, v1.2.x and earlier versions. When a new VM is created and the `Reserved Memory` field on WebUI is not filled, this VM will get the `100Mi default Reserved Memory`.
+When the `value` field is `"0"`, the `additional-guest-memory-overhead-ratio` setting is not used, Hypervisor will fallback to the legacy [Reserved Memory](/v1.6/vm/index#reserved-memory) which is used in Hypervisor v1.3.x, v1.2.x and earlier versions. When a new VM is created and the `Reserved Memory` field on WebUI is not filled, this VM will get the `100Mi default Reserved Memory`.
 
 If you have already set a valid value on the `spec.configuration.additionalGuestMemoryOverheadRatio` field of `kubevirt` object before Hypervisor v1.4.0 and then upgrade to v1.4.0, Hypervisor will fetch and convert it to the `value` field of this setting on the upgrade path. After that, Hypervisor will always use this setting to sync to the `kubevirt` object.
 
@@ -450,7 +451,7 @@ There is no `one-fit-all` solution.
 
 :::important
 
-If you have set the `Reserved Memory` field for each VM and plan to keep the legacy [Reserved Memory](https://docs.harvesterhci.io/v1.3/vm/index#reserved-memory), after the cluster is upgraded to Hypervisor v1.4.0, you can set the `additional-guest-memory-overhead-ratio` setting to `"0"`.
+If you have set the `Reserved Memory` field for each VM and plan to keep the legacy [Reserved Memory](/v1.6/vm/index#reserved-memory), after the cluster is upgraded to Hypervisor v1.4.0, you can set the `additional-guest-memory-overhead-ratio` setting to `"0"`.
 
 Changing the `additional-guest-memory-overhead-ratio` setting affects the VMs per following rules:
 

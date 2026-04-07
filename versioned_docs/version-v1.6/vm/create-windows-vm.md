@@ -218,8 +218,8 @@ stages:
       # ...
 ``` -->
 
-:::note
+<!-- :::note
 
 This is still an experimental solution. For more information, please refer to [this issue](https://github.com/harvester/harvester/issues/276) and please let us know if you have encountered any issues after applying this workaround.
 
-:::
+::: -->

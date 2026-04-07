@@ -17,7 +17,7 @@ Hypervisor supports adding hot-plug volumes to a running VM.
 
 :::info
 
-Currently, KubeVirt only supports disk bus `scsi` for hot-plug volumes. For more information, see this [issue](https://github.com/kubevirt/kubevirt/issues/5080#issuecomment-785183128).
+Currently, KubeVirt only supports disk bus `scsi` for hot-plug volumes.
 
 :::
 

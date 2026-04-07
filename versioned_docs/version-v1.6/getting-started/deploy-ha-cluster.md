@@ -25,7 +25,8 @@ Hypervisor is built for bare metal servers using enterprise-grade open-source so
 
 ## 2. Prepare the installation files based on the installation method that you want to use. 
 
-You can download the installation files from the [Hypervisor Releases](https://github.com/harvester/harvester/releases) page. The **Downloads** section of the release notes contains links to the ISO files and related artifacts. The following types of ISO files are available: 
+<!-- You can download the installation files from the [Hypervisor Releases](https://github.com/harvester/harvester/releases) page. The **Downloads** section of the release notes contains links to the ISO files and related artifacts.  -->
+The following types of ISO files are available: 
 
 - **Full ISO**: Contains the core operating system components and all required container images, which are preloaded during installation. You must use a full ISO when installing Hypervisor behind a firewall or proxy, and in environments without internet connectivity. 
 - [**Net install ISO**](../install/net-install.md): Contains only the core operating system components. After installation is completed, the operating system pulls all required container images from the internet (mostly from Docker Hub). 
@@ -96,7 +97,7 @@ You can create [Linux VMs](../vm/create-vm.md) using one of the following method
 
 - Hypervisor UI: On the **Virtual Machines** screen, click **Create** and configure the settings on each tab. 
 - Kubernetes API: Create a `VirtualMachine` object. 
-- [Hypervisor Terraform Provider](../terraform/terraform-provider.md): Define a `hypervisor_virtualmachine` resource block. 
+<!-- - [Hypervisor Terraform Provider](../terraform/terraform-provider.md): Define a `hypervisor_virtualmachine` resource block.  -->
 
 Creating [Windows VMs](../vm/create-windows-vm.md) on the Hypervisor UI involves slightly different steps. Hypervisor provides a VM template named `windows-iso-image-base-template` that adds a volume with the Virtio drivers for Windows, which streamlines the VM configuration process. If you require Virtio devices but choose to not use the template, you must add your own Virtio drivers for Windows to enable correct hardware detection. 
 
@@ -106,4 +107,4 @@ The following sections provide guides that walk you through how to back up and r
 
 - [VM Backup, Snapshot & Restore](../vm/backup-restore.md) 
 - [Host Management](../host/host.md) 
-- [Rancher Integration](../rancher/rancher-integration.md) 
+<!-- - [Rancher Integration](../rancher/rancher-integration.md)  -->

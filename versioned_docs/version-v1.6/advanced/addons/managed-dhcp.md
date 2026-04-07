@@ -10,11 +10,12 @@ title: "Managed DHCP (Experimental)"
 
 :::note
 
-**hypervisor-vm-dhcp-controller** is an *experimental* add-on. It is not included in the Hypervisor ISO, but you can download it from the [experimental-addons repository](https://github.com/harvester/experimental-addons). For more information about experimental features, see [Feature Labels](../../getting-started/document-conventions.md#feature-labels).
+**hypervisor-vm-dhcp-controller** is an *experimental* add-on. For more information about experimental features, see [Feature Labels](../../getting-started/document-conventions.md#feature-labels).
+<!-- **hypervisor-vm-dhcp-controller** is an *experimental* add-on. It is not included in the Hypervisor ISO, but you can download it from the [experimental-addons repository](https://github.com/harvester/experimental-addons). For more information about experimental features, see [Feature Labels](../../getting-started/document-conventions.md#feature-labels). -->
 
 :::
 
-You can configure IP pool information and serve IP addresses to VMs running on Hypervisor clusters using the embedded Managed DHCP feature. This feature, which is an alternative to the standalone DHCP server, leverages the [hypervisor-vm-dhcp-controller](https://github.com/harvester/vm-dhcp-controller) add-on to simplify guest cluster deployment.
+<!-- You can configure IP pool information and serve IP addresses to VMs running on Hypervisor clusters using the embedded Managed DHCP feature. This feature, which is an alternative to the standalone DHCP server, leverages the [hypervisor-vm-dhcp-controller](https://github.com/harvester/vm-dhcp-controller) add-on to simplify guest cluster deployment. -->
 
 :::note
 
@@ -74,13 +75,13 @@ kubectl -n kube-system get pods -l component=kube-apiserver -o yaml | grep "serv
 
 After installation, enable the add-on on the **Dashboard** screen of the Hypervisor UI or using the command-line tool kubectl.
 
-![](/img/v1.3/vm-dhcp-controller/enable-addon.png)
+![](/img/v1.3/vm-dhcp-controller-hv/enable-addon.png)
 
 ## Using the Add-on
 
 1. On the **Dashboard** screen of the Hypervisor UI, [create a VM Network](../../networking/harvester-network.md#create-a-vm-network).
 
-    ![](/img/v1.3/vm-dhcp-controller/vm-network.png)
+    ![](/img/v1.3/vm-dhcp-controller-hv/vm-network.png)
 
 1. Create an IPPool object using the command-line tool kubectl.
 
@@ -111,7 +112,7 @@ After installation, enable the add-on on the **Dashboard** screen of the Hypervi
 
 1. [Create a VM](../../vm/create-vm.md#how-to-create-a-vm) that is connected to the VM Network you previously created.
 
-    ![](/img/v1.3/vm-dhcp-controller/create-vm.png)
+    ![](/img/v1.3/vm-dhcp-controller-hv/create-vm.png)
 
 1. Wait for the corresponding VirtualMachineNetworkConfig object to be created and for the MAC address of the VM's network interface to be applied to the object.
 1. Check the `.status` field of the IPPool and VirtualMachineNetworkConfig objects, and verify that the IP address is allocated and assigned to the MAC address.
@@ -213,7 +214,7 @@ After installation, enable the add-on on the **Dashboard** screen of the Hypervi
 
 1. Check the [VM's serial console](../../vm/access-to-the-vm.md#access-with-the-harvester-ui) and verify that the IP address is correctly configured on the network interface (via DHCP).
 
-    ![](/img/v1.3/vm-dhcp-controller/vm-console.png)
+    ![](/img/v1.3/vm-dhcp-controller-hv/vm-console.png)
 
 ## Pods and CRDs
 
@@ -300,3 +301,4 @@ After the VirtualMachineNetworkConfig object is created, the controller attempts
 Manual creation of VirtualMachineNetworkConfig objects for VMs is unnecessary in most cases because **hypervisor-vm-dhcp-controller** handles that task during the VirtualMachine reconciliation process. Automatically-created VirtualMachineNetworkConfig objects are deleted when VirtualMachine objects are removed.
 
 :::
+

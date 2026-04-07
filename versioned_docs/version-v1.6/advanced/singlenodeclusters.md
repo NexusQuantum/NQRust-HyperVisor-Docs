@@ -13,7 +13,9 @@ keywords:
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/singlenodeclusters"/>
 </head>
 
-Hypervisor supports single-node clusters for implementations that can tolerate lower resilience or require minimal initial deployment resources. You can create single-node clusters using the standard installation methods ([ISO](../install/iso-install.md), [USB](../install/usb-install.md), and [PXE boot](../install/pxe-boot-install.md)).
+Hypervisor supports single-node clusters for implementations that can tolerate lower resilience or require minimal initial deployment resources. You can create single-node clusters using the standard installation methods [ISO](../install/iso-install.md) and [USB](../install/usb-install.md).
+
+<!-- and [PXE boot](../install/pxe-boot-install.md)). -->
 
 Single-node clusters support most Hypervisor features, including the creation of RKE2 clusters and node upgrades (with some limitations). However, this deployment type has the following key disadvantages:
 

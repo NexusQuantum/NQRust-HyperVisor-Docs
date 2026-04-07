@@ -8,11 +8,11 @@ title: "Rancher Manager (Experimental)"
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/addons/rancher-vcluster"/>
 </head>
 
-:::note
+<!-- :::note
 
 **rancher-vcluster** is an *experimental* add-on. It is not included in the Hypervisor ISO, but you can download it from the [experimental-addons repository](https://github.com/harvester/experimental-addons). For more information about experimental features, see [Feature Labels](../../getting-started/document-conventions.md#feature-labels).
 
-:::
+::: -->
 
 The **rancher-vcluster** add-on allows you to run Rancher as a workload on the underlying Hypervisor cluster and is implemented using [vCluster](https://www.vcluster.com).
 
@@ -20,13 +20,13 @@ The add-on runs a nested K3s cluster in the **rancher-vcluster** namespace and d
 
 During the installation, the ingress for Rancher is synced to the Hypervisor cluster, allowing end users to access Rancher.
 
-## Installing the Add-on
+<!-- ## Installing the Add-on
 
 If you are using the Hypervisor kubeconfig file, you can install the add-on by running the following command:
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/harvester/experimental-addons/main/rancher-vcluster/rancher-vcluster.yaml
-```
+``` -->
 
 ## Configuring the Add-on
 

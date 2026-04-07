@@ -140,7 +140,7 @@ kubectl drain <node_name> --force --ignore-daemonsets --delete-local-data --pod-
 Again, removing a control plane node in this situation is **not recommended** because etcd data is not replicated. Failure of a single node can cause etcd to lose its quorum and shut the cluster down.
 :::
 
-### 6. Delete RKE2 services and shut down the node.
+<!-- ### 6. Delete RKE2 services and shut down the node.
 
 1. Log in to the node using the root account.
 
@@ -153,9 +153,9 @@ Again, removing a control plane node in this situation is **not recommended** be
 There's a [known issue](https://github.com/harvester/harvester/issues/1497) about node hard delete.
 Once resolved, you can skip this step.
 
-:::
+::: -->
 
-### 7. Remove the node.
+### 6. Remove the node.
 
 1. On the Hypervisor UI, go to the **Hosts** screen.
 
@@ -175,7 +175,7 @@ Hardware issues may force you to replace the management node. In earlier Hypervi
 Hypervisor currently allows only one witness node in the cluster.
 :::
 
-For more information about assigning roles to nodes, see [ISO Installation](/v1.3/install/index).
+For more information about assigning roles to nodes, see [ISO Installation](/v1.6/install/index).
 
 ## Multi-disk Management
 
@@ -208,7 +208,7 @@ As of Hypervisor v1.0.2, we no longer support adding partitions as additional di
 
     ![Force Format](/img/v1.2/host-hv/multidisk-mgmt-08.png)
 
-  - **LonghornV2 (CSI)**: Select this provisioner if you want to use the [Longhorn V2 Data Engine](../advanced/longhorn-v2.md).
+  <!-- - **LonghornV2 (CSI)**: Select this provisioner if you want to use the [Longhorn V2 Data Engine](../advanced/longhorn-v2.md). -->
 
     ![Provisioner LonghornV2](/img/v1.2/host-hv/multidisk-mgmt-04.png)
 
@@ -235,7 +235,9 @@ If your disk does not have a WWN, you can format it with the `EXT4` filesystem t
 
 :::note
 
-If you are testing Hypervisor in a QEMU environment, you'll need to use QEMU v6.0 or later. Previous versions of QEMU will always generate the same WWN for NVMe disks emulation. This will cause Hypervisor to not add the additional disks, as explained above. However, you can still add a virtual disk with the SCSI controller. The WWN information could be added manually along with the disk attach operation. For more details, please refer to the [script](https://github.com/harvester/vagrant-rancherd/blob/2782981b6017754d016f5b72d630dff4895f7ad6/scripts/attach-disk.sh#L75).
+If you are testing Hypervisor in a QEMU environment, you'll need to use QEMU v6.0 or later. Previous versions of QEMU will always generate the same WWN for NVMe disks emulation. This will cause Hypervisor to not add the additional disks, as explained above. However, you can still add a virtual disk with the SCSI controller. The WWN information could be added manually along with the disk attach operation. 
+
+<!-- For more details, please refer to the [script](https://github.com/harvester/vagrant-rancherd/blob/2782981b6017754d016f5b72d630dff4895f7ad6/scripts/attach-disk.sh#L75). -->
 
 :::
 
@@ -441,9 +443,9 @@ $ kubectl get nodes hypervisor-node-0 -o yaml |yq -e '.metadata.annotations.["no
 
 ## Cloud-Native Node Configuration
 
-You may need to customize one or more nodes after installing Hypervisor . This process usually entails updating the [runtime configuration](/v1.3/install/update-harvester-configuration/) and modifying files in the `/oem` directory of each node to make changes persist after rebooting.
+<!-- You may need to customize one or more nodes after installing Hypervisor . This process usually entails updating the [runtime configuration](/v1.3/install/update-harvester-configuration/) and modifying files in the `/oem` directory of each node to make changes persist after rebooting. -->
 
-In Hypervisor v1.3.0, these customizations can be described in a Kubernetes manifest and then applied to the underlying cluster using kubectl or other GitOps-centric tools such as [Fleet](https://fleet.rancher.io/).
+In Hypervisor, these customizations can be described in a Kubernetes manifest and then applied to the underlying cluster using kubectl or other GitOps-centric tools such as [Fleet](https://fleet.rancher.io/).
 
 :::danger
 Misconfigurations might compromise the ability of a Hypervisor node to boot up, or even damage the overall stability of the cluster. You can prevent such issues by reading the Elemental toolkit documentation to learn how to [correctly customize Elemental](https://rancher.github.io/elemental-toolkit/docs/customizing/).

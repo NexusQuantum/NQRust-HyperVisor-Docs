@@ -35,7 +35,9 @@ A three-node cluster is required to fully realize the multi-node features of Hyp
 
 Hypervisor clusters can be imported into and managed by Rancher. Within the Rancher context, an imported Hypervisor cluster is known as a "managed cluster" or "downstream user cluster" (often abbreviated to "downstream cluster"). The Rancher term refers to any Kubernetes cluster that is connected to a Rancher server.
 
-Certain versions of Hypervisor and Rancher allow you to deploy container workloads directly to Hypervisor clusters (with some limitations). When this [experimental feature](../rancher/rancher-integration.md#harvester-baremetal-container-workload-support-experimental) is enabled, container workloads seamlessly interact with VM workloads.
+Certain versions of Hypervisor and Rancher allow you to deploy container workloads directly to Hypervisor clusters (with some limitations). 
+<!-- When this [experimental feature](../rancher/rancher-integration.md#harvester-baremetal-container-workload-support-experimental) is enabled, container workloads seamlessly interact with VM workloads. -->
+
 
 ## **NQRust Hypervisor** 
 

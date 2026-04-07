@@ -5,7 +5,7 @@ sidebar_position: 1
 sidebar_label: Add-on Development Guide
 keywords:
   - Hypervisor
-  - harvester
+  - hypervisor
   - Add-on Development
 Description: How to write your own Hypervisor add-on
 ---
@@ -25,13 +25,13 @@ Hypervisor add-ons allow you to enable and disable specific Hypervisor and third
 The `Addon` CRD supports the following fields:
 
 ```yaml
-apiVersion: harvesterhci.io/v1beta1
+apiVersion: hypervisorhci.io/v1beta1
 kind: Addon                         
 metadata:
   name: example-add-on           # Name of add-on
   namespace: example-namespace  # Namespace where the add-on CRD is deployed and where the associated Kubernetes components will be deployed
   labels:                       # Optional add-on labels
-    Add-on.harvesterhci.io/experimental: "true" # Predefined label used on the Hypervisor UI to identify add-ons with the "experimental" maturity level
+    Add-on.hypervisorhci.io/experimental: "true" # Predefined label used on the Hypervisor UI to identify add-ons with the "experimental" maturity level
 spec:
   enabled: false                # Boolean indicating if an add-on should be enabled or disabled on definition
   repo: https://chartsrepo.com  # Helm chart repository containing the Helm chart managed by the add-on

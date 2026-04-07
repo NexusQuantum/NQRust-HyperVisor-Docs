@@ -9,7 +9,7 @@ draft: true
   <link rel="canonical" href="https://docs.harvesterhci.io/v1.6/advanced/vgpusupport"/>
 </head>
 
-_Available as of v1.3.0_
+<!-- _Available as of v1.3.0_ -->
 
 Harvester can share NVIDIA GPU support for [Single Root IO Virtualization (SR-IOV)](https://docs.nvidia.com/networking/display/mlnxofedv581011/single+root+io+virtualization+(sr-iov)). This additional capability, which is provided by the **pcidevices-controller** add-on, leverages `sriov-manage` for GPU management. 
 
@@ -24,21 +24,21 @@ You must enable the [**nvidia-driver-toolkit** add-on](./addons/nvidiadrivertool
   - GPU devices have been scanned. 
   - An associated `sriovgpudevices.devices.hypervisorhci.io` object has been created. 
 
-  ![](/img/v1.3/advanced/sriovgpudevices-disabled.png)
+  <!-- ![](/img/v1.3/advanced/sriovgpudevices-disabled.png) -->
 
 1. Locate the device that you want to enable, and then select **:** > **Enable**. 
 
-  ![](/img/v1.3/advanced/sriovgpudevices-enabled.png)
+  <!-- ![](/img/v1.3/advanced/sriovgpudevices-enabled.png) -->
 
 1. Go to the **vGPU Devices** screen and check the associated `vgpudevices.devices.hypervisorhci.io` objects.
 
   Allow some time for the pcidevices-controller to scan the vGPU devices and for the Harvester UI to display the device information.
 
-  ![](/img/v1.3/advanced/vgpudevicelist.png)
+  <!-- ![](/img/v1.3/advanced/vgpudevicelist.png) -->
 
 1. Select a vGPU and configure a profile.
 
-  ![](/img/v1.3/advanced/vgpuprofiles.png)
+  <!-- ![](/img/v1.3/advanced/vgpuprofiles.png) -->
 
   :::note
   The list of profiles depends on the GPU and the underlying /sys tree of the host. For more information about the available profiles and their capabilities, see the [NVIDIA documentation](https://docs.nvidia.com/grid/15.0/grid-vgpu-user-guide/index.html#supported-gpus-grid-vgpu).
@@ -48,7 +48,7 @@ You must enable the [**nvidia-driver-toolkit** add-on](./addons/nvidiadrivertool
 
 1. Attach the vGPU to a new or existing VM.
 
-  ![](/img/v1.3/advanced/vgpuattachment.png)
+  <!-- ![](/img/v1.3/advanced/vgpuattachment.png) -->
 
   :::info important
   Once a vGPU has been assigned to a VM, it may not be possible to disable the VM until the vGPU is removed.
@@ -101,7 +101,7 @@ Example ([NVIDIA A2 GPU](https://docs.nvidia.com/grid/15.0/grid-vgpu-user-guide/
 
 If you select the `NVIDIA A2-4Q` profile, you can only configure 4 vGPU devices. Once those devices are configured, you cannot select any profiles for the remaining vGPUs.
 
-![](/img/v1.3/advanced/nvidia-a2-example.png)
+<!-- ![](/img/v1.3/advanced/nvidia-a2-example.png) -->
 
 ### Technical Deep dive
 

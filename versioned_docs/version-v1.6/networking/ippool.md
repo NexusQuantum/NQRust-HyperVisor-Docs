@@ -42,7 +42,9 @@ If the Hypervisor cluster is imported to `Rancher Manager` from `Rancher Manager
 
 ![](/img/v1.2/networking-hv/create-ippool-from-rancher-manager.png)
 
-The `Scope` includes `Project`, `Namespace` and `Guest Kubernetes Cluster`. For more information, see [Multi-Tenancy Example](../rancher/virtualization-management.md#multi-tenancy-example) and [Projects and Kubernetes Namespaces with Rancher](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/manage-clusters/projects-and-namespaces#about-projects).
+The `Scope` includes `Project`, `Namespace` and `Guest Kubernetes Cluster`. For more information, [Projects and Kubernetes Namespaces with Rancher](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/manage-clusters/projects-and-namespaces#about-projects).
+<!-- ori -->
+<!-- The `Scope` includes `Project`, `Namespace` and `Guest Kubernetes Cluster`. For more information, see [Multi-Tenancy Example](../rancher/virtualization-management.md#multi-tenancy-example) and [Projects and Kubernetes Namespaces with Rancher](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/manage-clusters/projects-and-namespaces#about-projects). -->
 
 When a pool has only one `Scope` and each selects `All`, then this IP Pool is marked as `global` automatically.
 
