@@ -8,8 +8,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: "NQRust HyperVisor",
   tagline: "The open-source hyperconverged infrastructure solution for a cloud-native world",
-  url: "https://docs.nqrhypervisorhci.io",
-  baseUrl: "/",
+  url: 'https://hypervisor.nexusquantum.id',
+  baseUrl: '/docs/',
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   // favicon: "img/favicon.ico",
