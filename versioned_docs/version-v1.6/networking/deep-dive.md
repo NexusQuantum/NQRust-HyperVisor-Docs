@@ -76,7 +76,7 @@ We leverage [multus CNI](https://github.com/k8snetworkplumbingwg/multus-cni) and
 3. To achieve high availability and fault tolerance, a bond device where the real NICs are bound is created to serve as the uplink of the bridge. By default, this bond device will allow the target tagged traffic/packets to pass through.
 
     ```shell
-    harvester-0:/home/rancher # bridge -c vlan show dev oob-bo
+    hypervisor-0:/home/rancher # bridge -c vlan show dev oob-bo
     port	   vlan ids
     oob-bo	   1 PVID Egress Untagged
                100

@@ -395,7 +395,7 @@ Node level operation, node by node:
 
 1. [Uncordon](../host/host.md#cordoning-a-node) this node.
 
-1. [Start](#vm-general-operations) the affected VMs from harvester UI.
+1. [Start](#vm-general-operations) the affected VMs from hypervisor UI.
 
     Wait some time, the VM will run successfully.
 
@@ -563,7 +563,7 @@ metadata:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                  - key: network.harvesterhci.io/cn2
+                  - key: network.hypervisorhci.io/cn2
                     operator: In
                     values:
                       - 'true'
@@ -588,7 +588,7 @@ spec:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
         - matchExpressions:
-          - key: network.harvesterhci.io/cn2
+          - key: network.hypervisorhci.io/cn2
             operator: In
             values:
             - "true"
@@ -610,11 +610,11 @@ status:
 
 ### Root Cause
 
-Hypervisor migtht [automatically apply affinity rules](../vm/create-vm.md#automatically-applied-affinity-rules) based on the definition of a virtual machine. In the above example, the virtual machine `vm100` attaches to the cluster network `cn2`, and Hypervisor applies the affinity rule `network.harvesterhci.io/cn2`. However, no nodes meet the rule's criteria, so the virtual machine cannot be scheduled.
+Hypervisor migtht [automatically apply affinity rules](../vm/create-vm.md#automatically-applied-affinity-rules) based on the definition of a virtual machine. In the above example, the virtual machine `vm100` attaches to the cluster network `cn2`, and Hypervisor applies the affinity rule `network.hypervisorhci.io/cn2`. However, no nodes meet the rule's criteria, so the virtual machine cannot be scheduled.
 
 ### Solution
 
-Ensure there are active nodes which sets up the cluster network `cn2` successfully, then these nodes are labeled with `network.harvesterhci.io/cn2`, finally the pending pod can be scheduled to them.
+Ensure there are active nodes which sets up the cluster network `cn2` successfully, then these nodes are labeled with `network.hypervisorhci.io/cn2`, finally the pending pod can be scheduled to them.
 
 ## Unintentional Virtual Machine Template Modification via Cloud Config YAML
 

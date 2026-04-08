@@ -364,7 +364,7 @@ A VM that is configured to have `1 CPU, 64 Gi Memory, 1 Volume and 1 NIC` will g
 The yaml output of this setting on a new cluster:
 
 ```
-apypervisor: harvesterhci.io/v1beta1
+apypervisor: hypervisorhci.io/v1beta1
 default: "1.5"
 kind: Setting
 metadata:
@@ -467,7 +467,7 @@ Changing the `additional-guest-memory-overhead-ratio` setting affects the VMs pe
 
 :::
 
-### `release-download-url`
+<!-- ### `release-download-url`
 
 **Definition**: URL for downloading the software required for upgrades.
 
@@ -486,7 +486,7 @@ metadata:
 spec:
   isoChecksum: ${ISO_CHECKSUM}
   isoURL: ${ISO_URL}
-```
+``` -->
 
 ### `server-version`
 
@@ -766,7 +766,7 @@ If the collection process is not completed within the allotted time, Hypervisor 
 false
 ```
 
-### `upgrade-checker-url`
+<!-- ### `upgrade-checker-url`
 
 **Definition**: URL used to check for available Hypervisor upgrades.
 
@@ -778,7 +778,7 @@ This setting can only be used if the `upgrade-checker-enabled` setting is set to
 
 ```
 https://your.upgrade.checker-url/v99/checkupgrade
-```
+``` -->
 
 ### `upgrade-config`
 
