@@ -36,7 +36,8 @@ The following types of ISO files are available:
 | --- | --- | --- |
 | [ISO](../install/iso-install.md) | ISO | N/A |
 | [USB](../install/usb-install.md) | ISO | USB flash drive; utility such as [balenaEtcher](https://etcher.balena.io/) or the Linux [dd command](https://man7.org/linux/man-pages/man1/dd.1.html) |
-| [PXE](../install/pxe-boot-install.md) | ISO, Linux kernel image (vmlinuz), initrd, SquashFS image | Directory on the HTTP server (for serving boot files); iPXE boot scripts (for automatic installation); DHCP server configuration |
+
+<!-- | [PXE](../install/pxe-boot-install.md) | ISO, Linux kernel image (vmlinuz), initrd, SquashFS image | Directory on the HTTP server (for serving boot files); iPXE boot scripts (for automatic installation); DHCP server configuration | -->
 
 ## 3. Prepare the cluster configuration requirements. 
 
@@ -97,7 +98,7 @@ You can create [Linux VMs](../vm/create-vm.md) using one of the following method
 
 - Hypervisor UI: On the **Virtual Machines** screen, click **Create** and configure the settings on each tab. 
 - Kubernetes API: Create a `VirtualMachine` object. 
-<!-- - [Hypervisor Terraform Provider](../terraform/terraform-provider.md): Define a `hypervisor_virtualmachine` resource block.  -->
+<!-- - Hypervisor Terraform Provider: Define a `hypervisor_virtualmachine` resource block. -->
 
 Creating [Windows VMs](../vm/create-windows-vm.md) on the Hypervisor UI involves slightly different steps. Hypervisor provides a VM template named `windows-iso-image-base-template` that adds a volume with the Virtio drivers for Windows, which streamlines the VM configuration process. If you require Virtio devices but choose to not use the template, you must add your own Virtio drivers for Windows to enable correct hardware detection. 
 
@@ -107,4 +108,4 @@ The following sections provide guides that walk you through how to back up and r
 
 - [VM Backup, Snapshot & Restore](../vm/backup-restore.md) 
 - [Host Management](../host/host.md) 
-<!-- - [Rancher Integration](../rancher/rancher-integration.md)  -->
+<!-- - Rancher Integration -->
