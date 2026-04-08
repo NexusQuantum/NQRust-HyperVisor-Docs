@@ -251,7 +251,7 @@ const config = {
           }
 
           if (existingPath === '/') {
-            return ['/latest/', '/latest'];
+            return ['/latest'];
           }
 
           return [`/latest${existingPath}`];
