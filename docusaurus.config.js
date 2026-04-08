@@ -246,14 +246,15 @@ const config = {
             return undefined;
           }
 
-          if (existingPath === '/') {
-            return ['/v1.6/', '/v1.6', '/latest/', '/latest'];
+          if (/^\/v\d+\.\d+(?:\/|$)/.test(existingPath)) {
+            return undefined;
           }
 
-          return [
-            `/v1.6${existingPath}`,
-            `/latest${existingPath}`,
-          ];
+          if (existingPath === '/') {
+            return ['/latest/', '/latest'];
+          }
+
+          return [`/latest${existingPath}`];
         }
       },
     ],
