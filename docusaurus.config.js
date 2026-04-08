@@ -70,7 +70,8 @@ const config = {
             },
             "v1.6": {
               label: 'v1.6 (Latest)',
-              path: 'v1.6',
+              path: '',
+              // path: 'v1.6',
             },
             "v1.5": {
               label: 'v1.5',
@@ -233,10 +234,26 @@ const config = {
          * @returns {RedirectsReturn}
          */
         createRedirects(existingPath) {
-          if (typeof existingPath === 'string' && existingPath.includes('/v1.6')) {
-            return [existingPath.replace('/v1.6', '/latest')];
+          if (typeof existingPath !== 'string') {
+            return undefined;
           }
-          return undefined;
+
+          if (/^\/(?:api|dev\/api)(?:\/|$)/.test(existingPath)) {
+            return undefined;
+          }
+
+          if (/^\/v\d+\.\d+\/(?:api)(?:\/|$)/.test(existingPath)) {
+            return undefined;
+          }
+
+          if (existingPath === '/') {
+            return ['/v1.6/', '/v1.6', '/latest/', '/latest'];
+          }
+
+          return [
+            `/v1.6${existingPath}`,
+            `/latest${existingPath}`,
+          ];
         }
       },
     ],
