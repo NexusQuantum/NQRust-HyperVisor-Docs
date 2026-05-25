@@ -18,19 +18,23 @@ const config = {
   favicon: "web-icon/android-chrome-192x192.png",
   organizationName: "Nexus Quantum", 
   projectName: "docs",
-  // i18n: {
-  //   defaultLocale: "en",
-  //   locales: ["en", "zh"],
-  //   path: "i18n",
-  //   localeConfigs: {
-  //     en: {
-  //       label: "English",
-  //     },
-  //     zh: {
-  //       label: "Chinese (Simplified)",
-  //     },
-  //   },
-  // },
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "id"],
+    path: "i18n",
+    localeConfigs: {
+      en: {
+        label: "English",
+        direction: "ltr",
+        htmlLang: "en-US",
+      },
+      id: {
+        label: "Bahasa Indonesia",
+        direction: "ltr",
+        htmlLang: "id-ID",
+      },
+    },
+  },
   webpack: {
     jsLoader: (isServer) => ({
       loader: require.resolve("swc-loader"),

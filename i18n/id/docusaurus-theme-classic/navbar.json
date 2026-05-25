@@ -1,0 +1,18 @@
+{
+  "title": {
+    "message": "NQRust HyperVisor",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "Logo NQR HyperVisor",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Quick Links": {
+    "message": "Pranala Pintas",
+    "description": "Navbar item with label Quick Links"
+  },
+  "item.label.NexusQuantum Home": {
+    "message": "Beranda NexusQuantum",
+    "description": "Navbar item with label NexusQuantum Home"
+  }
+}

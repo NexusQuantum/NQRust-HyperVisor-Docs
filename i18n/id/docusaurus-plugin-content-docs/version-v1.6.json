@@ -1,0 +1,126 @@
+{
+  "version.label": {
+    "message": "v1.6 (Latest)",
+    "description": "The label for version v1.6"
+  },
+  "sidebar.docs.category.Getting Started": {
+    "message": "Mulai",
+    "description": "The label for category Getting Started in sidebar docs"
+  },
+  "sidebar.docs.category.Installation": {
+    "message": "Instalasi",
+    "description": "The label for category Installation in sidebar docs"
+  },
+  "sidebar.docs.category.Upgrade": {
+    "message": "Pembaruan",
+    "description": "The label for category Upgrade in sidebar docs"
+  },
+  "sidebar.docs.category.VM Management": {
+    "message": "Manajemen VM",
+    "description": "The label for category VM Management in sidebar docs"
+  },
+  "sidebar.docs.category.Volume Management": {
+    "message": "Manajemen Volume",
+    "description": "The label for category Volume Management in sidebar docs"
+  },
+  "sidebar.docs.category.Image Management": {
+    "message": "Manajemen Image",
+    "description": "The label for category Image Management in sidebar docs"
+  },
+  "sidebar.docs.category.Networking": {
+    "message": "Jaringan",
+    "description": "The label for category Networking in sidebar docs"
+  },
+  "sidebar.docs.category.Monitoring": {
+    "message": "Pemantauan",
+    "description": "The label for category Monitoring in sidebar docs"
+  },
+  "sidebar.docs.category.Advanced": {
+    "message": "Lanjutan",
+    "description": "The label for category Advanced in sidebar docs"
+  },
+  "sidebar.docs.category.Available Addons": {
+    "message": "Available Addons",
+    "description": "The label for category Available Addons in sidebar docs"
+  },
+  "sidebar.docs.category.Rancher Integration": {
+    "message": "Rancher Integration",
+    "description": "The label for category Rancher Integration in sidebar docs"
+  },
+  "sidebar.docs.category.Harvester Node Driver": {
+    "message": "Harvester Node Driver",
+    "description": "The label for category Harvester Node Driver in sidebar docs"
+  },
+  "sidebar.docs.category.Troubleshooting": {
+    "message": "Pemecahan Masalah",
+    "description": "The label for category Troubleshooting in sidebar docs"
+  },
+  "sidebar.docs.category.Development Guides": {
+    "message": "Development Guides",
+    "description": "The label for category Development Guides in sidebar docs"
+  },
+  "sidebar.docs.category.API": {
+    "message": "API",
+    "description": "The label for category API in sidebar docs"
+  },
+  "sidebar.api.category.API": {
+    "message": "API",
+    "description": "The label for category API in sidebar api"
+  },
+  "sidebar.api.category.API.link.generated-index.title": {
+    "message": "Harvester API",
+    "description": "The generated-index page title for category API in sidebar api"
+  },
+  "sidebar.api.category.API.link.generated-index.description": {
+    "message": "This is the API doc of the Harvester server. The APIs are broken down into the categories below:",
+    "description": "The generated-index page description for category API in sidebar api"
+  },
+  "sidebar.api.category.Volumes": {
+    "message": "Volumes",
+    "description": "The label for category Volumes in sidebar api"
+  },
+  "sidebar.api.category.SSH Keys": {
+    "message": "SSH Keys",
+    "description": "The label for category SSH Keys in sidebar api"
+  },
+  "sidebar.api.category.Support Bundles": {
+    "message": "Support Bundles",
+    "description": "The label for category Support Bundles in sidebar api"
+  },
+  "sidebar.api.category.Upgrades hapus nanti": {
+    "message": "Upgrades hapus nanti",
+    "description": "The label for category Upgrades hapus nanti in sidebar api"
+  },
+  "sidebar.api.category.Backups": {
+    "message": "Backups",
+    "description": "The label for category Backups in sidebar api"
+  },
+  "sidebar.api.category.Images": {
+    "message": "Images",
+    "description": "The label for category Images in sidebar api"
+  },
+  "sidebar.api.category.Restores": {
+    "message": "Restores",
+    "description": "The label for category Restores in sidebar api"
+  },
+  "sidebar.api.category.Virtual Machine Templates": {
+    "message": "Virtual Machine Templates",
+    "description": "The label for category Virtual Machine Templates in sidebar api"
+  },
+  "sidebar.api.category.Networks": {
+    "message": "Networks",
+    "description": "The label for category Networks in sidebar api"
+  },
+  "sidebar.api.category.Migrations": {
+    "message": "Migrations",
+    "description": "The label for category Migrations in sidebar api"
+  },
+  "sidebar.api.category.Virtual Machines": {
+    "message": "Virtual Machines",
+    "description": "The label for category Virtual Machines in sidebar api"
+  },
+  "sidebar.api.doc.Introduction": {
+    "message": "Introduction",
+    "description": "The label for the doc item Introduction in sidebar api, linking to the doc api/harvester-apis"
+  }
+}
