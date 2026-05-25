@@ -10,6 +10,7 @@ const config = {
   tagline: "The open-source hyperconverged infrastructure solution for a cloud-native world",
   url: 'https://hypervisor.nexusquantum.id',
   baseUrl: '/docs/',
+  trailingSlash: true,
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   // favicon: "img/favicon.ico",
