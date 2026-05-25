@@ -64,7 +64,9 @@ export default function Home() {
           name="description"
           content="NQRust-HyperVisor is a commercially licensed, hyperconverged virtualization platform — VMs, storage, networking, backup and monitoring from one dashboard, on your own hardware."
         />
-        <link rel="icon" type="image/png" href={useBaseUrl('/landing/assets/nq-logo.png')} />
+        <link rel="icon" type="image/png" sizes="192x192" href={useBaseUrl('/web-icon/android-chrome-192x192.png')} />
+        <link rel="icon" type="image/png" sizes="512x512" href={useBaseUrl('/web-icon/android-chrome-512x512.png')} />
+        <link rel="apple-touch-icon" href={useBaseUrl('/web-icon/android-chrome-192x192.png')} />
       </Head>
       <div className="nq-landing" ref={rootRef} dangerouslySetInnerHTML={{__html: body}} />
     </>

@@ -15,8 +15,7 @@ const config = {
   trailingSlash: true,
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
-  // favicon: "img/favicon.ico",
-  favicon: "img/logo_hypervisor.png",
+  favicon: "web-icon/android-chrome-192x192.png",
   organizationName: "Nexus Quantum", 
   projectName: "docs",
   // i18n: {
