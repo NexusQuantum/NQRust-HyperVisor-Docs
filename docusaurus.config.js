@@ -9,7 +9,9 @@ const config = {
   title: "NQRust HyperVisor",
   tagline: "The open-source hyperconverged infrastructure solution for a cloud-native world",
   url: 'https://hypervisor.nexusquantum.id',
-  baseUrl: '/docs/',
+  // baseUrl is the site root. The landing page lives at /; docs are mounted
+  // under /docs/ via the classic preset's routeBasePath below.
+  baseUrl: '/',
   trailingSlash: true,
   onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
@@ -58,7 +60,8 @@ const config = {
       'classic',
       ({
         docs: {
-          routeBasePath: '/',
+          // Docs mount under /docs/ so / stays free for the marketing landing.
+          routeBasePath: 'docs',
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateTime: true,
           editUrl: "https://github.com/nqrhypervisor/docs/edit/main/",
