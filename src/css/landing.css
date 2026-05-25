@@ -208,6 +208,17 @@ ul { list-style: none; }
 .mono { font-family: var(--font-mono); }
 .container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
 
+/* ----- Override Docusaurus Infima for landing-only classes -----
+   Infima ships .hero / .container / .footer / .button etc. which conflict
+   with the design's class names. Higher-specificity rules under .nq-landing
+   beat Infima's bare class selectors so the design layout wins. */
+.nq-landing .hero       { display: block; padding: 64px 0 80px; align-items: initial; background-color: transparent; color: inherit; }
+.nq-landing .container  { max-width: 1240px; margin: 0 auto; padding: 0 32px; width: auto; }
+.nq-landing .footer     { padding: 0; background: var(--nq-bg-card); color: inherit; --ifm-footer-background-color: transparent; --ifm-footer-color: inherit; --ifm-footer-link-color: inherit; --ifm-footer-title-color: inherit; }
+.nq-landing .footer a   { color: inherit; }
+.nq-landing button      { font: inherit; }
+.nq-landing ul, .nq-landing li { padding-left: 0; margin: 0; }
+
 /* ====== Buttons ====== */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
