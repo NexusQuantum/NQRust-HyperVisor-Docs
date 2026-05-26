@@ -127,6 +127,10 @@
   color: var(--nq-fg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Belt-and-suspenders against any element (hero-glow, third-party widget,
+     wide table mock) that escapes its container on narrow viewports. */
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* Semantic type scale — mirrors the way the codebase uses Tailwind
@@ -1330,4 +1334,105 @@
 @media (max-width: 800px) {
   .nq-landing .footer-inner { grid-template-columns: 1fr; gap: 32px; }
   .nq-landing .footer-cols { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   Mobile responsive overrides (<= 768px tablet, <= 480px phone).
+   Goals:
+   - No horizontal scroll
+   - Hide the dashboard mockup on phones (decorative, forces 480+px width)
+   - Stack every two-column grid
+   - Allow long words to break
+   - Keep nav usable with the locale + sales links collapsed
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .nq-landing,
+  .nq-landing * { overflow-wrap: break-word; word-break: normal; }
+  .nq-landing img, .nq-landing svg { max-width: 100%; }
+
+  .nq-landing .container,
+  .nq-landing .hero-inner,
+  .nq-landing .manage-grid,
+  .nq-landing .contact-grid,
+  .nq-landing .footer-inner { padding-left: 20px; padding-right: 20px; }
+
+  /* HERO */
+  .nq-landing .hero { padding: 32px 0 56px; }
+  .nq-landing .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: start; }
+  .nq-landing .hero-copy h1 { font-size: clamp(28px, 8.5vw, 40px); margin-top: 14px; }
+  .nq-landing .hero-sub { font-size: 15px; margin-top: 16px; }
+  .nq-landing .hero-actions { margin-top: 22px; gap: 10px; }
+  .nq-landing .hero-actions .btn-lg { width: 100%; justify-content: center; }
+  .nq-landing .hero-bullets { margin-top: 28px; gap: 10px 18px; }
+
+  /* Dashboard mockup — decorative, drop it on phones */
+  .nq-landing .hero-mock { display: none; }
+
+  /* Trust strip */
+  .nq-landing .trust-strip { margin-top: 32px; gap: 14px; }
+  .nq-landing .trust-items { gap: 8px; justify-content: center; }
+  .nq-landing .trust-pill { font-size: 11px; padding: 5px 10px; }
+
+  /* Pillars (already 1fr <=900 but tighten on phones) */
+  .nq-landing .pillar-grid { gap: 20px; }
+  .nq-landing .pillar { padding: 20px; }
+
+  /* Capabilities */
+  .nq-landing .cap-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .nq-landing .cap-card { padding: 22px; }
+  .nq-landing .cap-feature { grid-column: auto; }
+
+  /* Manage section */
+  .nq-landing .manage-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .nq-landing .manage-mock .detail,
+  .nq-landing .manage-mock .terminal { width: 100%; max-width: 100%; transform: none; }
+  .nq-landing .detail-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .nq-landing .detail-tabs { flex-wrap: wrap; gap: 4px 12px; overflow-x: auto; }
+  .nq-landing .detail-tabs::-webkit-scrollbar { height: 0; }
+
+  /* Architecture board — drop to single column */
+  .nq-landing .arch-board { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .nq-landing .arch-arrow { display: none; }
+  .nq-landing .arch-row-2 { grid-template-columns: minmax(0, 1fr); }
+  .nq-landing .arch-foot { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+
+  /* Licensing */
+  .nq-landing .lic-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .nq-landing .lic-card { padding: 22px; }
+
+  /* Contact */
+  .nq-landing .contact-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .nq-landing .contact-card { padding: 22px; }
+  .nq-landing .contact-cta-title { font-size: 18px; }
+
+  /* Footer */
+  .nq-landing .footer { padding-top: 40px; padding-bottom: 24px; }
+  .nq-landing .footer-inner { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .nq-landing .footer-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+  .nq-landing .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+
+  /* Nav */
+  .nq-landing .nav-inner { padding: 10px 16px; gap: 10px; }
+  .nq-landing .nav-brand img { height: 22px; }
+  .nq-landing .nav-cta .btn-sm { padding: 0 10px; height: 32px; font-size: 12px; }
+  /* Hide secondary nav buttons on the smallest screens; the primary CTA stays */
+}
+
+@media (max-width: 480px) {
+  .nq-landing .container,
+  .nq-landing .hero-inner,
+  .nq-landing .manage-grid,
+  .nq-landing .contact-grid,
+  .nq-landing .footer-inner { padding-left: 16px; padding-right: 16px; }
+
+  .nq-landing .nav-cta .btn-ghost { display: none; }   /* keep only 'Talk to sales' */
+  .nq-landing .nav-product .nav-slash,
+  .nq-landing .nav-product .nav-tagline { display: none; }
+
+  .nq-landing .hero-copy h1 { font-size: clamp(26px, 9vw, 34px); }
+  .nq-landing .hero-bullets { font-size: 12.5px; }
+
+  .nq-landing .section-head h2 { font-size: clamp(22px, 6vw, 28px); }
+  .nq-landing .footer-cols { grid-template-columns: minmax(0, 1fr); }
 }
